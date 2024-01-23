@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Portofolio on Muhamad Irfan</title>
+    <link>https://irfanykywz.github.io/portofolio/</link>
+    <description>Recent content in Portofolio on Muhamad Irfan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© irfanykywz</copyright>
+    <lastBuildDate>Mon, 01 Jan 2024 16:00:35 +0700</lastBuildDate>
+    <atom:link href="https://irfanykywz.github.io/portofolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TikTok Live Downloader</title>
+      <link>https://irfanykywz.github.io/portofolio/tiktok-live-downloader/</link>
+      <pubDate>Mon, 01 Jan 2024 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/portofolio/tiktok-live-downloader/</guid>
+      <description>aplikasi untuk mendownload video tiktok live</description>
+    </item>
+    <item>
+      <title>Shopee Live Booster</title>
+      <link>https://irfanykywz.github.io/portofolio/shopee-live-booster/</link>
+      <pubDate>Sun, 31 Dec 2023 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/portofolio/shopee-live-booster/</guid>
+      <description>aplikasi untuk meningkatkan jumlah penonton live shopee (bot)</description>
+    </item>
+    <item>
+      <title>Live Converter</title>
+      <link>https://irfanykywz.github.io/portofolio/live-converter/</link>
+      <pubDate>Wed, 27 Dec 2023 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/portofolio/live-converter/</guid>
+      <description>aplikasi pesanan dari client untuk mendownload live dari beberapa platform diantaranya shopee, tokopedia, tiktok</description>
+    </item>
+    <item>
+      <title>Simple Live Stream</title>
+      <link>https://irfanykywz.github.io/portofolio/simple-live-stream/</link>
+      <pubDate>Fri, 22 Dec 2023 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/portofolio/simple-live-stream/</guid>
+      <description>aplikasi pesanan client untuk live secara looping menggunakan file</description>
+    </item>
+    <item>
+      <title>Blogger Automation</title>
+      <link>https://irfanykywz.github.io/portofolio/blogger-automation/</link>
+      <pubDate>Sun, 01 Oct 2023 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/portofolio/blogger-automation/</guid>
+      <description>Aplikasi manajemen banyak akun blogger.com, melakukan aksi post, setting, dan ganti tema</description>
+    </item>
+    <item>
+      <title>Facebook Automation</title>
+      <link>https://irfanykywz.github.io/portofolio/facebook-automation/</link>
+      <pubDate>Tue, 01 Aug 2023 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/portofolio/facebook-automation/</guid>
+      <description>Aplikasi manajemen banyak akun facebook, melakukan aksi rawat, reaction, ganti foto</description>
+    </item>
+    <item>
+      <title>Kurteyki</title>
+      <link>https://irfanykywz.github.io/portofolio/kurteyki/</link>
+      <pubDate>Mon, 01 Jan 2018 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/portofolio/kurteyki/</guid>
+      <description>Website untuk menulis konten berdasarkan topik</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Produk on Muhamad Irfan</title>
+    <link>https://irfanykywz.github.io/product/</link>
+    <description>Recent content in Produk on Muhamad Irfan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© irfanykywz</copyright>
+    <lastBuildDate>Mon, 01 Jan 2024 09:08:30 +0700</lastBuildDate>
+    <atom:link href="https://irfanykywz.github.io/product/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jasa Pembuatan Bot</title>
+      <link>https://irfanykywz.github.io/product/jasa-pembuatan-bot/</link>
+      <pubDate>Mon, 01 Jan 2024 09:08:30 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/product/jasa-pembuatan-bot/</guid>
+      <description>saya dapat membuatkan anda bot automation, scraping, dll menggunakan python
+saya mematok harga mulai dari 100k, tergantung tingkat kesulitan bot yang dibuat.</description>
+    </item>
+  </channel>
+</rss>

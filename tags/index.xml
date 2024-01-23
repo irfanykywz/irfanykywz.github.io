@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Muhamad Irfan</title>
+    <link>https://irfanykywz.github.io/tags/</link>
+    <description>Recent content in Tags on Muhamad Irfan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© irfanykywz</copyright>
+    <lastBuildDate>Tue, 02 Jan 2024 19:49:16 +0700</lastBuildDate>
+    <atom:link href="https://irfanykywz.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Komputer</title>
+      <link>https://irfanykywz.github.io/tags/komputer/</link>
+      <pubDate>Tue, 02 Jan 2024 19:49:16 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/tags/komputer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Film</title>
+      <link>https://irfanykywz.github.io/tags/film/</link>
+      <pubDate>Fri, 16 Sep 2022 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/tags/film/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Interview</title>
+      <link>https://irfanykywz.github.io/tags/interview/</link>
+      <pubDate>Thu, 12 Dec 2019 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/tags/interview/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Earning</title>
+      <link>https://irfanykywz.github.io/tags/earning/</link>
+      <pubDate>Mon, 18 Dec 2017 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/tags/earning/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Muhamad Irfan</title>
+    <link>https://irfanykywz.github.io/posts/</link>
+    <description>Recent content in Posts on Muhamad Irfan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© irfanykywz</copyright>
+    <lastBuildDate>Tue, 02 Jan 2024 19:49:16 +0700</lastBuildDate>
+    <atom:link href="https://irfanykywz.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pentingnya Menggunakan Power Supply Baru</title>
+      <link>https://irfanykywz.github.io/posts/pentingnya-menggunakan-power-supply-baru/</link>
+      <pubDate>Tue, 02 Jan 2024 19:49:16 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/pentingnya-menggunakan-power-supply-baru/</guid>
+      <description>saya ingin sharing kejadian akibat power supply komputer yang tidak layak lagi dipakai
+jadi waktu itu saya punya komputer yang suka restart-restart kadang mati sendiri
+saya pikir karena perangkatnya kepanasan atau kenapa gitu
+lalu saya coba kasih pasta, bersihin debu dan lain-lainnya
+seiring berjalannya waktu ternyata komputer tersebut malah rusak, motherboardnya tidak mau menyala
+karena tau motherboardnya yang rusak sayapun mengganti dengan motherboard baru
+saat 1hari pakai lancar dan bisa nyala, lalu pas ke-esokan harinya komputernya tidak bisa nyala lagi</description>
+    </item>
+    <item>
+      <title>Hanya Kumpulan Text, Image, Audio dan Video</title>
+      <link>https://irfanykywz.github.io/posts/hanya-kumpulan-text-image-audio-video/</link>
+      <pubDate>Mon, 18 Dec 2023 07:03:40 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/hanya-kumpulan-text-image-audio-video/</guid>
+      <description>selama ini saya selalu menggambarkan isi komputer hanyalah kumpulan data yang dibagi kedalam beberapa bagian
+diantaranya text yang berisi sebuah kata-kata yang dapat dimengerti manusia
+image yang berisi sebuah tampilan visual layaknya seperti mata melihat
+audio yang berisi sebuah suara seperti seseorang berbicara
+video yang berisi seperti kumpulan gambar yang dibuat hidup layaknya mata yang bergerak-gerak
+tidak lebih dan tidak pernah bertambah&amp;hellip;
+namun semua itu bisa membantu mempermudah pekerjaan, bahkan hanya dengan mengklik tombol saja sudah bisa terhubung kemana-mana, misalnya memindahkan uang dari awalnya milik si a jadi milik si b 😂</description>
+    </item>
+    <item>
+      <title>Cipher Pada Video Youtube</title>
+      <link>https://irfanykywz.github.io/posts/cipher-pada-video-youtube/</link>
+      <pubDate>Mon, 18 Dec 2023 05:40:08 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/cipher-pada-video-youtube/</guid>
+      <description>saat saya mencoba untuk menyelesaikan modul downloader youtube untuk aplikasi yang sedang dibuat, saya menemukan sedikit kendala yaitu youtube menyembunyikan url asli videonya
+url video tersebut awalnya bisa langsung didownload, namun setelah mencoba mendownload beberapa video lainnya, url video tiba-tiba tidak ditemukan
+setelah saya coba membaca hasil parsing dari video tersebut ternyata url videonya disembunyikan dan diproteksi
+alhasil url video tersebut tidak bisa langsung didownload dan harus di dechiper terlebih dahulu</description>
+    </item>
+    <item>
+      <title>Pengalaman pertama mengenal komputer</title>
+      <link>https://irfanykywz.github.io/posts/pengalaman-pertama-mengenal-komputer/</link>
+      <pubDate>Sun, 01 Jan 2023 11:00:00 -0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/pengalaman-pertama-mengenal-komputer/</guid>
+      <description>itu bermula saat tahun 2006-an ketika saya bermain kerumah tetangga yang tepat sekali berada didepan rumah.
+saya melihat ada sebuah mesin yang bisa memunculkan tampilan yang sangat wah seperti televisi
+di sinilah awal mulanya mengenal komputer dan saya sangat penasaran apa saja yang bisa dilakukan komputer tersebut
+saat itu saya diajak untuk bermain game bersamanya dan rasanya seperti bermain playstation tapi ini menggunakan perangkat yang berbeda yaitu mouse dan keyboard</description>
+    </item>
+    <item>
+      <title>Nyesel Nyimpen Data di HDD External</title>
+      <link>https://irfanykywz.github.io/posts/nyesel-nyimpen-data-di-hdd-external/</link>
+      <pubDate>Mon, 07 Jun 2021 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/nyesel-nyimpen-data-di-hdd-external/</guid>
+      <description>Pagi ini dikejutkan dengan kejadian yang sangat tidak mengenakan.menjalani hari-hari sebagai pengagguran yang dimana saat bangun tidur langsung menyalakan komputer dan duduk didepannya sambil memikirkan kehidupan kedepannya mau seperti apa...tidak lama setelah komputer menyala memulai aktivitas dengan mendengarkan musik, dimulai dengan membuka folder musik agar lebih relax klik explore dan melihat partisi harddisk tidak terbaca, dalam pikiran &#34;padahal semalem masih bisa ko malah ga kebaca gini&#34;saat itu juga saya merasa panik, mencoba berbagai cara dari cabut-colok, mengganti kabel, mengganti case dan lainnya tetap saja tidak bisa.</description>
+    </item>
+    <item>
+      <title>Interview Pekerjaan bagian Web Developer</title>
+      <link>https://irfanykywz.github.io/posts/interview-pekerjaan-bagian-web-developer/</link>
+      <pubDate>Thu, 12 Dec 2019 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/interview-pekerjaan-bagian-web-developer/</guid>
+      <description>hari ini ada panggilan tes kerja bagian web programmer. yang awalnya bekerja sebagai teknisi sekarang mencoba bekerja sebagai programmer, tapi tentu saja endingnya tidak semanis yang saya bayangkan haha.sesampainya didepan kantor saya langsung dihampiri seseorang dan menyuruh saya untuk masuk kedalam kantor.setelah itu datanglah pemiliki ownernya menceritakan sedikit tentang perusahaannya, sampai selesai. setelah itu dilanjut dengan beberapa pertanyaan seperti bisa apa aja di web programming, udah pernah buat apa aja ?</description>
+    </item>
+    <item>
+      <title>Interview Pekerjaan bagian Teknisi</title>
+      <link>https://irfanykywz.github.io/posts/interview-pekerjaan-bagian-teknisi/</link>
+      <pubDate>Wed, 05 Sep 2018 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/interview-pekerjaan-bagian-teknisi/</guid>
+      <description>Hari ini ada panggilan interview diperusahaan yang telah saya lamar, saya berangkat jam 9.30 pagi karena tes akan diadakan jam 10, kebetulan lokasinya tidak memakan banyak waktu sekitar 20 menitan jika menggunakan motor dengan keadaan lalulintas lancar tanpa kemacetan.sesampai disana saya bergegas buka jaket dan masuk kedalam, kemudian saya menunggu untuk dipanggil sekalian absen terlebih dahulu, siapa tau bisa diterima haha.setelah itu saya langsung dites untuk mengerjakan beberapa soal teknis dan soal pekerjaan.</description>
+    </item>
+    <item>
+      <title>Pertama kali Mendaftar Google Adsense</title>
+      <link>https://irfanykywz.github.io/posts/pertama-kali-mendaftar-google-adsense/</link>
+      <pubDate>Mon, 18 Dec 2017 16:00:35 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/pertama-kali-mendaftar-google-adsense/</guid>
+      <description>Google Adsense program kerja sama penayangan iklan untuk mendapatkan penghasilan dari internetAwal mula mendaftar Google Adsense ini dari youtube sekitar tahun 2016ansaat itu saya membuat channel youtube yang isi kontennya lirik lagunamun semakin kesini channel tersebut tidak saya urus lagi karena terlu banyak terkena copyrightwaktupun berlalu saya mencoba untuk membuat google adsense baru namun kali ini saya menggunakan blog untuk mendapatkannyanamun apa daya ternyata adsense hanya bisa daftar untuk 1 orang saja, jadi ketika saya pakai identitas yang sama maka akan terdeteksijadi saya urungkan niat untuk mendaftar adsense melalui blog.</description>
+    </item>
+    <item>
+      <title>Hello World</title>
+      <link>https://irfanykywz.github.io/posts/hello/</link>
+      <pubDate>Wed, 07 Dec 2011 09:08:30 +0700</pubDate>
+      <guid>https://irfanykywz.github.io/posts/hello/</guid>
+      <description>Headers # h1 Heading 8-) ## h2 Heading ### h3 Heading #### h4 Heading ##### h5 Heading ###### h6 Heading Alternatively, for H1 and H2, an underline-ish style: Alt-H1 ====== Alt-H2 ------ h1 Heading 8-) h2 Heading h3 Heading h4 Heading h5 Heading h6 Heading Alternatively, for H1 and H2, an underline-ish style:
+Alt-H1 Alt-H2 Emphasis Emphasis, aka italics, with *asterisks* or _underscores_. Strong emphasis, aka bold, with **asterisks** or __underscores__.</description>
+    </item>
+  </channel>
+</rss>
