@@ -13,9 +13,9 @@ a {
     text-decoration: none;
     word-break: break-word;
 }
-    a:hover {
-        border-bottom: 2px solid #3700ff;
-    }
+a:hover {
+    border-bottom: 2px solid #3700ff;
+}
 
 html,button,input,select,textarea {
     color: #333;
@@ -192,6 +192,27 @@ ul {
     list-style: disc inside;
 }
 
+.post.nodate {
+    border-left: 10px solid #f3f3f3;
+    padding-left: 10px;
+}
+
+.post.nodate.journal {
+    border-color: #dcb5ff;
+}
+
+.post.nodate.evaluasi {
+    border-color: #99ff9d;
+}
+
+.post.nodate.afirmasi {
+    border-color: #fff299;
+}
+
+.post.nodate.sistem {
+    border-color: #ff9999;
+}
+
 .post ul li {
     margin-bottom: 10px;
 }
@@ -218,7 +239,7 @@ ul {
 }
 
 .container {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .header {
@@ -238,26 +259,29 @@ ul {
 }
 .header .site-title {
     margin: 0;
+    font-size:24px;
 }
-    .site-title a {
-        color: #333;
-        text-decoration: none !important;
-    }
-    .site-title a:hover {
-        border-bottom-width: 3px;
-    }
+.site-title a {
+    color: #333;
+    text-decoration: none !important;
+}
+.site-title a:hover {
+    border-bottom-width: 3px;
+}
 
 .header .site-description {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
-    .header .site-description p {
-        margin: 0 0 10px 0;
-    }
+.header .site-description p {
+    margin: 0 0 10px 0;
+}
 
 .header nav {
     border-top: 1px solid #eee;
     padding-top: 15px;
+    clear: both;
 }
 
 .header nav ul,
@@ -269,21 +293,24 @@ ul {
 .header nav li {
     display: inline-block;
     list-style: none;
-    margin: 0 30px 0 0;
 }
-    .header nav.social a {
-        color: #333;
-    }
-    .header nav.social a:hover {
-        color: #3700ff;
-    }
+.header nav.social a {
+    color: #333;
+}
+.header nav.social a:hover {
+    color: #3700ff;
+}
+
+.header nav.menu li a {
+    border: 1px solid #ddd;
+    padding:10px;
+}
 
 .header .site-description nav {
     margin: 0;
     padding: 0;
     border: none;
     min-width: 50px;
-    margin-left: 15px;
 }
 
 .header .site-description nav ul svg {
@@ -390,6 +417,7 @@ ul {
 
 .footer {
     display:flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     font-size: 0.75em;
     color: #999;
@@ -397,12 +425,12 @@ ul {
     margin-top: 40px;
     padding: 15px 0;
 }
-    .footer a {
-        color: #666;
-    }
-    .footer a:hover {
-        color: #3700ff;
-    }
+.footer a {
+    color: #666;
+}
+.footer a:hover {
+    color: #3700ff;
+}
 
 .tag-cloud {
     margin-top: 20px;
@@ -479,7 +507,7 @@ ul {
       display: block;
       overflow-x: auto;
       width: 100%;
-    }
+  }
 }
 
 @media (max-width: 400px) {
