@@ -1,0 +1,100 @@
+baseURL = "https://irfanykywz.github.io/"
+languageCode = "en-us"
+title = "Muhamad Irfan"
+theme = "hugo-ink"
+paginate = 5
+
+copyright = "© irfanykywz"
+
+pygmentsstyle = "vs"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+# googleAnalytics = "UA-123-45"
+# disqusShortname = "ink-demo"
+
+[params]
+
+	subtitle = "Piece of word will build a story, keep write"
+	# subtitle = "A person who likes write about life"
+	favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
+
+	# Optional 64x64 avatar image.
+	# avatar = "https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg"
+	avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
+
+	# Content types to disable Disqus on.
+	# disableDisqusTypes = ["posts","page","portofolio"]
+	
+	featherIconsCDN = true
+
+	mode = "auto" # "dark" or "auto"
+	# customCSS = "css/custom.css"  # Custom CSS applied to default styles.
+	# customDarkCSS = "css/custom-dark.css"  # Custom styles applied to dark mode css.
+	# customJS = ["js/custom.js"]  # Custom JS scripts.
+	# seasonJS = ["js/snow.js"]
+	mouseJS = ["js/mouse.js"]
+
+# Nav.
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Portofolio"
+url = "/portofolio"
+weight = 2
+
+[[menu.main]]
+name = "Posts"
+url = "/posts"
+weight = 3
+
+# [[menu.main]]
+# name = "Tags"
+# url = "/tags"
+# weight = 4
+
+[[menu.footer]]
+name = "Journal"
+url = "/journal"
+weight = 2
+
+[[menu.footer]]
+name = "Evaluasi"
+url = "/evaluasi"
+weight = 3
+
+[[menu.footer]]
+name = "Afirmasi"
+url = "/afirmasi"
+weight = 4
+
+[[menu.footer]]
+name = "Sistem"
+url = "/sistem"
+weight = 5
+
+[[menu.footer]]
+name = "Favorite"
+url = "/favorite"
+weight = 6
+
+[[params.social]]
+name = "Github"
+icon = "github"
+url = "https://github.com/irfanykywz"
+
+[[params.social]]
+name = "LinkedIn"
+icon = "linkedin"
+url = "https://linkedin.com/in/irfanykywz"
+
+
+[taxonomies]
+   tag = "tags"
+
+# allow html to content .md
+[markup.goldmark.renderer] 
+	unsafe= true

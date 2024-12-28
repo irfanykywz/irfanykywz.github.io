@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+
+<body>
+	<div class="container wrapper list">
+		{{ partial "head.html" . }}	
+
+		<div class='posts-title'>
+			<h2>
+				{{.Title}}
+			</h2>
+			<p>
+				{{.Description}}
+			</p>
+		</div>
+
+		<ul class="posts flat">
+			{{ range .Data.Pages }}
+			<li class="post">
+
+
+				<div class="post-header">
+					<div class="preview" style="margin-right: 10px;">
+						{{ if isset .Params "image" }}									
+						<img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}' width="70">
+						{{ else }}
+						<img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAA0JCgwKCA0MCwwPDg0QFCIWFBISFCkdHxgiMSszMjArLy42PE1CNjlJOi4vQ1xESVBSV1dXNEFfZl5UZU1VV1P/2wBDAQ4PDxQSFCcWFidTNy83U1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1P/wAARCABGAEYDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAYEAf/EACAQAQEAAgIBBQEAAAAAAAAAAAABAgQDEQUGExQhQXH/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIDBAb/xAAbEQEAAgIDAAAAAAAAAAAAAAAAAQIDMQQREv/aAAwDAQACEQMRAD8AnwHtHeAAAAAAAAAAA1+L0OTyfkeHU47McuS/eV/J+1FrRWJmTTIL3a9B6s1MrrbPP8iTue5Zcbf5Ig8sbhlccp1ZerGOHkY83fidK1tFtOAN1gAAABr8Xv8AJ4zyPDt8cmWXHfvG/s/YyCLVi0TEm17tevNW6mU1tbn+RZ1Pc6mMv9lQeWVyyuWV7tvdrgxw8fHh78RtWtYroAbrAAAAAAAAAAAAAAAAAAAAAAP/2Q==" alt='{{.Title}}'>
+						{{ end }}
+					</div>
+					<div class="matter">
+						<h2 class="title small">
+							<a href="{{ .RelPermalink }}">
+								{{.Title}}{{ if .Draft }}
+								<sup class="draft-label">DRAFT</sup>{{ end }}
+							</a>
+						</h2>
+						<span class="description">
+							{{ if isset .Params "description" }}
+							{{ .Description }}
+							{{ else if gt (countrunes (.Content | plainify)) 120 }}
+							{{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+							{{ else }}
+							{{ .Content | plainify | safeHTML }}
+							{{ end }}
+						</span>
+						<div class="tags">
+							{{ if gt .Params.stack 0 }}
+							<ul style="line-height: initial;">
+								{{ range .Params.stack }}
+								<li style='border:1px solid #ccc; color:#888; padding: 2px 4px; font-size: 10px; margin:0; '>
+									{{ . }}
+								</li>
+								{{ end }}
+							</ul>
+							{{ end }}
+						</div>
+					</div>
+				</div>
+
+
+			</li>
+			{{- end -}}
+		</ul>
+	</div>
+
+	{{ partial "footer.html" . }}
+</body>
+
+</html>

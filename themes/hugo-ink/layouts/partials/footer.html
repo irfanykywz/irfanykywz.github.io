@@ -1,0 +1,36 @@
+<div class="footer wrapper">
+	<nav class="nav">
+		<div>
+			{{ range .Site.Menus.footer }}
+				<a href="{{ .URL }}">{{ .Name }}</a>
+			{{ end }}
+		</div>
+	</nav>
+	<nav class="nav">
+		{{ dateFormat "2006" now }} 
+		{{ with .Site.Copyright }} 
+			{{ . | safeHTML }} 
+		{{ end }}
+		| 		
+		<a target="_blank" rel="nofollow" href="https://github.com/knadh/hugo-ink">Ink</a> 
+		theme on <a target="_blank" rel="nofollow" href="https://gohugo.io">Hugo</a>
+		|
+		<a target="_blank" href="{{ $.Site.BaseURL }}index.xml">RSS</a> 
+	</nav>
+</div>
+
+{{- with .Site.Params.Social -}}
+<script>feather.replace()</script>
+{{- end -}}
+
+{{- if isset .Site.Params "seasonjs" -}}
+	{{- range .Site.Params.seasonJS -}}
+		<script src="{{ $.Site.BaseURL }}{{ . }}"></script>
+	{{- end -}}
+{{- end -}}
+
+{{- if isset .Site.Params "mousejs" -}}
+	{{- range .Site.Params.mouseJS -}}
+		<script src="{{ $.Site.BaseURL }}{{ . }}"></script>
+	{{- end -}}
+{{- end -}}

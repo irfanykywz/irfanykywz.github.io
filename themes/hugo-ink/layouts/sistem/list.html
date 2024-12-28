@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+
+<body>
+	<div class="container wrapper list">
+		{{ partial "head.html" . }}	
+
+		<div class='posts-title'>
+			<h2>
+				{{.Title}}
+			</h2>
+			<p>
+				{{.Description}}
+			</p>
+		</div>
+
+		<ul class="posts flat">
+			{{ range .Data.Pages }}
+			<li class="post nodate sistem">
+				<div class="post-header">
+					<div class="matter">
+						<h2 class="title small">
+							<a href="{{ .RelPermalink }}">{{.Title}}{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}</a>
+						</h2>
+						<span class="description">
+							{{ if isset .Params "description" }}
+							{{ .Description }}
+							{{ else if gt (countrunes (.Content | plainify)) 120 }}
+							{{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+							{{ else }}
+							{{ .Content | plainify | safeHTML }}
+							{{ end }}
+						</span>
+					</div>
+				</div>
+			</li>
+			{{- end -}}
+		</ul>
+	</div>
+
+	{{ partial "footer.html" . }}
+</body>
+
+</html>
