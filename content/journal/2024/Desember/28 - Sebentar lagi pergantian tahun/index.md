@@ -1,6 +1,6 @@
 ---
 title: "Sebentar lagi pergantian tahun"
-date: 2024-12-28T13:57:12+07:00
+date: 2024-12-28T09:30:12+07:00
 draft: false
 ---
 
