@@ -3,11 +3,15 @@ title: "Favorite"
 description: "Daftar Kesukaan saya"
 ---
 
-## Mentor
+## Mentor Panutan
 - Mardigu WP
-- [Yodhia Antariksa](https://www.instagram.com/yodhia.antariksa/reels/)
 
 ## Music
+
+**AOI***
+- Crawling
+- A Biiter Day
+- Hades
 
 **Let's Sing Kids 361**
 - 牛欣欣 (Niu Xin Xin)
@@ -32,12 +36,6 @@ description: "Daftar Kesukaan saya"
 - My Dream Family
 - Fantasy English Version
 
-**RTJ**
-- Film Murahan
-- 606116
-- Pesan Ini Waktu yang Menjawab 
-- Pulangku Untuk Pergi Kembali
-
 **Study Music Project**
 - [Ever Eternity](https://www.youtube.com/embed/8d7F5ikbajU)
 - Crystal Rose
@@ -55,7 +53,10 @@ description: "Daftar Kesukaan saya"
 
 ## Game
 - Harvest Moon
-- Terraria
-- Stardew Valley
-- Rune Factory
 - Lost Saga
+- Stardew Valley
+- Terraria
+- Rune Factory
+- Forager
+- Core Keeper
+- Necesse

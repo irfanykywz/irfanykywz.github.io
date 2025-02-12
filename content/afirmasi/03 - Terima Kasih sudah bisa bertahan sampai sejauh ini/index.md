@@ -10,11 +10,11 @@ draft: False
 </p>
 
 <p>
-	akan kubuat hari-hariku penuh makna dan warna...
+	akan kubuat hari-hariku penuh arti...
 </p>
 
 <p>
-	<b>setiap tahunnya</b> akan kubuat rencana untuk mewujudkan apa yang kuinginkan dalam hidup ini
+	<b>setiap tahunnya</b> akan kubuat rencana untuk mewujudkan apa yang kuinginkan ditahun ini
 </p>
 <p>
 	<b>setiap bulannya</b> akan kubuat rencana agar lebih fokus lagi dengan keinginanku ditahun ini
@@ -31,11 +31,11 @@ draft: False
 </p>
 
 <p>
-	terimakasih jiwa yang telah ditiupkan kedalam tubuh ini, indah sekali rasanya bisa merasakan kehidupan ini...
+	terimakasih ruh yang telah ditiupkan kedalam tubuh ini, indah sekali rasanya bisa merasakan kehidupan ini...
 </p>
 
 <p>
-	walau nantinya jiwa ini akan pergi aku ingin bisa merasakan hal yang ingin sekali kurasakan...
+	walau nantinya ruh ini akan pergi aku ingin bisa merasakan hal yang ingin sekali kurasakan...
 </p>
 
 <p>

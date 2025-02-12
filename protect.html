@@ -1,0 +1,134 @@
+<form id="form_hash">
+
+    <div class="mb-3">
+        <label for="secret key">secret key</label>
+        <input type="text" class="form-control" id="key" placeholder="secret key konten">
+    </div>
+
+    <div class="mb-3">
+        <label for="content">protect content</label>
+        <textarea class="form-control" id="content" placeholder="<p>insert html content</p>" rows="5"></textarea>
+    </div>
+
+    <button class="btn btn-dark" type="submit">Generate</button>
+
+</form>
+
+<textarea readonly onclick="select()" class='form-control mt-3' rows="5" id="resultEncrypt"></textarea>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+<script>
+
+    /**
+     * Credit
+     * https://github.com/robinmoisson/staticrypt
+     */ 
+    function hashFormatEncrypt(key) {
+        var salt = CryptoJS.lib.WordArray.random(128 / 8).toString();
+
+        var hashKey = CryptoJS.PBKDF2(key, salt, {
+            keySize: 256 / 32,
+            iterations: 1000
+        });
+
+        return {
+            salt: salt,
+            hashKey: hashKey.toString(),
+        };
+    }    
+
+    function encrypt(msg, key) {
+        var iv = CryptoJS.lib.WordArray.random(128 / 8);
+
+        var encrypted = CryptoJS.AES.encrypt(msg, key, {
+            iv: iv,
+            padding: CryptoJS.pad.Pkcs7,
+            mode: CryptoJS.mode.CBC
+        });
+        return iv.toString() + encrypted.toString();
+    }      
+
+    document.getElementById('form_hash').addEventListener('submit', function (e) {
+
+        e.preventDefault();
+
+        let content = document.getElementById('content').value,
+        key = document.getElementById('key').value;
+
+        var goHash = hashFormatEncrypt(key),
+        hashKey = goHash.hashKey,
+        salt = goHash.salt;
+
+        var encrypted = encrypt(content, hashKey),
+        hmac = CryptoJS.HmacSHA256(encrypted, CryptoJS.SHA256(hashKey).toString()).toString(),
+        encryptedMsg = hmac + encrypted;        
+
+        // console.info(hmac);
+        // console.info(encryptedMsg);
+        // console.info(salt);        
+
+// generate html (form unlock)
+var formUnlock = `
+<div id="resultDecrypt">
+<form id="form_hash">
+<input class="form-control mb-3" id="key" type="text" name="password" placeholder="Key" autofocus/>
+<input class="w-100 btn btn-primary" type="submit" value="Unlock"/>
+</form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></scr${'i'}pt>
+
+<script>
+function hashFormatDecrypt(key, salt) {
+    return CryptoJS.PBKDF2(key, salt, {
+        keySize: 256 / 32,
+        iterations: 1000
+    }).toString();
+}    
+
+function decrypt(key, encryptedMsg) {
+    var encryptedHMAC = encryptedMsg.substring(0, 64),
+    encryptedHTML = encryptedMsg.substring(64),
+    decryptedHMAC = CryptoJS.HmacSHA256(encryptedHTML, CryptoJS.SHA256(key).toString()).toString();
+
+    if (decryptedHMAC !== encryptedHMAC) {
+        return false;
+    }
+
+    return decryptMsg(encryptedHTML, key);
+}    
+
+function decryptMsg(encryptedMsg, key) {
+    var iv = CryptoJS.enc.Hex.parse(encryptedMsg.substr(0, 32))
+    var encrypted = encryptedMsg.substring(32);
+
+    return CryptoJS.AES.decrypt(encrypted, key, {
+        iv: iv,
+        padding: CryptoJS.pad.Pkcs7,
+        mode: CryptoJS.mode.CBC
+    }).toString(CryptoJS.enc.Utf8);
+}  
+
+document.getElementById('form_hash').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var keyInput = document.getElementById('key').value;
+    var encryptedMsg = '${encryptedMsg}';
+    var salt = '${salt}';
+
+    var hashKeyDec = hashFormatDecrypt(keyInput, salt);
+    var decryptMsg = decrypt(hashKeyDec, encryptedMsg);
+
+    // console.info(decryptMsg);        
+
+    if (!decryptMsg) {
+        alert('wrong Key !');
+    }else{                
+        document.getElementById('resultDecrypt').innerHTML = decryptMsg;
+    }
+});       
+</scr${'i'}pt>
+`;
+        document.getElementById('resultEncrypt').textContent = formUnlock;       
+    });
+</script>

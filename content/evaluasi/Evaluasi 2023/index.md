@@ -15,6 +15,8 @@ berikut ringkasan aktivitas yang saya lakukan selama tahun 2023
 belajar python untuk bisa buat aplikasi pakai qt
 
 september 2023 : main faefarm
+24 oktober 2023 : start blogger-apk bot project
+15 Desember 2023: start reupload-forbiden bot project
 
 **Mei-Juli**  
 coba rapihin project-project lama, kurteyki, facebook boot, belajar openwrt, stb
