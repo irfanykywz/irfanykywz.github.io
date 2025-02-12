@@ -9,9 +9,9 @@ draft: False
 <span style="background: #99ff9d; padding: 2px 4px; "> 
 Rencana : 
 </span><br/>
-rencana bulan ini mau ngidupin lagi situs kurteyki buat dijadiin tempat nulis  
+rencana bulan ini mau ngidupin lagi situs kurteyki buat dijadiin tempat nulis    
 sayang udah jalan setengah masa iya mau diberhentiin  
-ykywz.my.id sepertinya harus dimerge aja jadiin subdomain ke ykywz.kurteyki.com  
+ykywz.my.id sepertinya harus dimerge aja jadiin subdomain ke ykywz.kurteyki.com    
 karena hosting kurteyki tahun ini abis jadi harus dipindah juga hostingnya  
 jadi nanti ykywz.my.id domain tetap dikeep tapi hostingnya diberhentiin  
 ganti beli hosting buat kurteyki aja + migrasi databasenya  

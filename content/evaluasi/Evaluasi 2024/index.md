@@ -17,7 +17,7 @@ Rencana :
 <span style="background: #f9ff99; padding: 2px 4px; "> 
 Aksi : 
 </span><br/>  
-28 Oktober = tes cpns dapet skor gak pg kurang 5 point lagi padahal...
+28 Oktober = tes cpns dapet skor gak pg kurang 5 point lagi padahal... <br/>
 30 Oktober = start project web ykywz.my.id <br/>
 5 November = deploy web ke production  <br/>
 11 November = start project refactory tiktok-tts  <br/>
