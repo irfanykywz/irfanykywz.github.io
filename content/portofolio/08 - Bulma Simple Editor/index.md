@@ -10,6 +10,6 @@ aplikasi editing video secara masal
 
 edit video penambahan border, metadata, dan efek lainnya
 
-aplikasi ini adalah pesanana client
+aplikasi ini adalah pesanan client
 
 ![Bulma Simple Editor](bulma-simple-editor.png)

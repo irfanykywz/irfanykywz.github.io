@@ -1,14 +1,24 @@
 ---
-title: "Tentang"
+title: "About"
 type: "index"
 ---
 
+### About Me 👷
 
-## Perkenalan
-Hallo, perkenalkan nama panggilan saya Irfan
+I am someone who is interested in technology, especially in creating applications, currently I am studying creating desktop applications using Python
 
-saya adalah sesesorang yang tertarik pada bidang teknologi khususnya dalam pembuatan aplikasi, saat ini saya sedang mempelajari pembuatan aplikasi desktop menggunakan python
+I also understand a little about computers such as installation, maintenance and troubleshooting
 
-saya juga sedikit memahami tentang komputer seperti installasi, perawatan, dan troubleshooting
+To see what projects have been created, you can visit [portfolio page](/portofolio)
 
-untuk melihat project apa saja yang sudah pernah dibuat, maka bisa mengunjungi [halaman portofolio](/portofolio)
+
+### Experience ⚒️
+- Python Programmer 1year+
+- PHP Programmer 5year+
+- Website Development 5year+
+- Computer & Network Troubleshooting
+- Social Media Management 1month
+
+***
+
+If you need help with a job, [contact me](/contact). maybe I can help with right price 😎    

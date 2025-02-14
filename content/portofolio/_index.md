@@ -1,4 +1,4 @@
 ---
 title: "Portofolio"
-description: "Berikut beberapa project yang pernah saya buat"
+description: "several projects that I have made"
 ---

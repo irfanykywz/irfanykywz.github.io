@@ -3,12 +3,12 @@ title: "Favorite"
 description: "Daftar Kesukaan saya"
 ---
 
-## Mentor Panutan
+## Mentor
 - Mardigu WP
 
 ## Music
 
-**AOI***
+**AOI**
 - Crawling
 - A Biiter Day
 - Hades
@@ -45,7 +45,7 @@ description: "Daftar Kesukaan saya"
 - Wish the Moon
 - Winter Memories
 
-## Film
+## Movie
 - Surat Dari Praha (2016)
 - Itaewon Class
 - Startup
