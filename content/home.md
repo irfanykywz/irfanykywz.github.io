@@ -3,7 +3,7 @@ title: "About"
 type: "index"
 ---
 
-### About Me 👷
+### About Me 🧑‍🦱
 
 I am someone who is interested in technology, especially in creating applications, currently I am studying creating desktop applications using Python
 
@@ -21,4 +21,4 @@ To see what projects have been created, you can visit [portfolio page](/portofol
 
 ***
 
-If you need help with a job, [contact me](/contact). maybe I can help with right price 😎    
+If you need help with a job, [contact me](/contact). maybe I can help with right price    

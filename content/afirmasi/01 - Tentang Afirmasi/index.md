@@ -1,8 +1,8 @@
 ---
-title: "Tentang Afirmasi"
-description: "afirmasi, mantra yang bisa digunakan untuk membuat hidup lebih positif"
+title: Tentang Afirmasi
+description: afirmasi, mantra yang bisa digunakan untuk membuat hidup lebih positif
 date: 2020-12-25T09:08:30+07:00
-draft: False
+draft: false
 ---
 
 Afirmasi menurut saya yaitu menyebutkan kata-kata didalam hati untuk membuat diri menjadi lebih positif
