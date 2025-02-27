@@ -1,6 +1,6 @@
 ---
-title: "Favorite"
-description: "Daftar Kesukaan saya"
+title: Favorite
+description: Daftar Favorite saya
 ---
 
 ## Mentor
@@ -13,7 +13,7 @@ description: "Daftar Kesukaan saya"
 - A Biiter Day
 - Hades
 
-**Let's Sing Kids 361**
+CN
 - 牛欣欣 (Niu Xin Xin)
 - 邱诗晗 (Qiu Shihan)
 
@@ -38,6 +38,3 @@ description: "Daftar Kesukaan saya"
 - Forager
 - Core Keeper
 - Necesse
-
-## Note
-> segala hal yang disukai bisa berubah seiring berjalannya waktu

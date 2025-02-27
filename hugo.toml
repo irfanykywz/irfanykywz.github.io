@@ -64,27 +64,22 @@ weight = 4
 [[menu.footer]]
 name = "Journal"
 url = "/journal"
-weight = 2
-
-[[menu.footer]]
-name = "Evaluasi"
-url = "/evaluasi"
-weight = 3
-
-[[menu.footer]]
-name = "Afirmasi"
-url = "/afirmasi"
-weight = 4
-
-[[menu.footer]]
-name = "Sistem"
-url = "/sistem"
-weight = 5
+weight = 1
 
 [[menu.footer]]
 name = "Favorite"
 url = "/favorite"
-weight = 6
+weight = 2
+
+# [[menu.footer]]
+# name = "Life"
+# url = "/life"
+# weight = 3
+
+[[menu.footer]]
+name = "Tags"
+url = "/tags"
+weight = 4
 
 [[params.social]]
 name = "Github"
