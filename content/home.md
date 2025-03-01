@@ -21,4 +21,4 @@ To see what projects have been created, you can visit [portfolio page](/portofol
 
 ***
 
-If you need help with a job, [contact me](/contact). maybe I can help with right price    
+If you need help with a job, [hire me](/contact).

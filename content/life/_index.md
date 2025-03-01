@@ -1,4 +1,4 @@
 ---
-title: "Kehidupaku"
-description: "I life but not forever, sometimes i will go and never comeback"
+title: Hidup
+description: aku tahu tidak akan selamanya hidup, suatu saat akan pergi dan tidak akan kembali
 ---

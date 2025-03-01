@@ -2,6 +2,7 @@
 title: Jurnal Hari ini
 date: 2025-02-27T17:00:35+07:00
 draft: false
+tags: []
 ---
 
 Fokuskan 1 hal yang ingin kamu capai dalam waktu dekat ini

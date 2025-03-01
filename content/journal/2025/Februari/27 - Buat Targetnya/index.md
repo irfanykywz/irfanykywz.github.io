@@ -1,7 +1,9 @@
 ---
-title: "Buat Targetnya"
+title: Buat Targetnya
 date: 2025-02-27T18:00:35+07:00
-draft: False
+draft: false
+tags:
+  - Evaluasi
 ---
 
 Beberapa tahun kebelakang ini saya seperti kehilangan arah

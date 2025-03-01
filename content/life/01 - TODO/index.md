@@ -1,6 +1,5 @@
 ---
 title: "Kehidupanku"
-type: "page"
 ---
 
 Kehidupanku Kedepannya
@@ -32,3 +31,11 @@ setiap hari lakuin aktivitas ini, anggap aja sebagai inevstasi untuk masa depan
 - nonton video bahasa inggris
 - nonton resep masakan
 - olahraga minimal 1x lari ditempat, lompat-lompat, yang penting buat peregangan tubuh
+
+
+# Rencana saat ini
+- website kurteyki gak usah diperpanjang karena gak diurus 
+- bikin website baru irfanykywz > tapi domainnya blm ketemu yg bagus
+- buat personal branding aja irfanykywz gak usah yang lain ! 
+- ykywzQQ itu buang aja ganti jadi irfanykywz
+- domain ykywz.my.id itu buat nulis aja
