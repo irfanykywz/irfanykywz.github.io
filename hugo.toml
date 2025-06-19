@@ -2,7 +2,7 @@ baseURL = "https://irfanykywz.github.io/"
 languageCode = "en-us"
 title = "Muhamad Irfan"
 theme = "hugo-ink"
-paginate = 5
+paginate = 6
 
 copyright = "© irfanykywz"
 
@@ -14,35 +14,25 @@ pygmentscodefencesguesssyntax = true
 # disqusShortname = "ink-demo"
 
 [params]
-
-	subtitle = "Piece of word will build a story, keep write"
-	# subtitle = "A person who likes write about life"
+	subtitle = "Developer, Writer, and Technology Enthusiast"
 	favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
-
-	# Optional 64x64 avatar image.
-	# avatar = "https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg"
 	avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
-
-	# Content types to disable Disqus on.
-	# disableDisqusTypes = ["posts","page","portofolio"]
 	
 	featherIconsCDN = true
-
 	mode = "auto" # "dark" or "auto"
-	# customCSS = "css/custom.css"  # Custom CSS applied to default styles.
-	# customDarkCSS = "css/custom-dark.css"  # Custom styles applied to dark mode css.
-	# customJS = ["js/custom.js"]  # Custom JS scripts.
-	# seasonJS = ["js/snow.js"]
+	
+	# Custom CSS for modern design
+	customCSS = "css/modern.css"
 	mouseJS = ["js/mouse.js"]
 
-# Nav.
+# Navigation
 [[menu.main]]
 name = "Home"
 url = "/"
 weight = 1
 
 [[menu.main]]
-name = "Portofolio"
+name = "Portfolio"
 url = "/portofolio"
 weight = 2
 
@@ -52,35 +42,32 @@ url = "/posts"
 weight = 3
 
 [[menu.main]]
-name = "Contact"
-url = "/contact"
-weight = 4
-
-# [[menu.main]]
-# name = "Tags"
-# url = "/tags"
-# weight = 4
-
-[[menu.footer]]
 name = "Journal"
 url = "/journal"
-weight = 1
+weight = 4
 
+[[menu.main]]
+name = "Contact"
+url = "/contact"
+weight = 5
+
+# Footer menu
 [[menu.footer]]
 name = "Favorite"
 url = "/favorite"
-weight = 2
-
-# [[menu.footer]]
-# name = "Life"
-# url = "/life"
-# weight = 3
+weight = 1
 
 [[menu.footer]]
 name = "Tags"
 url = "/tags"
-weight = 4
+weight = 2
 
+[[menu.footer]]
+name = "RSS"
+url = "/index.xml"
+weight = 3
+
+# Social links
 [[params.social]]
 name = "Github"
 icon = "github"
@@ -91,10 +78,20 @@ name = "LinkedIn"
 icon = "linkedin"
 url = "https://linkedin.com/in/irfanykywz"
 
+[[params.social]]
+name = "Email"
+icon = "mail"
+url = "mailto:irfanyouth@gmail.com"
 
 [taxonomies]
    tag = "tags"
 
-# allow html to content .md
+# Allow HTML in content
 [markup.goldmark.renderer] 
-	unsafe= true
+	unsafe = true
+
+# Table of contents
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 4
+  ordered = false

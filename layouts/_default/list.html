@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+
+<body>
+	<div class="container wrapper list">
+		{{ partial "head.html" . }}
+
+		<div class="page-header">
+			{{ if isset .Data "Term" }}
+				<h1 class="page-title">Posts tagged "{{ .Data.Term }}"</h1>
+				<p class="page-description">Exploring topics related to {{ .Data.Term }}</p>
+			{{ else }}
+				<h1 class="page-title">{{ .Title }}</h1>
+				{{ if .Description }}
+				<p class="page-description">{{ .Description }}</p>
+				{{ end }}
+			{{ end }}
+		</div>
+		
+		{{ .Content }}
+
+		<div class="posts-container">
+			{{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
+			{{ if gt (len $paginator.Pages) 0 }}
+				<div class="posts-grid">
+					{{ range $paginator.Pages }}
+						<article class="post-card">
+							{{ partial "post-preview.html" . }}
+						</article>
+					{{- end -}}
+				</div>
+				{{ template "partials/paginator.html" . }}
+			{{ else }}
+				<div class="empty-state">
+					<h3>No posts found</h3>
+					<p>There are no posts to display at the moment.</p>
+					<a href="/" class="btn btn-primary">Back to Home</a>
+				</div>
+			{{ end }}
+		</div>
+	</div>
+
+	{{ partial "footer.html" . }}
+</body>
+
+</html>

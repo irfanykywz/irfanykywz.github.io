@@ -1,0 +1,99 @@
+<footer class="footer wrapper">
+	<nav class="footer-nav">
+		<div class="footer-links">
+			{{ range .Site.Menus.footer }}
+				<a href="{{ .URL }}">{{ .Name }}</a>
+			{{ end }}
+		</div>
+	</nav>
+	<div class="footer-info">
+		<p>
+			{{ dateFormat "2006" now }} 
+			{{ with .Site.Copyright }} 
+				{{ . | safeHTML }} 
+			{{ end }}
+		</p>
+		<p>
+			Built with <a target="_blank" rel="nofollow" href="https://gohugo.io">Hugo</a>
+			& <a target="_blank" rel="nofollow" href="https://github.com/knadh/hugo-ink">Ink</a>
+		</p>
+	</div>
+</footer>
+
+{{- with .Site.Params.Social -}}
+<script>feather.replace()</script>
+{{- end -}}
+
+{{- if isset .Site.Params "seasonjs" -}}
+	{{- range .Site.Params.seasonJS -}}
+		<script src="{{ $.Site.BaseURL }}{{ . }}"></script>
+	{{- end -}}
+{{- end -}}
+
+{{- if isset .Site.Params "mousejs" -}}
+	{{- range .Site.Params.mouseJS -}}
+		<script src="{{ $.Site.BaseURL }}{{ . }}"></script>
+	{{- end -}}
+{{- end -}}
+
+<style>
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  margin-top: 4rem;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+.footer-info {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-info p {
+  margin: 0;
+}
+
+.footer-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-links {
+    gap: 1rem;
+  }
+  
+  .footer-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+</style>

@@ -1,0 +1,30 @@
+<div class="post-card-content">
+	<div class="post-meta">
+		<time datetime="{{ .Date.Format "2006-01-02" }}" class="post-date">
+			{{ .Date.Format "Jan 2, 2006" }}
+		</time>
+		{{ if .Params.tags }}
+		<div class="post-tags">
+			{{ range first 2 .Params.tags }}
+			<span class="tag">{{ . }}</span>
+			{{ end }}
+		</div>
+		{{ end }}
+	</div>
+	<h3 class="post-title">
+		<a href="{{ .RelPermalink }}">
+			{{ .Title }}
+			{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}
+		</a>
+	</h3>
+	<p class="post-excerpt">
+		{{ if isset .Params "description" }}
+			{{ .Description }}
+		{{ else if gt (countrunes (.Content | plainify)) 120 }}
+			{{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+		{{ else }}
+			{{ .Content | plainify | safeHTML }}
+		{{ end }}
+	</p>
+	<a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+</div>

@@ -1,0 +1,35 @@
+<div class="header">
+	{{ if .Site.Params.Avatar }}
+		<div class="avatar">
+			<a href="{{ .Site.BaseURL }}" aria-label="Home">
+				<img src="{{ .Site.Params.Avatar | safeURL }}" alt="{{ .Site.Title }}" />
+			</a>
+		</div>
+	{{ end }}
+	<h1 class="site-title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+	<div class="site-description">
+		{{- if isset .Site.Params "subtitle" -}}
+		<p>{{ .Site.Params.Subtitle | markdownify }}</p>
+		{{- end -}}
+		<nav class="nav social" aria-label="Social media links">
+			<ul class="flat">
+				{{- range $index, $key := .Site.Params.Social -}}
+					<li><a target="_blank" rel="nofollow noopener" href="{{ $key.url }}" title="{{ $key.name }}" aria-label="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a></li>
+				{{- end -}}
+		    {{- if or (eq .Site.Params.mode "auto") (eq .Site.Params.mode "dark") -}}
+		    	<li><button class="scheme-toggle" id="scheme-toggle" aria-label="Toggle dark mode"></button></li>
+		    {{- end -}}
+			</ul>
+		</nav>
+	</div>
+
+	<nav class="nav menu" aria-label="Main navigation">
+		<ul class="flat">
+			{{ range .Site.Menus.main }}
+			<li>
+				<a href="{{ .URL }}" {{ if eq .URL $.RelPermalink }}aria-current="page"{{ end }}>{{ .Name }}</a>
+			</li>
+			{{ end }}
+		</ul>
+	</nav>
+</div>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html {{- if (eq .Site.Params.mode "dark") -}}class="dark"{{ end }}>
+{{ partial "header.html" . }}
+<body>
+	<div class="container wrapper">
+		{{ partial "head.html" . }}
+
+		<!-- Hero Section -->
+		<section class="hero">
+			<div class="hero-content">
+				<h1 class="hero-title">Welcome to My Digital Space</h1>
+				<p class="hero-subtitle">A collection of thoughts, projects, and experiences from my journey in technology and life.</p>
+				<div class="hero-actions">
+					<a href="/posts" class="btn btn-primary">Read My Posts</a>
+					<a href="/portofolio" class="btn btn-secondary">View Portfolio</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Featured Content -->
+		<section class="featured-section">
+			<h2 class="section-title">Latest Posts</h2>
+			<div class="posts-grid">
+				{{ $posts := where .Site.RegularPages "Type" "posts" }}
+				{{ range first 3 $posts }}
+				<article class="post-card">
+					<div class="post-card-content">
+						<div class="post-meta">
+							<time datetime="{{ .Date.Format "2006-01-02" }}">
+								{{ .Date.Format "Jan 2, 2006" }}
+							</time>
+							{{ if .Params.tags }}
+							<div class="post-tags">
+								{{ range first 2 .Params.tags }}
+								<span class="tag">{{ . }}</span>
+								{{ end }}
+							</div>
+							{{ end }}
+						</div>
+						<h3 class="post-title">
+							<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+						</h3>
+						<p class="post-excerpt">
+							{{ if .Description }}
+								{{ .Description }}
+							{{ else }}
+								{{ .Summary | truncate 120 }}
+							{{ end }}
+						</p>
+						<a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+					</div>
+				</article>
+				{{ end }}
+			</div>
+			<div class="section-footer">
+				<a href="/posts" class="btn btn-outline">View All Posts</a>
+			</div>
+		</section>
+
+		<!-- Portfolio Preview -->
+		<section class="portfolio-section">
+			<h2 class="section-title">Featured Projects</h2>
+			<div class="portfolio-grid">
+				{{ $portfolio := where .Site.RegularPages "Type" "portofolio" }}
+				{{ range first 3 $portfolio }}
+				<div class="portfolio-card">
+					<div class="portfolio-image">
+						{{ if .Params.image }}
+						<img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+						{{ else }}
+						<div class="portfolio-placeholder">
+							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+								<circle cx="8.5" cy="8.5" r="1.5"/>
+								<polyline points="21,15 16,10 5,21"/>
+							</svg>
+						</div>
+						{{ end }}
+					</div>
+					<div class="portfolio-content">
+						<h3 class="portfolio-title">
+							<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+						</h3>
+						<p class="portfolio-description">{{ .Description }}</p>
+						{{ if .Params.stack }}
+						<div class="tech-stack">
+							{{ range first 3 .Params.stack }}
+							<span class="tech-tag">{{ . }}</span>
+							{{ end }}
+						</div>
+						{{ end }}
+					</div>
+				</div>
+				{{ end }}
+			</div>
+			<div class="section-footer">
+				<a href="/portofolio" class="btn btn-outline">View All Projects</a>
+			</div>
+		</section>
+
+		<!-- About Section -->
+		<section class="about-section">
+			<div class="about-content">
+				<h2 class="section-title">About Me</h2>
+				{{ range .Site.RegularPages }}
+					{{ if eq .Type "index" }}
+						<div class="about-text">
+							{{ .Content }}
+						</div>
+					{{ end }}
+				{{ end }}
+				<div class="about-actions">
+					<a href="/contact" class="btn btn-primary">Get In Touch</a>
+					<a href="/journal" class="btn btn-outline">Read My Journal</a>
+				</div>
+			</div>
+		</section>
+	</div>
+	{{ partial "footer.html" . }}
+</body>
+</html>
