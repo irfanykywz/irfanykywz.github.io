@@ -6,28 +6,35 @@
 		{{ partial "head.html" . }}
 
 		<!-- Hero Section -->
-		<section class="hero">
+		<section class="hero winter-card ice-crystal">
 			<div class="hero-content">
-				<h1 class="hero-title">Welcome to My Digital Space</h1>
+				<h1 class="hero-title winter-text">Welcome to My Digital Space</h1>
 				<p class="hero-subtitle">A collection of thoughts, projects, and experiences from my journey in technology and life.</p>
 				<div class="hero-actions">
-					<a href="/posts" class="btn btn-primary">Read My Posts</a>
-					<a href="/portofolio" class="btn btn-secondary">View Portfolio</a>
+					<a href="/posts" class="btn btn-primary btn-winter">
+						<i data-feather="book-open"></i>
+						Read My Posts
+					</a>
+					<a href="/portofolio" class="btn btn-outline">
+						<i data-feather="briefcase"></i>
+						View Portfolio
+					</a>
 				</div>
 			</div>
 		</section>
 
 		<!-- Featured Content -->
 		<section class="featured-section">
-			<h2 class="section-title">Latest Posts</h2>
+			<h2 class="section-title winter-text">Latest Posts</h2>
 			<div class="posts-grid">
 				{{ $posts := where .Site.RegularPages "Type" "posts" }}
 				{{ range first 3 $posts }}
-				<article class="post-card">
+				<article class="post-card winter-card ice-crystal">
 					<div class="post-card-content">
 						<div class="post-meta">
-							<time datetime="{{ .Date.Format "2006-01-02" }}">
-								{{ .Date.Format "Jan 2, 2006" }}
+							<time datetime="{{ .Date.Format "2006-01-02" }}" class="post-date">
+								<span class="day">{{ dateFormat "02" .Date }}</span>
+								<span class="month-year">{{ if $.Site.Data.month }}{{ index $.Site.Data.month (printf "%d" .Date.Month) }} {{ .Date.Year }}{{ else }}{{ dateFormat "Jan 2006" .Date }}{{ end }}</span>
 							</time>
 							{{ if .Params.tags }}
 							<div class="post-tags">
@@ -47,7 +54,9 @@
 								{{ .Summary | truncate 120 }}
 							{{ end }}
 						</p>
-						<a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+						<a href="{{ .RelPermalink }}" class="read-more">
+							Read more <i data-feather="arrow-right"></i>
+						</a>
 					</div>
 				</article>
 				{{ end }}
@@ -59,21 +68,18 @@
 
 		<!-- Portfolio Preview -->
 		<section class="portfolio-section">
-			<h2 class="section-title">Featured Projects</h2>
+			<h2 class="section-title winter-text">Featured Projects</h2>
 			<div class="portfolio-grid">
 				{{ $portfolio := where .Site.RegularPages "Type" "portofolio" }}
 				{{ range first 3 $portfolio }}
-				<div class="portfolio-card">
+				<div class="portfolio-card winter-card ice-crystal">
 					<div class="portfolio-image">
 						{{ if .Params.image }}
 						<img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
 						{{ else }}
 						<div class="portfolio-placeholder">
-							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-								<circle cx="8.5" cy="8.5" r="1.5"/>
-								<polyline points="21,15 16,10 5,21"/>
-							</svg>
+							<i data-feather="image"></i>
+							<span>No preview</span>
 						</div>
 						{{ end }}
 					</div>
@@ -99,9 +105,9 @@
 		</section>
 
 		<!-- About Section -->
-		<section class="about-section">
+		<section class="about-section winter-card">
 			<div class="about-content">
-				<h2 class="section-title">About Me</h2>
+				<h2 class="section-title winter-text">About Me</h2>
 				{{ range .Site.RegularPages }}
 					{{ if eq .Type "index" }}
 						<div class="about-text">
@@ -110,8 +116,14 @@
 					{{ end }}
 				{{ end }}
 				<div class="about-actions">
-					<a href="/contact" class="btn btn-primary">Get In Touch</a>
-					<a href="/journal" class="btn btn-outline">Read My Journal</a>
+					<a href="/contact" class="btn btn-primary btn-winter">
+						<i data-feather="mail"></i>
+						Get In Touch
+					</a>
+					<a href="/journal" class="btn btn-outline">
+						<i data-feather="book"></i>
+						Read My Journal
+					</a>
 				</div>
 			</div>
 		</section>
