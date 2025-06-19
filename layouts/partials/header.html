@@ -48,6 +48,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/modern.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/enhanced-styles.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/winter-effects.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/navigation.css" />
 	
 	{{- if isset .Site.Params "customcss" }}
 		<link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}{{ .Site.Params.customCSS }}" />
@@ -68,6 +69,7 @@
 	
 	<script src="{{ .Site.BaseURL }}js/main.js"></script>
 	<script src="{{ .Site.BaseURL }}js/winter-effects.js"></script>
+	<script src="{{ .Site.BaseURL }}js/enhanced-navigation.js"></script>
 	
 	{{- if isset .Site.Params "customjs" -}}
 		{{- range .Site.Params.customJS }}<script src="{{ $.Site.BaseURL }}{{ . }}"></script>{{- end }}
