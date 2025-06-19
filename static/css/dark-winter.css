@@ -1,0 +1,293 @@
+/* Enhanced Dark Mode with Winter Theme */
+
+/* Dark Winter Variables */
+html.dark {
+  --primary-color: #64b5f6;
+  --primary-light: #90caf9;
+  --primary-dark: #42a5f5;
+  
+  --text-primary: #e3f2fd;
+  --text-secondary: #bbdefb;
+  --text-muted: #90caf9;
+  
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  
+  --border-color: #30363d;
+  --winter-glow: rgba(100, 181, 246, 0.2);
+}
+
+/* Dark mode winter effects */
+html.dark body {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+  color: var(--text-primary);
+}
+
+/* Dark mode hero section */
+html.dark .hero {
+  background: linear-gradient(135deg, 
+    rgba(22, 27, 34, 0.9) 0%, 
+    rgba(13, 17, 23, 0.9) 100%);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px rgba(100, 181, 246, 0.1);
+}
+
+/* Dark mode cards with winter glow */
+html.dark .post-card,
+html.dark .portfolio-card {
+  background: rgba(22, 27, 34, 0.8);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+html.dark .post-card:hover,
+html.dark .portfolio-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 32px var(--winter-glow);
+}
+
+/* Dark mode buttons with winter effects */
+html.dark .btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  box-shadow: 0 4px 15px rgba(100, 181, 246, 0.3);
+}
+
+html.dark .btn-primary:hover {
+  box-shadow: 0 8px 25px rgba(100, 181, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+html.dark .btn-outline {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+html.dark .btn-outline:hover {
+  background: var(--primary-color);
+  color: #0d1117;
+  box-shadow: 0 8px 25px rgba(100, 181, 246, 0.3);
+}
+
+/* Dark mode navigation with frost effect */
+html.dark .header {
+  background: rgba(13, 17, 23, 0.9);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+html.dark .header nav.menu li a {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+  transition: all 0.3s ease;
+}
+
+html.dark .header nav.menu li a:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(100, 181, 246, 0.2);
+}
+
+/* Dark mode code blocks with winter theme */
+html.dark .highlight,
+html.dark .post-content pre {
+  background: rgba(22, 27, 34, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+html.dark .post-content code {
+  background: rgba(22, 27, 34, 0.6);
+  color: var(--primary-light);
+  border: 1px solid var(--border-color);
+}
+
+/* Dark mode blockquotes */
+html.dark .post-content blockquote {
+  background: rgba(22, 27, 34, 0.6);
+  border-left: 4px solid var(--primary-color);
+  color: var(--text-secondary);
+}
+
+/* Dark mode tables */
+html.dark table {
+  background: rgba(22, 27, 34, 0.8);
+  border: 1px solid var(--border-color);
+}
+
+html.dark table th {
+  background: rgba(33, 38, 45, 0.9);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+html.dark table td {
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+html.dark table tbody tr:nth-of-type(even) {
+  background-color: rgba(33, 38, 45, 0.3);
+}
+
+/* Dark mode footer */
+html.dark .footer {
+  background: rgba(13, 17, 23, 0.9);
+  border-top: 1px solid var(--border-color);
+}
+
+html.dark .footer-links a {
+  color: var(--text-secondary);
+}
+
+html.dark .footer-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Dark mode winter snowflakes */
+html.dark .snowflake {
+  color: rgba(100, 181, 246, 0.6);
+  text-shadow: 0 0 10px rgba(100, 181, 246, 0.3);
+}
+
+/* Dark mode ice particles */
+html.dark .ice-particle {
+  background: radial-gradient(circle, 
+    rgba(100, 181, 246, 0.8) 0%, 
+    rgba(100, 181, 246, 0.2) 50%, 
+    transparent 100%);
+  box-shadow: 0 0 6px rgba(100, 181, 246, 0.4);
+}
+
+/* Dark mode winter text effects */
+html.dark .winter-text {
+  background: linear-gradient(135deg, 
+    var(--primary-light), 
+    var(--primary-color), 
+    #81c784);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark mode hero title gradient */
+html.dark .hero-title {
+  background: linear-gradient(135deg, 
+    var(--primary-light) 0%, 
+    var(--primary-color) 50%, 
+    #81c784 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark mode section titles */
+html.dark .section-title {
+  color: var(--text-primary);
+  text-shadow: 0 2px 10px rgba(100, 181, 246, 0.2);
+}
+
+/* Dark mode post navigation */
+html.dark .nav-link {
+  background: rgba(22, 27, 34, 0.8);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+html.dark .nav-link:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 25px rgba(100, 181, 246, 0.2);
+}
+
+/* Dark mode tags */
+html.dark .tag {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: #0d1117;
+  font-weight: 500;
+}
+
+html.dark .tech-tag {
+  background: rgba(22, 27, 34, 0.8);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* Dark mode scrollbar with winter theme */
+html.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+}
+
+/* Dark mode selection */
+html.dark ::selection {
+  background: rgba(100, 181, 246, 0.3);
+  color: var(--text-primary);
+}
+
+html.dark ::-moz-selection {
+  background: rgba(100, 181, 246, 0.3);
+  color: var(--text-primary);
+}
+
+/* Dark mode winter loading */
+html.dark .winter-loading {
+  border-color: var(--primary-light);
+  border-top-color: var(--primary-color);
+}
+
+/* Dark mode about section */
+html.dark .about-section {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+/* Dark mode portfolio image placeholder */
+html.dark .portfolio-placeholder {
+  background: rgba(33, 38, 45, 0.8);
+  color: var(--text-muted);
+}
+
+/* Dark mode winter cursor trail */
+html.dark .ice-trail {
+  background: radial-gradient(circle, 
+    rgba(100, 181, 246, 0.8) 0%, 
+    transparent 70%);
+  box-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+}
+
+/* Dark mode responsive adjustments */
+@media (max-width: 768px) {
+  html.dark .hero {
+    background: rgba(13, 17, 23, 0.95);
+  }
+  
+  html.dark .post-card,
+  html.dark .portfolio-card {
+    background: rgba(22, 27, 34, 0.9);
+  }
+}
+
+/* Dark mode print styles */
+@media print {
+  html.dark body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  html.dark .post-content {
+    color: black !important;
+  }
+}

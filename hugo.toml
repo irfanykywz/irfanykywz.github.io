@@ -6,64 +6,66 @@ paginate = 6
 
 copyright = "© irfanykywz"
 
-pygmentsstyle = "vs"
+pygmentsstyle = "github-dark"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
-# googleAnalytics = "UA-123-45"
-# disqusShortname = "ink-demo"
-
 [params]
-	subtitle = "Developer, Writer, and Technology Enthusiast"
+	subtitle = "Developer, Writer, and Technology Enthusiast ❄️"
 	favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
 	avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
 	
 	featherIconsCDN = true
 	mode = "auto" # "dark" or "auto"
 	
-	# Custom CSS for modern design
-	customCSS = "css/modern.css"
+	# Winter theme settings
+	winterMode = true
+	enableSnowfall = true
+	enableIceEffects = true
+	
+	# Custom CSS for winter design
+	customCSS = "css/dark-winter.css"
 	mouseJS = ["js/mouse.js"]
 
 # Navigation
 [[menu.main]]
-name = "Home"
+name = "🏠 Home"
 url = "/"
 weight = 1
 
 [[menu.main]]
-name = "Portfolio"
+name = "💼 Portfolio"
 url = "/portofolio"
 weight = 2
 
 [[menu.main]]
-name = "Posts"
+name = "📝 Posts"
 url = "/posts"
 weight = 3
 
 [[menu.main]]
-name = "Journal"
+name = "📖 Journal"
 url = "/journal"
 weight = 4
 
 [[menu.main]]
-name = "Contact"
+name = "📧 Contact"
 url = "/contact"
 weight = 5
 
 # Footer menu
 [[menu.footer]]
-name = "Favorite"
+name = "⭐ Favorite"
 url = "/favorite"
 weight = 1
 
 [[menu.footer]]
-name = "Tags"
+name = "🏷️ Tags"
 url = "/tags"
 weight = 2
 
 [[menu.footer]]
-name = "RSS"
+name = "📡 RSS"
 url = "/index.xml"
 weight = 3
 
@@ -83,6 +85,11 @@ name = "Email"
 icon = "mail"
 url = "mailto:irfanyouth@gmail.com"
 
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/irfanykywz"
+
 [taxonomies]
    tag = "tags"
 
@@ -95,3 +102,31 @@ url = "mailto:irfanyouth@gmail.com"
   startLevel = 2
   endLevel = 4
   ordered = false
+
+# Image processing
+[imaging]
+  resampleFilter = "lanczos"
+  quality = 85
+  anchor = "smart"
+
+# Minification
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  minifyOutput = true
+
+# Security
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
+    osEnv = ['(?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM)$']
+  [security.funcs]
+    getenv = ['^HUGO_']
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = ['.*']

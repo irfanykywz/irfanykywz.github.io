@@ -1,0 +1,83 @@
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{{- $title := ( .Title ) -}}
+	{{- $siteTitle := ( .Site.Title ) -}}
+	{{- if .IsHome -}}
+		<title>{{ $siteTitle }} {{ if isset .Site.Params "subtitle" }}- {{ .Site.Params.Subtitle }}{{ end }} </title>
+	{{- else -}}
+		<title>{{ $title }} - {{ $siteTitle }}</title>
+	{{- end -}}
+
+	{{- if isset .Site.Params "favicon" -}}
+		<link rel="icon" type="image/png" href={{ .Site.Params.favicon }} />
+	{{- end -}}
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.subtitle }}{{ end }}">
+	
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+	<meta property="og:url" content="{{ .Permalink }}">
+	<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+	<meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.subtitle }}{{ end }}">
+	<meta property="og:image" content="{{ .Site.Params.avatar }}">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="{{ .Permalink }}">
+	<meta property="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+	<meta property="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.subtitle }}{{ end }}">
+	<meta property="twitter:image" content="{{ .Site.Params.avatar }}">
+
+	{{ with .OutputFormats.Get "rss" -}}
+		{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+	{{ end -}}
+
+	<meta name="google-site-verification" content="lDWGSmP0hlTFnz59wlaQqzwpVJeznar9HRdFtgZnnEI" />
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+	
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/page.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/modern.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/enhanced-styles.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/winter-effects.css" />
+	
+	{{- if isset .Site.Params "customcss" }}
+		<link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}{{ .Site.Params.customCSS }}" />
+	{{ end }}
+
+	<!-- Dark mode styles -->
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/dark.css" />
+	{{- if isset .Site.Params "customdarkcss" }}
+		<link id="dark-scheme" rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}{{ .Site.Params.customDarkCSS }}" />
+	{{- end }}
+
+	<!-- Scripts -->
+	{{ if and (isset .Site.Params "social") (isset .Site.Params "feathericonscdn") (eq .Site.Params.featherIconsCDN true) -}}
+		<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	{{- else if or (isset .Site.Params "social") (eq .Site.Params.mode "auto") (eq .Site.Params.mode "dark") -}}
+		<script src="{{ .Site.BaseURL }}js/feather.min.js"></script>
+	{{ end }}
+	
+	<script src="{{ .Site.BaseURL }}js/main.js"></script>
+	<script src="{{ .Site.BaseURL }}js/winter-effects.js"></script>
+	
+	{{- if isset .Site.Params "customjs" -}}
+		{{- range .Site.Params.customJS }}<script src="{{ $.Site.BaseURL }}{{ . }}"></script>{{- end }}
+	{{- end }}
+
+	<!-- Performance optimizations -->
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	
+	<!-- Theme color for mobile browsers -->
+	<meta name="theme-color" content="#3700ff">
+	<meta name="msapplication-TileColor" content="#3700ff">
+</head>
