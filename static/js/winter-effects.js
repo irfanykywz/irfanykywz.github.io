@@ -1,46 +1,62 @@
-// Winter Effects JavaScript
+// Winter Effects JavaScript - Enhanced
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize winter effects
+    initWinterEffects();
+});
+
+function initWinterEffects() {
     // Create snowfall effect
     createSnowfall();
     
     // Create floating ice particles
     createIceParticles();
     
-    // Add winter theme toggle
+    // Add winter theme functionality
     initWinterTheme();
     
-    // Add parallax effect for winter elements
+    // Add winter cursor effect
+    initWinterCursor();
+    
+    // Initialize parallax effects
     initParallaxEffect();
-});
+    
+    // Auto-detect season
+    detectSeason();
+}
 
 function createSnowfall() {
+    // Remove existing snow container
+    const existingSnow = document.querySelector('.snow-container');
+    if (existingSnow) {
+        existingSnow.remove();
+    }
+    
     const snowContainer = document.createElement('div');
     snowContainer.className = 'snow-container';
-    snowContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1000;
-    `;
     
-    // Create snowflakes
-    for (let i = 0; i < 50; i++) {
+    // Create snowflakes with better distribution
+    for (let i = 0; i < 60; i++) {
         const snowflake = document.createElement('div');
         snowflake.className = 'snowflake';
         snowflake.innerHTML = '❄';
+        
+        // Random properties for each snowflake
+        const size = Math.random() * 8 + 8;
+        const left = Math.random() * 100;
+        const animationDuration = Math.random() * 8 + 8;
+        const animationDelay = Math.random() * 10;
+        const opacity = Math.random() * 0.6 + 0.4;
+        
         snowflake.style.cssText = `
             position: absolute;
-            color: rgba(255, 255, 255, 0.8);
+            left: ${left}%;
+            font-size: ${size}px;
+            opacity: ${opacity};
+            animation: snowfall ${animationDuration}s linear infinite;
+            animation-delay: ${animationDelay}s;
             user-select: none;
             pointer-events: none;
-            font-size: ${Math.random() * 10 + 10}px;
-            left: ${Math.random() * 100}%;
-            animation-delay: ${Math.random() * 10}s;
-            animation-duration: ${Math.random() * 3 + 2}s;
         `;
         
         snowContainer.appendChild(snowflake);
@@ -50,17 +66,29 @@ function createSnowfall() {
 }
 
 function createIceParticles() {
+    // Remove existing ice particles
+    const existingIce = document.querySelector('.ice-particles');
+    if (existingIce) {
+        existingIce.remove();
+    }
+    
     const particleContainer = document.createElement('div');
     particleContainer.className = 'ice-particles';
     
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 25; i++) {
         const particle = document.createElement('div');
         particle.className = 'ice-particle';
+        
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const delay = Math.random() * 6;
+        const duration = Math.random() * 4 + 4;
+        
         particle.style.cssText = `
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation-delay: ${Math.random() * 6}s;
-            animation-duration: ${Math.random() * 4 + 4}s;
+            left: ${left}%;
+            top: ${top}%;
+            animation-delay: ${delay}s;
+            animation-duration: ${duration}s;
         `;
         
         particleContainer.appendChild(particle);
@@ -73,80 +101,65 @@ function initWinterTheme() {
     const themeToggle = document.getElementById('scheme-toggle');
     if (!themeToggle) return;
     
-    // Add winter-specific theme handling
-    themeToggle.addEventListener('click', function() {
-        const html = document.documentElement;
-        const isWinter = localStorage.getItem('winter-mode') === 'true';
-        
-        if (isWinter) {
-            html.classList.remove('winter-mode');
-            localStorage.setItem('winter-mode', 'false');
-        } else {
-            html.classList.add('winter-mode');
-            localStorage.setItem('winter-mode', 'true');
-        }
-        
-        updateWinterEffects();
-    });
-    
-    // Initialize winter mode from localStorage
-    if (localStorage.getItem('winter-mode') === 'true') {
+    // Check if winter mode is enabled
+    const isWinterMode = localStorage.getItem('winter-mode') === 'true';
+    if (isWinterMode) {
         document.documentElement.classList.add('winter-mode');
-        updateWinterEffects();
+        updateWinterEffects(true);
     }
+    
+    // Add click handler for theme toggle
+    themeToggle.addEventListener('click', function() {
+        setTimeout(() => {
+            const isDark = document.documentElement.classList.contains('dark');
+            if (isDark) {
+                // Enable winter effects in dark mode
+                document.documentElement.classList.add('winter-mode');
+                localStorage.setItem('winter-mode', 'true');
+                updateWinterEffects(true);
+            } else {
+                // Disable winter effects in light mode
+                document.documentElement.classList.remove('winter-mode');
+                localStorage.setItem('winter-mode', 'false');
+                updateWinterEffects(false);
+            }
+        }, 100);
+    });
 }
 
-function updateWinterEffects() {
-    const isWinterMode = document.documentElement.classList.contains('winter-mode');
+function updateWinterEffects(enable) {
     const snowContainer = document.querySelector('.snow-container');
     const iceParticles = document.querySelector('.ice-particles');
     
     if (snowContainer) {
-        snowContainer.style.display = isWinterMode ? 'block' : 'none';
+        snowContainer.style.display = enable ? 'block' : 'none';
     }
     
     if (iceParticles) {
-        iceParticles.style.display = isWinterMode ? 'block' : 'none';
+        iceParticles.style.display = enable ? 'block' : 'none';
+    }
+    
+    // Update body class for winter styling
+    if (enable) {
+        document.body.classList.add('winter-active');
+    } else {
+        document.body.classList.remove('winter-active');
     }
 }
 
-function initParallaxEffect() {
-    let ticking = false;
-    
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.parallax-element');
-        
-        parallaxElements.forEach(element => {
-            const speed = element.dataset.speed || 0.5;
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px)`;
-        });
-        
-        ticking = false;
-    }
-    
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    }
-    
-    window.addEventListener('scroll', requestTick);
-}
-
-// Winter-themed cursor effect
 function initWinterCursor() {
     let mouseX = 0;
     let mouseY = 0;
+    let trails = [];
     
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
-        // Create ice trail effect
-        createIceTrail(mouseX, mouseY);
+        // Only create trails if winter mode is active
+        if (document.documentElement.classList.contains('winter-mode')) {
+            createIceTrail(mouseX, mouseY);
+        }
     });
 }
 
@@ -155,8 +168,8 @@ function createIceTrail(x, y) {
     trail.className = 'ice-trail';
     trail.style.cssText = `
         position: fixed;
-        left: ${x}px;
-        top: ${y}px;
+        left: ${x - 3}px;
+        top: ${y - 3}px;
         width: 6px;
         height: 6px;
         background: radial-gradient(circle, rgba(135, 206, 235, 0.8) 0%, transparent 70%);
@@ -176,26 +189,40 @@ function createIceTrail(x, y) {
     }, 1000);
 }
 
-// Add CSS for ice trail animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes ice-trail-fade {
-        0% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        100% {
-            opacity: 0;
-            transform: scale(0.3);
+function initParallaxEffect() {
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+        
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // Update snowflakes position based on scroll
+        const snowflakes = document.querySelectorAll('.snowflake');
+        snowflakes.forEach((flake, index) => {
+            const speed = 0.1 + (index % 3) * 0.05;
+            const yPos = scrolled * speed;
+            flake.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
         }
     }
-`;
-document.head.appendChild(style);
+    
+    window.addEventListener('scroll', requestTick);
+}
 
-// Initialize winter cursor effect
-initWinterCursor();
-
-// Winter theme seasonal detection
 function detectSeason() {
     const now = new Date();
     const month = now.getMonth();
@@ -207,14 +234,11 @@ function detectSeason() {
         // Auto-enable winter mode during winter months
         document.documentElement.classList.add('winter-mode');
         localStorage.setItem('winter-mode', 'true');
-        updateWinterEffects();
+        updateWinterEffects(true);
     }
 }
 
-// Call seasonal detection
-detectSeason();
-
-// Add winter loading animation for page transitions
+// Winter loading animation
 function showWinterLoading() {
     const loader = document.createElement('div');
     loader.className = 'winter-loader';
@@ -238,7 +262,6 @@ function showWinterLoading() {
     `;
     
     document.body.appendChild(loader);
-    
     return loader;
 }
 
@@ -252,10 +275,66 @@ function hideWinterLoading(loader) {
     }
 }
 
-// Export functions for use in other scripts
+// Performance optimization: Reduce effects on mobile
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Adjust effects based on device
+if (isMobile()) {
+    // Reduce number of particles on mobile
+    const originalCreateSnowfall = createSnowfall;
+    createSnowfall = function() {
+        const existingSnow = document.querySelector('.snow-container');
+        if (existingSnow) {
+            existingSnow.remove();
+        }
+        
+        const snowContainer = document.createElement('div');
+        snowContainer.className = 'snow-container';
+        
+        // Fewer snowflakes on mobile
+        for (let i = 0; i < 30; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❄';
+            
+            const size = Math.random() * 6 + 6;
+            const left = Math.random() * 100;
+            const animationDuration = Math.random() * 6 + 6;
+            const animationDelay = Math.random() * 8;
+            const opacity = Math.random() * 0.5 + 0.3;
+            
+            snowflake.style.cssText = `
+                position: absolute;
+                left: ${left}%;
+                font-size: ${size}px;
+                opacity: ${opacity};
+                animation: snowfall ${animationDuration}s linear infinite;
+                animation-delay: ${animationDelay}s;
+                user-select: none;
+                pointer-events: none;
+            `;
+            
+            snowContainer.appendChild(snowflake);
+        }
+        
+        document.body.appendChild(snowContainer);
+    };
+}
+
+// Export functions for global use
 window.WinterEffects = {
     showLoading: showWinterLoading,
     hideLoading: hideWinterLoading,
     createSnowfall: createSnowfall,
-    createIceParticles: createIceParticles
+    createIceParticles: createIceParticles,
+    updateEffects: updateWinterEffects
 };
+
+// Initialize feather icons after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+});

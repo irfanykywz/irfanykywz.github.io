@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+
+<body>
+	<div class="container wrapper list journal-list">
+		{{ partial "head.html" . }}
+
+		<div class="page-header winter-card ice-crystal">
+			<h1 class="page-title winter-text">{{ .Title }}</h1>
+			{{ if .Description }}
+			<p class="page-description">{{ .Description }}</p>
+			{{ end }}
+			<div class="journal-stats">
+				<span class="stat-item">
+					<i data-feather="book-open"></i>
+					{{ len .Data.Pages }} entries
+				</span>
+				<span class="stat-item">
+					<i data-feather="calendar"></i>
+					Personal reflections
+				</span>
+			</div>
+		</div>
+		
+		{{ .Content }}
+
+		<div class="posts-container">
+			{{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
+			{{ if gt (len $paginator.Pages) 0 }}
+				<div class="journal-grid">
+					{{ range $paginator.Pages }}
+						<article class="journal-card winter-card">
+							<div class="journal-date">
+								<span class="day">{{ dateFormat "02" .Date }}</span>
+								<span class="month">{{ if $.Site.Data.month }}{{ index $.Site.Data.month (printf "%d" .Date.Month) }}{{ else }}{{ dateFormat "Jan" .Date }}{{ end }}</span>
+								<span class="year">{{ .Date.Year }}</span>
+							</div>
+							<div class="journal-content">
+								<h3 class="journal-title">
+									<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+								</h3>
+								<p class="journal-excerpt">
+									{{ if isset .Params "description" }}
+										{{ .Description }}
+									{{ else if gt (countrunes (.Content | plainify)) 150 }}
+										{{ slicestr (.Content | plainify) 0 150 | safeHTML }}...
+									{{ else }}
+										{{ .Content | plainify | safeHTML }}
+									{{ end }}
+								</p>
+								{{ if .Params.tags }}
+								<div class="journal-tags">
+									{{ range first 3 .Params.tags }}
+									<span class="tag tag-{{ . | urlize }}">{{ . }}</span>
+									{{ end }}
+								</div>
+								{{ end }}
+								<a href="{{ .RelPermalink }}" class="read-more">
+									Read entry <i data-feather="arrow-right"></i>
+								</a>
+							</div>
+						</article>
+					{{- end -}}
+				</div>
+				{{ template "partials/paginator.html" . }}
+			{{ else }}
+				<div class="empty-state winter-card">
+					<div class="empty-icon">
+						<i data-feather="book"></i>
+					</div>
+					<h3>No journal entries found</h3>
+					<p>Start writing your thoughts and experiences.</p>
+					<a href="/" class="btn btn-primary btn-winter">Back to Home</a>
+				</div>
+			{{ end }}
+		</div>
+	</div>
+
+	{{ partial "footer.html" . }}
+	
+	<style>
+	.journal-list {
+		position: relative;
+	}
+	
+	.journal-stats {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		margin-top: 1rem;
+		flex-wrap: wrap;
+	}
+	
+	.stat-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--text-secondary);
+		font-size: 0.875rem;
+	}
+	
+	.stat-item i {
+		width: 16px;
+		height: 16px;
+	}
+	
+	.journal-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+	
+	.journal-card {
+		display: flex;
+		gap: 1.5rem;
+		padding: 1.5rem;
+		transition: all 0.3s ease;
+		border-left: 4px solid var(--primary-color);
+	}
+	
+	.journal-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 30px var(--winter-glow);
+	}
+	
+	.journal-date {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		min-width: 60px;
+		padding: 0.5rem;
+		background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+		border-radius: 8px;
+		color: white;
+		height: fit-content;
+	}
+	
+	.journal-date .day {
+		font-size: 1.5rem;
+		font-weight: 700;
+		line-height: 1;
+	}
+	
+	.journal-date .month {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-top: 0.25rem;
+	}
+	
+	.journal-date .year {
+		font-size: 0.7rem;
+		opacity: 0.8;
+		margin-top: 0.25rem;
+	}
+	
+	.journal-content {
+		flex: 1;
+	}
+	
+	.journal-title {
+		margin: 0 0 0.75rem 0;
+		font-size: 1.1rem;
+		line-height: 1.3;
+	}
+	
+	.journal-title a {
+		color: var(--text-primary);
+		text-decoration: none;
+		font-weight: 600;
+	}
+	
+	.journal-title a:hover {
+		color: var(--primary-color);
+	}
+	
+	.journal-excerpt {
+		color: var(--text-secondary);
+		font-size: 0.9rem;
+		line-height: 1.5;
+		margin-bottom: 1rem;
+	}
+	
+	.journal-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+	
+	.journal-tags .tag {
+		font-size: 0.7rem;
+		padding: 0.25rem 0.5rem;
+		border-radius: 12px;
+	}
+	
+	.tag-journal {
+		background: linear-gradient(135deg, #dcb5ff, #b794f6);
+		color: #4a1a5c;
+	}
+	
+	.tag-evaluasi {
+		background: linear-gradient(135deg, #99ff9d, #68d391);
+		color: #1a4a1c;
+	}
+	
+	.tag-afirmasi {
+		background: linear-gradient(135deg, #fff299, #f6e05e);
+		color: #4a4a1a;
+	}
+	
+	.read-more {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--primary-color);
+		text-decoration: none;
+		font-size: 0.875rem;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+	
+	.read-more:hover {
+		color: var(--primary-dark);
+		transform: translateX(4px);
+	}
+	
+	.read-more i {
+		width: 14px;
+		height: 14px;
+		transition: transform 0.3s ease;
+	}
+	
+	.read-more:hover i {
+		transform: translateX(4px);
+	}
+	
+	.empty-state {
+		text-align: center;
+		padding: 4rem 2rem;
+		margin-top: 2rem;
+	}
+	
+	.empty-icon {
+		margin-bottom: 1rem;
+		color: var(--text-muted);
+	}
+	
+	.empty-icon i {
+		width: 48px;
+		height: 48px;
+	}
+	
+	@media (max-width: 768px) {
+		.journal-grid {
+			grid-template-columns: 1fr;
+		}
+		
+		.journal-card {
+			flex-direction: column;
+			text-align: center;
+		}
+		
+		.journal-date {
+			align-self: center;
+			flex-direction: row;
+			gap: 0.5rem;
+			padding: 0.5rem 1rem;
+		}
+		
+		.journal-stats {
+			gap: 1rem;
+		}
+	}
+	</style>
+</body>
+
+</html>

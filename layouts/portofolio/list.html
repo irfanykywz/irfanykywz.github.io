@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+
+<body>
+	<div class="container wrapper list portfolio-list">
+		{{ partial "head.html" . }}	
+
+		<div class="page-header winter-card ice-crystal">
+			<h1 class="page-title winter-text">{{ .Title }}</h1>
+			{{ if .Description }}
+			<p class="page-description">{{ .Description }}</p>
+			{{ end }}
+			<div class="portfolio-stats">
+				<span class="stat-item">
+					<i data-feather="folder"></i>
+					{{ len .Data.Pages }} projects
+				</span>
+				<span class="stat-item">
+					<i data-feather="code"></i>
+					Full-stack development
+				</span>
+				<span class="stat-item">
+					<i data-feather="star"></i>
+					Featured work
+				</span>
+			</div>
+		</div>
+
+		<div class="portfolio-container">
+			{{ if gt (len .Data.Pages) 0 }}
+				<div class="portfolio-grid-enhanced">
+					{{ range .Data.Pages }}
+					<article class="portfolio-card-enhanced winter-card ice-crystal">
+						<div class="portfolio-image-container">
+							{{ if .Params.image }}
+							<img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+							{{ else }}
+							<div class="portfolio-placeholder">
+								<i data-feather="image"></i>
+								<span>No preview</span>
+							</div>
+							{{ end }}
+							<div class="portfolio-overlay">
+								<a href="{{ .RelPermalink }}" class="view-project">
+									<i data-feather="external-link"></i>
+									View Project
+								</a>
+							</div>
+						</div>
+						
+						<div class="portfolio-content-enhanced">
+							<div class="portfolio-header">
+								<h3 class="portfolio-title">
+									<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+								</h3>
+								{{ if .Date }}
+								<time class="portfolio-date" datetime="{{ .Date.Format "2006-01-02" }}">
+									{{ .Date.Format "2006" }}
+								</time>
+								{{ end }}
+							</div>
+							
+							<p class="portfolio-description">{{ .Description }}</p>
+							
+							{{ if .Params.stack }}
+							<div class="tech-stack-enhanced">
+								<h4>Technologies</h4>
+								<div class="tech-tags">
+									{{ range .Params.stack }}
+									<span class="tech-tag">{{ . }}</span>
+									{{ end }}
+								</div>
+							</div>
+							{{ end }}
+							
+							<div class="portfolio-actions">
+								<a href="{{ .RelPermalink }}" class="btn btn-primary btn-winter">
+									<i data-feather="eye"></i>
+									View Details
+								</a>
+							</div>
+						</div>
+					</article>
+					{{ end }}
+				</div>
+			{{ else }}
+				<div class="empty-state winter-card">
+					<div class="empty-icon">
+						<i data-feather="briefcase"></i>
+					</div>
+					<h3>No projects found</h3>
+					<p>Check back soon for new projects and updates.</p>
+					<a href="/" class="btn btn-primary btn-winter">Back to Home</a>
+				</div>
+			{{ end }}
+		</div>
+	</div>
+
+	{{ partial "footer.html" . }}
+	
+	<style>
+	.portfolio-list {
+		position: relative;
+	}
+	
+	.portfolio-stats {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		margin-top: 1rem;
+		flex-wrap: wrap;
+	}
+	
+	.stat-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--text-secondary);
+		font-size: 0.875rem;
+	}
+	
+	.stat-item i {
+		width: 16px;
+		height: 16px;
+	}
+	
+	.portfolio-container {
+		margin-top: 2rem;
+	}
+	
+	.portfolio-grid-enhanced {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+		gap: 2rem;
+	}
+	
+	.portfolio-card-enhanced {
+		overflow: hidden;
+		transition: all 0.3s ease;
+		border: 1px solid var(--border-color);
+	}
+	
+	.portfolio-card-enhanced:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 20px 40px var(--winter-glow);
+	}
+	
+	.portfolio-image-container {
+		position: relative;
+		height: 220px;
+		overflow: hidden;
+		background: var(--bg-tertiary);
+	}
+	
+	.portfolio-image-container img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+	
+	.portfolio-card-enhanced:hover .portfolio-image-container img {
+		transform: scale(1.05);
+	}
+	
+	.portfolio-placeholder {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		color: var(--text-muted);
+		background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+	}
+	
+	.portfolio-placeholder i {
+		width: 48px;
+		height: 48px;
+		margin-bottom: 0.5rem;
+	}
+	
+	.portfolio-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.7);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+	
+	.portfolio-card-enhanced:hover .portfolio-overlay {
+		opacity: 1;
+	}
+	
+	.view-project {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: white;
+		text-decoration: none;
+		font-weight: 500;
+		padding: 0.75rem 1.5rem;
+		background: var(--primary-color);
+		border-radius: 6px;
+		transition: all 0.3s ease;
+	}
+	
+	.view-project:hover {
+		background: var(--primary-dark);
+		transform: translateY(-2px);
+	}
+	
+	.view-project i {
+		width: 16px;
+		height: 16px;
+	}
+	
+	.portfolio-content-enhanced {
+		padding: 1.5rem;
+	}
+	
+	.portfolio-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 1rem;
+		gap: 1rem;
+	}
+	
+	.portfolio-title {
+		margin: 0;
+		flex: 1;
+	}
+	
+	.portfolio-title a {
+		color: var(--text-primary);
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 1.25rem;
+		line-height: 1.3;
+	}
+	
+	.portfolio-title a:hover {
+		color: var(--primary-color);
+	}
+	
+	.portfolio-date {
+		color: var(--text-muted);
+		font-size: 0.875rem;
+		background: var(--bg-tertiary);
+		padding: 0.25rem 0.75rem;
+		border-radius: 12px;
+		white-space: nowrap;
+	}
+	
+	.portfolio-description {
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+	}
+	
+	.tech-stack-enhanced {
+		margin-bottom: 1.5rem;
+	}
+	
+	.tech-stack-enhanced h4 {
+		margin: 0 0 0.75rem 0;
+		font-size: 0.875rem;
+		color: var(--text-secondary);
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+	
+	.tech-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	
+	.tech-tag {
+		background: var(--bg-tertiary);
+		color: var(--text-secondary);
+		padding: 0.25rem 0.75rem;
+		border-radius: 12px;
+		font-size: 0.75rem;
+		border: 1px solid var(--border-color);
+		transition: all 0.3s ease;
+	}
+	
+	.tech-tag:hover {
+		background: var(--primary-color);
+		color: white;
+		border-color: var(--primary-color);
+	}
+	
+	.portfolio-actions {
+		display: flex;
+		gap: 1rem;
+	}
+	
+	.btn-winter {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.875rem;
+	}
+	
+	.btn-winter i {
+		width: 16px;
+		height: 16px;
+	}
+	
+	.empty-state {
+		text-align: center;
+		padding: 4rem 2rem;
+		margin-top: 2rem;
+	}
+	
+	.empty-icon {
+		margin-bottom: 1rem;
+		color: var(--text-muted);
+	}
+	
+	.empty-icon i {
+		width: 48px;
+		height: 48px;
+	}
+	
+	@media (max-width: 768px) {
+		.portfolio-grid-enhanced {
+			grid-template-columns: 1fr;
+		}
+		
+		.portfolio-header {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		
+		.portfolio-stats {
+			gap: 1rem;
+		}
+		
+		.stat-item {
+			font-size: 0.8rem;
+		}
+	}
+	
+	@media (max-width: 480px) {
+		.portfolio-content-enhanced {
+			padding: 1rem;
+		}
+		
+		.portfolio-image-container {
+			height: 180px;
+		}
+	}
+	</style>
+</body>
+
+</html>

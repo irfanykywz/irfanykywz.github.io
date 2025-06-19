@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+<body>
+	<div class="container wrapper">
+		{{ partial "head.html" . }}
+
+		<article class="portfolio-single">
+			<header class="portfolio-header winter-card ice-crystal">
+				<div class="portfolio-meta">
+					{{ if ne .Date.Year 1 }}
+					<time datetime="{{ .Date.Format "2006-01-02" }}" class="portfolio-date">
+						<i data-feather="calendar"></i>
+						{{ .Date.Format "January 2006" }}
+					</time>
+					{{ end }}
+					{{ if .Params.stack }}
+					<div class="portfolio-category">
+						<i data-feather="code"></i>
+						{{ index .Params.stack 0 | title }} Project
+					</div>
+					{{ end }}
+				</div>
+				
+				<h1 class="portfolio-title winter-text">{{ .Title }}</h1>
+				
+				{{ if .Description }}
+				<p class="portfolio-description">{{ .Description }}</p>
+				{{ end }}
+				
+				{{ if .Params.stack }}
+				<div class="tech-stack-header">
+					<h3>Technologies Used</h3>
+					<div class="tech-tags-header">
+						{{ range .Params.stack }}
+						<span class="tech-tag-large">{{ . }}</span>
+						{{ end }}
+					</div>
+				</div>
+				{{ end }}
+			</header>
+
+			{{ if .Params.image }}
+			<div class="portfolio-featured-image winter-card">
+				<img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+			</div>
+			{{ end }}
+					
+			<div class="portfolio-content markdown winter-card">
+				{{ with .Content }} 
+					{{ . | safeHTML }} 
+				{{ end }}
+			</div>
+
+			<footer class="portfolio-footer">
+				{{ if .Params.stack }}
+				<div class="tech-details winter-card">
+					<h3>Technical Details</h3>
+					<div class="tech-grid">
+						{{ range .Params.stack }}
+						<div class="tech-item">
+							<span class="tech-name">{{ . }}</span>
+							<div class="tech-bar">
+								<div class="tech-progress"></div>
+							</div>
+						</div>
+						{{ end }}
+					</div>
+				</div>
+				{{ end }}
+
+				<div class="portfolio-navigation">
+					{{ with .NextInSection }}
+					<a href="{{ .RelPermalink }}" class="nav-link nav-next winter-card">
+						<span class="nav-label">Next Project</span>
+						<span class="nav-title">{{ .Title }}</span>
+						<i data-feather="arrow-right"></i>
+					</a>
+					{{ end }}
+					{{ with .PrevInSection }}
+					<a href="{{ .RelPermalink }}" class="nav-link nav-prev winter-card">
+						<i data-feather="arrow-left"></i>
+						<span class="nav-label">Previous Project</span>
+						<span class="nav-title">{{ .Title }}</span>
+					</a>
+					{{ end }}
+				</div>
+				
+				<div class="back-to-portfolio">
+					<a href="/portofolio" class="btn btn-primary btn-winter">
+						<i data-feather="grid"></i>
+						Back to Portfolio
+					</a>
+				</div>
+			</footer>
+		</article>
+	</div>
+	{{ partial "footer.html" . }}
+	
+	<style>
+	.portfolio-single {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+	
+	.portfolio-header {
+		text-align: center;
+		margin-bottom: 3rem;
+		padding: 3rem 2rem;
+	}
+	
+	.portfolio-meta {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		margin-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+	
+	.portfolio-date,
+	.portfolio-category {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--text-muted);
+		font-size: 0.875rem;
+		background: var(--bg-tertiary);
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+	}
+	
+	.portfolio-date i,
+	.portfolio-category i {
+		width: 16px;
+		height: 16px;
+	}
+	
+	.portfolio-title {
+		font-size: 3rem;
+		font-weight: 700;
+		margin-bottom: 1.5rem;
+		line-height: 1.2;
+	}
+	
+	.portfolio-description {
+		font-size: 1.25rem;
+		color: var(--text-secondary);
+		margin-bottom: 2rem;
+		line-height: 1.6;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.tech-stack-header {
+		margin-top: 2rem;
+	}
+	
+	.tech-stack-header h3 {
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+		font-size: 1.25rem;
+	}
+	
+	.tech-tags-header {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+	
+	.tech-tag-large {
+		background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		font-size: 0.875rem;
+		font-weight: 500;
+		box-shadow: 0 4px 15px rgba(55, 0, 255, 0.2);
+	}
+	
+	.portfolio-featured-image {
+		margin-bottom: 3rem;
+		overflow: hidden;
+		border-radius: 12px;
+	}
+	
+	.portfolio-featured-image img {
+		width: 100%;
+		height: auto;
+		display: block;
+		border-radius: 12px;
+	}
+	
+	.portfolio-content {
+		padding: 2rem;
+		margin-bottom: 3rem;
+		font-size: 1.125rem;
+		line-height: 1.8;
+	}
+	
+	.portfolio-content h2,
+	.portfolio-content h3,
+	.portfolio-content h4 {
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+	}
+	
+	.portfolio-content h2 {
+		font-size: 2rem;
+		border-bottom: 2px solid var(--border-color);
+		padding-bottom: 0.5rem;
+	}
+	
+	.portfolio-content p {
+		margin-bottom: 1.5rem;
+	}
+	
+	.portfolio-content img {
+		border-radius: 8px;
+		margin: 2rem 0;
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+	}
+	
+	.tech-details {
+		padding: 2rem;
+		margin-bottom: 2rem;
+	}
+	
+	.tech-details h3 {
+		margin-bottom: 1.5rem;
+		color: var(--text-primary);
+	}
+	
+	.tech-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+	}
+	
+	.tech-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	
+	.tech-name {
+		font-weight: 500;
+		color: var(--text-primary);
+		font-size: 0.875rem;
+	}
+	
+	.tech-bar {
+		height: 6px;
+		background: var(--bg-tertiary);
+		border-radius: 3px;
+		overflow: hidden;
+	}
+	
+	.tech-progress {
+		height: 100%;
+		background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+		width: 85%;
+		border-radius: 3px;
+		animation: tech-load 2s ease-out;
+	}
+	
+	@keyframes tech-load {
+		from { width: 0; }
+		to { width: 85%; }
+	}
+	
+	.portfolio-navigation {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+		margin-bottom: 2rem;
+	}
+	
+	.nav-link {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.5rem;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		border: 1px solid var(--border-color);
+	}
+	
+	.nav-link:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 30px var(--winter-glow);
+	}
+	
+	.nav-prev {
+		text-align: left;
+	}
+	
+	.nav-next {
+		text-align: right;
+		justify-content: flex-end;
+	}
+	
+	.nav-label {
+		display: block;
+		font-size: 0.875rem;
+		color: var(--text-muted);
+		margin-bottom: 0.25rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+	
+	.nav-title {
+		display: block;
+		font-weight: 600;
+		color: var(--text-primary);
+		line-height: 1.3;
+	}
+	
+	.nav-link i {
+		width: 20px;
+		height: 20px;
+		color: var(--primary-color);
+	}
+	
+	.back-to-portfolio {
+		text-align: center;
+		padding-top: 2rem;
+		border-top: 1px solid var(--border-color);
+	}
+	
+	.btn-winter {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	
+	.btn-winter i {
+		width: 16px;
+		height: 16px;
+	}
+	
+	@media (max-width: 768px) {
+		.portfolio-title {
+			font-size: 2rem;
+		}
+		
+		.portfolio-header {
+			padding: 2rem 1rem;
+		}
+		
+		.portfolio-meta {
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+		}
+		
+		.portfolio-navigation {
+			grid-template-columns: 1fr;
+		}
+		
+		.nav-next {
+			text-align: left;
+			justify-content: flex-start;
+		}
+		
+		.tech-grid {
+			grid-template-columns: 1fr;
+		}
+		
+		.portfolio-content {
+			padding: 1.5rem;
+			font-size: 1rem;
+		}
+	}
+	</style>
+</body>
+</html>

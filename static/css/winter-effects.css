@@ -1,82 +1,48 @@
-/* Winter Effects CSS */
+/* Winter Effects CSS - Enhanced */
 
-/* Snowfall Animation */
+/* Fixed Snowfall Background */
+.snow-container {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
 .snowflake {
-  position: fixed;
-  top: -10px;
-  z-index: 9999;
+  position: absolute;
+  color: rgba(255, 255, 255, 0.8);
   user-select: none;
-  cursor: default;
-  animation-name: snowflakes-fall, snowflakes-shake;
-  animation-duration: 10s, 3s;
-  animation-timing-function: linear, ease-in-out;
-  animation-iteration-count: infinite, infinite;
-  animation-play-state: running, running;
+  pointer-events: none;
+  animation: snowfall 10s linear infinite;
+  font-size: 14px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
-@keyframes snowflakes-fall {
-  to {
-    transform: translateY(100vh);
+@keyframes snowfall {
+  0% {
+    transform: translateY(-100px) translateX(0px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(100px);
+    opacity: 0;
   }
 }
 
-@keyframes snowflakes-shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(80px);
-  }
-}
-
-.snowflake:nth-of-type(0) {
-  left: 1%;
-  animation-delay: 0s, 0s;
-}
-
-.snowflake:nth-of-type(1) {
-  left: 10%;
-  animation-delay: 1s, 1s;
-}
-
-.snowflake:nth-of-type(2) {
-  left: 20%;
-  animation-delay: 6s, 0.5s;
-}
-
-.snowflake:nth-of-type(3) {
-  left: 30%;
-  animation-delay: 4s, 2s;
-}
-
-.snowflake:nth-of-type(4) {
-  left: 40%;
-  animation-delay: 2s, 2s;
-}
-
-.snowflake:nth-of-type(5) {
-  left: 50%;
-  animation-delay: 8s, 3s;
-}
-
-.snowflake:nth-of-type(6) {
-  left: 60%;
-  animation-delay: 6s, 2s;
-}
-
-.snowflake:nth-of-type(7) {
-  left: 70%;
-  animation-delay: 2.5s, 1s;
-}
-
-.snowflake:nth-of-type(8) {
-  left: 80%;
-  animation-delay: 1s, 0s;
-}
-
-.snowflake:nth-of-type(9) {
-  left: 90%;
-  animation-delay: 3s, 1.5s;
+/* Dark mode snowflakes */
+html.dark .snowflake {
+  color: rgba(100, 181, 246, 0.7);
+  text-shadow: 0 0 8px rgba(100, 181, 246, 0.4);
 }
 
 /* Winter Theme Colors */
@@ -88,6 +54,7 @@
   --winter-silver: #c0c0c0;
   --winter-ice: #e6f3ff;
   --winter-frost: rgba(255, 255, 255, 0.1);
+  --winter-glow: rgba(74, 144, 226, 0.2);
 }
 
 /* Winter Dark Mode */
@@ -97,6 +64,7 @@ html.dark {
   --winter-accent: #64b5f6;
   --winter-text: #e3f2fd;
   --winter-muted: #90a4ae;
+  --winter-glow: rgba(100, 181, 246, 0.3);
 }
 
 /* Frosted Glass Effect */
@@ -112,19 +80,29 @@ html.dark .frosted-glass {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Winter Gradient Backgrounds */
-.winter-gradient {
-  background: linear-gradient(135deg, 
-    var(--winter-light-blue) 0%, 
-    var(--winter-blue) 50%, 
-    var(--winter-dark-blue) 100%);
+/* Winter Card Effects */
+.winter-card {
+  background: var(--winter-frost);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-html.dark .winter-gradient {
-  background: linear-gradient(135deg, 
-    #1e3a8a 0%, 
-    #1e40af 50%, 
-    #1d4ed8 100%);
+.winter-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+html.dark .winter-card {
+  background: rgba(26, 31, 46, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html.dark .winter-card:hover {
+  box-shadow: 0 20px 40px var(--winter-glow);
 }
 
 /* Ice Crystal Animation */
@@ -154,6 +132,37 @@ html.dark .winter-gradient {
   }
   100% {
     transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Floating Ice Particles */
+.ice-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ice-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
   }
 }
 
@@ -190,101 +199,6 @@ html.dark .winter-gradient {
   left: 100%;
 }
 
-/* Winter Card Effects */
-.winter-card {
-  background: var(--winter-frost);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.winter-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-html.dark .winter-card {
-  background: rgba(26, 31, 46, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-html.dark .winter-card:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Icicle Decorations */
-.icicles {
-  position: relative;
-}
-
-.icicles::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  right: 0;
-  height: 10px;
-  background: linear-gradient(to right,
-    transparent 0%,
-    var(--winter-white) 10%,
-    transparent 20%,
-    var(--winter-white) 30%,
-    transparent 40%,
-    var(--winter-white) 50%,
-    transparent 60%,
-    var(--winter-white) 70%,
-    transparent 80%,
-    var(--winter-white) 90%,
-    transparent 100%);
-  clip-path: polygon(0% 0%, 10% 100%, 20% 0%, 30% 100%, 40% 0%, 50% 100%, 60% 0%, 70% 100%, 80% 0%, 90% 100%, 100% 0%);
-}
-
-/* Winter Navigation */
-.winter-nav {
-  background: var(--winter-frost);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-html.dark .winter-nav {
-  background: rgba(15, 20, 25, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Floating Ice Particles */
-.ice-particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.ice-particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  animation: float 6s infinite ease-in-out;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0;
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-    opacity: 1;
-  }
-}
-
 /* Winter Typography */
 .winter-text {
   background: linear-gradient(135deg, var(--winter-blue), var(--winter-light-blue));
@@ -292,34 +206,6 @@ html.dark .winter-nav {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: 700;
-}
-
-/* Responsive Winter Effects */
-@media (max-width: 768px) {
-  .snowflake {
-    animation-duration: 8s, 2s;
-  }
-  
-  .ice-crystal::before {
-    animation-duration: 2s;
-  }
-  
-  .winter-card:hover {
-    transform: translateY(-4px);
-  }
-}
-
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-  .snowflake,
-  .ice-crystal::before,
-  .ice-particle {
-    animation: none;
-  }
-  
-  .winter-card:hover {
-    transform: none;
-  }
 }
 
 /* Winter Loading Animation */
@@ -363,4 +249,49 @@ html.dark ::-webkit-scrollbar-track {
 
 html.dark ::-webkit-scrollbar-thumb {
   background: var(--winter-accent);
+}
+
+/* Responsive Winter Effects */
+@media (max-width: 768px) {
+  .snowflake {
+    font-size: 12px;
+    animation-duration: 8s;
+  }
+  
+  .ice-crystal::before {
+    animation-duration: 2s;
+  }
+  
+  .winter-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .snowflake,
+  .ice-crystal::before,
+  .ice-particle {
+    animation: none;
+  }
+  
+  .winter-card:hover {
+    transform: none;
+  }
+}
+
+/* Ice trail effect */
+@keyframes ice-trail-fade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+.ice-trail {
+  animation: ice-trail-fade 1s ease-out forwards;
 }
