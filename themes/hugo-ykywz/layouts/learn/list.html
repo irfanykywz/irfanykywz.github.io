@@ -1,9 +1,12 @@
 {{ define "main" }}
 
 {{/* we must add logic here for muliple page learn and module  */}}
-{{ $dirParts := split .File.Dir "\\" }}
-{{ .File.Dir }}
-{{ (len $dirParts) }}
+{{ $dirParts := split .File.Dir "/" }}
+path :{{ .File.Path }}
+
+dir :{{ .File.Dir }}
+
+len :{{ (len $dirParts) }}
 
 {{ if gt (len $dirParts) 2 }}
 
