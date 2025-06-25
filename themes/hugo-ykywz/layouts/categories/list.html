@@ -1,0 +1,38 @@
+{{ define "main" }}
+
+
+<main class="main">
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">
+        <i class="fas fa-tag"></i>
+        Browse by Categories
+      </h1>
+      <p class="page-description">Explore content by categories</p>
+    </div>
+  </section>
+
+  <section class="tags-content">
+    <div class="container">
+
+      <div class="tags-cloud">
+
+        {{ range .Pages }}
+          <div class="tag-item large">
+            <a href="{{ .RelPermalink }}" class="tag-link">
+              <i class="fas fa-tag"></i>
+              <span class="tag-name">{{ .LinkTitle}}</span>
+              <span class="tag-count">8</span>
+            </a>
+          </div>
+        {{ end }}
+
+      </div>
+
+
+    </div>
+  </section>
+
+</main>
+
+{{ end }}

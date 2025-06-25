@@ -1,0 +1,9 @@
+<div class="gallery-item">
+    <a target="_blank" href='{{ .Get "image"}}'>
+        <img src='{{ .Get "image" }}' alt='{{ .Get "name" }}' />
+    </a>
+    <div class="gallery-overlay">
+        <h4>{{ .Get "name" }}</h4>
+        <p>{{ .Get "description" }}</p>
+    </div>
+</div>

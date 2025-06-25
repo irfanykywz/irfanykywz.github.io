@@ -1,0 +1,100 @@
+{{ define "main" }}
+
+<main class="main">
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-briefcase"></i>
+                {{ .Title }}
+            </h1>
+            <p class="page-description">{{ .Description }}</p>
+        </div>
+    </section>
+
+    <section class="portfolio-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th"></i>
+                    All Projects
+                </button>
+                <button class="filter-btn" data-filter="Desktop App">
+                    <i class="fas fa-desktop"></i>
+                    Desktop
+                </button>
+                <button class="filter-btn" data-filter="Website App">
+                    <i class="fas fa-globe"></i>
+                    Website
+                </button>
+                <button class="filter-btn" data-filter="Mobile">
+                    <i class="fas fa-mobile"></i>
+                    Mobile
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-grid">
+        <div class="container">
+            <div class="projects-grid">
+                {{ range .Data.Pages }}
+                <div class="project-item" data-category="{{ .Params.category }}">
+                    <div class="project-image">
+                        {{ if isset .Params "image" }}
+                        <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}'>
+                        {{ else }}
+                        <img src="{{ .Site.BaseURL }}portofolio-image.png" alt="{{ .Title }}" />
+                        {{ end }}
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                <a href="{{ .Permalink }}" class="btn btn-small btn-outline">
+                                    <i class="fas fa-eye"></i>
+                                    View
+                                </a>
+                                {{ if isset .Params "github" }}
+                                <a target="_blank" href="{{ .Params.Github }}" class="btn btn-small btn-outline">
+                                    <i class="fab fa-github"></i>
+                                    GitHub
+                                </a>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>
+                            <a href="{{ .RelPermalink }}">
+                                {{.Title}}
+                                {{ if .Draft }}
+                                <sup class="draft-label">DRAFT</sup>
+                                {{ end }}
+                            </a>
+                        </h3>
+                        <p>
+                            {{ if isset .Params "description" }}
+                            {{ .Description }}
+                            {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                            {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                            {{ else }}
+                            {{ .Content | plainify | safeHTML }}
+                            {{ end }}
+                        </p>
+                        {{ if gt .Params.stack 0 }}
+                        <div class="project-tags">
+                            {{ range .Params.stack }}
+                            <span class="tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
+            </div>
+        </div>
+    </section>
+
+    {{ partial "cta.html" . }}
+</main>
+
+
+{{ end }}

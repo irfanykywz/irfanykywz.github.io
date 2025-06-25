@@ -1,0 +1,92 @@
+baseURL = "https://irfanykywz.github.io/"
+languageCode = "en-us"
+title = "Muhamad Irfan"
+theme = "hugo-ykywz"
+copyright = "irfanykywz"
+pagination.pagerSize = 5
+
+pygmentsstyle = "vs"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+
+[params]
+	# browser icon
+	favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
+
+	# Optional 64x64 avatar image.
+	avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
+
+# Menu Header
+[[menu.main]]
+name = "Home"
+url = "/"
+pre = "fas fa-home"
+weight = 1
+
+[[menu.main]]
+name = "Portofolio"
+url = "/portofolio/"
+pre = "fas fa-briefcase"
+weight = 2
+
+[[menu.main]]
+name = "Learn"
+url = "/learn/"
+pre = "fas fa-graduation-cap"
+weight = 3
+
+[[menu.main]]
+name = "Posts"
+url = "/posts/"
+pre = "fas fa-blog"
+weight = 4
+
+[[menu.main]]
+name = "Contact"
+url = "/contact/"
+pre = "fas fa-envelope"
+weight = 5
+
+# Menu Footer
+[[menu.footer]]
+name = "Journal"
+url = "/journal/"
+pre = "fas fa-book"
+weight = 1
+
+[[menu.footer]]
+name = "Favorite"
+url = "/favorite/"
+pre = "fas fa-heart"
+weight = 2
+
+[[menu.footer]]
+name = "Tags"
+url = "/tags/"
+pre = "fas fa-tags"
+weight = 4
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    style = "dracula"  # or any other chroma style
+    tabWidth = 4
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+# allow html to content .md
+[markup.goldmark.renderer] 
+	unsafe= true
+
+# allow shortcodes
+[security]
+	enableInlineShortcodes = true	

@@ -1,0 +1,78 @@
+<div class="popular-tags">
+    <h2 class="section-title">
+        🌘
+        Previous Project
+    </h2>
+
+    <div class="projects-grid">
+        {{ $pages := where site.RegularPages "Section" "eq" "portofolio" -}}
+        {{ range first 2 $pages }}
+        <div class="project-item" data-category="{{ .Params.category }}">
+            <div class="project-image">
+                {{ if isset .Params "image" }}
+                <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}' width="70">
+                {{ else }}
+                <img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ .Title }}" />
+                {{ end }}
+                <div class="project-overlay">
+                    <div class="project-actions">
+                        <a href="{{ .Permalink }}" class="btn btn-small btn-outline">
+                            <i class="fas fa-eye"></i>
+                            View
+                        </a>
+                        {{ if isset .Params "github" }}
+                        <a target="_blank" href="{{ .Params.Github }}" class="btn btn-small btn-outline">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+            <div class="project-info">
+                <h3>
+                    <a href="{{ .RelPermalink }}">
+                        {{.Title}}
+                        {{ if .Draft }}
+                        <sup class="draft-label">DRAFT</sup>
+                        {{ end }}
+                    </a>
+                </h3>
+                <div>
+                    <small>
+                        {{ .Date | time.Format "2 January 2006" }}
+                    </small>
+                </div>
+                <p>
+                    {{ if isset .Params "description" }}
+                    {{ .Description }}
+                    {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                    {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                    {{ else }}
+                    {{ .Content | plainify | safeHTML }}
+                    {{ end }}
+                </p>
+                {{ if gt .Params.stack 0 }}
+                <div class="project-tags">
+                    {{ range .Params.stack }}
+                    <span class="tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+
+        {{/* <div>
+            <h2>View More</h2>
+            <p>
+                <a href="{{ $.Site.BaseURL }}portofolio/">
+        Visit Portofolio Page
+        <i class="fas fa-arrow-right"></i>
+        </a>
+        </p>
+    </div> */}}
+
+</div>
+
+</div>

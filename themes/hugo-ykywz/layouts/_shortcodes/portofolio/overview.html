@@ -1,0 +1,14 @@
+<div class="project-overview">
+    <div class="overview-grid">
+        <div class="overview-item">
+            <h3>
+                <i class="fas fa-bullseye"></i>
+                {{ .Get "title" }}
+            </h3>
+            <p>
+                {{ .Inner | .Page.RenderString }}
+            </p>
+        </div>
+
+    </div>
+</div>

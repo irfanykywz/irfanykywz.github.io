@@ -1,0 +1,13 @@
+<div class="favorite-item">
+    <div class="favorite-icon">
+        {{ if .Get "icon" }}
+        {{ .Get "icon" | .Page.RenderString }}
+        {{ else }}
+        <i class="fas fa-star"></i>
+        {{ end }}
+    </div>
+    <div class="favorite-content">
+        <h3>{{ .Get "title" }}</h3>
+        {{ .Inner | .Page.RenderString }}
+    </div>
+</div>

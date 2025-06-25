@@ -1,0 +1,132 @@
+{{ define "main" }}
+
+<main class="main">
+    <section class="detail-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="{{ $.Site.BaseURL }}portofolio/">
+                    <i class="fas fa-briefcase"></i>
+                    Portfolio
+                </a>
+                <i class="fas fa-chevron-right"></i>
+                <span>{{ .Title }}</span>
+            </nav>
+        </div>
+    </section>
+
+    <article class="portfolio-detail">
+        <div class="container">
+
+            <div class="project-hero">
+                <div class="project-hero-content">
+                    <div class="project-meta">
+
+                        {{ if .Params.category }}
+                        <span class="project-category">
+                            <i class="fas fa-layer-group"></i>
+                            {{ .Params.category }}
+                        </span>
+                        {{ end }}
+
+
+                        {{ if .Params.duration }}
+                        <span class="project-duration">
+                            <i class="fas fa-calendar"></i>
+                            {{ .Params.duration }}
+                        </span>
+                        {{ end }}
+
+                        {{ if .Params.status }}
+
+
+                        {{ if strings.Contains .Params.status "Active" }}
+                        <span class="project-status active">
+                            <i class="fas fa-check-circle"></i>
+                            {{ .Params.status }}
+                        </span>
+                        {{ else if strings.Contains .Params.status "Freelance" }}
+                        <span class="project-status active">
+                            <i class="fas fa-money-check-dollar"></i>
+                            {{ .Params.status }}
+                        </span>
+                        {{ else }}
+                        <span class="project-status disable">
+                            <i class="fas fa-times-circle"></i>
+                            {{ .Params.status }}
+                        </span>
+                        {{ end }}
+
+                        {{ end }}
+
+                    </div>
+                    <h1 class="project-title">{{ .Title }}</h1>
+                    <p class="project-subtitle">{{ .Description }}</p>
+
+                    <div class="project-actions">
+                        {{ if .Params.demo }}
+                        <a target="_blank" href='{{ .Params.demo }}' class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                        {{ end }}
+
+                        {{ if .Params.github }}
+                        <a target="_blank" href=' {{ .Params.github }}' class="btn btn-outline">
+                            <i class="fab fa-github"></i>
+                            View Code
+                        </a>
+                        {{ end }}
+
+                        {{ if .Params.buy }}
+                        <a target="_blank" href=' {{ .Params.buy }}' class="btn btn-outline">
+                            <i class="fas fa-store"></i>
+                            Buy Now
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <div class="project-hero-image">
+                    <img src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+                </div>
+            </div>
+
+
+            {{ .Content }}
+
+
+            <div class="project-navigation">
+                <div class="nav-section">
+                    <a href="{{ $.Site.BaseURL}}portofolio/" class="nav-button">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Portfolio
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-buttons">
+                        {{ $pages := .CurrentSection.Pages.ByWeight }}
+
+                        {{ with $pages.Prev . }}
+                        <a href="{{ .RelPermalink }}" class="nav-button">
+                            <i class="fas fa-chevron-left"></i>
+                            Previous Project
+                        </a>
+                        {{ end }}
+
+                        {{ with $pages.Next . }}
+                        <a href="{{ .RelPermalink }}" class="nav-button">
+                            Next Project
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </article>
+</main>
+
+
+{{ end }}

@@ -1,0 +1,40 @@
+{{ define "main" }}
+
+<main class="main">
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-heart"></i>
+                {{ .Title}}
+            </h1>
+            <p class="page-description">{{ .Description }}</p>
+        </div>
+    </section>
+
+    <section class="favorites-content">
+        <div class="container">
+            <div class="favorites-grid">
+                {{ range sort .Data.Pages "Params.weight"}}
+                <div class="favorite-category">
+                    <h2 class="category-title">
+                        {{ if .Params.Icon }}
+                        {{ .Params.Icon | .Page.RenderString }}
+                        {{ else }}
+                        <i class="fas fa-star"></i>
+                        {{ end }}
+                        {{ .Title }}
+                    </h2>
+
+                    <div class="favorite-items {{ if .Params.grid }}favorite-items-grid{{ end }}">
+
+                        {{ .Content }}
+
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+</main>
+
+{{ end }}
