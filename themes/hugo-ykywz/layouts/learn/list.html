@@ -2,7 +2,8 @@
 
 {{/* we must add logic here for muliple page learn and module  */}}
 {{ $dirParts := split .File.Dir "\\" }}
-{{/* {{ (len $dirParts) }} */}}
+{{ .File.Dir }}
+{{ (len $dirParts) }}
 
 {{ if gt (len $dirParts) 2 }}
 
