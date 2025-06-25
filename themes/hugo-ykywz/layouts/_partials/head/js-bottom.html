@@ -1,1 +1,6 @@
 <script src="{{ $.Site.BaseURL }}mouse.js"></script>
+
+{{/* only show snow in december  */}}
+{{ if eq (now.Format "01") "12" }}
+<script src="{{ $.Site.BaseURL }}js/snow.js"></script>
+{{ end }}

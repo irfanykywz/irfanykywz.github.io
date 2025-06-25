@@ -1,152 +1,69 @@
-var colour="#1bb5f3";
-var sparkles=100;
-var x=ox=400;
-var y=oy=300;
-var swide=800;
-var shigh=600;
-var sleft=sdown=0;
-var tiny=new Array();
-var star=new Array();
-var starv=new Array();
-var starx=new Array();
-var stary=new Array();
-var tinyx=new Array();
-var tinyy=new Array();
-var tinyv=new Array();
-window.onload=function() { if (document.getElementById) {
-	var i, rats, rlef, rdow;
-	for (var i=0; i<sparkles; i++) {
-		var rats=createDiv(3, 3);
-		rats.style.visibility="hidden";
-		document.body.appendChild(tiny[i]=rats);
-		starv[i]=0;
-		tinyv[i]=0;
-		var rats=createDiv(5, 5);
-		rats.style.backgroundColor="transparent";
-		rats.style.visibility="hidden";
-		var rlef=createDiv(1, 5);
-		var rdow=createDiv(5, 1);
-		rats.appendChild(rlef);
-		rats.appendChild(rdow);
-		rlef.style.top="3px";
-		rlef.style.left="0px";
-		rdow.style.top="0px";
-		rdow.style.left="3px";
-		document.body.appendChild(star[i]=rats);
-	}
-	set_width();
-	sparkle();
-}}
+var colour = "#1bb5f3",
+    sparkles = 100,
+    x = ox = 400,
+    y = oy = 300,
+    swide = 800,
+    shigh = 600,
+    sleft = sdown = 0,
+    tiny = new Array,
+    star = new Array,
+    starv = new Array,
+    starx = new Array,
+    stary = new Array,
+    tinyx = new Array,
+    tinyy = new Array,
+    tinyv = new Array;
+
 function sparkle() {
-	var c;
-	if (x!=ox || y!=oy) {
-		ox=x;
-		oy=y;
-		for (c=0; c<sparkles; c++) if (!starv[c]) {
-			star[c].style.left=(starx[c]=x)+"px";
-			star[c].style.top=(stary[c]=y)+"px";
-			star[c].style.clip="rect(0px, 5px, 5px, 0px)";
-			star[c].style.visibility="visible";
-			starv[c]=50;
-			break;
-		}
-	}
-	for (c=0; c<sparkles; c++) {
-		if (starv[c]) update_star(c);
-		if (tinyv[c]) update_tiny(c);
-	}
-	setTimeout("sparkle()", 40);
+    var t;
+    if (x != ox || y != oy)
+        for (ox = x, oy = y, t = 0; t < sparkles; t++)
+            if (!starv[t]) {
+                star[t].style.left = (starx[t] = x) + "px", star[t].style.top = (stary[t] = y) + "px", star[t].style.clip = "rect(0px, 5px, 5px, 0px)", star[t].style.visibility = "visible", starv[t] = 50;
+                break
+            } for (t = 0; t < sparkles; t++) starv[t] && update_star(t), tinyv[t] && update_tiny(t);
+    setTimeout("sparkle()", 40)
 }
-function update_star(i) {
-	if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
-	if (starv[i]) {
-		stary[i]+=1+Math.random()*3;
-		if (stary[i]<shigh+sdown) {
-			star[i].style.top=stary[i]+"px";
-			starx[i]+=(i%5-2)/5;
-			star[i].style.left=starx[i]+"px";
-		}
-		else {
-			star[i].style.visibility="hidden";
-			starv[i]=0;
-			return;
-		}
-	}
-	else {
-		tinyv[i]=50;
-		tiny[i].style.top=(tinyy[i]=stary[i])+"px";
-		tiny[i].style.left=(tinyx[i]=starx[i])+"px";
-		tiny[i].style.width="2px";
-		tiny[i].style.height="2px";
-		star[i].style.visibility="hidden";
-		tiny[i].style.visibility="visible"
-	}
+
+function update_star(t) {
+    if (25 == --starv[t] && (star[t].style.clip = "rect(1px, 4px, 4px, 1px)"), starv[t]) {
+        if (stary[t] += 1 + 3 * Math.random(), !(stary[t] < shigh + sdown)) return star[t].style.visibility = "hidden", void(starv[t] = 0);
+        star[t].style.top = stary[t] + "px", starx[t] += (t % 5 - 2) / 5, star[t].style.left = starx[t] + "px"
+    } else tinyv[t] = 50, tiny[t].style.top = (tinyy[t] = stary[t]) + "px", tiny[t].style.left = (tinyx[t] = starx[t]) + "px", tiny[t].style.width = "2px", tiny[t].style.height = "2px", star[t].style.visibility = "hidden", tiny[t].style.visibility = "visible"
 }
-function update_tiny(i) {
-	if (--tinyv[i]==25) {
-		tiny[i].style.width="1px";
-		tiny[i].style.height="1px";
-	}
-	if (tinyv[i]) {
-		tinyy[i]+=1+Math.random()*3;
-		if (tinyy[i]<shigh+sdown) {
-			tiny[i].style.top=tinyy[i]+"px";
-			tinyx[i]+=(i%5-2)/5;
-			tiny[i].style.left=tinyx[i]+"px";
-		}
-		else {
-			tiny[i].style.visibility="hidden";
-			tinyv[i]=0;
-			return;
-		}
-	}
-	else tiny[i].style.visibility="hidden";
+
+function update_tiny(t) {
+    if (25 == --tinyv[t] && (tiny[t].style.width = "1px", tiny[t].style.height = "1px"), tinyv[t]) {
+        if (tinyy[t] += 1 + 3 * Math.random(), !(tinyy[t] < shigh + sdown)) return tiny[t].style.visibility = "hidden", void(tinyv[t] = 0);
+        tiny[t].style.top = tinyy[t] + "px", tinyx[t] += (t % 5 - 2) / 5, tiny[t].style.left = tinyx[t] + "px"
+    } else tiny[t].style.visibility = "hidden"
 }
-document.onmousemove=mouse;
-function mouse(e) {
-	set_scroll();
-	y=(e)?e.pageY:event.y+sdown;
-	x=(e)?e.pageX:event.x+sleft;
+
+function mouse(t) {
+    set_scroll(), y = t ? t.pageY : event.y + sdown, x = t ? t.pageX : event.x + sleft
 }
+
 function set_scroll() {
-	if (typeof(self.pageYOffset)=="number") {
-		sdown=self.pageYOffset;
-		sleft=self.pageXOffset;
-	}
-	else if (document.body.scrollTop || document.body.scrollLeft) {
-		sdown=document.body.scrollTop;
-		sleft=document.body.scrollLeft;
-	}
-	else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
-		sleft=document.documentElement.scrollLeft;
-		sdown=document.documentElement.scrollTop;
-	}
-	else {
-		sdown=0;
-		sleft=0;
-	}
+    "number" == typeof self.pageYOffset ? (sdown = self.pageYOffset, sleft = self.pageXOffset) : document.body.scrollTop || document.body.scrollLeft ? (sdown = document.body.scrollTop, sleft = document.body.scrollLeft) : document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft) ? (sleft = document.documentElement.scrollLeft, sdown = document.documentElement.scrollTop) : (sdown = 0, sleft = 0)
 }
-window.onresize=set_width;
+
 function set_width() {
-	if (typeof(self.innerWidth)=="number") {
-		swide=self.innerWidth;
-		shigh=self.innerHeight;
-	}
-	else if (document.documentElement && document.documentElement.clientWidth) {
-		swide=document.documentElement.clientWidth;
-		shigh=document.documentElement.clientHeight;
-	}
-	else if (document.body.clientWidth) {
-		swide=document.body.clientWidth;
-		shigh=document.body.clientHeight;
-	}
+    "number" == typeof self.innerWidth ? (swide = self.innerWidth, shigh = self.innerHeight) : document.documentElement && document.documentElement.clientWidth ? (swide = document.documentElement.clientWidth, shigh = document.documentElement.clientHeight) : document.body.clientWidth && (swide = document.body.clientWidth, shigh = document.body.clientHeight)
 }
-function createDiv(height, width) {
-	var div=document.createElement("div");
-	div.style.position="absolute";
-	div.style.height=height+"px";
-	div.style.width=width+"px";
-	div.style.overflow="hidden";
-	div.style.backgroundColor=colour;
-	return (div);
-}	
+
+function createDiv(t, e) {
+    var i = document.createElement("div");
+    return i.style.position = "absolute", i.style.height = t + "px", i.style.width = e + "px", i.style.overflow = "hidden", i.style.backgroundColor = colour, i
+}
+window.onload = function() {
+    if (document.getElementById) {
+        for (var t = 0; t < sparkles; t++) {
+            var e;
+            (e = createDiv(3, 3)).style.visibility = "hidden", document.body.appendChild(tiny[t] = e), starv[t] = 0, tinyv[t] = 0, (e = createDiv(5, 5)).style.backgroundColor = "transparent", e.style.visibility = "hidden";
+            var i = createDiv(1, 5),
+                n = createDiv(5, 1);
+            e.appendChild(i), e.appendChild(n), i.style.top = "3px", i.style.left = "0px", n.style.top = "0px", n.style.left = "3px", document.body.appendChild(star[t] = e)
+        }
+        set_width(), sparkle()
+    }
+}, document.onmousemove = mouse, window.onresize = set_width;

@@ -233,14 +233,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--space-4);
-    max-width: 900px;
+    padding-top: var(--space-4); 
+    padding-bottom: var(--space-4); 
+/*    max-width: 900px;*/
     margin: 0 auto;
 }
 
 .nav-links {
     display: flex;
-    gap: var(--space-6);
+    gap: var(--space-4);
 }
 
 .nav-link {
@@ -462,7 +463,7 @@ body {
 }
 
 .page-title {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     gap: var(--space-3);
@@ -2992,7 +2993,7 @@ body {
     }
 
     .profile-actions .btn {
-        width: 100%;
+        /* width: 100%; */
     }
 
     .nav-links {
@@ -3020,7 +3021,7 @@ body {
     }
 
     .footer-links {
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: var(--space-3);
     }
 
@@ -3040,7 +3041,7 @@ body {
     }
 
     .project-meta {
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: var(--space-2);
     }
 
@@ -3049,12 +3050,12 @@ body {
     }
 
     .project-actions {
-        flex-direction: column;
+        flex-wrap: wrap;
         width: 100%;
     }
 
     .project-actions .btn {
-        width: 100%;
+        /* width: 100%; */
     }
 
     /* Learn Small Mobile Styles */
