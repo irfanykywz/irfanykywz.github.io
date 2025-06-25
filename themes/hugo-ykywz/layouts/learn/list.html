@@ -1,11 +1,11 @@
 {{ define "main" }}
 
 {{/* we must add logic here for muliple page learn and module  */}}
-{{ if string.Contains .File.Dir "/" }}
-{{ $dirParts := split .File.Dir "/" }}
-{{ else }}
-{{ $dirParts := split .File.Dir "/" }}
+{{ $split := "/"}}
+{{ if strings.Contains .File.Dir "\\" }}
+{{ $split = "\\"}}
 {{ end }}
+{{ $dirParts := split .File.Dir $split }}
 
 {{/* path :{{ .File.Path }}
 
