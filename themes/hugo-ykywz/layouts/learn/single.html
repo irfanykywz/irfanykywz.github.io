@@ -29,11 +29,11 @@
     {{ if strings.Contains .File.Dir "\\" }}
     {{ $split = "\\"}}
     {{ end }}
-    {{ $dirParts := split .File.Dir "\\" }}
-    file dir : {{ .File.Dir }}
-    dir path : {{ $dirParts }}
+    {{ $dirParts := split .File.Dir $split }}
+    {{/* file dir : {{ .File.Dir }}
+    dir path : {{ $dirParts }} */}}
     {{ $page := index $dirParts 1 }}
-    page : {{ $page }}
+    {{/* page : {{ $page }} */}}
 
     <!-- Main Container -->
     <div class="main-container">
@@ -73,9 +73,9 @@
                 {{ $split = "\\"}}
                 {{ end }}
                 {{ $dirParts := split .File.Dir $split }}
-                dir path posts : {{ $dirParts }}
+                {{/* dir path posts : {{ $dirParts }}
                 index : {{ index $dirParts 1 }}
-                len : {{ len $dirParts }}
+                len : {{ len $dirParts }} */}}
 
                 {{ if and (eq $page (index $dirParts 1)) (eq (len $dirParts) 4) }}
                 <li class="lesson-item">
