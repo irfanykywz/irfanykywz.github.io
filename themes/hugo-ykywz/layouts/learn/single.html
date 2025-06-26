@@ -30,6 +30,8 @@
     {{ $split = "\\"}}
     {{ end }}
     {{ $dirParts := split .File.Dir "\\" }}
+    file dir : {{ .File.Dir }}
+    dir path : {{ $dirParts }}
     {{ $page := index $dirParts 1 }}
     page : {{ $page }}
 
