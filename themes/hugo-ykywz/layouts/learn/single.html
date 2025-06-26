@@ -25,6 +25,10 @@
     </section>
 
 
+    {{ $split := "/"}}
+    {{ if strings.Contains .File.Dir "\\" }}
+    {{ $split = "\\"}}
+    {{ end }}
     {{ $dirParts := split .File.Dir "\\" }}
     {{ $page := index $dirParts 1 }}
     {{/* {{ $page }} */}}
