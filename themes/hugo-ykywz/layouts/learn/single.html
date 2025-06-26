@@ -31,7 +31,7 @@
     {{ end }}
     {{ $dirParts := split .File.Dir "\\" }}
     {{ $page := index $dirParts 1 }}
-    {{/* {{ $page }} */}}
+    page : {{ $page }}
 
     <!-- Main Container -->
     <div class="main-container">
@@ -71,6 +71,9 @@
                 {{ $split = "\\"}}
                 {{ end }}
                 {{ $dirParts := split .File.Dir $split }}
+                dir path posts : {{ $dirParts }}
+                index : {{ index $dirParts 1 }}
+                len : {{ len $dirParts }}
 
                 {{ if and (eq $page (index $dirParts 1)) (eq (len $dirParts) 4) }}
                 <li class="lesson-item">
