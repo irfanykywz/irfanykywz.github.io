@@ -1,5 +1,5 @@
 ---
-title: '{{ replace .File.ContentBaseName "-" " " | title }}'
+title: {{ replace .File.ContentBaseName "-" " " | title }}
 description: 
 image: "image.png"
 stack: ['python']
@@ -9,7 +9,7 @@ status: Active
 demo: https://google.com
 buy: https:google.com/ncr
 # github: https://google.com
-date: '{{ .Date }}'
+date: {{ .Date }}
 ---
 
 
