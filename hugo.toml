@@ -1,6 +1,6 @@
 baseURL = "https://irfanykywz.github.io/"
 languageCode = "en-us"
-title = "Muhamad Irfan"
+title = "irfanykywz"
 theme = "hugo-ykywz"
 copyright = "irfanykywz"
 pagination.pagerSize = 5
