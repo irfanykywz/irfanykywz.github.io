@@ -87,7 +87,11 @@
                 </div>
 
                 <div class="project-hero-image">
-                    <img src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+                    {{ if hasPrefix .Params.image "http" }}
+                      <img src='{{ .Params.image }}' alt='{{ .Title }}' />
+                    {{ else }}
+                        <img src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+                    {{ end }}  
                 </div>
             </div>
 

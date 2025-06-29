@@ -148,8 +148,10 @@ blockquote footer::before {
 
 :root {
     /* Dark Theme Colors */
-    --bg-primary: #1a1a2e;
-    --bg-secondary: #16213e;
+    /*--bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;*/
+    --bg-primary: #0f0f23;
+    --bg-secondary: #20203c;
     --bg-tertiary: #0f172a;
     --text-primary: #ffffff;
     --text-secondary: #94a3b8;

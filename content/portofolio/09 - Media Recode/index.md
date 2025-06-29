@@ -52,6 +52,9 @@ and the feature that I like is the narrator scene, I can make videos from severa
 
 {{< /portofolio/feature  >}}
 
+<!-- stack -->
+{{< portofolio/stack >}}
+
 
 {{< portofolio/galery >}}
 

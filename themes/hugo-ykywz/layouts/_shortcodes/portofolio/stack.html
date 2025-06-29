@@ -6,15 +6,12 @@
     <div class="tech-stack-grid">
         <div class="tech-category">
             <div class="tech-list">
-
-                {{ $items := split (.Get "stack")  "," }}
-                {{ range $index, $item := $items }}
+                {{ range $index, $item := $.Page.Params.stack }}
                 <div class="tech-item">
                     <i class="fas fa-code"></i>
                     <span>{{ $item }}</span>
                 </div>
                 {{ end }}
-
             </div>
         </div>
     </div>
