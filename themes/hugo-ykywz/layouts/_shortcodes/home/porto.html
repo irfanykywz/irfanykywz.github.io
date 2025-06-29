@@ -10,9 +10,15 @@
         <div class="project-item" data-category="{{ .Params.category }}">
             <div class="project-image">
                 {{ if isset .Params "image" }}
-                <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}' width="70">
+
+                    {{ if hasPrefix .Params.image "http" }}
+                      <img src='{{ .Params.image }}' alt='{{ .Title }}' />
+                    {{ else }}
+                        <img src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+                    {{ end }}  
+
                 {{ else }}
-                <img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ .Title }}" />
+                    <img src="{{ .Site.BaseURL }}portofolio-image.png" alt="{{ .Title }}" />
                 {{ end }}
                 <div class="project-overlay">
                     <div class="project-actions">
