@@ -3289,7 +3289,7 @@ body {
 }
 
 /* Override gradient for specific technologies */
-.course-card-tutorial:nth-child(1) .course-icon {
+/*.course-card-tutorial:nth-child(1) .course-icon {
     background: linear-gradient(135deg, #e34f26, #ff6b47)
 }
 
@@ -3335,7 +3335,7 @@ body {
 
 .course-card-tutorial:nth-child(12) .course-icon {
     background: linear-gradient(135deg, #ff6b6b, #ff8a80)
-}
+}*/
 
 /* Responsive Design */
 @media (max-width:768px) {
