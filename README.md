@@ -9,12 +9,18 @@ personal web, porto, etc
 - Journal
 - Collection
 - Research
-- tags, category
+- tags, category, search
 
 ## Todo
-- search
+-
 
 ## Changelog
+
+**13 July 2025**
+- search page
+- research page
+- change image to avif
+- categories page
 
 **12 July 2025**
 - add collection and research page
