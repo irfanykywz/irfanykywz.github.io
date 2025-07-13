@@ -2,7 +2,7 @@
 title: Belajar Python
 description: python adalah bahasa pemrograman yang sangat mudah digunakan, ini adalah tulisan perjalanan saya dalam belajar python ditahun 2023 lalu
 section: Index
-image: image.png
+image: image.avif
 ---
 
 Halo, teman-teman! 👋 Selamat datang di tutorial bahasa pemrograman Python! Di sini, kita akan menjelajahi dunia pemrograman dengan cara yang seru dan menyenangkan. Python adalah salah satu bahasa pemrograman yang paling populer saat ini, dan banyak digunakan di berbagai bidang, mulai dari pengembangan web, analisis data, hingga kecerdasan buatan. 🐍

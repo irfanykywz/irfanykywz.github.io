@@ -1,4 +1,4 @@
 ---
-title: My Journal
-description: Personal thoughts, reflections, and daily experiences as a software engineer
+title: My Journey
+description: A journal of personal thoughts, reflections, and experiences shaping my purpose.
 ---

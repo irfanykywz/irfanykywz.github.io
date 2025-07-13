@@ -1,0 +1,9 @@
+<div class="contrived">
+    <h2>{{ .Get "title" }}</h2>
+    {{ .Inner | .Page.RenderString }}
+</div>
+
+{{/* usage  */}}
+{{/* {{< portofolio/contrived title="A Contrived Example" >}}
+This is a **bold** word, and this is an _emphasized_ word.
+{{< /portofolio/contrived  >}} */}}

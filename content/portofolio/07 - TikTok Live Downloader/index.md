@@ -2,7 +2,7 @@
 title: "TikTok Live Downloader"
 description: "Aplikasi untuk mendownload live tiktok"
 draft: false
-image: "tiktok-live-downloader.png"
+image: "tiktok-live-downloader.avif"
 stack: ['python', 'ffmpeg', 'pyside6']
 category: Desktop App
 duration: 2 Week

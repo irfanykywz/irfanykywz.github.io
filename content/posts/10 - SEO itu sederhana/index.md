@@ -3,7 +3,7 @@ title: SEO itu Sederhana
 description: Bisa ditarik kesimpulan kira-kira seperti ini
 date: 2025-01-02T18:00:35+07:00
 draft: false
-categories: Happy
+categories: Website
 tags: ['SEO']
 ---
 

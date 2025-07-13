@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+{{/* we must add logic here for muliple page learn and module  */}}
+{{ $split := "/"}}
+{{ if strings.Contains .File.Dir "\\" }}
+{{ $split = "\\"}}
+{{ end }}
+{{ $dirParts := split .File.Dir $split }}
+
+{{/* path :{{ .File.Path }}
+
+dir :{{ .File.Dir }}
+
+len :{{ (len $dirParts) }} */}}
+
+{{ if gt (len $dirParts) 2 }}
+
+{{ partial "learn/module.html" . }}
+
+{{ else if eq (len $dirParts) 2 }}
+
+{{ partial "learn/list.html" . }}
+
+{{ end }}
+
+{{ end }}

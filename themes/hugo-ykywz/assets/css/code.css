@@ -100,3 +100,14 @@
     background: rgba(255, 255, 255, 0.2);
     color: white;
 }
+
+/* Light theme code copy button */
+[data-theme="light"] .code-copy-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #475569;
+}
+
+[data-theme="light"] .code-copy-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: #1e293b;
+}

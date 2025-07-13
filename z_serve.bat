@@ -1,3 +1,3 @@
 @echo off
 
-hugo serve
+hugo server --disableFastRender

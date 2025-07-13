@@ -1,7 +1,7 @@
 ---
 title: "Media Recode"
 description: "Mass Video Editing with many effect"
-image: "media-recode.png"
+image: "media-recode.avif"
 stack: ['python', 'ffmpeg', 'pyside6', 'exiftool', 'ai', 'spleeter', 'faceswap']
 category: Desktop App
 duration: 5 month
@@ -59,7 +59,7 @@ and the feature that I like is the narrator scene, I can make videos from severa
 {{< portofolio/galery >}}
 
     {{< portofolio/galery-card 
-        image="media-recode.png" 
+        image="media-recode.avif" 
         name="Maker View" 
         description="in this maker you can build a video from source of image, text, etc"  
     >}}

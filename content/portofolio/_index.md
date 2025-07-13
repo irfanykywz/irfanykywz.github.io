@@ -1,4 +1,4 @@
 ---
-title: My Portfolio
-description: A collection of projects showcasing my software engineering expertise
+title: Projects
+description: A collection of my work, showcasing my software engineering expertise and capabilities.
 ---

@@ -2,7 +2,7 @@
 title: "Shopee Live Booster"
 description: "Aplikasi untuk menambah jumlah penonton live shopee"
 draft: false
-image: 'shopee-live-booster.png'
+image: 'shopee-live-booster.avif'
 stack: ['python', 'websockets', 'pyside6']
 category: Desktop App
 duration: 1 Week

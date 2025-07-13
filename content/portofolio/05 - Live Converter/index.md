@@ -2,7 +2,7 @@
 title: "Live Converter"
 description: "Aplikasi untuk mendownload live dari beberapa platform"
 draft: false
-image: "live-converter.png"
+image: "live-converter.avif"
 stack: ['python', 'ffmpeg', 'pyside6']
 category: Desktop App
 duration: 1 Month

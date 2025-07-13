@@ -1,6 +1,6 @@
 ---
 title: Muhamad Irfan (A.k.a irfanykywz)
-description: Newbie Software Engineering
+description: Noob Software Engineer
 cv: https:/google.com
 email: irfanyouth@gmail.com
 linkedin: https://linkedin.com/in/irfanykywz
@@ -8,12 +8,13 @@ linkedin: https://linkedin.com/in/irfanykywz
 
 {{< home/about title="Who am I" >}}
 
-My full name is Muhamad Irfan, and I'm a passionate software engineer and freelance programmer. I specialize in creating modern, responsive web, desktop applications and have extensive experience in software development.
+Hi, I'm Muhamad Irfan, a passionate software engineer and freelance programmer. 
 
-With expertise in various programming languages and frameworks, I have developed numerous websites, desktop, managed complex projects, configured servers, and handled diverse IT-related tasks. I have contributed to projects for multiple companies, ensuring efficient and effective web, desktop solutions.
+I specialize in crafting modern, responsive web and desktop applications. With extensive experience, I've developed numerous solutions, managed complex projects, configured servers, and handled diverse IT tasks for various companies. 
 
-With the skills and knowledge I have gained, I am committed to continuous learning and making meaningful contributions to every project I take on.
+I'm committed to continuous learning and making meaningful contributions to every project.
 
+I'm actively exploring freelance projects and full-time positions. If you're looking for a dedicated software engineer specializing in web and desktop applications, I'd love to hear about your needs.
 
 {{< /home/about>}}
 

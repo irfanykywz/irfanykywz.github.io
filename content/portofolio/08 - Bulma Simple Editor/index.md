@@ -2,7 +2,7 @@
 title: "Bulma Simple Editor"
 description: "Aplikasi untuk editing video secara masal"
 draft: false
-image: "bulma-simple-editor.png"
+image: "bulma-simple-editor.avif"
 stack: ['python', 'ffmpeg', 'pyside6', 'exiftool']
 category: Desktop App
 duration: 1 Month

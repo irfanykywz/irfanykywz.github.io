@@ -1,7 +1,7 @@
 ---
 title: Shopee Live Manager
 description: aplikasi melihat data live secara realtime
-image: "https://github.com/irfanykywz/shopee-live-manager/blob/main/preview.png?raw=true"
+image: "preview.avif"
 stack: ['python', 'pyside6', 'pyppeteer', 'chrome extensions']
 category: Desktop
 duration: 1 month

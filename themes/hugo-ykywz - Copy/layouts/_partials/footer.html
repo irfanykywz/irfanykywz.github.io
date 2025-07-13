@@ -1,0 +1,36 @@
+<!-- <p>Copyright {{ now.Year }}. All rights reserved.</p> -->
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-links">
+                {{ range .Site.Menus.footer }}
+                {{ $menu_item_url := .URL | relLangURL }}
+                {{/* {{ $menu_item_url }} */}}
+                {{ $page_url := $.Page.RelPermalink | relLangURL }}
+                {{ $page_split := index (split $page_url "/") 1 }}
+                {{/* {{ $page_split }} */}}
+                {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
+                <a href="{{ .URL | relLangURL }}" class="footer-link {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}active{{ end }}">
+                    <i class="{{ .Pre }}"></i>
+                    <span>{{ .Name }}</span>
+                </a>
+                {{ end}}
+            </div>
+            <p class="footer-copyright">
+                &copy; {{ now.Year }} 🛸 {{ $.Site.Title }}
+                <br />
+                <span>Build with
+                    <a target="_blank" rel="nofollow" href="https://gohugo.io">Hugo 🚀</a>
+                </span>
+                <br />
+                <span>
+                    <a target="_blank" href="{{ $.Site.BaseURL }}index.xml">RSS</a>
+                    <a href="{{ $.Site.BaseURL }}tags/">🔍</a>
+                    <a href="{{ $.Site.BaseURL }}favorite/">💖</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</footer>

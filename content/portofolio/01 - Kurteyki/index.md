@@ -2,7 +2,7 @@
 title: 'Kurteyki'
 description: "Website untuk menulis konten berdasarkan topik"
 draft: false
-image: "kurteyki.png"
+image: "kurteyki.avif"
 stack: ['codeigniter4', 'jquery', 'bootstrap5']
 category: Website App
 duration: 3 Years

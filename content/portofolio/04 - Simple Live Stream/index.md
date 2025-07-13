@@ -2,7 +2,7 @@
 title: "Simple Live Stream"
 description: "Aplikasi untuk melakukan live streaming"
 draft: false
-image: "simple-live-stream.png"
+image: "simple-live-stream.avif"
 stack: ['python', 'ffmpeg', 'pyside6']
 category: Desktop App
 duration: 1 Month

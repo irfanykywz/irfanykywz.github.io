@@ -2,7 +2,7 @@
 title: "Facebook Mass Action"
 description: "Aplikasi manajemen banyak akun facebook"
 draft: false
-image: "facebook-automation.jpg"
+image: "facebook-automation.avif"
 stack: ['python', 'pyside6', 'ichrome']
 category: Desktop App
 duration: 1 Year

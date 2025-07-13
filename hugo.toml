@@ -56,15 +56,15 @@ pre = "fas fa-book"
 weight = 1
 
 [[menu.footer]]
-name = "Favorite"
-url = "/favorite/"
-pre = "fas fa-heart"
+name = "Collection"
+url = "/collection/"
+pre = "fa-solid fa-lines-leaning"
 weight = 2
 
 [[menu.footer]]
-name = "Tags"
-url = "/tags/"
-pre = "fas fa-tags"
+name = "Research"
+url = "/research/"
+pre = "fa-solid fa-flask"
 weight = 4
 
 [markup]
@@ -90,3 +90,14 @@ weight = 4
 # allow shortcodes
 [security]
 	enableInlineShortcodes = true	
+
+# output format
+[outputs]
+  home = ["HTML", "RSS", "JSON"]  
+
+[outputFormats]
+[outputFormats.JSON]
+  mediaType = "application/json"
+  baseName = "index"
+  isPlainText = true
+  notAlternative = true  
