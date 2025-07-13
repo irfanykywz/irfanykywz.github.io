@@ -10,6 +10,13 @@
     {{ block "main" . }}{{ end }}
     {{ partial "footer.html" . }}
 
+    <!-- Fixed Theme Toggle -->
+    <div class="theme-toggle-fixed">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </div>
+
     {{ partial "head/js-bottom.html" . }}
 
 </body>

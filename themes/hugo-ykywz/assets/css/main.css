@@ -313,6 +313,16 @@ body {
     align-items: center;
 }
 
+/* Fixed theme toggle on bottom right */
+.theme-toggle-fixed {
+    position: fixed;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
 .theme-toggle-btn {
     display: flex;
     align-items: center;
@@ -2923,6 +2933,11 @@ body {
         right: var(--space-4);
     }
 
+    .theme-toggle-fixed {
+        bottom: var(--space-4);
+        right: var(--space-4);
+    }
+
     .nav-link {
         font-size: 0.75rem;
         padding: var(--space-2) var(--space-3);
@@ -3142,6 +3157,11 @@ body {
 
     .theme-toggle {
         right: var(--space-2);
+    }
+
+    .theme-toggle-fixed {
+        bottom: var(--space-4);
+        right: var(--space-4);
     }
 
     .nav-link {
