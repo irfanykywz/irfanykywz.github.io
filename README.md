@@ -12,7 +12,7 @@ personal web, porto, etc
 - tags, category, search
 
 ## Todo
-empty
+- darkmode di learn list
 
 ## Changelog
 
