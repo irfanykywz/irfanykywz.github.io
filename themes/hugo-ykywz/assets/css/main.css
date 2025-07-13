@@ -2079,10 +2079,19 @@ body {
     color: var(--accent-primary);
     text-decoration: none;
     transition: color var(--transition-fast);
+    text-wrap-mode: nowrap;
 }
 
 .breadcrumb a:hover {
     color: #2563eb;
+}
+
+/* Targets the last span in breadcrumb (current page title) */
+.breadcrumb span {
+    overflow: hidden;          
+    text-overflow: ellipsis;   
+    white-space: nowrap;       
+    display: inline-block;     
 }
 
 .detail-content {
@@ -3184,7 +3193,7 @@ body {
 
     .project-actions {
         flex-wrap: wrap;
-        width: 100%;
+        /* width: 100%; */
     }
 
     .project-actions .btn {
@@ -4722,7 +4731,8 @@ body {
     background: var(--bg-tertiary);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     border: 1px solid var(--border-color);
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 0;
+    /* border-bottom: 2px solid var(--border-color); */
     margin-bottom: 0;
 }
 
@@ -4960,7 +4970,7 @@ body {
     }
 
     .header-row {
-        display: none;
+        border-radius: 0 !important;
     }
 
     .table-cell {

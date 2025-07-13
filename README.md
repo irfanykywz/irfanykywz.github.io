@@ -12,7 +12,7 @@ personal web, porto, etc
 - tags, category, search
 
 ## Todo
--
+empty
 
 ## Changelog
 
@@ -21,6 +21,7 @@ personal web, porto, etc
 - research page
 - change image to avif
 - categories page
+- switch theme menghalangi
 
 **12 July 2025**
 - add collection and research page

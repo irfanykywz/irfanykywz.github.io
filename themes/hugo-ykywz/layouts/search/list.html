@@ -440,13 +440,10 @@ document.addEventListener('DOMContentLoaded', function() {
             initialState.classList.remove('hidden');
             resultCount.textContent = '0 results';
             searchTime.textContent = '';
-            clearPreviousResults();
             return;
         }
         
         initialState.classList.add('hidden');
-        clearPreviousResults();
-        
         const startTime = performance.now();
         const results = searchData.filter(item => {
             const content = `${item.title || ''} ${item.content || ''} ${item.tags || ''}`.toLowerCase();
@@ -466,7 +463,6 @@ document.addEventListener('DOMContentLoaded', function() {
             noResults.classList.remove('hidden');
             resultCount.textContent = '0 results';
             searchTime.textContent = `${duration}ms`;
-            clearPreviousResults();
             return;
         }
         
@@ -475,12 +471,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let resultsHTML = '';
         
-        // Remove duplicates based on permalink
-        const uniqueResults = results.filter((item, index, self) => 
-            index === self.findIndex(t => t.permalink === item.permalink)
-        );
-        
-        uniqueResults.forEach(item => {
+        results.forEach(item => {
             // Highlight matching text
             const titleHighlighted = highlightText(item.title || '', query);
             let contentPreview = item.content ? item.content.substring(0, 150) : '';
@@ -522,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         document.getElementById('searchTableBody').innerHTML = resultsHTML;
-        resultCount.textContent = `${uniqueResults.length} ${uniqueResults.length === 1 ? 'result' : 'results'}`;
+        resultCount.textContent = `${results.length} ${results.length === 1 ? 'result' : 'results'}`;
         searchTime.textContent = `${duration}ms`;
     }
     
@@ -560,11 +551,6 @@ document.addEventListener('DOMContentLoaded', function() {
             performSearch(this.value);
         }, 300);
     });
-    
-    // Prevent duplicate searches by clearing previous results
-    function clearPreviousResults() {
-        document.getElementById('searchTableBody').innerHTML = '';
-    }
     
     // Focus search input on page load
     searchInput.focus();

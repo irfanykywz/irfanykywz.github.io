@@ -106,6 +106,12 @@ I'm actively exploring freelance projects and full-time positions. If you're loo
     content="Laragon, PyCharm, VsCode, Cursor, Xampp, Git, Github" 
     >}}
 
+    {{< home/stack-card 
+    title="AI Agent"
+    icon="fas fa-robot"
+    content="Gemini, Blackboxai" 
+    >}}
+
 {{< /home/stack >}}
 
 {{< home/stack title="IT Support Scope" >}}
