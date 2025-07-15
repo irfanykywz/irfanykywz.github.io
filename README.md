@@ -13,6 +13,8 @@ personal web, porto, etc
 
 ## Todo
 - darkmode di learn list
+- password page
+- menu tools
 
 ## Changelog
 

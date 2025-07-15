@@ -8,55 +8,57 @@
 echo ---------------------------------
 echo   HUGO CONTENT GENERATOR
 echo ---------------------------------
-echo 1. Posts (blog posts)
-echo 2. Journal (daily notes)
-echo 3. Portfolio (project showcases)
-echo 4. Learn (tutorials/how-tos)
+echo 1. Posts (posts/title)
+echo 2. Journal (YEAR/Month/Date - Title)
+echo 3. Portfolio (portofolio/title)
+echo 4. Learn (learn/topic/tutorial)
+echo 5. collection (collection/title.md)
+echo 4. research (research-title/research-content)
 echo ---------------------------------
 
 set /p "choice=Select content type (1-4): "
 
 :: Set content path based on selection
 if "%choice%"=="1" (
-    set "CONTENT_TYPE=posts"
-    set "TYPE_NAME=Post"
+    set "CONTENT_TYPE=posts"    
 ) else if "%choice%"=="2" (
-    set "CONTENT_TYPE=journal"
-    set "TYPE_NAME=Journal Entry"
+    set "CONTENT_TYPE=journal"    
 ) else if "%choice%"=="3" (
-    set "CONTENT_TYPE=portofolio"
-    set "TYPE_NAME=Portfolio Item"
+    set "CONTENT_TYPE=portofolio"    
 ) else if "%choice%"=="4" (
-    set "CONTENT_TYPE=learn"
-    set "TYPE_NAME=Tutorial"
+    set "CONTENT_TYPE=learn"    
+)  else if "%choice%"=="5" (
+    set "CONTENT_TYPE=collection"    
+)  else if "%choice%"=="6" (
+    set "CONTENT_TYPE=research"    
 ) else (
     echo Invalid selection
     pause
-    exit /b 1
+    goto menu
 )
 
 :: Prompt user for content title
-set /p "title=Enter %TYPE_NAME% title: "
+set /p "title=Enter %CONTENT_TYPE% title: "
 
 :: Validate input
 if "%title%"=="" (
     echo Error: Title cannot be empty.
     pause
-    exit /b 1
+    goto menu
 )
 
 :: Generate the Hugo path
 set "HUGO_PATH=%CONTENT_TYPE%\%title%\index.md"
 
 :: Execute Hugo command
-echo Creating new %TYPE_NAME%: %HUGO_PATH%
+echo Creating new %CONTENT_TYPE%: %HUGO_PATH%
 hugo new content "%HUGO_PATH%"
 
 
 echo.
 echo ---------------------------------
 echo Successfully created:
-echo Type: %TYPE_NAME%
+echo Type: %CONTENT_TYPE%
 echo Path: %HUGO_PATH%
 echo File: !file_path!
 echo ---------------------------------
