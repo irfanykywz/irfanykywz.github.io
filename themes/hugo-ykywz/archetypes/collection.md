@@ -1,12 +1,12 @@
 ---
 title: {{ replace .File.ContentBaseName "-" " " | title }}
-description: "-"
+description:
 date: {{ .Date }}
-categories: "-"
+categories: 
 
 
 collection_links:
   - title: Title
-    url: Link
-    description: "-"
+    url: '#'
+    description: 
 ---

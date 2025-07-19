@@ -15,6 +15,8 @@ personal web, porto, etc
 - darkmode di learn list
 - password page
 - menu tools
+- tambahin fitur protect content
+- stack card ganti dijadiin card aja tulisannya dikecilin
 
 ## Changelog
 
