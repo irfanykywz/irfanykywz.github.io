@@ -1,0 +1,139 @@
+{{ define "head" }}
+    {{- with resources.Get "css/profile.css" -}}
+        {{- if hugo.IsDevelopment -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+        {{- else -}}
+            {{- with . | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{ end }}
+
+ {{ define "main" }}
+     <header class="page-header profile-hero">
+        <div class="container">
+            <h1 class="page-title">{{ .Params.name | default "Muhamad Irfan" }}</h1>
+            <p class="page-description">{{ .Params.headline | default "IT Support | Troubleshooting, Networking, and End-User Assistance" }}</p>
+        </div>
+    </header>
+
+    <main class="profile container">
+        <section class="profile-intro">
+            <div class="profile-card">
+                <div class="profile-identity">
+                    {{ with .Params.avatar }}
+                    <img class="avatar" src="{{ . }}" alt="{{ $.Params.name | default $.Title }}" loading="lazy">
+                    {{ else }}
+                    <div class="avatar avatar-initials" aria-hidden="true">{{ substr (default (upper (substr (.Params.name | default "MI") 0 1)) "M") 0 1 }}{{ substr (default (upper (substr (.Params.name | default "MI") 1 1)) "I") 0 1 }}</div>
+                    {{ end }}
+                    <div class="identity-meta">
+                        <h2 class="identity-name">{{ .Params.name | default "Muhamad Irfan" }}</h2>
+                        <p class="identity-role">{{ .Params.role | default "IT Support Specialist" }}</p>
+                        <div class="identity-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>{{ .Params.location | default "Indonesia" }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-contacts">
+                    {{ with .Params.email }}
+                    <a class="btn btn-outline" href="mailto:{{ . }}"><i class="fa-solid fa-envelope"></i><span>{{ . }}</span></a>
+                    {{ end }}
+                    {{ with .Params.phone }}
+                    <a class="btn btn-outline" href="tel:{{ . }}"><i class="fa-solid fa-phone"></i><span>{{ . }}</span></a>
+                    {{ end }}
+                    {{ with .Params.linkedin }}
+                    <a class="btn btn-outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>
+                    {{ end }}
+                    {{ with .Params.github }}
+                    <a class="btn btn-outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+                    {{ end }}
+                    {{ with .Params.cv }}
+                    <a class="btn btn-primary" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i><span>Download CV</span></a>
+                    {{ end }}
+                </div>
+            </div>
+            <div class="profile-summary">
+                <h3>Ringkasan</h3>
+                <p>{{ .Params.summary | default "IT Support dengan pengalaman menangani troubleshooting perangkat keras dan lunak, instalasi dan konfigurasi jaringan, manajemen aset TI, serta dukungan end-user baik onsite maupun remote. Terbiasa menggunakan ticketing system, dokumentasi, dan komunikasi yang efektif dengan tim lintas fungsi." }}</p>
+            </div>
+        </section>
+
+        <section class="profile-grid">
+            <article class="card">
+                <h3>Keahlian Utama</h3>
+                <ul class="list-columns">
+                    {{- $skills := .Params.skills | default (slice "Troubleshooting Windows/Mac" "Active Directory" "Microsoft 365" "Basic Linux" "TCP/IP, DNS, DHCP" "LAN/WAN & Wi‑Fi" "Printer & Scanner" "Remote Support (AnyDesk/TeamViewer)" "Ticketing System" "Hardware Upgrade" "Backup & Recovery" "IT Asset Management") -}}
+                    {{ range $skills }}<li>{{ . }}</li>{{ end }}
+                </ul>
+            </article>
+
+            <article class="card">
+                <h3>Tools</h3>
+                <ul class="list-pill">
+                    {{- $tools := .Params.tools | default (slice "Windows Server" "Azure AD" "MikroTik" "Ubiquiti" "Google Workspace" "Office 365 Admin" "Zabbix/PRTG" "Git" "Jira/Freshservice" "Veeam/UrBackup") -}}
+                    {{ range $tools }}<li>{{ . }}</li>{{ end }}
+                </ul>
+            </article>
+
+            <article class="card">
+                <h3>Sertifikasi</h3>
+                <ul class="list-timeline compact">
+                    {{- $certs := .Params.certs | default (slice "CompTIA A+ (target)" "MTCNA" "ITIL Foundation (target)") -}}
+                    {{ range $certs }}<li><span class="dot"></span><span>{{ . }}</span></li>{{ end }}
+                </ul>
+            </article>
+        </section>
+
+        <section class="profile-experience">
+            <h3>Pengalaman Kerja</h3>
+            <ul class="timeline">
+                {{- with .Params.experience -}}
+                    {{- range . -}}
+                    <li class="timeline-item">
+                        <div class="timeline-meta">{{ .period | default "2022 — Sekarang" }}</div>
+                        <div class="timeline-card">
+                            <h4>{{ .title | default "IT Support" }} — <span class="company">{{ .company | default "Perusahaan" }}</span></h4>
+                            {{ with .location }}<div class="location"><i class="fa-solid fa-location-dot"></i> {{ . }}</div>{{ end }}
+                            <ul class="bullets">
+                                {{- range .highlights -}}
+                                <li>{{ . }}</li>
+                                {{- end -}}
+                            </ul>
+                        </div>
+                    </li>
+                    {{- end -}}
+                {{- else -}}
+                    <li class="timeline-item">
+                        <div class="timeline-meta">2023 — Sekarang</div>
+                        <div class="timeline-card">
+                            <h4>IT Support — <span class="company">Freelance</span></h4>
+                            <ul class="bullets">
+                                <li>Menangani troubleshooting OS, aplikasi, dan periferal untuk 20+ end-user per minggu.</li>
+                                <li>Setup jaringan kecil/menengah, segmentasi dasar, dan monitoring sederhana.</li>
+                                <li>Migrasi email ke Microsoft 365, serta pelatihan penggunaan dasar.</li>
+                            </ul>
+                        </div>
+                    </li>
+                {{- end -}}
+            </ul>
+        </section>
+
+        <section class="profile-education">
+            <h3>Pendidikan</h3>
+            <ul class="list-timeline">
+                {{- $education := .Params.education | default (slice (dict "title" "D3/S1 Informatika/TPM" "org" "Universitas/Politeknik" "year" "2019 — 2023")) -}}
+                {{- range $education -}}
+                <li><span class="dot"></span>{{ .title }} — <span class="company">{{ .org }}</span> <span class="year">{{ .year }}</span></li>
+                {{- end -}}
+            </ul>
+        </section>
+
+        {{ with .Content }}
+        <section class="profile-extra">
+            {{ . }}
+        </section>
+        {{ end }}
+    </main>
+{{ end }}

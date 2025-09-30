@@ -25,6 +25,8 @@ yaitu, kita harus benar-benar memilih ilmu apa yang harus dipelajari
 
 `***`
 
-ingatlah. belajar membutuhkan waktu, sayang sekali bukan sudah bersusah payah mempelajarinya tapi tidak dimanfaatkan
+ingatlah, belajar membutuhkan waktu.
+
+sayang sekali bukan, sudah bersusah payah mempelajarinya tapi tidak dimanfaatkan
 
 pilihlah ilmu yang benar-benar membawa manfaat untuk hidupmu hari ini dan yang akan datang...

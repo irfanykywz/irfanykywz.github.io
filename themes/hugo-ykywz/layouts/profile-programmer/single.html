@@ -1,0 +1,162 @@
+ {{ define "head" }}
+     {{- with resources.Get "css/profile-programmer.css" -}}
+         {{- if hugo.IsDevelopment -}}
+ <link rel="stylesheet" href="{{ .RelPermalink }}">
+         {{- else -}}
+             {{- with . | minify | fingerprint -}}
+ <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+             {{- end -}}
+         {{- end -}}
+     {{- end -}}
+ {{ end }}
+ 
+ {{ define "main" }}
+     <header class="page-header programmer-hero">
+         <div class="container">
+             <h1 class="page-title mono">{{ .Params.name | default "Muhamad Irfan" }}</h1>
+             <p class="page-description"><span class="code-pill">$</span> {{ .Params.headline | default "Software Developer • Backend, Frontend, and System Integration" }}</p>
+         </div>
+     </header>
+ 
+     <main class="programmer container layout-split">
+         <aside class="sidebar">
+             <div class="intro-card glow-border">
+                 <div class="identity">
+                     {{ with .Params.avatar }}
+                     <img class="avatar" src="{{ . }}" alt="{{ $.Params.name | default $.Title }}" loading="lazy">
+                     {{ else }}
+                     <div class="avatar avatar-initials" aria-hidden="true">{{ substr (default (upper (substr (.Params.name | default "MI") 0 1)) "M") 0 1 }}{{ substr (default (upper (substr (.Params.name | default "MI") 1 1)) "I") 0 1 }}</div>
+                     {{ end }}
+                     <div class="identity-meta">
+                         <h2 class="identity-name">{{ .Params.name | default "Muhamad Irfan" }}</h2>
+                         <p class="identity-role">{{ .Params.role | default "Software Developer" }}</p>
+                         <div class="identity-location"><i class="fa-solid fa-location-dot"></i><span>{{ .Params.location | default "Indonesia" }}</span></div>
+                     </div>
+                 </div>
+                 <div class="contacts">
+                     {{ with .Params.email }}<a class="btn btn-outline" href="mailto:{{ . }}"><i class="fa-solid fa-envelope"></i><span>{{ . }}</span></a>{{ end }}
+                     {{ with .Params.website }}<a class="btn btn-outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i><span>Website</span></a>{{ end }}
+                     {{ with .Params.github }}<a class="btn btn-outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i><span>GitHub</span></a>{{ end }}
+                     {{ with .Params.linkedin }}<a class="btn btn-outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>{{ end }}
+                     {{ with .Params.resume }}<a class="btn btn-primary" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i><span>Resume</span></a>{{ end }}
+                 </div>
+             </div>
+ 
+             <div class="sidebar-stats glass">
+                 <div class="stat-item"><span class="label mono">Years</span><span class="value">{{ or .Params.stats.years 3 }}</span></div>
+                 <div class="stat-item"><span class="label mono">Projects</span><span class="value">{{ or .Params.stats.projects 12 }}</span></div>
+                 <div class="stat-item"><span class="label mono">Repos</span><span class="value">{{ or .Params.stats.repos 25 }}</span></div>
+             </div>
+ 
+             <div class="sidebar-tags glass">
+                 <div class="tags">
+                     {{- $tags := .Params.skills | default (slice "TypeScript" "Go" "Laravel" "React" "Docker" "PostgreSQL" "Clean Architecture" "CI/CD" "Testing") -}}
+                     {{- range $tags }}<span class="tag">#{{ . }}</span>{{ end }}
+                 </div>
+             </div>
+         </aside>
+ 
+        <section class="content">
+            <section class="block kpis">
+                <div class="kpi-row">
+                    <div class="kpi-card">
+                        <div class="kpi-value">{{ or .Params.kpis.delivery "95%" }}</div>
+                        <div class="kpi-label">On-time Delivery</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value">{{ or .Params.kpis.defects "<1%" }}</div>
+                        <div class="kpi-label">Defect Rate</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value">{{ or .Params.kpis.performance "2x" }}</div>
+                        <div class="kpi-label">Perf Improvement</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value">{{ or .Params.kpis.savings "$10k+" }}</div>
+                        <div class="kpi-label">Cost Savings</div>
+                    </div>
+                </div>
+            </section>
+             <section class="block about glass">
+                 <h3 class="mono">Tentang Saya</h3>
+                 <p>{{ .Params.summary | default "Software Developer yang fokus pada pembuatan aplikasi web berskala produksi, integrasi API, otomatisasi, dan praktik pengembangan modern (CI/CD, testing, code review)." }}</p>
+             </section>
+ 
+            <section class="block stack glass">
+                <h3 class="mono">Keahlian Teknis</h3>
+                <div class="skills">
+                    {{- $skills := .Params.skills | default (slice "JavaScript/TypeScript" "Go" "PHP" "Node.js" "Laravel" "React" "REST/GraphQL" "PostgreSQL/MySQL" "Docker" "CI/CD" "Testing" "Clean Architecture") -}}
+                    {{- range $skills }}
+                        {{- $isMap := reflect.IsMap . -}}
+                        {{- $name := . -}}
+                        {{- $level := "" -}}
+                        {{- if $isMap -}}
+                            {{- $name = (.name | default (.Name | default "")) -}}
+                            {{- $level = (.level | default "") -}}
+                        {{- end -}}
+                        <div class="skill">
+                            <div class="skill-head"><span class="skill-name">{{ $name }}</span>{{ if $level }}<span class="skill-level">{{ $level }}%</span>{{ end }}</div>
+                            {{ if $level }}<div class="meter" aria-label="{{ $name }} level {{ $level }}%"><span style="width: {{ $level }}%"></span></div>{{ end }}
+                        </div>
+                    {{- end }}
+                </div>
+            </section>
+ 
+            <section class="block projects glass">
+                <h3 class="mono">Case Studies</h3>
+                <div class="cards">
+                    {{ range or .Params.projects (slice (dict "name" "API Service" "desc" "Mendesain dan membangun REST API; latensi turun 40%" "link" "#") (dict "name" "Dashboard Admin" "desc" "SPA untuk manajemen; waktu operasi tim berkurang 30%" "link" "#") (dict "name" "CLI Tool" "desc" "Otomasi build/deploy; hemat 10 jam/bulan" "link" "#")) }}
+                        <a class="case-card" href="{{ .link }}" target="_blank" rel="noopener">
+                            <div class="case-title">{{ .name }}</div>
+                            <div class="case-desc">{{ .desc }}</div>
+                        </a>
+                    {{ end }}
+                </div>
+            </section>
+ 
+             <section class="block experience glass">
+                 <h3 class="mono">Pengalaman</h3>
+                 <div class="xp-row">
+                     {{- with .Params.experience -}}
+                         {{- range . -}}
+                         <article class="xp-card">
+                             <div class="xp-meta mono">{{ .period | default "2022 — Sekarang" }}</div>
+                             <h4>{{ .title | default "Software Developer" }} — <span class="company">{{ .company | default "Perusahaan" }}</span></h4>
+                             <ul class="bullets">{{ range .highlights }}<li>{{ . }}</li>{{ end }}</ul>
+                         </article>
+                         {{- end -}}
+                     {{- else -}}
+                         <article class="xp-card">
+                             <div class="xp-meta mono">2023 — Sekarang</div>
+                             <h4>Software Developer — <span class="company">Freelance</span></h4>
+                             <ul class="bullets">
+                                 <li>Membangun REST API dan integrasi pembayaran.</li>
+                                 <li>Mendesain database relasional dan query efisien.</li>
+                                 <li>Mengimplementasikan CI/CD sederhana dan testing.</li>
+                             </ul>
+                         </article>
+                     {{- end -}}
+                 </div>
+             </section>
+ 
+            {{ with .Content }}
+            <section class="block extra glass">{{ . }}</section>
+            {{ end }}
+
+            <section class="block cta-bar">
+                <div class="cta-inner">
+                    <div class="cta-text">
+                        <h3 class="mono">Tertarik bekerja sama?</h3>
+                        <p>Siap membantu membangun dan meningkatkan sistem Anda. Hubungi saya untuk diskusi.</p>
+                    </div>
+                    <div class="cta-actions">
+                        {{ with .Params.email }}<a class="btn btn-primary" href="mailto:{{ . }}"><i class="fa-solid fa-envelope"></i><span>Email</span></a>{{ end }}
+                        {{ with .Params.linkedin }}<a class="btn btn-outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>{{ end }}
+                        {{ with .Params.resume }}<a class="btn btn-outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i><span>Resume</span></a>{{ end }}
+                    </div>
+                </div>
+            </section>
+         </section>
+     </main>
+ {{ end }}
+

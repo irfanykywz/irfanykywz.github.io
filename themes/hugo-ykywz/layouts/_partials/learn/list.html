@@ -1,8 +1,8 @@
 <main class="main">
     <section class="page-header">
         <div class="container-full">
-            <h1 class="page-title">
-                <i class="fas fa-graduation-cap"></i>
+            <h1 class="page-title">    
+                💡             
                 {{ .Title }}
             </h1>
             <p class="page-description">{{ .Description }}</p>
@@ -18,9 +18,7 @@
                     <div class="course-card-tutorial">
                         <div class="course-icon">
                             {{ if isset .Params "image" }}
-                            <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}'>
-                            {{ else }}
-                            <img src="{{ .Site.BaseURL }}learn-image.png" alt="{{ .Title }}" />
+                                <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}'>
                             {{ end }}
                         </div>
                         <div class="course-info">
@@ -34,7 +32,7 @@
                         <div class="course-meta">
                             <div class="meta-item">
                                 <i class="fas fa-file-alt"></i>
-                                <span>{{ (len .Pages) }} Content</span>
+                                <span>{{ (len .Pages) }} Konten</span>
                             </div>
                             <div class="meta-item">
                                 <i class="fas fa-clock"></i>
@@ -42,12 +40,12 @@
                                 {{ range .Pages }}
                                 {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
                                 {{ end }}
-                                <span>{{ printf "%d min read" $totalReadingTime }}</span>
+                                <span>{{ printf "%d min waktu baca" $totalReadingTime }}</span>
                             </div>
                             <div class="meta-item">
                                 <a href="{{ .RelPermalink }}" class="read-more">
                                     <i class="fas fa-book-open"></i>
-                                    Start Learn
+                                    Mulai Belajar
                                 </a>
                             </div>
                         </div>
@@ -61,13 +59,13 @@
                     {{ with .Prev }}
                     <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
                         <i class="fas fa-chevron-left"></i>
-                        <span aria-hidden="true">Previous</span>
+                        <span aria-hidden="true">Sebelumnya</span>
                     </a>
                     {{ end }}
-                    <span class="pagination-info">Page {{ .PageNumber }} of {{ .TotalPages }}</span>
+                    <span class="pagination-info">{{ .PageNumber }}/{{ .TotalPages }}</span>
                     {{ with .Next }}
                     <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
-                        <span aria-hidden="true">Next</span>
+                        <span aria-hidden="true">Selanjutnya</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                     {{ end }}

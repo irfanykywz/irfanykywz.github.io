@@ -10,6 +10,7 @@ demo: https://google.com
 buy: https:google.com/ncr
 # github: https://google.com
 date: {{ .Date }}
+draft: false
 ---
 
 

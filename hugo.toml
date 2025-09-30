@@ -2,7 +2,9 @@ baseURL = "https://irfanykywz.github.io/"
 languageCode = "en-us"
 title = "irfanykywz"
 theme = "hugo-ykywz"
+
 copyright = "irfanykywz"
+
 pagination.pagerSize = 5
 
 pygmentsstyle = "vs"
@@ -12,60 +14,97 @@ pygmentscodefencesguesssyntax = true
 
 [params]
 	# browser icon
-	favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
+	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
+  favicon = "avatar.jpg"
 
 	# Optional 64x64 avatar image.
-	avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
+	# avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
+  avatar = "avatar.jpg"
+
+  description = "Website Muhamad Irfan: Memiliki skill dibidang IT Support dan Software Engineering. siap direkrut kapan saja, segera hubungi saya"
+  author = "Muhamad Irfan"
+  keywords = "Software Engineer, IT Support, Portofolio, Coding, Troubleshooting, Infrastruktur."
 
 # Menu Header
 [[menu.main]]
-name = "Home"
+name = "Beranda"
 url = "/"
 pre = "fas fa-home"
 weight = 1
 
 [[menu.main]]
-name = "Portofolio"
+name = "Proyek"
 url = "/portofolio/"
 pre = "fas fa-briefcase"
 weight = 2
 
-[[menu.main]]
-name = "Learn"
-url = "/learn/"
-pre = "fas fa-graduation-cap"
-weight = 3
+# [[menu.main]]
+# name = "Learn"
+# url = "/learn/"
+# pre = "fas fa-graduation-cap"
+# weight = 3
 
 [[menu.main]]
-name = "Posts"
+name = "Artikel"
 url = "/posts/"
 pre = "fas fa-blog"
 weight = 4
 
 [[menu.main]]
-name = "Contact"
+name = "Kontak"
 url = "/contact/"
 pre = "fas fa-envelope"
 weight = 5
 
 # Menu Footer
 [[menu.footer]]
-name = "Journal"
+name = "Jurnal"
 url = "/journal/"
-pre = "fas fa-book"
+pre = "📝"
 weight = 1
 
 [[menu.footer]]
-name = "Collection"
-url = "/collection/"
-pre = "fa-solid fa-lines-leaning"
+name = "Belajar"
+url = "/learn/"
+pre = "💡"
 weight = 2
 
 [[menu.footer]]
-name = "Research"
+name = "Buku"
+url = "/book-lesson/"
+pre = "📖"
+weight = 2
+
+# Menu Footer Right
+[[menu.footer_right]]
+name = "🔍"
+url = "/search/"
+weight = 1
+
+[[menu.footer_right]]
+name = "#️⃣"
+url = "/tags/"
+weight = 2
+
+[[menu.footer_right]]
+name = "🏷️"
+url = "/categories/"
+weight = 3
+
+# [[menu.footer_right]]
+# name = "📦"
+# url = "/collection/"
+# weight = 4
+
+[[menu.footer_right]]
+name = "🧪"
 url = "/research/"
-pre = "fa-solid fa-flask"
-weight = 4
+weight = 5
+
+[[menu.footer_right]]
+name = "🎮"
+url = "/game-journey/"
+weight = 6
 
 [markup]
   [markup.highlight]
@@ -101,3 +140,7 @@ weight = 4
   baseName = "index"
   isPlainText = true
   notAlternative = true  
+
+[languages.id]
+languageName = "Indonesian"
+languageCode = "id"

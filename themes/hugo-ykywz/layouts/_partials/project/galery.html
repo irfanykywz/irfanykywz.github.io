@@ -1,0 +1,19 @@
+{{ if .Params.galery }}
+    <div class="project-gallery">
+        <h2 class="section-title">
+            <i class="fas fa-images"></i>
+            Galeri Proyek
+        </h2>
+        <div class="gallery-grid">
+            {{ range $index, $element := .Params.galery }}
+                <div class="gallery-item">
+                    <img class="lightbox-trigger" data-src="{{ $element.image }}" src='{{ $element.image }}' alt='{{ $element.name }}' />
+                    <div class="gallery-overlay">
+                        <h4>{{ $element.name }}</h4>
+                        <p>{{ $element.description }}</p>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}

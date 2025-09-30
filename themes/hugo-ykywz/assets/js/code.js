@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.chroma').forEach(function(codeBlock) {
+    document.querySelectorAll('pre.chroma:has(code[data-lang])').forEach(function(codeBlock) {
         const copyButton = document.createElement('button');
         copyButton.className = 'code-copy-btn';
         copyButton.textContent = 'Copy';

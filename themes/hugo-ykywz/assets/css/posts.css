@@ -1,0 +1,27 @@
+/* Posts Styles */
+.posts-content{padding:var(--space-16) 0}
+.posts-grid{display:grid;gap:var(--space-8);margin-bottom:var(--space-12)}
+.blog-post{background:var(--bg-secondary);padding:var(--space-8);border-radius:var(--radius-xl);border:1px solid var(--border-color)}
+.post-header{margin-bottom:var(--space-6)}
+.post-meta{display:flex;gap:var(--space-4);margin-bottom:var(--space-4);font-size:0.875rem;color:var(--text-muted);flex-wrap:wrap}
+.post-meta span{display:flex;align-items:center;gap:var(--space-1)}
+.post-category{color:var(--accent-primary);font-weight:600}
+.post-title{font-size:1.5rem;font-weight:700;line-height:1.3}
+.post-title a{color:var(--text-primary);text-decoration:none;transition:color var(--transition-fast)}
+.post-title a:hover{color:var(--accent-primary)}
+.post-content{color:var(--text-secondary);line-height:1.7;margin-bottom:var(--space-6)}
+.post-content p{margin-bottom:var(--space-4)}
+.post-footer{display:flex;justify-content:space-between;align-items:center;padding-top:var(--space-4);border-top:1px solid var(--border-color)}
+.read-more{display:flex;align-items:center;gap:var(--space-2);color:var(--accent-primary);text-decoration:none;font-weight:600;transition:color var(--transition-fast)}
+.read-more:hover{color:#2563eb}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .post-footer{flex-direction:column;gap:var(--space-4);align-items:flex-start}
+}
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.profile-section,.about-section,.skills-section{animation:fadeInUp 0.8s ease-out}
+
+

@@ -5,6 +5,25 @@ date: 2011-12-07T09:08:30+07:00
 tags: []
 ---
 
+
+## Highlighting Specific Lines
+
+```go {lineNos=true hl_lines=[3,6,8]}
+package main
+
+import "fmt"  // This line will be highlighted
+
+func main() {
+    message := "Hello, World!"  // This line will also be highlighted
+
+    fmt.Println(message)  // This line will also be highlighted
+
+    for i := 0; i < 3; i++ {
+        fmt.Printf("Count: %d\n", i)
+    }
+}
+```
+
 # Custom ShortCodes
 {{< code lang="javascript" title="Example Function" >}}
 function greet(name) {

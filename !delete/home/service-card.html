@@ -1,0 +1,13 @@
+<div class="services-card">
+    <div class="icon">
+        {{ .Get "icon" | .Page.RenderString }}
+    </div>
+    <div class="info">
+        <h3>
+            {{ .Get "title" }}
+        </h3>
+        <p>
+            {{ .Get "content" | .Page.RenderString }}
+        </p>
+    </div>
+</div>

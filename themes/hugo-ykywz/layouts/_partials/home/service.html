@@ -1,0 +1,27 @@
+<section>
+    <div class="services container">
+        <h2 class="section-title">
+            🪓
+            {{ .Params.servicetitle }}
+        </h2>
+        <div class="services-grid">
+            {{- range $index, $element := .Params.service -}}
+                <div class="services-card">
+                    <div class="icon">
+                        {{ $element.icon }}
+                    </div>
+                    <div class="info">
+                        <h3>
+                            {{ $element.title }}
+                        </h3>
+                        {{ range $element.jobs }}
+                            <p>
+                                {{ . }}
+                            </p>
+                        {{ end }}
+                    </div>
+                </div>
+             {{ end }}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>
+{{ if .IsHome }}
+	{{ site.Title }}
+{{ else }}
+	{{ printf "%s | %s" .Title site.Title }}
+{{ end }}
+</title>
+
+{{ if .IsHome }}
+	<meta name="description" content="{{ .Site.Params.description }}" />
+	<meta name="author" content="{{ .Site.Params.author }}" />
+	<meta name="keywords" content="{{ .Site.Params.keywords }}" />
+{{ else }}
+
+{{ end }}
+
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />
+<meta name="google-site-verification" content="lDWGSmP0hlTFnz59wlaQqzwpVJeznar9HRdFtgZnnEI" />
+<meta name="google-adsense-account" content="ca-pub-2846006866814506">
+
+{{- if isset .Site.Params "favicon" -}}
+	<link rel="icon" type="image/png" href={{ $.Site.BaseURL }}{{ .Site.Params.favicon }} />
+{{- end -}}
+
+{{ with .OutputFormats.Get "rss" -}}
+	{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end -}}
+
+{{- template "_internal/schema.html" . -}}
+{{- template "_internal/opengraph.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}

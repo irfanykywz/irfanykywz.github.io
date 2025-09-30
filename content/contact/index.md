@@ -1,14 +1,13 @@
 ---
-title: Let's Connect & Create
-description: Have a project in mind, or looking for a dedicated software engineer to join your team? I'm available for freelance opportunities and open to full-time employment
+title: Hubungi Kapan Saja
+description: Saya sedang mencari peluang kerja penuh waktu dan siap memberikan kontribusi terbaik.
 email: irfanyouth@gmail.com
 phone: +6281389215100
 whatsapp: https://api.whatsapp.com/send?phone=6281389215100&text=Halo
 telegram: https://t.me/irfanykywz
-telegramgroup: https://t.me/ykywz
+discordusername: "@irfanykywz"
+discord: https://discord.com/users/993858663162839062
 facebook: https://fb.com/irfanykywz
 youtube: https://youtube.com/@irfanykywz
-status: Currently available for new projects
+status: respons rata-rata kurang dari 24 jam.
 ---
-
-Lets talk about work, feel free to contact, average fast response less than 24 hours.

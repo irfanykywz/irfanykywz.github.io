@@ -6,6 +6,4 @@ draft: false
 
 "tanpa komitmen dan janji kepada diri sendiri bahwa anda akan mewujudkannya, rencana yang telah anda buat akan percuma. hanya rencana dan mimpi-mimpi tak berguna."
 
-...
-
-jika saya terus melangkah setiap harinya untuk melakuakan intruksi yang sudah dibuat maka keinginan apapun itu pasti menjadi nyata
+kata-kata ini saya dapat dari sebuah aplikasi pencari beasiswa...

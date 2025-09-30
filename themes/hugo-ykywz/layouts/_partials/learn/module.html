@@ -1,27 +1,6 @@
-{{ partial "learn/style.html" . }}
-
 <main class="main">
-    <section class="detail-header">
-        <div class="container-full">
-            <nav class="breadcrumb">
-                <a href="{{ $.Site.BaseURL }}learn/">
-                    <i class="fas fa-graduation-cap"></i>
-                    Learn
-                </a>
-                <i class="fas fa-chevron-right"></i>
-                <span style="flex-grow: 1;">
-                    {{ .Title }}
-                </span>
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    Menu
-                </button>
-            </nav>
-        </div>
-    </section>
 
+    {{ partial "learn/breadcrumb.html" . }}
 
     <!-- Main Container -->
     <div class="main-container">
@@ -39,9 +18,9 @@
                         </svg>
 
                         {{ if .Params.section }}
-                        {{ .Params.section }}
+                            {{ .Params.section }}
                         {{ else }}
-                        {{ .Title }}
+                            {{ .Title }}
                         {{ end }}
                     </a>
                 </li>
@@ -49,19 +28,19 @@
                 {{ $sortedPosts := sort .Data.Pages "Date" }}
                 {{ $first := first 1 $sortedPosts}}
                 {{ range $sortedPosts }}
-                <li class="lesson-item">
-                    <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                        <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                        </svg>
+                    <li class="lesson-item">
+                        <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
+                            <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
 
-                        {{ if .Params.section }}
-                        {{ .Params.section }}
-                        {{ else }}
-                        {{ .Title }}
-                        {{ end }}
-                    </a>
-                </li>
+                            {{ if .Params.section }}
+                                {{ .Params.section }}
+                            {{ else }}
+                                {{ .Title }}
+                            {{ end }}
+                        </a>
+                    </li>
                 {{ end }}
 
             </ul>
@@ -87,35 +66,34 @@
                 {{ if $first }}
                 <div class="module-navigation">
                     <span class="nav-button disabled">
-                        <i class="fas fa-chevron-left"></i>
-                        Previous
+                        <i class="fas fa-chevron-left"></i>                        
                     </span>
                     {{ range $first }}
-                    <div class="nav-section">
-                        <a href="{{ .RelPermalink }}" class="nav-button">
-                            Next:
-                            {{ if .Params.section }}
-                            {{ .Params.section }}
-                            {{ else }}
-                            {{ .Title }}
-                            {{ end }}
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
+                        <div class="nav-section">
+                            <a href="{{ .RelPermalink }}" class="nav-button">
+
+                                Selanjutnya:
+
+                                {{ if .Params.section }}
+                                    {{ .Params.section }}
+                                {{ else }}
+                                    {{ .Title }}
+                                {{ end }}
+
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     {{ end }}
                 </div>
                 {{ end }}
 
             </main>
-
-            {{ partial "learn/toc.html" . }}
-
         </div>
+
+        {{ partial "learn/toc.html" . }}
     </div>
 
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
 </main>
-
-{{ partial "learn/script.html" . }}

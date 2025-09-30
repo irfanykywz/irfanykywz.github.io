@@ -1,3 +1,3 @@
 @echo off
 
-hugo server --disableFastRender
+hugo server --disableFastRender --cleanDestinationDir

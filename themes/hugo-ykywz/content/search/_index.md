@@ -1,9 +1,5 @@
 ---
-title: "Search"
-description: "Search through all content on this site"
+title: "Pencarian"
+description: "Cari semua konten disitus ini."
 layout: "search/list"
 ---
-
-# Search
-
-Find exactly what you're looking for across all our content. Search through articles, tutorials, and resources. 

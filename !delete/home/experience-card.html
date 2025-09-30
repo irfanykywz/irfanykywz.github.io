@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-head">
+        <h3>{{ .Get "title" }}</h3>
+        <p class="company-name">{{ .Get "company" }}</p>
+        <p class="duration">{{ .Get "time" }}</p>
+    </div>
+    <div class="card-body">
+        <ul>
+            {{ $items := split (.Get "jobs")  "," }}
+            {{ range $index, $item := $items }}
+            <li>
+                {{ $item }}
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</div>

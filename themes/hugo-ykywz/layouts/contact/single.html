@@ -1,103 +1,49 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/contact.css") }}
+{{ end }}
+
 {{ define "main" }}
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-envelope"></i>
+                    {{ .Title }}
+                </h1>
+                <p class="page-description">{{ .Description }}</p>
+            </div>
+        </section>
 
-<main class="main">
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">
-                <i class="fas fa-envelope"></i>
-                {{ .Title }}
-            </h1>
-            <p class="page-description">{{ .Description }}</p>
-        </div>
-    </section>
-
-    <section class="contact-content">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <h3>
-                            <i class="fas fa-handshake"></i>
-                            Get In Touch
-                        </h3>
-                        <!-- <p>I'm always interested in discussing new opportunities, whether it's a complex web application, automation solution, or consulting project.</p> -->
-
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <h4>Email</h4>
-                                    <a target="_blank" href="mailto:{{ .Params.Email }}">{{ .Params.Email }}</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <h4>WhatsApp</h4>
-                                    <a target="_blank" href="{{ .Params.Whatsapp }}">
-                                        {{ .Params.Phone }}
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fa-brands fa-telegram"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <h4>Telegram</h4>
-                                    <a target="_blank" href="{{ .Params.Telegram }}">
-                                        {{ .Params.Telegram }}
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="availability-status">
-                            <div class="status-indicator available"></div>
-                            <span>{{ .Params.Status }}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-
+        <section class="contact-content">
+            <div class="container">
+                <div class="contact-grid">
                     <div class="contact-info">
                         <div class="contact-card">
                             <h3>
-                                <i class="fas fa-message"></i>
-                                Connect with me
+                                <i class="fas fa-handshake"></i>
+                                Kontak
                             </h3>
-                            <!-- <p>
-                                Active on Social Media
-                            </p> -->
+                            <!-- <p>I'm always interested in discussing new opportunities, whether it's a complex web application, automation solution, or consulting project.</p> -->
 
                             <div class="contact-methods">
-
                                 <div class="contact-method">
                                     <div class="contact-icon">
-                                        <i class="fa-brands fa-facebook"></i>
+                                        <i class="fas fa-envelope"></i>
                                     </div>
                                     <div class="contact-details">
-                                        <h4>Facebook</h4>
-                                        <a target="_blank" href="{{ .Params.Facebook }}">{{ .Params.Facebook }}</a>
+                                        <h4>Email</h4>
+                                        <a target="_blank" href="mailto:{{ .Params.Email }}">{{ .Params.Email }}</a>
                                     </div>
                                 </div>
 
                                 <div class="contact-method">
                                     <div class="contact-icon">
-                                        <i class="fa-brands fa-youtube"></i>
+                                        <i class="fa-brands fa-whatsapp"></i>
                                     </div>
                                     <div class="contact-details">
-                                        <h4>Youtube</h4>
-                                        <a target="_blank" href="{{ .Params.Youtube }}">
-                                            {{ .Params.Youtube }}
+                                        <h4>WhatsApp</h4>
+                                        <a target="_blank" href="{{ .Params.Whatsapp }}">
+                                            {{ .Params.Phone }}
                                         </a>
                                     </div>
                                 </div>
@@ -107,29 +53,84 @@
                                         <i class="fa-brands fa-telegram"></i>
                                     </div>
                                     <div class="contact-details">
-                                        <h4>Telegram Group</h4>
-                                        <a target="_blank" href="{{ .Params.TelegramGroup }}">
-                                            {{ .Params.TelegramGroup }}
+                                        <h4>Telegram</h4>
+                                        <a target="_blank" href="{{ .Params.Telegram }}">
+                                            {{ .Params.Telegram }}
                                         </a>
                                     </div>
                                 </div>
 
                             </div>
 
-
+                            <div class="availability-status">
+                                <div class="status-indicator available"></div>
+                                <span>{{ .Params.Status }}</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="services-summary">
-                        {{ .Content }}
+                    <div>
+
+                        <div class="contact-info">
+                            <div class="contact-card">
+                                <h3>
+                                    <i class="fas fa-message"></i>
+                                    Media Sosial
+                                </h3>
+                                <!-- <p>
+                                    Active on Social Media
+                                </p> -->
+
+                                <div class="contact-methods">
+
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="fa-brands fa-facebook"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h4>Facebook</h4>
+                                            <a target="_blank" href="{{ .Params.Facebook }}">{{ .Params.Facebook }}</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="fa-brands fa-youtube"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h4>Youtube</h4>
+                                            <a target="_blank" href="{{ .Params.Youtube }}">
+                                                {{ .Params.Youtube }}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="fa-brands fa-discord"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h4>Discord</h4>
+                                            <a target="_blank" href="{{ .Params.Discord }}">
+                                                {{ .Params.discordusername }}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <!-- <div class="services-summary">
+                            {{ .Content }}
+                        </div> -->
                     </div>
+
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-</main>
-
-
+    </main>
 {{ end }}

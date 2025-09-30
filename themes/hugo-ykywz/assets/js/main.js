@@ -24,39 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-
-  // Contact form handling
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Get form data
-      const formData = new FormData(contactForm);
-      const data = Object.fromEntries(formData);
-      
-      // Simple validation
-      if (!data.name || !data.email || !data.message) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-      
-      // Simulate form submission
-      const submitButton = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitButton.innerHTML;
-      
-      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-      submitButton.disabled = true;
-      
-      setTimeout(() => {
-        alert('Thank you for your message! I\'ll get back to you soon.');
-        contactForm.reset();
-        submitButton.innerHTML = originalText;
-        submitButton.disabled = false;
-      }, 2000);
-    });
-  }
-
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -134,25 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Add typing effect to profile name (optional enhancement)
-  const profileName = document.querySelector('.profile-info h1');
-  if (profileName && profileName.textContent.includes('Muhamad')) {
-    const text = profileName.textContent;
-    profileName.textContent = '';
-    let i = 0;
-    
-    const typeWriter = () => {
-      if (i < text.length) {
-        profileName.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
-      }
-    };
-    
-    // Start typing effect after a short delay
-    setTimeout(typeWriter, 100);
-  }
-
+  
   // Skill tag hover effects
   document.querySelectorAll('.skill-tag').forEach(tag => {
     tag.addEventListener('mouseenter', function() {

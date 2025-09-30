@@ -6,7 +6,7 @@
             <nav class="breadcrumb">
                 <a href="{{ $.Site.BaseURL }}posts/">
                     <i class="fas fa-blog"></i>
-                    Posts
+                    Artikel
                 </a>
                 <i class="fas fa-chevron-right"></i>
                 <span>{{ .Title }}</span>
@@ -23,15 +23,17 @@
                             <i class="fas fa-calendar"></i>
                             <span>{{ .Date | time.Format "2 January 2006" }}</span>
                         </div>
-                        {{ if .Params.categories }}
+                        <!-- {{ if .Params.categories }}
                         <div class="meta-item">
                             <i class="fas fa-tag"></i>
                             <span>{{ .Params.categories}}</span>
                         </div>
-                        {{ end }}
+                        {{ end }} -->
                         <div class="meta-item">
                             <i class="fas fa-clock"></i>
-                            <span>{{ printf "%d min read" .ReadingTime }}</span>
+                            <span>
+                                {{ printf "%d min waktu baca" .ReadingTime }}
+                            </span>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-user"></i>
@@ -46,14 +48,14 @@
                     <div class="post-content-full">
 
                         {{ with .Content }}
-                        {{ . | safeHTML }}
+                            {{ . | safeHTML }}
                         {{ end }}
 
                     </div>
 
                     {{ if gt .Params.tags 0 }}
                     <div class="detail-tags">
-                        <h4>Tags:</h4>
+                        <h4>Kata Kunci:</h4>
                         <div class="tags-list">
                             {{ range .Params.tags }}
                             <span class="tag">{{ . }}</span>
@@ -68,24 +70,24 @@
                     <div class="detail-navigation">
                         <a href="javascript:window.history.go(-1);" class="nav-button">
                             <i class="fas fa-arrow-left"></i>
-                            Back to Posts
+                            Kembali
                         </a>
 
                         <div class="nav-buttons">
                             {{ $pages := .CurrentSection.Pages.ByWeight }}
 
                             {{ with $pages.Prev . }}
-                            <a href="{{ .RelPermalink }}" class="nav-button">
-                                <i class="fas fa-chevron-left"></i>
-                                Previous Post
-                            </a>
+                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                    <i class="fas fa-chevron-left"></i>
+                                    Sebelumnya
+                                </a>
                             {{ end }}
 
                             {{ with $pages.Next . }}
-                            <a href="{{ .RelPermalink }}" class="nav-button">
-                                Next Post
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
+                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                    Selanjutnya
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
                             {{ end }}
                         </div>
 

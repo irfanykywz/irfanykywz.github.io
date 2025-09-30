@@ -2,23 +2,31 @@
 personal web, porto, etc
 
 ## Pages
-- Portofolio
-- Learn
-- Posts
-- Contact
-- Journal
-- Collection
-- Research
-- tags, category, search
+- Projek
+- Belajar
+- Artikel
+- Kontak
+- Jurnal
+- Koleksi
+- Riset
+- tags, category, pencarian
+- game
+- ringkasan buku
 
 ## Todo
-- darkmode di learn list
-- password page
-- menu tools
+- home:
+	- class popular dipisah aja jadiin beda beda column
+	- stack card ganti dijadiin card aja tulisannya dikecilin
 - tambahin fitur protect content
-- stack card ganti dijadiin card aja tulisannya dikecilin
+- jurnal harian > seleksi tulisan
+
 
 ## Changelog
+**25 September 2025**
+- menambahkan halaman book-lesson, game-journey
+- menghilangkan halaman favorite
+- refactory style, setiap halaman memiliki file cssnya masing masing
+- merubah bahasa inggris menjadi bahasa indonesia
 
 **13 July 2025**
 - search page

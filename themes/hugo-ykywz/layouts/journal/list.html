@@ -1,127 +1,112 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/journal.css") }}
+    {{ partial "style.html" (dict "css" "css/pagination.css") }}
+{{ end }}
+
 {{ define "main" }}
 
-<main class="main">
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">
-                <i class="fas fa-book"></i>
-                {{.Title}}
-            </h1>
-            <p class="page-description">{{ .Description }}</p>
-        </div>
-    </section>
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-pencil"></i>
+                    {{.Title}}
+                </h1>
+                <p class="page-description">{{ .Description }}</p>
+            </div>
+        </section>
 
-    <section class="journal-content">
-        <div class="container">
-            <div class="journal-entries">
+        <section class="journal-content">
+            <div class="container">
+                <div class="journal-entries">
 
-                {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
-                {{ range $paginator.Pages }}
-                <article class="journal-entry">
-                    <div class="journal-header">
-                        <div class="journal-date">
-                            <div class="date-day">{{ .Date.Day }}</div>
-                            <div class="date-month">{{ .Date.Month }}</div>
-                            <div class="date-year">{{ .Date.Year }}</div>
-                        </div>
-                        <div class="journal-meta">
-                            <div class="journal-time">
-                                <i class="fas fa-clock"></i>
-                                {{ .Date.Format "3:04 PM" }}
+                    {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
+                    {{ range $paginator.Pages }}
+                        <article class="journal-entry">
+                            <div class="journal-header">
+                                <div class="journal-date">
+                                    <div class="date-day">{{ .Date.Day }}</div>
+                                    <div class="date-month">{{ i18n .Date.Month }}</div>
+                                    <div class="date-year">{{ .Date.Year }}</div>
+                                </div>
+                                <div class="journal-meta">
+                                    <div class="journal-time">
+                                        <i class="fas fa-clock"></i>
+                                        {{ .Date.Format "3:04 PM" }}
+                                    </div>
+
+                                    {{ if .Params.mood }}
+                                    <div class="journal-mood">
+                                        {{ if eq .Params.mood "Smile"}}
+                                        <i class="fas fa-smile"></i>
+                                        {{ else if eq .Params.mood "Inspired" }}
+                                        <i class="fas fa-lightbulb"></i>
+                                        {{ else if eq .Params.mood "Super" }}
+                                        <i class="fas fa-grin-stars"></i>
+                                        {{ else if eq .Params.mood "Energetic" }}
+                                        <i class="fas fa-coffee"></i>
+                                        {{ else }}
+                                        <i class="fas fa-meh"></i>
+                                        {{ end }}
+                                        {{ .Params.mood }}
+                                    </div>
+                                    {{ end }}
+
+
+                                    {{ if .Params.weather }}
+                                    <div class="journal-weather">
+                                        {{ if eq .Params.weather "Rain"}}
+                                        <i class="fas fa-cloud-rain"></i>
+                                        {{ else if eq .Params.weather "Bright" }}
+                                        <i class="fas fa-sun"></i>
+                                        {{ else if eq .Params.weather "Clear" }}
+                                        <i class="fas fa-star"></i>
+                                        {{ else }}
+                                        <i class="fas fa-cloud"></i>
+                                        {{ end }}
+                                        {{ .Params.weather }}
+                                    </div>
+                                    {{ end }}
+                                </div>
                             </div>
-
-                            {{ if .Params.mood }}
-                            <div class="journal-mood">
-                                {{ if eq .Params.mood "Smile"}}
-                                <i class="fas fa-smile"></i>
-                                {{ else if eq .Params.mood "Inspired" }}
-                                <i class="fas fa-lightbulb"></i>
-                                {{ else if eq .Params.mood "Super" }}
-                                <i class="fas fa-grin-stars"></i>
-                                {{ else if eq .Params.mood "Energetic" }}
-                                <i class="fas fa-coffee"></i>
-                                {{ else }}
-                                <i class="fas fa-meh"></i>
+                            <div class="journal-content-body">
+                                <h2 class="journal-title">
+                                    <a href="{{ .RelPermalink }}">{{.Title}}{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}</a>
+                                </h2>
+                                <div class="journal-text">
+                                    <p>
+                                        {{ if isset .Params "description" }}
+                                            {{ .Description }}
+                                        {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                                            {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                                        {{ else }}
+                                            {{ .Content | plainify | safeHTML }}
+                                        {{ end }}
+                                    </p>
+                                </div>
+                                {{ if gt .Params.tags 0 }}
+                                <div class="journal-tags">
+                                    {{ range .Params.tags }}
+                                        <span class="tag">{{ . }}</span>
+                                    {{ end }}
+                                </div>
                                 {{ end }}
-                                {{ .Params.mood }}
                             </div>
-                            {{ end }}
-
-
-                            {{ if .Params.weather }}
-                            <div class="journal-weather">
-                                {{ if eq .Params.weather "Rain"}}
-                                <i class="fas fa-cloud-rain"></i>
-                                {{ else if eq .Params.weather "Bright" }}
-                                <i class="fas fa-sun"></i>
-                                {{ else if eq .Params.weather "Clear" }}
-                                <i class="fas fa-star"></i>
-                                {{ else }}
-                                <i class="fas fa-cloud"></i>
-                                {{ end }}
-                                {{ .Params.weather }}
+                            <div class="journal-footer">
+                                <a href="{{ .RelPermalink }}" class="read-more">
+                                    <i class="fas fa-book-open"></i>
+                                    Selengkapnya
+                                </a>
                             </div>
-                            {{ end }}
-                        </div>
-                    </div>
-                    <div class="journal-content-body">
-                        <h2 class="journal-title">
-                            <a href="{{ .RelPermalink }}">{{.Title}}{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}</a>
-                        </h2>
-                        <div class="journal-text">
-                            <p>
-                                {{ if isset .Params "description" }}
-                                {{ .Description }}
-                                {{ else if gt (countrunes (.Content | plainify)) 120 }}
-                                {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
-                                {{ else }}
-                                {{ .Content | plainify | safeHTML }}
-                                {{ end }}
-                            </p>
-                        </div>
-                        {{ if gt .Params.tags 0 }}
-                        <div class="journal-tags">
-                            {{ range .Params.tags }}
-                            <span class="tag">{{ . }}</span>
-                            {{ end }}
-                        </div>
-                        {{ end }}
-                    </div>
-                    <div class="journal-footer">
-                        <a href="{{ .RelPermalink }}" class="read-more">
-                            <i class="fas fa-book-open"></i>
-                            Read Full Entry
-                        </a>
-                    </div>
-                </article>
-                {{- end -}}
+                        </article>
+                    {{- end -}}
+
+                </div>
+
+                {{ template "_internal/pagination.html" . }}
 
             </div>
-
-
-
-            {{ with $paginator }}
-            <div class="pagination">
-                {{ with .Prev }}
-                <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
-                    <i class="fas fa-chevron-left"></i>
-                    <span aria-hidden="true">Previous</span>
-                </a>
-                {{ end }}
-                <span class="pagination-info">Page {{ .PageNumber }} of {{ .TotalPages }}</span>
-                {{ with .Next }}
-                <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
-                    <span aria-hidden="true">Next</span>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-                {{ end }}
-            </div>
-            {{ end }}
-
-
-        </div>
-    </section>
-</main>
-
+        </section>
+    </main>
 
 {{ end }}

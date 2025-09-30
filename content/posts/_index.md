@@ -1,4 +1,4 @@
 ---
-title: Development Posts
-description: Thoughts on software engineering, programming tips, and lessons learned
+title: Artikel
+description: Tulisan yang berkaitan dengan teknologi, tips, dan pelajaran
 ---

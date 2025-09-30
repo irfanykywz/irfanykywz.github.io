@@ -1,156 +1,183 @@
 ---
-title: Muhamad Irfan (A.k.a irfanykywz)
-description: Noob Software Engineer
+title: Muhamad Irfan
+description: IT Support, Software Engineering
 cv: https://drive.google.com/drive/folders/13YFtrbO0rbK28MTrAZk5f7Zx2z-0Z7IZ?usp=sharing
 email: irfanyouth@gmail.com
 linkedin: https://linkedin.com/in/irfanykywz
+github: https://github.com/irfanykywz
+# =====================================
+abouttitle: "Ringkasan"
+about:
+    - "Halo, nama saya Muhamad Irfan. Saya adalah teknisi IT pemula yang bersemangat mencari pengalaman kerja."
+    - "Saya memiliki pemahaman dasar yang kuat tentang sistem operasi, hardware, dan jaringan komputer. Meskipun belum banyak pengalaman formal, saya aktif belajar dan siap menerapkan keterampilan saya untuk membantu mengatasi masalah IT."
+    - "Saya sedang mencari posisi penuh waktu atau proyek lepas. Jika Anda membutuhkan teknisi yang berdedikasi dan siap belajar, saya siap untuk berkontribusi."
+# =====================================
+servicetitle: "Keahlian"
+service:
+    - title: "Dukungan IT"
+      icon: "❤️"
+      jobs: 
+        - "Membantu merawat dan memastikan perangkat keras (hardware) serta sistem operasi komputer berfungsi dengan optimal dan bebas masalah."
+        - "Mendiagnosis dan memperbaiki berbagai masalah teknis pada jaringan, koneksi internet, perangkat lunak, dan keamanan dasar."
+    - title: "Pengembangan Perangkat Lunak"
+      icon: "❤️"
+      jobs: 
+        - "Mengembangkan aplikasi desktop dan situs web, dengan teknologi terkini"
+        - "Membuat skrip otomatisasi tugas-tugas berulang guna meningkatkan efisiensi kerja."        
+# =====================================
+experiencetitle: "Pengalaman Kerja"
+experience:
+    - title: "Pekerja Lepas Pembuatan Aplikasi"
+      company: "Ykywz"
+      time: "2023 - Sekarang"
+      jobs: 
+        - "membuat aplikasi desktop"
+        - "membuat bot"
+        - "membuat website"
+        - "membuat alat scraping"
+    - title: "Teknisi Komputer"
+      company: "Nusa Komputer"
+      time: "2022 - 2023"
+      jobs: 
+        - "Perakitan Komputer"
+        - "Instalasi Sistem Operasi dan Aplikasi"
+        - "Instalasi dan Pemecah masalah Jaringan"
+        - "Penggantian Perangkat Komputer"
+        - "Pemecah masalah Printer & CCTV"
+        - "Layanan Pelanggan Panggilan"
+    - title: "Teknisi CCTV"
+      company: "Network Global Solusindo"
+      time: "2018 - 2019"
+      jobs: 
+        - "Pemeliharaan CCTV"
+        - "Memastikan CCTV Tampil dilayar monitor"
+        - "Pengecekan Rekaman"
+        - "Laporan Hasil Pemeliharaan"
+        - "Pemecah masalah jaringan & Komputer"
+# =====================================
+educationtitle: "🎓 Pendidikan"
+educationtab:
+    - name: "Formal"
+      id: "formal"
+      class: "tab-1"
+    - name: "Non Formal"
+      id: "non_formal"
+      class: "tab-2"
+    - name: "Sertifikat"
+      id: "certification"
+      class: "tab-3"            
+education:
+    formal:
+        - degree: "Sekolah Menengah Kejuruan (SMK)"
+          field: "Rekayasa Perangkat Lunak"
+          school: "Generasi Madani"
+          initial: "GM"
+          period: "2014 - 2017"
+          location: "Cibinong, Bogor"
+    non_formal:
+        - degree: "Pelatihan Jabar Digital Academy"
+          field: "Junior Web Programmer"
+          school: "Alkademi, JDA"
+          initial: "JDA"
+          period: "Desember 2023 - Juli 2024"
+          location: "Online"    
+          certificate: true      
+    certification:
+        - name: "Junior Web Programmer"
+          initial: "WP"
+          org: "Alkademi"
+          issued: "2024-07"
+          expires: ""
+          # credential_id: "ABC-123"
+          link: "https://www.google.com"
+# =====================================
+skilltitle: "🤺 Ruang Lingkup Keahlian"
+skilltab:
+    - name: "IT Support"
+      id: "it_support"
+      class: "tab-1"
+    - name: "Software Engineering"
+      id: "software_engineering"
+      class: "tab-2"                  
+skills:
+    it_support:
+        scopes:
+          - title: "Sistem Operasi"
+            items:
+              - Windows
+              - Linux
+          - title: "Perangkat Keras"
+            items:
+              - "Merakit Komputer"
+              - "Pemecahan Masalah Komputer"
+          - title: "Perangkat Lunak"
+            items:
+              - "Office"
+              - "PDF"
+              - "Remote Desktop"
+              - "Browser"
+          - title: "Jaringan"
+            items:
+              - "Instalasi Jaringan"
+              - "Konfigurasi VPN"
+              - "Konfigurasi Router"
+              - "Konfigurasi Wireless"
+          - title: "Pemeliharaan Perangkat"
+            items:
+              - "Pembersihan"
+              - "Pemeriksaan"
+              - "Pencadangan"
+              - "Pemulihan"
+              - "Laporan"
+          - title: "Layanan Pelanggan"
+            items:
+              - "Dukungan Teknis"
+              - "Pelatihan Pengguna"
+              - "Komunikasi"
+              - "Dokumentasi"
+    software_engineering:
+        scopes:
+          - title: "Bahasa Pemrograman"
+            items:
+              - Python
+              - Lua
+              - PHP
+              - Javascript
+              - SQL
+          - title: "Antarmuka (Frontend)"
+            items:
+              - HTML
+              - CSS
+              - Javascript
+              - Bootstrap
+              - Tailwind CSS
+              - Pyside6
+          - title: "Sistem (Backend)"
+            items:
+              - Codeigniter
+              - Laravel  
+              - Flask  
+          - title: "Basis Data"
+            items:
+              - JSON         
+              - database.txt        
+              - Mysql          
+          - title: "Alat Kolaborasi"
+            items:
+              - Notion
+              - Trello
+              - Slack
+          - title: "Alat Kerja"
+            items:
+              - Laragonzo
+              - Cursor
+              - Git
+              - Github
+              - Node.js
+# =====================================
+project: true
+projecttitle: "🌘 Project terbaru"
+projectcount: 3
+# =====================================
 ---
 
-{{< home/about title="Who am I" >}}
-
-Hi, I'm Muhamad Irfan, a passionate software engineer and freelance programmer. 
-
-I specialize in crafting modern, responsive web and desktop applications. With extensive experience, I've developed numerous solutions, managed complex projects, configured servers, and handled diverse IT tasks for various companies. 
-
-I'm committed to continuous learning and making meaningful contributions to every project.
-
-I'm actively exploring freelance projects and full-time positions. If you're looking for a dedicated software engineer specializing in web and desktop applications, I'd love to hear about your needs.
-
-{{< /home/about>}}
-
-{{< home/service >}}
-
-    {{< home/service-card 
-    title="Build Desktop App"
-    icon="<img alt=\"\" src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPgo8c3ZnIHdpZHRoPSI4MDBweCIgaGVpZ2h0PSI4MDBweCIgdmlld0JveD0iMCAwIDY0IDY0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0iaW1nIiBjbGFzcz0iaWNvbmlmeSBpY29uaWZ5LS1lbW9qaW9uZSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgbWVldCI+Cg08cGF0aCBkPSJNNjIgNmMwLTItMi00LTQtNEg2QzQgMiAyIDQgMiA2djM4aDYwVjZ6IiBmaWxsPSIjMjEyNTI4Ij4KDTwvcGF0aD4KDTxwYXRoIGQ9Ik0yIDQ0djRjMCAyIDIgNCA0IDRoNTJjMiAwIDQtMiA0LTR2LTRIMnoiIGZpbGw9IiNkZGQiPgoNPC9wYXRoPgoNPHBhdGggZD0iTTI0IDU0YzAgNC00IDQtOCA0aDMyYy00IDAtOCAwLTgtNHYtMkgyNHYyIiBmaWxsPSIjYmZiZWJlIj4KDTwvcGF0aD4KDTxwYXRoIGZpbGw9IiMzZTQzNDciIGQ9Ik02IDZoNTJ2MzRINnoiPgoNPC9wYXRoPgoNPGcgZmlsbD0iIzk0OTg5YiI+Cg08Y2lyY2xlIGN4PSIzMiIgY3k9IjQ3LjkiIHI9IjEiPgoNPC9jaXJjbGU+Cg08cGF0aCBkPSJNMTYgNThoMzJ2NEgxNnoiPgoNPC9wYXRoPgoNPC9nPgoNPC9zdmc+\" />"
-    content="I will create desktop application use python pyside6 for you" 
-    >}}
-
-    {{< home/service-card 
-    title="Build Website App"
-    icon="<img alt='' src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgaWQ9ImIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHN0eWxlPi5je2ZpbGw6IzAwMDAwMDt9LmR7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImQiIGQ9Im0zMS4zMjU2LDI1LjU5MTFoOC40OTgzdjguNzE2M2gtOC40OTgzdi04LjcxNjMiLz48cGF0aCBjbGFzcz0iZCIgZD0ibTM5LjgyMzUsMjUuNTkxMWwyLjY3NjItMi42NzYyIi8+PHBhdGggY2xhc3M9ImQiIGQ9Im0zMS4zMjU2LDI1LjU5MTFsMi42NzYyLTIuNjc2MiIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtMzkuODIzNSwzNC4zMDhsMi42NzYyLTIuNjc2MiIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtMzQuMDAxNywyMi45MTUxaDguNDk4MyIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtNDIuNDk5NiwyMi45MTUxdjguNzE2MyIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtMzEuMzI1NiwzNC4zMDhjLTIuMTgyMywxLjI1OTktNi4zNjg4LDMuMTAxNi04LjYzMDgsMS45OTkiLz48cGF0aCBjbGFzcz0iZCIgZD0ibTE5LjM1NzgsMTUuNTEyOWMwLDEzLjg1MjEsMjAuMTU0NCw3LjAwMzQsMTUuNzQ3MS0uNjI5OSIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtMjAuMzU2OCwyMC4wNTUyYy00LjM1OTEsMi41MTY3LTYuNjk0NSwxMS4xNC0xLjIzODEsMTQuMjkiLz48cGF0aCBjbGFzcz0iZCIgZD0ibTE5LjM1NzgsMTUuNTEyOWMyLjE4NTEsMS4yNjE1LDEwLjg3NjQuNjc1MywxNS43NDcxLS42Mjk5LDEuMjIyNi0uMzI3Niw0LjQ2NTktMS4zODAyLDMuNTcxNi0yLjI3NDQtLjg5NDItLjg5NDItMi4zNzcxLTEuNTQ1NS00LjI0OTItMS44NTIyLTIuNjA4MS05LjczMzgtMTguODQ5My0xLjc5MDQtMTUuMDcwMSw0Ljc1NjUiLz48cGF0aCBjbGFzcz0iZCIgZD0ibTM0LjQyNjgsMTAuNzU3Yy0xLjc4NCwxLjc4NC0xMS40MTQxLDMuNzc2OS0xNS4wNzAxLDQuNzU2NSIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtMzIuOTA2LDIxLjU2OTZjLTIuOTU5NC43ODkyLTUuMzA3Ny41Mzk3LTYuODE1Mi0xLjEzOTMiLz48cGF0aCBjbGFzcz0iZCIgZD0ibTI3LjMxNjksMjYuOTA2OGw1LjE2MTgsMy42OTgsMi42OTY1LTEuMjMyNyIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtMjguNTkzMiwzNS42NDE3bDMuNTUwNyw2LjE1LDMuMDE0NS0xLjc0MDUiLz48cGF0aCBjbGFzcz0iZCIgZD0ibTIyLjg3NzcsMzEuNjc1NWwtMy42MDI2LDYuMjM5OS00LjkyOTMtMS4zMjA4LTEuOTg0NiwzLjQzNzQiLz48cGF0aCBjbGFzcz0iZCIgZD0ibTguMDE5NSwxMi45OTMxaDYuMjk4OCIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtNi43NTk4LDE2Ljc3MjNoNi4yOTg4Ii8+PHBhdGggY2xhc3M9ImQiIGQ9Im01LjUsMjguMTExaDYuMjk4OCIvPjxwYXRoIGNsYXNzPSJkIiBkPSJtNi43NTk4LDMxLjg5MDJoNi4yOTg4Ii8+PHBhdGggY2xhc3M9ImQiIGQ9Im0zMi42NjM2LDI0LjI1MzFsLTIuMDA5OC0xLjUxNTgiLz48Y2lyY2xlIGNsYXNzPSJjIiBjeD0iMzMuMDY1NCIgY3k9IjE3Ljg5MjQiIHI9Ii43NSIvPjxjaXJjbGUgY2xhc3M9ImMiIGN4PSIyOC4yNzEyIiBjeT0iMTguNDM3NiIgcj0iLjc1Ii8+PC9zdmc+' />"
-    content="I can create website app, like store website, news website, membership, etc" 
-    >}}
-
-    {{< home/service-card 
-    title="Build Website"
-    icon="<img alt=\"\" src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KDQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPCEtLSBVcGxvYWRlZCB0bzogU1ZHIFJlcG8sIHd3dy5zdmdyZXBvLmNvbSwgR2VuZXJhdG9yOiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iX3gzNV8iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIA0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzUzNTc0QjsiIGQ9Ik00OTYuNDg4LDE1LjUxMlY1MTJIMC4yMjFWNjMuMjJIMFYxOC45NjZoMC40NDFDMC4xNDcsMTcuODYyLDAsMTYuNjg3LDAsMTUuNTEyDQoJCUMwLDYuOTgzLDYuOTEsMCwxNS41MTEsMGg0NjUuNDY3QzQ4OS41NzksMCw0OTYuNDg4LDYuOTgzLDQ5Ni40ODgsMTUuNTEyeiIvPg0KCTxyZWN0IHg9IjguOTc3IiB5PSI2MC43OTIiIHN0eWxlPSJmaWxsOiNGRkZGRkY7IiB3aWR0aD0iNDc4LjUzNSIgaGVpZ2h0PSI0NDAuOTI5Ii8+DQoJPHJlY3QgeD0iOC45NzciIHk9IjYwLjc5MiIgc3R5bGU9Im9wYWNpdHk6MC4wNjtmaWxsOiMwRDBEMEQ7IiB3aWR0aD0iNDc4LjUzNSIgaGVpZ2h0PSIyMC4xMzQiLz4NCgk8Zz4NCgkJPGVsbGlwc2Ugc3R5bGU9ImZpbGw6IzhCQzY2RjsiIGN4PSIxMjEuOTk4IiBjeT0iMzEuNTg0IiByeD0iMTEuNzczIiByeT0iMTIuNTMyIi8+DQoJCTxlbGxpcHNlIHN0eWxlPSJmaWxsOiNGNERCNkQ7IiBjeD0iNzkuMTY4IiBjeT0iMzEuNTg0IiByeD0iMTEuNzczIiByeT0iMTIuNTMyIi8+DQoJCTxlbGxpcHNlIHN0eWxlPSJmaWxsOiNFMDYyNzY7IiBjeD0iMzYuMzM5IiBjeT0iMzEuNTg0IiByeD0iMTEuNzczIiByeT0iMTIuNTMyIi8+DQoJPC9nPg0KCTxnIHN0eWxlPSJvcGFjaXR5OjAuNTsiPg0KCQk8Zz4NCgkJCTxyZWN0IHg9IjEzMi43OTMiIHk9IjM2MS4zMDQiIHN0eWxlPSJmaWxsOiNDREUzREY7IiB3aWR0aD0iNjIuODQ5IiBoZWlnaHQ9IjUyLjQ3NSIvPg0KCQkJPGc+DQoJCQkJPHJlY3QgeD0iMjA1LjYyNiIgeT0iNDAyLjg4NyIgc3R5bGU9ImZpbGw6I0NERTNERjsiIHdpZHRoPSI0MS45OTkiIGhlaWdodD0iNy4yMjciLz4NCgkJCQk8cmVjdCB4PSIyMDUuNjI2IiB5PSIzNjMuNDM1IiBzdHlsZT0iZmlsbDojQ0RFM0RGOyIgd2lkdGg9Ijg2Ljc1MSIgaGVpZ2h0PSI3LjU1NiIvPg0KCQkJCTxyZWN0IHg9IjIwNS42MjYiIHk9IjM4My4wNzkiIHN0eWxlPSJmaWxsOiNDREUzREY7IiB3aWR0aD0iODYuNzUxIiBoZWlnaHQ9IjcuNTU2Ii8+DQoJCQk8L2c+DQoJCTwvZz4NCgkJPGc+DQoJCQk8cmVjdCB4PSIxMzIuNzkzIiB5PSIzNjEuMzA0IiBzdHlsZT0ib3BhY2l0eTowLjU7ZmlsbDojQkVEOEQ0OyIgd2lkdGg9IjYyLjg0OSIgaGVpZ2h0PSI1Mi40NzUiLz4NCgkJCTxnIHN0eWxlPSJvcGFjaXR5OjAuNTsiPg0KCQkJCTxyZWN0IHg9IjIwNS42MjYiIHk9IjQwMi44ODciIHN0eWxlPSJmaWxsOiNCRUQ4RDQ7IiB3aWR0aD0iNDEuOTk5IiBoZWlnaHQ9IjcuMjI3Ii8+DQoJCQkJPHJlY3QgeD0iMjA1LjYyNiIgeT0iMzYzLjQzNSIgc3R5bGU9ImZpbGw6I0JFRDhENDsiIHdpZHRoPSI4Ni43NTEiIGhlaWdodD0iNy41NTYiLz4NCgkJCQk8cmVjdCB4PSIyMDUuNjI2IiB5PSIzODMuMDc5IiBzdHlsZT0iZmlsbDojQkVEOEQ0OyIgd2lkdGg9Ijg2Ljc1MSIgaGVpZ2h0PSI3LjU1NiIvPg0KCQkJPC9nPg0KCQk8L2c+DQoJPC9nPg0KCTxyZWN0IHg9IjIwNC44NjkiIHk9IjQ2My41NzIiIHN0eWxlPSJvcGFjaXR5OjAuNTtmaWxsOiNDREUzREY7IiB3aWR0aD0iODYuNzUxIiBoZWlnaHQ9IjcuNTU2Ii8+DQoJPGc+DQoJCTxyZWN0IHg9IjMwLjgyNiIgeT0iMTg2LjQ3OSIgc3R5bGU9Im9wYWNpdHk6MC41O2ZpbGw6I0NERTNERjsiIHdpZHRoPSI4OC43NDUiIGhlaWdodD0iMjQuNzI4Ii8+DQoJCTxyZWN0IHg9IjMwLjgyNiIgeT0iMjI3LjIxNyIgc3R5bGU9Im9wYWNpdHk6MC41O2ZpbGw6I0NERTNERjsiIHdpZHRoPSI4OC43NDUiIGhlaWdodD0iMjQuNzI4Ii8+DQoJCTxyZWN0IHg9IjMwLjgyNiIgeT0iMjY3Ljk1NSIgc3R5bGU9Im9wYWNpdHk6MC41O2ZpbGw6I0NERTNERjsiIHdpZHRoPSI4OC43NDUiIGhlaWdodD0iMjQuNzI4Ii8+DQoJCTxyZWN0IHg9IjMwLjgyNiIgeT0iMzA4LjY5MiIgc3R5bGU9Im9wYWNpdHk6MC41O2ZpbGw6I0NERTNERjsiIHdpZHRoPSI4OC43NDUiIGhlaWdodD0iMjQuNzI4Ii8+DQoJPC9nPg0KCTxyZWN0IHg9IjI4Ljk0NyIgeT0iMTQ5LjA5NyIgc3R5bGU9Im9wYWNpdHk6MC41O2ZpbGw6I0NERTNERjsiIHdpZHRoPSI0MzguNTk1IiBoZWlnaHQ9IjIwLjk1OCIvPg0KCTxyZWN0IHg9IjI4Ljk0NyIgeT0iNDM2LjkyNSIgc3R5bGU9Im9wYWNpdHk6MC41O2ZpbGw6I0NERTNERjsiIHdpZHRoPSI0MzguNTk1IiBoZWlnaHQ9IjQuNDE4Ii8+DQoJPGcgc3R5bGU9Im9wYWNpdHk6MC41OyI+DQoJCTxnPg0KCQkJPHJlY3QgeD0iMzA5LjU0IiB5PSIzNjAuNjIiIHN0eWxlPSJmaWxsOiNDREUzREY7IiB3aWR0aD0iNjIuODQ5IiBoZWlnaHQ9IjUyLjQ3NSIvPg0KCQkJPGc+DQoJCQkJPHJlY3QgeD0iMzgyLjM3MyIgeT0iNDAyLjIwMyIgc3R5bGU9ImZpbGw6I0NERTNERjsiIHdpZHRoPSI0MS45OTkiIGhlaWdodD0iNy4yMjciLz4NCgkJCQk8cmVjdCB4PSIzODIuMzczIiB5PSIzNjIuNzUxIiBzdHlsZT0iZmlsbDojQ0RFM0RGOyIgd2lkdGg9Ijg2Ljc1MSIgaGVpZ2h0PSI3LjU1NiIvPg0KCQkJCTxyZWN0IHg9IjM4Mi4zNzMiIHk9IjM4Mi4zOTUiIHN0eWxlPSJmaWxsOiNDREUzREY7IiB3aWR0aD0iODYuNzUxIiBoZWlnaHQ9IjcuNTU2Ii8+DQoJCQk8L2c+DQoJCTwvZz4NCgkJPGc+DQoJCQk8cmVjdCB4PSIzMDkuNTQiIHk9IjM2MC42MiIgc3R5bGU9Im9wYWNpdHk6MC41O2ZpbGw6I0JFRDhENDsiIHdpZHRoPSI2Mi44NDkiIGhlaWdodD0iNTIuNDc1Ii8+DQoJCQk8ZyBzdHlsZT0ib3BhY2l0eTowLjU7Ij4NCgkJCQk8cmVjdCB4PSIzODIuMzczIiB5PSI0MDIuMjAzIiBzdHlsZT0iZmlsbDojQkVEOEQ0OyIgd2lkdGg9IjQxLjk5OSIgaGVpZ2h0PSI3LjIyNyIvPg0KCQkJCTxyZWN0IHg9IjM4Mi4zNzMiIHk9IjM2Mi43NTEiIHN0eWxlPSJmaWxsOiNCRUQ4RDQ7IiB3aWR0aD0iODYuNzUxIiBoZWlnaHQ9IjcuNTU2Ii8+DQoJCQkJPHJlY3QgeD0iMzgyLjM3MyIgeT0iMzgyLjM5NSIgc3R5bGU9ImZpbGw6I0JFRDhENDsiIHdpZHRoPSI4Ni43NTEiIGhlaWdodD0iNy41NTYiLz4NCgkJCTwvZz4NCgkJPC9nPg0KCTwvZz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojN0JDQUQ0OyIgZD0iTTQyMi4yNTEsMTA2LjkzOGMtMC42NzktMi45LTIuMDg3LTUuNTgyLTQuMDY4LTcuNzg5Yy0xLjk4Mi0yLjIxLTQuNTQtMy45NDUtNy41My00Ljk0MQ0KCQljLTAuMzA4LTAuMTAzLTAuNjIxLTAuMi0wLjkzOC0wLjI4NmMtMi44MDktMC43NjgtNS42NDMtMC44MDgtOC4zMDgtMC4yNDJjLTMuMTUyLDAuNjctNi4wNjQsMi4xOTEtOC40MDgsNC4zODFsMTMuMDA4LDEzLjE0DQoJCWwwLjAzLDAuMDMxaC0wLjAwMWwtMC4wMy0wLjAzMWwtMC4wMjMsMC4wODRsMCwwbDAuMDIzLTAuMDg0TDM5Myw5OC4wNjFjLTIuMzA2LDIuMTU3LTQuMDY2LDQuOTU4LTQuOTYsOC4yMjgNCgkJYy0wLjg5NSwzLjI3LTAuODA1LDYuNTc2LDAuMDgzLDkuNjA2YzAuOTA1LDMuMDgsMi42MzcsNS44Nyw1LjAxLDguMDUxYzAuMDIsMC4wMTgsMC4wMzksMC4wMzgsMC4wNjIsMC4wNTUNCgkJYzEuOTkyLDEuODE2LDQuNDMyLDMuMjA0LDcuMjEyLDMuOTY1YzAuMzE3LDAuMDg2LDAuNjM1LDAuMTYyLDAuOTUyLDAuMjMxYzMuMDgsMC42NjQsNi4xNjcsMC40Nyw4Ljk5Ni0wLjQyMg0KCQljMC4wMjUtMC4wMDgsMC4wNTItMC4wMTcsMC4wNzctMC4wMjdjMi44LTAuODk2LDUuMzQ3LTIuNDc5LDcuMzg4LTQuNjExbDAsMGwwLDBsMCwwbDAsMGMxLjk2NC0yLjA1MSwzLjQ2LTQuNjA4LDQuMjYyLTcuNTQNCgkJQzQyMi44ODUsMTEyLjY2NCw0MjIuODk4LDEwOS43MDMsNDIyLjI1MSwxMDYuOTM4eiIvPg0KCTxwYXRoIHN0eWxlPSJmaWxsOiM0RjlGRDg7IiBkPSJNNDYyLjUzOSwxMDYuOTM4Yy0wLjY3OS0yLjktMi4wODctNS41ODItNC4wNjgtNy43ODljLTEuOTgyLTIuMjEtNC41NC0zLjk0NS03LjUzLTQuOTQxDQoJCWMtMC4zMDgtMC4xMDMtMC42Mi0wLjItMC45MzgtMC4yODZjLTIuODA5LTAuNzY4LTUuNjQzLTAuODA4LTguMzA4LTAuMjQyYy0zLjE1MiwwLjY3LTYuMDY0LDIuMTkxLTguNDA4LDQuMzgxbDEzLjAwOCwxMy4xNA0KCQlsMC4wMywwLjAzMWgtMC4wMDFsLTAuMDMtMC4wMzFsLTAuMDIzLDAuMDg0bDAsMGwwLjAyMy0wLjA4NGwtMTMuMDA4LTEzLjE0Yy0yLjMwNiwyLjE1Ny00LjA2Niw0Ljk1OC00Ljk2LDguMjI4DQoJCWMtMC44OTUsMy4yNy0wLjgwNSw2LjU3NiwwLjA4Myw5LjYwNmMwLjkwNSwzLjA4LDIuNjM3LDUuODcsNS4wMSw4LjA1MWMwLjAyLDAuMDE4LDAuMDM5LDAuMDM4LDAuMDYyLDAuMDU1DQoJCWMxLjk5MiwxLjgxNiw0LjQzMiwzLjIwNCw3LjIxMiwzLjk2NWMwLjMxNywwLjA4NiwwLjYzNSwwLjE2MiwwLjk1MywwLjIzMWMzLjA4LDAuNjY0LDYuMTY3LDAuNDcsOC45OTYtMC40MjINCgkJYzAuMDI1LTAuMDA4LDAuMDUyLTAuMDE3LDAuMDc3LTAuMDI3YzIuOC0wLjg5Niw1LjM0Ny0yLjQ3OSw3LjM4OC00LjYxMWwwLDBsMCwwbDAsMGwwLDBjMS45NjQtMi4wNTEsMy40Ni00LjYwOCw0LjI2Mi03LjU0DQoJCUM0NjMuMTczLDExMi42NjQsNDYzLjE4NiwxMDkuNzAzLDQ2Mi41MzksMTA2LjkzOHoiLz4NCgk8Zz4NCgkJPHBhdGggc3R5bGU9ImZpbGw6IzUzNTc0QjsiIGQ9Ik0xOTIuNTk3LDEzMS43MzJ2LTI4LjIyOWgtNS42NjF2MzIuNzEyaDIzLjUyM3YtNC40ODNIMTkyLjU5N3oiLz4NCgkJPHBhdGggc3R5bGU9ImZpbGw6IzUzNTc0QjsiIGQ9Ik0yNDIuMDY5LDExNS4yNjRjLTAuMDczLTEuMjQ5LTAuMjItMi40MjUtMC40NDEtMy40NTNjLTAuMjk0LTEuMDMtMC42NjEtMS45ODUtMS4xNzYtMi43OTQNCgkJCWMtMC40NDEtMC44ODEtMS4xNzYtMS42OTEtMi4wNTktMi41Yy0xLjI0OS0xLjEwMi0yLjY0Ni0xLjkxMS00LjE5LTIuNDk4Yy0xLjU0NC0wLjUxNS0zLjM4MS0wLjgwOS01LjM2Ni0wLjgwOQ0KCQkJYy0yLjA1OCwwLTMuODk2LDAuMjk0LTUuNDQsMC44MDljLTEuNTQ0LDAuNTg3LTIuOTQxLDEuMzk2LTQuMTksMi40OThjLTAuODgyLDAuODA5LTEuNjE3LDEuNjE5LTIuMDU4LDIuNQ0KCQkJYy0wLjUxNSwwLjgwOS0wLjg4MiwxLjc2NC0xLjE3NiwyLjc5NGMtMC4yMiwxLjAyOC0wLjM2NywyLjIwNC0wLjQ0MSwzLjQ1M2MwLDEuMzI0LTAuMDc0LDIuODY4LTAuMDc0LDQuNTU4DQoJCQljMCwxLjY5MSwwLjA3NCwzLjIzNCwwLjA3NCw0LjU1OWMwLjA3NCwxLjI0OSwwLjIyMSwyLjQyNSwwLjQ0MSwzLjQ1NWMwLjI5NCwxLjAyOCwwLjY2MiwxLjk4MywxLjE3NiwyLjg2Ng0KCQkJYzAuNDQxLDAuODA5LDEuMTc2LDEuNjkxLDIuMDU4LDIuNDI2YzEuMjUsMS4xMDIsMi42NDYsMS45MTEsNC4xOSwyLjQ5OGMxLjU0NCwwLjU4OSwzLjM4MiwwLjgwOSw1LjQ0LDAuODA5DQoJCQljMS45ODUsMCwzLjgyMy0wLjIyMSw1LjM2Ni0wLjgwOWMxLjU0NC0wLjU4NywyLjk0MS0xLjM5Niw0LjE5LTIuNDk4YzAuODgyLTAuNzM2LDEuNjE4LTEuNjE3LDIuMDU5LTIuNDI2DQoJCQljMC41MTUtMC44ODMsMC44ODItMS44MzgsMS4xNzYtMi44NjZjMC4yMjEtMS4wMywwLjM2OC0yLjIwNiwwLjQ0MS0zLjQ1NWMwLTEuMzI1LDAuMDc0LTIuODY4LDAuMDc0LTQuNTU5DQoJCQlDMjQyLjE0MywxMTguMTMyLDI0Mi4wNjksMTE2LjU4OCwyNDIuMDY5LDExNS4yNjR6IE0yMzYuNDA5LDEyMy45MzljMCwxLjEwMi0wLjE0NywxLjk4NS0wLjI5NCwyLjc5Mg0KCQkJYy0wLjE0NywwLjczNi0wLjM2OCwxLjMyNS0wLjY2MSwxLjgzOGMtMC4yOTQsMC41MTUtMC42NjIsMC45NTYtMS4xMDMsMS4zOTZjLTAuNzM1LDAuNjYyLTEuNTQzLDEuMTc3LTIuNDk5LDEuNTQ1DQoJCQljLTAuODgyLDAuMzY4LTEuOTExLDAuNTE1LTMuMDE0LDAuNTE1Yy0xLjE3NiwwLTIuMjA1LTAuMTQ3LTMuMDg3LTAuNTE1Yy0wLjk1Ni0wLjM2OC0xLjc2NC0wLjg4My0yLjUtMS41NDUNCgkJCWMtMC40NDEtMC40NC0wLjgwOS0wLjg4MS0xLjEwMi0xLjM5NmMtMC4yOTQtMC41MTMtMC41MTUtMS4xMDItMC42NjItMS45MTFjLTAuMTQ3LTAuNzM0LTAuMjk0LTEuNjkxLTAuMjk0LTIuNzkyDQoJCQljLTAuMDc0LTEuMDI4LTAuMDc0LTIuNDI2LTAuMDc0LTQuMDQzYzAtMS42MTcsMC0zLjAxMywwLjA3NC00LjExN2MwLTEuMTAyLDAuMTQ3LTEuOTg1LDAuMjk0LTIuNzE5DQoJCQljMC4xNDctMC44MDksMC4zNjgtMS4zOTgsMC42NjItMS45MTFjMC4yOTQtMC41MTUsMC42NjEtMS4wMywxLjEwMi0xLjQ3MmMxLjQ3LTEuMzIzLDMuMzA4LTEuOTgzLDUuNTg3LTEuOTgzDQoJCQljMi4yMDUsMCw0LjA0MywwLjY2LDUuNTEzLDEuOTgzYzAuNDQxLDAuNDQxLDAuODA5LDAuODgzLDEuMTAzLDEuMzk4YzAuMjk0LDAuNTE1LDAuNTE1LDEuMTc1LDAuNjYxLDEuOTExDQoJCQljMC4xNDcsMC44MDgsMC4yOTQsMS42OTEsMC4yOTQsMi43OTNjMC4wNzQsMS4xMDQsMC4wNzQsMi41LDAuMDc0LDQuMTE3QzIzNi40ODMsMTIxLjQzOSwyMzYuNDgzLDEyMi44MzcsMjM2LjQwOSwxMjMuOTM5eiIvPg0KCQk8cGF0aCBzdHlsZT0iZmlsbDojNTM1NzRCOyIgZD0iTTI2Mi40MzIsMTE4LjQ5OXY0LjI2Mmg3LjkzOXYxLjc2NmMwLDEuMTAyLTAuMTQ3LDIuMDU3LTAuNDQxLDIuODY2DQoJCQljLTAuMjIxLDAuODgxLTAuNzM1LDEuNjE3LTEuMzk3LDIuMzUzYy0wLjczNSwwLjczNC0xLjYxOCwxLjMyMy0yLjcyLDEuNjkxYy0xLjAyOSwwLjQ0MS0yLjIwNiwwLjU4OS0zLjM4MiwwLjU4OQ0KCQkJYy0yLjIwNSwwLTQuMDQzLTAuNjYyLTUuNTEzLTEuOTg1Yy0wLjQ0MS0wLjQ0MS0wLjgwOS0wLjg4My0xLjEwMy0xLjQ3MmMtMC4yOTQtMC41MTMtMC41MTQtMS4xMDItMC43MzUtMS44MzgNCgkJCWMtMC4xNDctMC44MDgtMC4yMi0xLjY5MS0wLjI5NC0yLjc5MmMtMC4wNzQtMS4xMDItMC4wNzQtMi41LTAuMDc0LTQuMTE3YzAtMS42MTcsMC0zLjAxMywwLjA3NC00LjExNw0KCQkJYzAuMDc0LTEuMTAyLDAuMTQ3LTEuOTg1LDAuMjk0LTIuNzE5YzAuMjIxLTAuODA5LDAuNDQxLTEuMzk4LDAuNzM1LTEuOTExYzAuMjk0LTAuNTE1LDAuNjYyLTEuMDMsMS4xMDMtMS40NzINCgkJCWMxLjQ3LTEuMzIzLDMuMzA4LTEuOTgzLDUuNTEzLTEuOTgzYzIuMDU5LDAsMy43NDksMC41MTUsNS4wNzIsMS40N2MxLjMyMywxLjAyOCwyLjI3OSwyLjQyNiwyLjcyLDQuMTg5aDUuNjYNCgkJCWMtMC4yOTQtMS4zMjMtMC43MzUtMi42NDUtMS4zOTctMy44OTVjLTAuNzM1LTEuMTc3LTEuNjE3LTIuMjc5LTIuNzkzLTMuMjM0Yy0xLjEwMy0wLjg4My0yLjQyNi0xLjYxOS00LjA0My0yLjEzMg0KCQkJYy0xLjU0NC0wLjU4OS0zLjMwOC0wLjgwOS01LjIxOS0wLjgwOWMtMi4wNTgsMC0zLjgyMywwLjI5NC01LjQ0LDAuODA5Yy0xLjU0NCwwLjU4Ny0yLjk0MSwxLjM5Ni00LjExNywyLjQ5OA0KCQkJYy0wLjk1NiwwLjgwOS0xLjYxNywxLjYxOS0yLjEzMiwyLjVjLTAuNTE0LDAuODA5LTAuODgyLDEuNzY0LTEuMTAyLDIuNzk0Yy0wLjI5NCwxLjAyOC0wLjQ0MSwyLjIwNC0wLjQ0MSwzLjQ1Mw0KCQkJYy0wLjA3NCwxLjMyNC0wLjA3NCwyLjg2OC0wLjA3NCw0LjU1OGMwLDEuNjkxLDAsMy4yMzQsMC4wNzQsNC41NTljMCwxLjI0OSwwLjE0NywyLjQyNSwwLjQ0MSwzLjQ1NQ0KCQkJYzAuMjIsMS4wMjgsMC41ODgsMS45ODMsMS4xMDIsMi44NjZjMC41MTUsMC44MDksMS4xNzYsMS42OTEsMi4xMzIsMi40MjZjMS4xNzYsMS4xMDIsMi41NzMsMS45MTEsNC4xMTcsMi40OTgNCgkJCWMxLjYxNywwLjU4OSwzLjM4MiwwLjgwOSw1LjQ0LDAuODA5YzEuOTg1LDAsMy44MjMtMC4yOTQsNS41MTMtMC44ODFjMS43NjQtMC41ODksMy4zMDgtMS41NDUsNC43MDUtMi43OTQNCgkJCWMxLjE3Ni0xLjE3NiwyLjA1OC0yLjUsMi41NzMtMy44OTZjMC41MTUtMS4zOTYsMC43MzUtMy4yMzQsMC43MzUtNS4zNjZ2LTQuOTk4SDI2Mi40MzJ6Ii8+DQoJCTxwYXRoIHN0eWxlPSJmaWxsOiM1MzU3NEI7IiBkPSJNMzA5LjQ3OCwxMTUuMjY0Yy0wLjA3My0xLjI0OS0wLjIyMS0yLjQyNS0wLjQ0MS0zLjQ1M2MtMC4yOTQtMS4wMy0wLjY2Mi0xLjk4NS0xLjEwMy0yLjc5NA0KCQkJYy0wLjUxNS0wLjg4MS0xLjI1LTEuNjkxLTIuMTMyLTIuNWMtMS4yNS0xLjEwMi0yLjY0Ny0xLjkxMS00LjE5LTIuNDk4Yy0xLjU0NC0wLjUxNS0zLjM4Mi0wLjgwOS01LjM2Ny0wLjgwOQ0KCQkJYy0yLjA1OCwwLTMuODk2LDAuMjk0LTUuNDQsMC44MDljLTEuNTQzLDAuNTg3LTIuOTQsMS4zOTYtNC4xOSwyLjQ5OGMtMC44ODIsMC44MDktMS42MTcsMS42MTktMi4wNTgsMi41DQoJCQljLTAuNTE1LDAuODA5LTAuODgyLDEuNzY0LTEuMTc2LDIuNzk0Yy0wLjIyLDEuMDI4LTAuMzY3LDIuMjA0LTAuNDQxLDMuNDUzYzAsMS4zMjQtMC4wNzMsMi44NjgtMC4wNzMsNC41NTgNCgkJCWMwLDEuNjkxLDAuMDczLDMuMjM0LDAuMDczLDQuNTU5YzAuMDc0LDEuMjQ5LDAuMjIxLDIuNDI1LDAuNDQxLDMuNDU1YzAuMjk0LDEuMDI4LDAuNjYyLDEuOTgzLDEuMTc2LDIuODY2DQoJCQljMC40NDEsMC44MDksMS4xNzYsMS42OTEsMi4wNTgsMi40MjZjMS4yNSwxLjEwMiwyLjY0NywxLjkxMSw0LjE5LDIuNDk4YzEuNTQ0LDAuNTg5LDMuMzgyLDAuODA5LDUuNDQsMC44MDkNCgkJCWMxLjk4NSwwLDMuODIzLTAuMjIxLDUuMzY3LTAuODA5YzEuNTQzLTAuNTg3LDIuOTQtMS4zOTYsNC4xOS0yLjQ5OGMwLjg4Mi0wLjczNiwxLjYxNy0xLjYxNywyLjEzMi0yLjQyNg0KCQkJYzAuNDQxLTAuODgzLDAuODA5LTEuODM4LDEuMTAzLTIuODY2YzAuMjItMS4wMywwLjM2OC0yLjIwNiwwLjQ0MS0zLjQ1NWMwLTEuMzI1LDAuMDczLTIuODY4LDAuMDczLTQuNTU5DQoJCQlDMzA5LjU1MiwxMTguMTMyLDMwOS40NzgsMTE2LjU4OCwzMDkuNDc4LDExNS4yNjR6IE0zMDMuODE4LDEyMy45MzljMCwxLjEwMi0wLjE0NywxLjk4NS0wLjI5NCwyLjc5Mg0KCQkJYy0wLjE0NywwLjczNi0wLjM2OCwxLjMyNS0wLjY2MiwxLjgzOGMtMC4yOTQsMC41MTUtMC42NjIsMC45NTYtMS4xMDMsMS4zOTZjLTAuNzM1LDAuNjYyLTEuNTQzLDEuMTc3LTIuNDk5LDEuNTQ1DQoJCQljLTAuODgyLDAuMzY4LTEuOTExLDAuNTE1LTMuMDE0LDAuNTE1Yy0xLjE3NiwwLTIuMjA1LTAuMTQ3LTMuMDg3LTAuNTE1Yy0wLjk1Ni0wLjM2OC0xLjc2NC0wLjg4My0yLjQ5OS0xLjU0NQ0KCQkJYy0wLjQ0MS0wLjQ0LTAuODA5LTAuODgxLTEuMTAzLTEuMzk2Yy0wLjI5NC0wLjUxMy0wLjUxNS0xLjEwMi0wLjY2Mi0xLjkxMWMtMC4xNDctMC43MzQtMC4yOTQtMS42OTEtMC4yOTQtMi43OTINCgkJCWMtMC4wNzQtMS4wMjgtMC4wNzQtMi40MjYtMC4wNzQtNC4wNDNjMC0xLjYxNywwLTMuMDEzLDAuMDc0LTQuMTE3YzAtMS4xMDIsMC4xNDctMS45ODUsMC4yOTQtMi43MTkNCgkJCWMwLjE0Ny0wLjgwOSwwLjM2OC0xLjM5OCwwLjY2Mi0xLjkxMWMwLjI5NC0wLjUxNSwwLjY2Mi0xLjAzLDEuMTAzLTEuNDcyYzEuNDctMS4zMjMsMy4zMDgtMS45ODMsNS41ODYtMS45ODMNCgkJCWMyLjIwNiwwLDQuMDQ0LDAuNjYsNS41MTMsMS45ODNjMC40NDEsMC40NDEsMC44MDksMC44ODMsMS4xMDMsMS4zOThjMC4yOTQsMC41MTUsMC41MTUsMS4xNzUsMC42NjIsMS45MTENCgkJCWMwLjE0NywwLjgwOCwwLjI5NCwxLjY5MSwwLjI5NCwyLjc5M2MwLjA3NCwxLjEwNCwwLjA3NCwyLjUsMC4wNzQsNC4xMTdDMzAzLjg5MiwxMjEuNDM5LDMwMy44OTIsMTIyLjgzNywzMDMuODE4LDEyMy45Mzl6Ii8+DQoJPC9nPg0KCTxnPg0KCQk8cmVjdCB4PSIxMzIuNDkyIiB5PSIxODYuODU1IiBzdHlsZT0iZmlsbDojQjlERkQyOyIgd2lkdGg9IjMzNS4wNSIgaGVpZ2h0PSIxNjIuMTk4Ii8+DQoJCTxlbGxpcHNlIHN0eWxlPSJvcGFjaXR5OjAuODtmaWxsOiNGOUY4Qzk7IiBjeD0iMjg0LjQ0NCIgY3k9IjIxOC4yODciIHJ4PSIyNC4wODgiIHJ5PSIyMy41MiIvPg0KCQk8ZyBzdHlsZT0ib3BhY2l0eTowLjU7Ij4NCgkJCTxwYXRoIHN0eWxlPSJmaWxsOiM3QkM0OEU7IiBkPSJNMzI0LjkyNiwzNDkuMDU0SDEzMi43OTNsNjguMzAyLTc4Ljg5NmMxNS4yNTQtMTcuNjM3LDQwLjI3NS0xNy42MzcsNTUuNTI5LDBsMjUuOTI0LDI5Ljk4NQ0KCQkJCUwzMjQuOTI2LDM0OS4wNTR6Ii8+DQoJCTwvZz4NCgkJPGcgc3R5bGU9Im9wYWNpdHk6MC41OyI+DQoJCQk8cGF0aCBzdHlsZT0iZmlsbDojN0JDNDhFOyIgZD0iTTQ2Ny41NDIsMzEzLjcxMXYzNS4zNDNIMjQzbDQyLjUzNC00OC45MTFsNTYuNTc3LTY0Ljk4OWMxNS42NzEtMTguMTEyLDQxLjQ0OS0xOC4xMTIsNTcuMTE5LDANCgkJCQlMNDY3LjU0MiwzMTMuNzExeiIvPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPC9zdmc+\" />"
-    content="Create a basic website like Landing Page, Blog Post, Static Website" 
-    >}}
-
-    {{< home/service-card 
-    title="Automate & Scraping"
-    icon="<img alt=\"\" src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBVcGxvYWRlZCB0bzogU1ZHIFJlcG8sIHd3dy5zdmdyZXBvLmNvbSwgR2VuZXJhdG9yOiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4NCjxzdmcgaGVpZ2h0PSI4MDBweCIgd2lkdGg9IjgwMHB4IiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiANCgkgdmlld0JveD0iMCAwIDUxMi4wMDIgNTEyLjAwMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMTIzMjQ3OyIgZD0iTTIxNS45OTcsNTEyLjAwMmMtMi4wNDgsMC00LjA5Ni0wLjc4NC01LjY1Ni0yLjM0NGwtNDAtNDBjLTEtMS0xLjcxMi0yLjIzMi0yLjA3Mi0zLjU5MmwtMzItMTIwDQoJCWMtMC43MzYtMi43NiwwLjA1Ni01LjcwNCwyLjA3Mi03LjcybDQwLTQwYzMuMTI4LTMuMTI4LDguMTg0LTMuMTI4LDExLjMxMiwwczMuMTI4LDguMTg0LDAsMTEuMzEybC0zNi43MzYsMzYuNzM2bDMwLjI1NiwxMTMuNDcyDQoJCWwzOC40OCwzOC40ODhjMy4xMjgsMy4xMjgsMy4xMjgsOC4xODQsMCwxMS4zMTJDMjIwLjA5Myw1MTEuMjE4LDIxOC4wNDUsNTEyLjAwMiwyMTUuOTk3LDUxMi4wMDJ6Ii8+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzEyMzI0NzsiIGQ9Ik0xNTkuOTk3LDUwNC4wMDJjLTIuMDQ4LDAtNC4wOTYtMC43ODQtNS42NTYtMi4zNDRsLTMyLTMyYy0xLjA5Ni0xLjA5Ni0xLjg0OC0yLjQ4OC0yLjE2OC00LjAwOA0KCQlsLTMyLTE1MmMtMC42NjQtMy4xMzYsMC42MTYtNi4zNjgsMy4yNC04LjJsODAtNTZjMy42MzItMi41MzYsOC42MDgtMS42NDgsMTEuMTQ0LDEuOTY4czEuNjU2LDguNi0xLjk2OCwxMS4xNDRsLTc1LjY3Miw1Mi45Ng0KCQlsMzAuNDI0LDE0NC40OTZsMzAuMzIsMzAuMzJjMy4xMjgsMy4xMjgsMy4xMjgsOC4xODQsMCwxMS4zMTJDMTY0LjA5Myw1MDMuMjE4LDE2Mi4wNDUsNTA0LjAwMiwxNTkuOTk3LDUwNC4wMDJ6Ii8+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzEyMzI0NzsiIGQ9Ik0yOTUuOTk3LDUxMi4wMDJjLTIuMDQ4LDAtNC4wOTYtMC43ODQtNS42NTYtMi4zNDRjLTMuMTI4LTMuMTI4LTMuMTI4LTguMTg0LDAtMTEuMzEyDQoJCWwzOC40ODgtMzguNDg4bDMwLjI1Ni0xMTMuNDcybC0zNi43NDQtMzYuNzM2Yy0zLjEyOC0zLjEyOC0zLjEyOC04LjE4NCwwLTExLjMxMmMzLjEyOC0zLjEyOCw4LjE4NC0zLjEyOCwxMS4zMTIsMGw0MCw0MA0KCQljMi4wMjQsMi4wMTYsMi44MTYsNC45NiwyLjA4LDcuNzJsLTMyLDEyMGMtMC4zNjgsMS4zNi0xLjA4LDIuNTkyLTIuMDgsMy41OTJsLTQwLDQwDQoJCUMzMDAuMDkzLDUxMS4yMTgsMjk4LjA0NSw1MTIuMDAyLDI5NS45OTcsNTEyLjAwMnoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMTIzMjQ3OyIgZD0iTTM1MS45OTcsNTA0LjAwMmMtMi4wNDgsMC00LjA5Ni0wLjc4NC01LjY1Ni0yLjM0NGMtMy4xMjgtMy4xMjgtMy4xMjgtOC4xODQsMC0xMS4zMTJsMzAuMzItMzAuMzINCgkJbDMwLjQyNC0xNDQuNDk2bC03NS42NzItNTIuOTY4Yy0zLjYxNi0yLjUzNi00LjQ5Ni03LjUyLTEuOTY4LTExLjE0NGMyLjUzNi0zLjYxNiw3LjUyLTQuNTA0LDExLjE0NC0xLjk2OGw4MCw1Ng0KCQljMi42MzIsMS44MzIsMy45MDQsNS4wNzIsMy4yNCw4LjJsLTMyLDE1MmMtMC4zMiwxLjUyLTEuMDcyLDIuOTEyLTIuMTY4LDQuMDA4bC0zMiwzMg0KCQlDMzU2LjA5Myw1MDMuMjE4LDM1NC4wNDUsNTA0LjAwMiwzNTEuOTk3LDUwNC4wMDJ6Ii8+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzEyMzI0NzsiIGQ9Ik0zMTIuMDA1LDIyNC4wMDJjLTIuMjU2LDAtNC40OTYtMC45NTItNi4wOC0yLjhjLTIuODcyLTMuMzUyLTIuNDk2LTguNDA4LDAuODY0LTExLjI4bDUyLjE3Ni00NC43Mg0KCQlMMzI4LjgyOSw1Mi4xNDZsLTM4LjQ4OC0zOC40ODhjLTMuMTI4LTMuMTI4LTMuMTI4LTguMTg0LDAtMTEuMzEyYzMuMTI4LTMuMTI4LDguMTg0LTMuMTI4LDExLjMxMiwwbDQwLDQwDQoJCWMxLDEsMS43MTIsMi4yMzIsMi4wOCwzLjU5MmwzMiwxMjBjMC43OTIsMi45NjgtMC4xODQsNi4xNDQtMi41Miw4LjE0NGwtNTYsNDhDMzE1LjcwMSwyMjMuMzcsMzEzLjg0NSwyMjQuMDAyLDMxMi4wMDUsMjI0LjAwMnoiDQoJCS8+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzEyMzI0NzsiIGQ9Ik0zMzYuMDA1LDI2NC4wMDJjLTIuNTIsMC01LTEuMTg0LTYuNTYtMy40MTZjLTIuNTI4LTMuNjE2LTEuNjQ4LTguNiwxLjk2OC0xMS4xNDRsNzUuNjcyLTUyLjk2OA0KCQlMMzc2LjY2MSw1MS45NzhsLTMwLjMyLTMwLjMyYy0zLjEyOC0zLjEyOC0zLjEyOC04LjE4NCwwLTExLjMxMmMzLjEyOC0zLjEyOCw4LjE4NC0zLjEyOCwxMS4zMTIsMGwzMiwzMg0KCQljMS4xMDQsMS4wOTYsMS44NDgsMi40ODgsMi4xNjgsNC4wMDhsMzIsMTUyYzAuNjY0LDMuMTM2LTAuNjA4LDYuMzY4LTMuMjQsOC4ybC04MCw1Ng0KCQlDMzM5LjE4OSwyNjMuNTMsMzM3LjU4OSwyNjQuMDAyLDMzNi4wMDUsMjY0LjAwMnoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMTIzMjQ3OyIgZD0iTTE5OS45OTcsMjI0LjAwMmMtMS44NCwwLTMuNjk2LTAuNjMyLTUuMi0xLjkybC01Ni00OGMtMi4zMzYtMi0zLjMyLTUuMTY4LTIuNTItOC4xNDRsMzItMTIwDQoJCWMwLjM2LTEuMzYsMS4wOC0yLjU5MiwyLjA3Mi0zLjU5Mmw0MC00MGMzLjEyOC0zLjEyOCw4LjE4NC0zLjEyOCwxMS4zMTIsMHMzLjEyOCw4LjE4NCwwLDExLjMxMmwtMzguNDgsMzguNDg4bC0zMC4xNiwxMTMuMDU2DQoJCWw1Mi4xNzYsNDQuNzJjMy4zNTIsMi44NzIsMy43NDQsNy45MjgsMC44NjQsMTEuMjhDMjA0LjQ5MywyMjMuMDUsMjAyLjI0NSwyMjQuMDAyLDE5OS45OTcsMjI0LjAwMnoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMTIzMjQ3OyIgZD0iTTE3NS45ODksMjY0LjAwMmMtMS41ODQsMC0zLjE4NC0wLjQ3Mi00LjU3Ni0xLjQ0OGwtODAtNTZjLTIuNjMyLTEuODMyLTMuOTA0LTUuMDcyLTMuMjQtOC4yDQoJCWwzMi0xNTJjMC4zMi0xLjUyLDEuMDcyLTIuOTEyLDIuMTY4LTQuMDA4bDMyLTMyYzMuMTI4LTMuMTI4LDguMTg0LTMuMTI4LDExLjMxMiwwYzMuMTI4LDMuMTI4LDMuMTI4LDguMTg0LDAsMTEuMzEybC0zMC4zMiwzMC4zMg0KCQlsLTMwLjQxNiwxNDQuNTA0bDc1LjY2NCw1Mi45NjhjMy42MjQsMi41MzYsNC40OTYsNy41MiwxLjk2OCwxMS4xNDRDMTgwLjk5NywyNjIuODE4LDE3OC41MDksMjY0LjAwMiwxNzUuOTg5LDI2NC4wMDJ6Ii8+DQo8L2c+DQo8cGF0aCBzdHlsZT0iZmlsbDojNTc2RDdFOyIgZD0iTTI5Ni4zODksMjAxLjg3NGM0Ljc5Mi03LjQ3Miw3LjYwOC0xNi4zNDQsNy42MDgtMjUuODcyYzAtMjYuNTA0LTIxLjQ5Ni00OC00OC00OHMtNDgsMjEuNDk2LTQ4LDQ4DQoJYzAsOS41MjgsMi44MTYsMTguNCw3LjYwOCwyNS44NzJjLTI4LjI2NCwxNC42NC00Ny42MDgsNDQuMDk2LTQ3LjYwOCw3OC4xMjhjMCw0OC42MDgsMzkuMzkyLDg4LDg4LDg4YzQ4LjYsMCw4OC0zOS40LDg4LTg4DQoJQzM0My45OTcsMjQ1Ljk3LDMyNC42NTMsMjE2LjUxNCwyOTYuMzg5LDIwMS44NzR6Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojMzU0OTVDOyIgZD0iTTMwNS4wNjEsMjA2LjkzOGM5LjQzMiwxNC4wMTYsMTQuOTM2LDMwLjg5NiwxNC45MzYsNDkuMDY0YzAsNDguNi0zOS40LDg4LTg4LDg4DQoJYy0xOC4xNjgsMC0zNS4wNC01LjUwNC00OS4wNTYtMTQuOTM2YzE1LjgsMjMuNDgsNDIuNjE2LDM4LjkzNiw3My4wNTYsMzguOTM2YzQ4LjYsMCw4OC0zOS40LDg4LTg4DQoJQzM0My45OTcsMjQ5LjU2MiwzMjguNTQxLDIyMi43NDYsMzA1LjA2MSwyMDYuOTM4eiIvPg0KPGc+DQoJPGNpcmNsZSBzdHlsZT0iZmlsbDojRDZEOURCOyIgY3g9IjIzOS45OTciIGN5PSIxMjguMDAyIiByPSIxNiIvPg0KCTxjaXJjbGUgc3R5bGU9ImZpbGw6I0Q2RDlEQjsiIGN4PSIyNzEuOTk3IiBjeT0iMTI4LjAwMiIgcj0iMTYiLz4NCjwvZz4NCjxnPg0KCTxjaXJjbGUgc3R5bGU9ImZpbGw6I0YxNTY0MjsiIGN4PSIyNzEuOTk3IiBjeT0iMTI4LjAwMiIgcj0iOCIvPg0KCTxjaXJjbGUgc3R5bGU9ImZpbGw6I0YxNTY0MjsiIGN4PSIyMzkuOTk3IiBjeT0iMTI4LjAwMiIgcj0iOCIvPg0KPC9nPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6I0ZCQUM0MzsiIGQ9Ik0yNjMuOTk3LDE5Mi40MWMtMi42NC0wLjI0LTUuMzA0LTAuNDA4LTgtMC40MDhzLTUuMzYsMC4xNjgtOCwwLjQwOHYxNzUuMTg0DQoJCWMyLjY0LDAuMjQsNS4zMDQsMC40MDgsOCwwLjQwOHM1LjM2LTAuMTY4LDgtMC40MDhWMTkyLjQxeiIvPg0KCTxjaXJjbGUgc3R5bGU9ImZpbGw6I0ZCQUM0MzsiIGN4PSIyNTUuOTk3IiBjeT0iMjgwLjAwMiIgcj0iMzIiLz4NCjwvZz4NCjxjaXJjbGUgc3R5bGU9ImZpbGw6IzU3NkQ3RTsiIGN4PSIyNTUuOTk3IiBjeT0iMjgwLjAwMiIgcj0iMTYiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiMzNTQ5NUM7IiBkPSJNMjU1Ljk5NywxOTIuMDAyYzE0LjUzNiwwLDI4LjIyNCwzLjU4NCw0MC4zMDQsOS44MzJjMi40OTYtMy44ODgsNC41MjgtOC4xMiw1LjgzMi0xMi42NzINCgljLTEzLjQzMi04LjI5Ni0yOS4yLTEzLjE2LTQ2LjEzNi0xMy4xNnMtMzIuNzA0LDQuODY0LTQ2LjEyOCwxMy4xNmMxLjI5Niw0LjU1MiwzLjMyOCw4Ljc4NCw1LjgyNCwxMi42NzINCglDMjI3Ljc3MywxOTUuNTg2LDI0MS40NjEsMTkyLjAwMiwyNTUuOTk3LDE5Mi4wMDJ6Ii8+DQo8L3N2Zz4=\" />"
-    content="i can automate browser workflow like a uploading, posting, scraping for you" 
-    >}}
-
-{{< /home/service >}}
-
-
-{{< home/porto >}}
-
-<!-- {{< home/experience >}}
-
-    {{< home/experience-card 
-    title="Freelance Software Engineering"
-    time="2023 - Now"
-    jobs="Create Desktop App, Create Bot App, Create Website, Create Scrapper App, Social Media Management" 
-    >}}
-
-    {{< home/experience-card 
-    title="Computer Repair Shop"
-    time="2022 - 2023"
-    jobs="OS Installation, OS Backup, Hardware Troubleshooting, Software Installation, Network Troubleshooting, CCTV Troubleshooting, Replacement Computer Spare Part, Customer Service Delivery" 
-    >}}
-
-    {{< home/experience-card 
-    title="CCTV Technician"
-    time="2018 - 2019"
-    jobs="CCTV Troubleshooting, CCTV Installation, CCTV Maintenancer, Computer Installation, Computer Troubleshooting, Wireless Networking, Fiber Optic Installation, Fiber Optic Flashing" 
-    >}}
-
-
-{{< /home/experience >}} -->
-
-
-{{< home/stack title="Software Engineering Stack" >}}
-
-    {{< home/stack-card 
-    title="Website Frontend"
-    icon="fas fa-palette"
-    content="HTML, CSS, Javascript, Bootstrap" 
-    >}}
-
-    {{< home/stack-card 
-    title="Website Backend"
-    icon="fas fa-server"
-    content="PHP, Codeigniter, Laravel, Node.js, Python" 
-    >}}
-
-    {{< home/stack-card 
-    title="Database"
-    icon="fas fa-database"
-    content="JSON, database.txt, Mysql" 
-    >}}
-
-
-    {{< home/stack-card 
-    title="Python Lib"
-    icon="fab fa-python"
-    content="Pyside6, Pyppeteer, Flask, Requests, Beautifulsoup" 
-    >}}
-
-    {{< home/stack-card 
-    title="Setup & Tools"
-    icon="fas fa-tools"
-    content="Laragon, PyCharm, VsCode, Cursor, Xampp, Git, Github" 
-    >}}
-
-    {{< home/stack-card 
-    title="AI Agent"
-    icon="fas fa-robot"
-    content="Gemini, Blackboxai" 
-    >}}
-
-{{< /home/stack >}}
-
-{{< home/stack title="IT Support Scope" >}}
-
-    {{< home/stack-card 
-    title="Operating System"
-    icon="fab fa-windows"
-    content="Windows, Linux" 
-    >}}
-
-    {{< home/stack-card 
-    title="Hardware"
-    icon="fab fa-windows"
-    content="PC Building, PC Troubleshooting" 
-    >}}
-
-    {{< home/stack-card 
-    title="Software"
-    icon="fab fa-windows"
-    content="Office, Remote Desktop, Browser, PDF" 
-    >}}
-
-    {{< home/stack-card 
-    title="Networking"
-    icon="fab fa-windows"
-    content="Network Setup, VPN Setup, Router Configuration, Wireless Setup" 
-    >}}
-
-    {{< home/stack-card 
-    title="Maintenance"
-    icon="fab fa-windows"
-    content="Cleaning Hardware, Checking Hardware & Software, Backup OS, Restore OS, Report" 
-    >}}
-
-
-    {{< home/stack-card 
-    title="Customer Service"
-    icon="fab fa-windows"
-    content="Technical Support, User Training, Communication, Documentation" 
-    >}}
-
-{{< /home/stack >}}

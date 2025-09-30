@@ -1,0 +1,404 @@
+{{ define "head" }}
+	{{- with resources.Get "css/profile-new.css" -}}
+		{{- if hugo.IsDevelopment -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+		{{- else -}}
+			{{- with . | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+			{{- end -}}
+		{{- end -}}
+	{{- end -}}
+{{ end }}
+
+{{ define "main" }}
+	<header class="page-header profile-new-hero">
+		<div class="container">
+			<h1 class="page-title">{{ .Params.name | default .Title }}</h1>
+			{{ with .Params.headline }}<p class="page-description">{{ . }}</p>{{ end }}
+		</div>
+	</header>
+
+	<main class="container profile-new">
+		<section class="pn-section pn-achievements">
+			<div class="pn-head">
+				<h3 class="mono">Pencapaian</h3>
+				{{ if or .Params.certifications_note .Params.awards_note }}<p class="pn-note">{{ .Params.certifications_note }} {{ .Params.awards_note }}</p>{{ end }}
+			</div>
+			<div class="pn-tabs" data-tabs>
+				<div class="pn-tablist" role="tablist" aria-label="Achievement Tabs">
+					<button class="pn-tab active" role="tab" aria-selected="true" aria-controls="tab-cert" id="tabbtn-cert">Sertifikat</button>
+					<button class="pn-tab" role="tab" aria-selected="false" aria-controls="tab-award" id="tabbtn-award">Penghargaan</button>
+				</div>
+				<div class="pn-tabpanels">
+					<div id="tab-cert" class="pn-tabpanel active" role="tabpanel" aria-labelledby="tabbtn-cert">
+						<ul class="pn-cards pn-cards-cert">
+							{{- $certs := .Params.certifications | default (slice (dict "name" "Google Data Analytics" "org" "Coursera" "issued" "2024-05" "expires" "" "credential_id" "ABC-123" "link" "#") (dict "name" "MTCNA" "org" "MikroTik" "issued" "2023-07")) -}}
+							{{- range $certs -}}
+							<li class="pn-card cert-card">
+								<div class="cert-head">
+									<div class="issuer">
+										{{ with .logo }}
+											<img class="issuer-logo" src="{{ . }}" alt="{{ $.Title }} issuer" loading="lazy">
+										{{ else }}
+											<div class="issuer-initials" aria-hidden="true">{{ substr (default (upper (substr (.org | default "ID") 0 1)) "I") 0 1 }}{{ substr (default (upper (substr (.org | default "ID") 1 1)) "D") 0 1 }}</div>
+										{{ end }}
+										<div class="issuer-meta">
+											<div class="title">{{ or .name .title }}</div>
+											<div class="org">{{ .org }}</div>
+										</div>
+									</div>
+									{{ if or .link .credential_id }}
+										<div class="cert-actions">
+											{{ with .link }}<a class="btn btn-primary btn-small" href="{{ . }}" target="_blank" rel="noopener">Lihat Kredensial</a>{{ end }}
+										</div>
+									{{ end }}
+								</div>
+								<div class="cert-meta">
+									{{ with .issued }}<span class="badge mono">Diterbitkan: {{ . }}</span>{{ end }}
+									{{ with .expires }}<span class="badge mono warn">Kedaluwarsa: {{ . }}</span>{{ end }}
+									{{ with .year }}<span class="badge mono">Tahun: {{ . }}</span>{{ end }}
+									{{ with .credential_id }}<span class="badge mono mute">ID: {{ . }}</span>{{ end }}
+								</div>
+							</li>
+							{{- end -}}
+						</ul>
+					</div>
+					<div id="tab-award" class="pn-tabpanel" role="tabpanel" aria-labelledby="tabbtn-award" hidden>
+						<ul class="pn-cards pn-cards-min">
+							{{- $awards := .Params.awards | default (slice (dict "title" "Best Contributor" "org" "Open Source Project" "year" "2024" "link" "#") (dict "title" "Hackathon Winner" "org" "Tech Event" "year" "2023")) -}}
+							{{- range $awards -}}
+							<li class="pn-card">
+								<div class="card-head">
+									<div class="degree">{{ .title }}</div>
+									{{ with .year }}<div class="period mono">{{ . }}</div>{{ end }}
+								</div>
+								<div class="school">{{ .org }}</div>
+								<div class="card-actions">
+									{{ with .link }}<a class="btn btn-outline btn-sm" href="{{ . }}" target="_blank" rel="noopener">Detail</a>{{ end }}
+								</div>
+							</li>
+							{{- end -}}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pn-section pn-files">
+			<div class="pn-head">
+				<h3 class="mono">File Manager</h3>
+			</div>
+			<div class="file-controls">
+				<div class="controls-left">
+					<input id="fileSearch" class="input" type="search" placeholder="Cari file..." aria-label="Cari file">
+				</div>
+				<div class="controls-right">
+					<label class="sr-only" for="fileSort">Urutkan</label>
+					<select id="fileSort" class="select" aria-label="Urutkan">
+						<option value="name">Nama</option>
+						<option value="type">Tipe</option>
+						<option value="size">Ukuran</option>
+						<option value="updated" selected>Pembaruan</option>
+					</select>
+					<label class="sr-only" for="filePageSize">Per halaman</label>
+					<select id="filePageSize" class="select" aria-label="Per halaman">
+						<option>5</option>
+						<option selected>10</option>
+						<option>20</option>
+					</select>
+				</div>
+			</div>
+			{{- $files := .Params.files | default (slice (dict "name" "Curriculum Vitae" "type" "PDF" "size" "220 KB" "updated" "2025-01-12" "url" "/files/irfan-cv.pdf") (dict "name" "Resume (One Page)" "type" "PDF" "size" "145 KB" "updated" "2025-02-03" "url" "/files/irfan-resume.pdf") (dict "name" "Company Profile" "type" "PDF" "size" "1.2 MB" "updated" "2025-03-15" "url" "/files/company-profile.pdf")) -}}
+			<ul id="fileList" class="pn-files-grid list">
+				{{- range $files -}}
+				<li class="file-card" data-name="{{ lower .name }}" data-type="{{ lower (or .type "") }}" data-updated="{{ or .updated "" }}" data-size="{{ or .size "" }}">
+					<div class="file-head">
+						<div class="file-icon" aria-hidden="true">
+							{{ $t := lower (or .type "file") }}
+							{{- if or (eq $t "pdf") (in (lower .name) ".pdf") -}}<i class="fa-solid fa-file-pdf"></i>
+							{{- else if or (eq $t "doc") (eq $t "docx") (in (lower .name) ".doc") (in (lower .name) ".docx") -}}<i class="fa-solid fa-file-word"></i>
+							{{- else if or (eq $t "ppt") (eq $t "pptx") (in (lower .name) ".ppt") (in (lower .name) ".pptx") -}}<i class="fa-solid fa-file-powerpoint"></i>
+							{{- else if or (eq $t "zip") (in (lower .name) ".zip") (in (lower .name) ".rar") -}}<i class="fa-solid fa-file-zipper"></i>
+							{{- else -}}<i class="fa-solid fa-file"></i>{{ end }}
+						</div>
+						<div class="file-titles">
+							<div class="file-name">{{ .name }}</div>
+							<div class="file-tags">
+								{{ with .type }}<span class="tag mono">{{ . }}</span>{{ end }}
+								{{ with .category }}<span class="tag alt mono">{{ . }}</span>{{ end }}
+							</div>
+						</div>
+					</div>
+					<div class="file-meta">
+						{{ with .size }}<span class="meta-item"><i class="fa-solid fa-weight-hanging"></i> {{ . }}</span>{{ end }}
+						{{ with .updated }}<span class="meta-item"><i class="fa-regular fa-clock"></i> {{ . }}</span>{{ end }}
+						{{ with .note }}<span class="meta-item dim">{{ . }}</span>{{ end }}
+					</div>
+					<div class="file-actions">
+						{{ with .url }}<a class="btn btn-outline btn-small" href="{{ . }}" target="_blank" rel="noopener"><i class="fa-solid fa-eye"></i> Lihat</a>{{ end }}
+						{{ with .download }}<a class="btn btn-primary btn-small" href="{{ . }}" download><i class="fa-solid fa-download"></i> Unduh</a>{{ end }}
+					</div>
+				</li>
+				{{- end -}}
+			</ul>
+			<div class="file-pagination">
+				<div class="pagination-info" id="fileInfo">Menampilkan 0 dari 0</div>
+				<div class="pagination-actions">
+					<button class="nav-button" id="filePrev" disabled>← Prev</button>
+					<button class="nav-button" id="fileNext" disabled>Next →</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="pn-section pn-skills">
+			<div class="pn-head">
+				<h3 class="mono">Keahlian</h3>
+			</div>
+			<div class="pn-tabs" data-tabs>
+				<div class="pn-tablist" role="tablist" aria-label="Skill Tabs">
+					<button class="pn-tab active" role="tab" aria-selected="true" aria-controls="tab-it" id="tabbtn-it">IT Support</button>
+					<button class="pn-tab" role="tab" aria-selected="false" aria-controls="tab-se" id="tabbtn-se">Software Engineering</button>
+				</div>
+				<div class="pn-tabpanels">
+					<div id="tab-it" class="pn-tabpanel active" role="tabpanel" aria-labelledby="tabbtn-it">
+						{{- $it := .Params.skills.it_support -}}
+						{{- $scopesIt := slice -}}
+						{{- $scopesIt = $it.scopes -}}
+
+						<ul class="pn-cards pn-cards-scope">
+							{{- range $scopesIt -}}
+							<li class="pn-card scope-card">
+								<div class="scope-title">{{ .title }}</div>
+								<ul class="pn-pill-list">
+									{{- range .items }}<li class="pill">{{ . }}</li>{{ end -}}
+								</ul>
+							</li>
+							{{- end -}}
+						</ul>
+					</div>
+					<div id="tab-se" class="pn-tabpanel" role="tabpanel" aria-labelledby="tabbtn-se" hidden>
+						{{- $se := .Params.skills.software_engineering -}}
+						{{- $scopesSe := slice -}}
+						{{- if and $se (reflect.IsMap $se) (isset $se "scopes") -}}
+							{{- $scopesSe = $se.scopes -}}
+						{{- else if and $se (reflect.IsSlice $se) -}}
+							{{- $scopesSe = (slice (dict "title" "Umum" "items" $se)) -}}
+						{{- else -}}
+							{{- $scopesSe = (slice (dict "title" "Programming Languages" "items" (slice "JavaScript" "TypeScript" "Go" "PHP")) (dict "title" "Stacks" "items" (slice "Laravel" "Node.js" "React")) (dict "title" "Data & Infra" "items" (slice "PostgreSQL" "MySQL" "Docker")) (dict "title" "Practices" "items" (slice "REST/GraphQL" "CI/CD" "Testing"))) -}}
+						{{- end -}}
+						<ul class="pn-cards pn-cards-scope">
+							{{- range $scopesSe -}}
+							<li class="pn-card scope-card">
+								<div class="scope-title">{{ .title }}</div>
+								<ul class="pn-pill-list">
+									{{- range .items }}<li class="pill">{{ . }}</li>{{ end -}}
+								</ul>
+							</li>
+							{{- end -}}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pn-section pn-education">
+			<div class="pn-head">
+				<h3 class="mono">Pendidikan</h3>
+			</div>
+			<div class="pn-tabs" data-tabs>
+				<div class="pn-tablist" role="tablist" aria-label="Education Tabs">
+					<button class="pn-tab active" role="tab" aria-selected="true" aria-controls="edu-formal" id="tabbtn-edu-formal">Formal</button>
+					<button class="pn-tab" role="tab" aria-selected="false" aria-controls="edu-nonformal" id="tabbtn-edu-nonformal">Non-Formal</button>
+				</div>
+				<div class="pn-tabpanels">
+					<div id="edu-formal" class="pn-tabpanel active" role="tabpanel" aria-labelledby="tabbtn-edu-formal">
+						<ul class="pn-cards pn-cards-edu">
+							{{- $formal := slice -}}
+							{{- $eduParam := .Params.education -}}
+							{{- if and $eduParam (reflect.IsMap $eduParam) (isset $eduParam "formal") -}}
+								{{- $formal = $eduParam.formal -}}
+							{{- else if and $eduParam (reflect.IsSlice $eduParam) -}}
+								{{- $formal = $eduParam -}}
+							{{- else -}}
+								{{- $formal = (slice (dict "degree" "S1 Informatika" "field" "Teknik Informatika" "school" "Universitas Contoh" "period" "2019 — 2023" "gpa" "3.7/4.0" "location" "Bandung" "honors" "Cum Laude" "activities" (slice "Asisten Lab" "Ketua Komunitas Coding"))) -}}
+							{{- end -}}
+							{{- range $formal -}}
+							<li class="pn-card edu-card">
+								<div class="edu-head">
+									<div class="campus">
+										{{ with .logo }}
+											<img class="campus-logo" src="{{ . }}" alt="{{ $.Title }} campus" loading="lazy">
+										{{ else }}
+											<div class="campus-initials" aria-hidden="true">{{ substr (default (upper (substr (.school | default "UN") 0 1)) "U") 0 1 }}{{ substr (default (upper (substr (.school | default "UN") 1 1)) "N") 0 1 }}</div>
+										{{ end }}
+										<div class="campus-meta">
+											<div class="degree">{{ .degree }}</div>
+											{{ with .field }}<div class="field">{{ . }}</div>{{ end }}
+											<div class="school">{{ .school }}</div>
+										</div>
+									</div>
+									<div class="edu-actions">
+										{{ with .link }}<a class="btn btn-outline btn-small" href="{{ . }}" target="_blank" rel="noopener">Lihat Transkrip</a>{{ end }}
+									</div>
+								</div>
+								<div class="edu-meta">
+									{{ with .period }}<span class="badge mono">{{ . }}</span>{{ end }}
+									{{ with .location }}<span class="badge mono"><i class="fa-solid fa-location-dot"></i> {{ . }}</span>{{ end }}
+									{{ with .gpa }}<span class="badge mono success">IPK {{ . }}</span>{{ end }}
+									{{ with .honors }}<span class="badge mono warn">{{ . }}</span>{{ end }}
+								</div>
+								{{ with .activities }}
+								<ul class="bullets">
+									{{ range . }}<li>{{ . }}</li>{{ end }}
+								</ul>
+								{{ end }}
+							</li>
+							{{- end -}}
+						</ul>
+					</div>
+					<div id="edu-nonformal" class="pn-tabpanel" role="tabpanel" aria-labelledby="tabbtn-edu-nonformal" hidden>
+						<ul class="pn-cards pn-cards-edu">
+							{{- $nf := slice -}}
+							{{- $eduParam2 := .Params.education -}}
+							{{- if and $eduParam2 (reflect.IsMap $eduParam2) (isset $eduParam2 "non_formal") -}}
+								{{- $nf = $eduParam2.non_formal -}}
+							{{- else -}}
+								{{- $nf = (slice (dict "program" "Bootcamp Backend" "provider" "Online Academy" "period" "2024" "certificate" true) (dict "program" "Workshop Clean Architecture" "provider" "Tech Conf" "period" "2023")) -}}
+							{{- end -}}
+							{{- range $nf -}}
+							{{- $degree := or .degree .program -}}
+							{{- $school := or .school .provider -}}
+							<li class="pn-card edu-card">
+								<div class="edu-head">
+									<div class="campus">
+										<div class="campus-initials" aria-hidden="true">{{ substr (default (upper (substr ($school | default "NF") 0 1)) "N") 0 1 }}{{ substr (default (upper (substr ($school | default "NF") 1 1)) "F") 0 1 }}</div>
+										<div class="campus-meta">
+											<div class="degree">{{ $degree }}</div>
+											<div class="school">{{ $school }}</div>
+										</div>
+									</div>
+									<div class="edu-actions">
+										{{ with .link }}<a class="btn btn-outline btn-small" href="{{ . }}" target="_blank" rel="noopener">Lihat Sertifikat</a>{{ end }}
+									</div>
+								</div>
+								<div class="edu-meta">
+									{{ with .period }}<span class="badge mono">{{ . }}</span>{{ end }}
+									{{ with .location }}<span class="badge mono"><i class="fa-solid fa-location-dot"></i> {{ . }}</span>{{ end }}
+									{{ if .certificate }}<span class="badge mono success">Bersertifikat</span>{{ end }}
+								</div>
+								{{ with .topics }}
+								<ul class="bullets">
+									{{ range . }}<li>{{ . }}</li>{{ end }}
+								</ul>
+								{{ end }}
+							</li>
+							{{- end -}}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{{ with .Content }}
+		<section class="pn-section pn-extra">
+			{{ . }}
+		</section>
+		{{ end }}
+
+		<script>
+		(function(){
+			var tabs = document.querySelectorAll('.pn-tabs');
+			for (var i=0;i<tabs.length;i++){
+				(function(tabRoot){
+					var btns = tabRoot.querySelectorAll('.pn-tab');
+					var panels = tabRoot.querySelectorAll('.pn-tabpanel');
+					for (var j=0;j<btns.length;j++){
+						btns[j].addEventListener('click', function(ev){
+							for (var k=0;k<btns.length;k++){
+								btns[k].classList.remove('active');
+								btns[k].setAttribute('aria-selected','false');
+							}
+							for (var p=0;p<panels.length;p++){
+								panels[p].classList.remove('active');
+								panels[p].setAttribute('hidden','');
+							}
+							var btn = ev.currentTarget;
+							btn.classList.add('active');
+							btn.setAttribute('aria-selected','true');
+							var panelId = btn.getAttribute('aria-controls');
+							var panel = tabRoot.querySelector('#'+panelId);
+							if(panel){
+								panel.classList.add('active');
+								panel.removeAttribute('hidden');
+							}
+						});
+					}
+				})(tabs[i]);
+			}
+		})();
+		</script>
+
+		<script>
+		(function(){
+			// File list search/sort/pagination
+			var listRoot = document.getElementById('fileList');
+			if(listRoot){
+				var items = Array.prototype.slice.call(listRoot.querySelectorAll('.file-card'));
+				var input = document.getElementById('fileSearch');
+				var sortSel = document.getElementById('fileSort');
+				var pageSel = document.getElementById('filePageSize');
+				var info = document.getElementById('fileInfo');
+				var prevBtn = document.getElementById('filePrev');
+				var nextBtn = document.getElementById('fileNext');
+				var page = 1;
+				function parseSize(s){
+					if(!s) return 0;
+					var m = /([0-9]+(?:\.[0-9]+)?)\s*(KB|MB|GB|B)/i.exec(s);
+					if(!m) return 0;
+					var n = parseFloat(m[1]);
+					var u = m[2].toUpperCase();
+					var mult = (u==="GB"?1024*1024*1024:(u==="MB"?1024*1024:(u==="KB"?1024:1)));
+					return n*mult;
+				}
+				function norm(str){return (str||"").toString().toLowerCase();}
+				function apply(){
+					var q = norm(input && input.value);
+					var sortBy = (sortSel && sortSel.value) || 'updated';
+					var pageSize = parseInt((pageSel && pageSel.value) || '10',10);
+					var filtered = items.filter(function(el){
+						var name = el.getAttribute('data-name');
+						var type = el.getAttribute('data-type');
+						return !q || (name && name.indexOf(q)>-1) || (type && type.indexOf(q)>-1);
+					});
+					filtered.sort(function(a,b){
+						if(sortBy==='name'){return norm(a.getAttribute('data-name')).localeCompare(norm(b.getAttribute('data-name')));}
+						if(sortBy==='type'){return norm(a.getAttribute('data-type')).localeCompare(norm(b.getAttribute('data-type')));}
+						if(sortBy==='size'){return parseSize(a.getAttribute('data-size'))-parseSize(b.getAttribute('data-size'));}
+						var ua = a.getAttribute('data-updated')||'';
+						var ub = b.getAttribute('data-updated')||'';
+						return ua<ub?1:(ua>ub?-1:0);
+					});
+					var total = filtered.length;
+					var totalPages = Math.max(1, Math.ceil(total/pageSize));
+					if(page>totalPages) page = totalPages;
+					var start = (page-1)*pageSize;
+					var end = Math.min(start+pageSize, total);
+					for(var i=0;i<items.length;i++){items[i].style.display='none';}
+					for(var j=start;j<end;j++){filtered[j].style.display='flex';}
+					if(info){info.textContent = 'Menampilkan ' + (total? (start+1)+'–'+end : '0') + ' dari ' + total;}
+					if(prevBtn){prevBtn.disabled = page<=1;}
+					if(nextBtn){nextBtn.disabled = page>=totalPages;}
+				}
+				if(input) input.addEventListener('input', function(){page=1;apply();});
+				if(sortSel) sortSel.addEventListener('change', function(){page=1;apply();});
+				if(pageSel) pageSel.addEventListener('change', function(){page=1;apply();});
+				if(prevBtn) prevBtn.addEventListener('click', function(){if(page>1){page--;apply();}});
+				if(nextBtn) nextBtn.addEventListener('click', function(){page++;apply();});
+				apply();
+			}
+		})();
+		</script>
+	</main>
+{{ end }}
+
+

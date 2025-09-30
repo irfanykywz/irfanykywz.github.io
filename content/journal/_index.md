@@ -1,4 +1,4 @@
 ---
-title: My Journey
-description: A journal of personal thoughts, reflections, and experiences shaping my purpose.
+title: Jurnal Harian
+description: Sebuah tulisan berisi pemikiran pribadi, refleksi, dan pengalaman hidup.
 ---

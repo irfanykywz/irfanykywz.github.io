@@ -1,0 +1,67 @@
+<div class="skill-category">
+    <h3>
+        <i class='{{ .Get "icon" }}'></i>
+        {{ .Get "title" }}
+    </h3>
+    <div class="skills-list">
+        {{ $items := split (.Get "content")  "," }}
+        {{ range $index, $item := $items }}
+        <span class="skill-tag">
+            {{ $item_lower := strings.ToLower $item }}
+
+            {{ if strings.Contains $item_lower "html" }}
+                <i class="fab fa-html5"></i>
+            {{ else if strings.Contains $item_lower "css" }}
+                <i class="fab fa-css3-alt"></i>
+            {{ else if strings.Contains $item_lower "javascript" }}
+                <i class="fab fa-js-square"></i>
+            {{ else if strings.Contains $item_lower "bootstrap" }}
+                <i class="fab fa-bootstrap"></i>
+
+
+            {{ else if strings.Contains $item_lower "php" }}
+                <i class="fab fa-php"></i>
+            {{ else if strings.Contains $item_lower "laravel" }}
+                <i class="fab fa-laravel"></i>
+            {{ else if strings.Contains $item_lower "codeigniter" }}
+                <i class="fas fa-fire"></i>
+            {{ else if strings.Contains $item_lower "nodejs" }}
+                <i class="fab fa-node-js"></i>
+            {{ else if strings.Contains $item_lower "python" }}
+                <i class="fab fa-python"></i>
+
+            {{ else if strings.Contains $item_lower "json" }}
+                <i class="fas fa-code"></i>
+            {{ else if strings.Contains $item_lower "mysql" }}
+                <i class="fas fa-database"></i>
+            {{ else if strings.Contains $item_lower "txt" }}
+                <i class="fas fa-file-code"></i>
+
+            {{ else if strings.Contains $item_lower "pyside" }}
+                <i class="fas fa-desktop"></i>
+            {{ else if strings.Contains $item_lower "pypp" }}
+                <i class="fas fa-robot"></i>
+            {{ else if strings.Contains $item_lower "flask" }}
+                <i class="fas fa-flask"></i>
+            {{ else if strings.Contains $item_lower "requests" }}
+                <i class="fas fa-exchange-alt"></i>
+
+            {{ else if strings.Contains $item_lower "github" }}
+                <i class="fa-brands fa-github"></i>
+            {{ else if strings.Contains $item_lower "git" }}
+                <i class="fa-brands fa-git-alt"></i>
+            {{ else if or (strings.Contains $item_lower "vscode") (strings.Contains $item_lower "cursor") }}
+                <i class="fas fa-desktop"></i>
+
+
+
+
+            {{ else }}
+                <i class="fa-solid fa-chevron-right"></i>
+            {{ end }}
+
+            {{ $item }}
+        </span>
+        {{ end }}
+    </div>
+</div>

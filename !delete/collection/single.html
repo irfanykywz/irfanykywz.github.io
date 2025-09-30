@@ -1,0 +1,113 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/collection.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="detail-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="{{ $.Site.BaseURL }}collection/">
+                        <i class="fas fa-table"></i>
+                        Collection
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>{{ .Title }}</span>
+                </nav>
+            </div>
+        </section>
+
+        <article class="collection-detail">
+            <div class="container">
+                <!-- Collection Item Card -->
+                <div class="collection-card-detail">
+                    <div class="card-body">
+                        
+
+                        <h1 class="card-title">{{ .Title }}</h1>
+                        <p class="card-description">{{ .Description }}</p>
+
+                        <div class="card-meta">
+                            {{ if .Params.categories }}
+                            <span class="meta-item">
+                                <i class="fas fa-tag"></i>
+                                {{ .Params.categories }}
+                            </span>
+                            {{ end }}
+                            {{ if .Date }}
+                            <span class="meta-item">
+                                <i class="fas fa-calendar"></i>
+                                {{ .Date | time.Format "2 January 2006" }}
+                            </span>
+                            {{ end }}
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Links Table -->
+                {{ if .Params.collection_links }}
+                <div class="collection-links-table">
+                    <div class="table-header">
+                        <div class="table-row header-row">
+                            <div class="table-cell header-cell">Link Type</div>
+                            <div class="table-cell header-cell">Description</div>                        
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        {{ range .Params.collection_links }}
+                        <div class="table-row data-row">
+                            <div class="table-cell">
+                                <span class="link-type">
+                                    <a target="_blank" href="{{ .url }}"  rel="nofollow">
+                                        {{ .title | default "Title" }}
+                                        <i class="fas fa-external-link-alt"></i>                                
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="table-cell">
+                                <span class="link-description">{{ .description }}</span>
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
+
+
+                <!-- Navigation -->
+                <div class="collection-navigation">
+                    <div class="nav-section">
+                        <a href="{{ $.Site.BaseURL }}collection/" class="nav-button">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Collection
+                        </a>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-buttons">
+                            {{ $pages := .CurrentSection.Pages.ByWeight }}
+
+                            {{ with $pages.Prev . }}
+                            <a href="{{ .RelPermalink }}" class="nav-button">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous Item
+                            </a>
+                            {{ end }}
+
+                            {{ with $pages.Next . }}
+                            <a href="{{ .RelPermalink }}" class="nav-button">
+                                Next Item
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+{{ end }}

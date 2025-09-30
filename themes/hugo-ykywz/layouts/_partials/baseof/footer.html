@@ -1,0 +1,47 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-links">
+                {{ range .Site.Menus.footer }}
+                    {{ $menu_item_url := .URL | relLangURL }}
+                    {{/* {{ $menu_item_url }} */}}
+                    
+                    {{ $page_url := $.Page.RelPermalink | relLangURL }}
+                    {{ $page_split := index (split $page_url "/") 1 }}
+                    {{/* {{ $page_split }} */}}
+                    
+                    {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
+                    
+                    <a href="{{ .URL | relLangURL }}" class="footer-link {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}active{{ end }}">
+
+                        {{ if strings.Contains .Pre "fa" }}
+                          <i class="{{ .Pre }}"></i>
+                        {{ else }}
+                            <span>{{ .Pre }}</span>
+                        {{ end }}
+                        <span>{{ .Name }}</span>
+
+                    </a>
+                    
+                {{ end}}
+            </div>
+            <p class="footer-copyright">
+                &copy; {{ now.Year }} 🛸 {{ $.Site.Title }}
+                <br />
+                <span>Menggunakan
+                    <a target="_blank" rel="nofollow" href="https://gohugo.io">Hugo {{ hugo.Version }}🚀</a>
+
+                </span>
+                <br />
+                <span>
+                    {{ range .Site.Menus.footer_right }}
+                    <a href="{{ .URL | relLangURL }}">
+                        {{ .Name | safeHTML  }}
+                    </a>
+                    {{ end}}
+                    <a target="_blank" href="{{ $.Site.BaseURL }}index.xml">RSS</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</footer>

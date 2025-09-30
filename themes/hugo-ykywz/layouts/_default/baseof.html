@@ -2,13 +2,24 @@
 <html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 
 <head>
-    {{ partial "head.html" . }}
+
+    {{ partial "baseof/head.html" . }}
+
+    {{ partialCached "baseof/css.html" . }}
+
+    {{ block "head" . }}{{ end }}
+
+    {{ partialCached "baseof/js.html" . }}
+
 </head>
 
 <body>
-    {{ partial "header.html" . }}
+
+    {{ partial "baseof/header.html" . }}
+
     {{ block "main" . }}{{ end }}
-    {{ partial "footer.html" . }}
+
+    {{ partial "baseof/footer.html" . }}
 
     <!-- Fixed Theme Toggle -->
     <div class="theme-toggle-fixed">
@@ -17,7 +28,9 @@
         </button>
     </div>
 
-    {{ partial "head/js-bottom.html" . }}
+    {{ partial "baseof/js-bottom.html" . }}
+
+    {{ block "footer" . }}{{ end }}
 
 </body>
 
