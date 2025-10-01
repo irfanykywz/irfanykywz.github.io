@@ -1,7 +1,7 @@
 .research-content{padding:var(--space-16) 0}
 /* Research Table Styles */
 .research-table-wrapper{width:100%;overflow-x:auto}
-.research-table{width:100%;border-collapse:collapse;background:var(--bg-secondary);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);font-size:1rem}
+.research-table{width:100%;border-collapse:collapse;background:var(--bg-secondary) !important;border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);font-size:1rem}
 .research-table th,.research-table td{padding:var(--space-4) var(--space-6);text-align:left;border-bottom:1px solid var(--border-color);vertical-align:middle}
 .research-table th{background:var(--bg-tertiary);color:var(--text-primary);font-weight:700;font-size:1.05em}
 .research-table tr:last-child td{border-bottom:none}

@@ -23,60 +23,60 @@
                     <tbody>
                         {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
                         {{ range $paginator.Pages }}
-                        <tr>
-                            <td style="width:30px;">
-                                {{ if isset .Params "image" }}
-                                <img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" style="width:40px; height:40px; object-fit:cover; border-radius:8px; background:#222;">
-                                {{ else }}
-                                <i class="fas fa-flask" style="font-size:1.5em; color:var(--accent-primary);"></i>
-                                {{ end }}
-                            </td>
-                            <td>
-                                <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                                {{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}
-                                <div class="research-description-table">
-                                    {{ if isset .Params "description" }}
-                                    {{ .Description }}
-                                    {{ else if gt (countrunes (.Content | plainify)) 120 }}
-                                    {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                            <tr>
+                                <td style="width:30px;">
+                                    {{ if isset .Params "image" }}
+                                    <img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" style="width:40px; height:40px; object-fit:cover; border-radius:8px; background:#222;">
                                     {{ else }}
-                                    {{ .Content | plainify | safeHTML }}
+                                    <i class="fas fa-flask" style="font-size:1.5em; color:var(--accent-primary);"></i>
                                     {{ end }}
-                                </div>
-                            </td>
-                            <td>
-                                {{ $sorted := sort .Pages "Date" }}
-                                {{ $lastUpdate := index $sorted (sub (len $sorted) 1) }}
-                                {{ $lastUpdate.Date.Format "2 January 2006" }}
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                                    {{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}
+                                    <div class="research-description-table">
+                                        {{ if isset .Params "description" }}
+                                        {{ .Description }}
+                                        {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                                        {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                                        {{ else }}
+                                        {{ .Content | plainify | safeHTML }}
+                                        {{ end }}
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ $sorted := sort .Pages "Date" }}
+                                    {{ $lastUpdate := index $sorted (sub (len $sorted) 1) }}
+                                    {{ $lastUpdate.Date.Format "2 January 2006" }}
+                                </td>
+                            </tr>
                         {{ end }}
                         {{ with $paginator }}
-                        <tr class="table-pagination-row">
-                            <td colspan="3">
-                                <div class="table-pagination table-pagination-grid">
-                                    <div class="table-pagination-prev">
-                                        {{ with .Prev }}
-                                        <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
-                                            <i class="fas fa-chevron-left"></i>
-                                            <span aria-hidden="true">Previous</span>
-                                        </a>
-                                        {{ end }}
+                            <tr class="table-pagination-row">
+                                <td colspan="3">
+                                    <div class="table-pagination table-pagination-grid">
+                                        <div class="table-pagination-prev">
+                                            {{ with .Prev }}
+                                            <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
+                                                <i class="fas fa-chevron-left"></i>
+                                                <!-- <span aria-hidden="true">Previous</span> -->
+                                            </a>
+                                            {{ end }}
+                                        </div>
+                                        <div class="table-pagination-info">
+                                            <span class="pagination-info">{{ .PageNumber }}/{{ .TotalPages }}</span>
+                                        </div>
+                                        <div class="table-pagination-next">
+                                            {{ with .Next }}
+                                            <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
+                                                <!-- <span aria-hidden="true">Next</span> -->
+                                                <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                            {{ end }}
+                                        </div>
                                     </div>
-                                    <div class="table-pagination-info">
-                                        <span class="pagination-info">Page {{ .PageNumber }} of {{ .TotalPages }}</span>
-                                    </div>
-                                    <div class="table-pagination-next">
-                                        {{ with .Next }}
-                                        <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
-                                            <span aria-hidden="true">Next</span>
-                                            <i class="fas fa-chevron-right"></i>
-                                        </a>
-                                        {{ end }}
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         {{ end }}
                     </tbody>
                 </table>

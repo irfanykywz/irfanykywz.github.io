@@ -101,7 +101,7 @@
                                 <div class="nav-section">
                                     <a href="{{ .RelPermalink }}" class="nav-button">
                                         <i class="fas fa-arrow-left"></i>
-                                        Sebelumnya:
+                                        <!-- Sebelumnya: -->
                                         {{ if .Params.section }}
                                             {{ .Params.section }}
                                         {{ else }}
@@ -113,7 +113,7 @@
 
                                 <a href="{{ .RelPermalink }}" class="nav-button">
                                     <i class="fas fa-chevron-left"></i>
-                                    Sebelumnya:
+                                    <!-- Sebelumnya: -->
                                     {{ if .Params.section }}
                                         {{ .Params.section }}
                                     {{ else }}
@@ -126,7 +126,7 @@
                             {{ with $.NextInSection }}
                                 <div class="nav-section">
                                     <a href="{{ .RelPermalink }}" class="nav-button">
-                                        Selanjutnya:
+                                        <!-- Selanjutnya: -->
                                         {{ if .Params.section }}
                                         {{ .Params.section }}
                                         {{ else }}

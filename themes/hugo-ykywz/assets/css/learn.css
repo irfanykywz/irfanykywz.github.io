@@ -196,7 +196,7 @@
 .sidebar {
     width: 300px;
     background: #0f172a;
-    border-right: 1px solid #334155;
+    border-right: 1px solid var(--border-color);
     padding: 24px;
     position: fixed;
     left: -300px;
@@ -284,6 +284,7 @@
 .main-content {
     padding: 32px;
     max-width: 800px;
+    /*background-color: var(--bg-primary);*/
     background: #1e293b;
     flex-grow: 1;
 }

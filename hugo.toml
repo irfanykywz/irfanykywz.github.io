@@ -81,15 +81,15 @@ name = "🔍"
 url = "/search/"
 weight = 1
 
-[[menu.footer_right]]
-name = "#️⃣"
-url = "/tags/"
-weight = 2
+# [[menu.footer_right]]
+# name = "#️⃣"
+# url = "/tags/"
+# weight = 2
 
-[[menu.footer_right]]
-name = "🏷️"
-url = "/categories/"
-weight = 3
+# [[menu.footer_right]]
+# name = "🏷️"
+# url = "/categories/"
+# weight = 3
 
 # [[menu.footer_right]]
 # name = "📦"

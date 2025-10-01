@@ -15,12 +15,12 @@ about:
 servicetitle: "Keahlian"
 service:
     - title: "Dukungan IT"
-      icon: "❤️"
+      icon: "🖥️"
       jobs: 
         - "Membantu merawat dan memastikan perangkat keras (hardware) serta sistem operasi komputer berfungsi dengan optimal dan bebas masalah."
         - "Mendiagnosis dan memperbaiki berbagai masalah teknis pada jaringan, koneksi internet, perangkat lunak, dan keamanan dasar."
     - title: "Pengembangan Perangkat Lunak"
-      icon: "❤️"
+      icon: "🧑‍💻"
       jobs: 
         - "Mengembangkan aplikasi desktop dan situs web, dengan teknologi terkini"
         - "Membuat skrip otomatisasi tugas-tugas berulang guna meningkatkan efisiensi kerja."        
