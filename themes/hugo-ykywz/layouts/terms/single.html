@@ -1,0 +1,23 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/pages.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+<main class="main">
+
+<section class="detail-content">
+
+
+    <div class="container">
+
+        <h1>📜 {{ .Title }}</h1>
+
+        {{ .Content }}
+
+    </div>
+
+</section>    
+</main>
+
+{{ end }}

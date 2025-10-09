@@ -1,0 +1,7 @@
+<span class='post-view' data-id='{{ .RelPermalink }}'>    
+    <span class='view-load post-views-count-placeholder'>0</span> 
+</span>
+
+{{ define "footer" }}
+<script type="module" src="{{ $.Site.BaseURL }}js/view-count.js"></script>
+{{ end }}

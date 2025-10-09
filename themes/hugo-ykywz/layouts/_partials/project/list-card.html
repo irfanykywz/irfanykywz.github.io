@@ -1,0 +1,55 @@
+<div class="project-item" data-category="{{ .Params.category }}">
+    <div class="project-image">
+
+        {{ if isset .Params "image" }}
+
+            {{ if hasPrefix .Params.image "http" }}
+            <img src='{{ .Params.image }}' alt='{{ .Title }}' />
+            {{ else }}
+                <img src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+            {{ end }}  
+
+        {{ end }}
+
+        <div class="project-overlay">
+            <div class="project-actions">
+                <a href="{{ .Permalink }}" class="btn btn-small btn-outline">
+                    <i class="fas fa-fire"></i>
+                    Lihat
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="project-info">
+        <div class="project-meta-info">
+            {{ if isset .Params "category" }}
+                <span class="project-category-badge">
+                    {{ partial "project/category.html" . }}
+                </span>
+            {{ end }}
+            {{ if isset .Params "date" }}
+                <span class="project-date-badge">
+                    <i class="fas fa-calendar"></i>
+                    {{ .Date | time.Format "January 2006" }}
+                </span>
+            {{ end }}
+        </div>
+
+        <h3>
+            <a href="{{ .RelPermalink }}">
+                {{.Title}}
+            </a>
+        </h3>
+
+        <p>
+            {{ if isset .Params "description" }}
+                {{ .Description }}
+            {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+            {{ else }}
+                {{ .Content | plainify | safeHTML }}
+            {{ end }}
+        </p>
+
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="custom-code-block">
+    {{ if .Get "title" }}
+    <div class="code-title">{{ .Get "title" }}</div>
+    {{ end }}
+    {{ highlight (trim .Inner "\n") (.Get "lang") "" }}
+</div>

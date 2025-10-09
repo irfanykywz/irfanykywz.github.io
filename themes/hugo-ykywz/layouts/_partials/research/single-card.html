@@ -1,0 +1,23 @@
+<!-- Abstract Section -->
+<section class="research-section">
+    <div class="research-header">
+        <h2 class="section-h2">
+            {{ if .Params.icon }}
+                <i class="{{ .Params.icon }}"></i>
+            {{ else }}
+                <i class="fas fa-file-alt"></i>
+            {{ end }}
+            
+            {{ .Title }}
+        </h2>
+        <div class="research-info">
+            <div class="info-item">
+                <i class="fas fa-calendar"></i>
+                <span>{{ .Date.Format "2 January 2006" }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="section-content">
+        {{ .Content }}
+    </div>
+</section>

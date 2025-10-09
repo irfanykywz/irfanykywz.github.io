@@ -1,0 +1,151 @@
+baseURL = "https://irfanykywz.github.io/"
+languageCode = "en-us"
+title = "irfanykywz"
+theme = "hugo-ykywz"
+
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+canonifyURLs = true
+
+copyright = "irfanykywz"
+
+pagination.pagerSize = 5
+
+pygmentsstyle = "vs"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+
+[params]
+	# browser icon
+	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
+  favicon = "avatar.jpg"
+
+	# Optional 64x64 avatar image.
+	# avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
+  avatar = "avatar.jpg"
+
+  author = "Muhamad Irfan"
+  description = "Website Muhamad Irfan: Memiliki skill dibidang IT Support dan Software Engineering. siap direkrut kapan saja, segera hubungi saya"
+  keywords = "Software Engineer, IT Support, Portofolio, Coding, Troubleshooting, Infrastruktur."
+
+# Menu Header
+[[menu.main]]
+name = "Beranda"
+url = "/"
+pre = "fas fa-home"
+weight = 1
+
+[[menu.main]]
+name = "Proyek"
+url = "/projects/"
+pre = "fas fa-briefcase"
+weight = 2
+
+# [[menu.main]]
+# name = "Learn"
+# url = "/learn/"
+# pre = "fas fa-graduation-cap"
+# weight = 3
+
+[[menu.main]]
+name = "Artikel"
+url = "/posts/"
+pre = "fas fa-blog"
+weight = 4
+
+[[menu.main]]
+name = "Kontak"
+url = "/contact/"
+pre = "fas fa-envelope"
+weight = 5
+
+# Menu Footer
+[[menu.footer]]
+name = "📝 Jurnal"
+url = "/journal/"
+weight = 20
+
+[[menu.footer]]
+name = "💡 Belajar"
+url = "/learn/"
+weight = 30
+
+[[menu.footer]]
+name = "📖 Buku"
+url = "/book-lesson/"
+weight = 40
+
+[[menu.footer]]
+name = "📁 File"
+url = "/files/"
+weight = 50
+
+[[menu.footer]]
+name = "🔨 Alat"
+url = "/tools/"
+weight = 60
+
+[[menu.footer]]
+name = "🌟 Kumpulan Kata"
+url = "/quote/"
+weight = 70
+
+[[menu.footer]]
+name = "🧪 Riset"
+url = "/research/"
+weight = 80
+
+[[menu.footer]]
+name = "🎮 Game"
+url = "/game-journey/"
+weight = 90
+
+[[menu.footer]]
+name = "🔍 Pencarian"
+url = "/search/"
+weight = 100
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    style = "dracula"  # or any other chroma style
+    tabWidth = 4
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+# allow html to content .md
+[markup.goldmark.renderer] 
+	unsafe= true
+
+# allow shortcodes
+[security]
+	enableInlineShortcodes = true	
+
+# output format
+[outputs]
+  home = ["HTML", "RSS", "JSON"]  
+
+[outputFormats]
+[outputFormats.JSON]
+  mediaType = "application/json"
+  baseName = "index"
+  isPlainText = true
+  notAlternative = true  
+
+[languages.id]
+languageName = "Indonesian"
+languageCode = "id"
+
+[services]
+  [services.googleAnalytics]
+    id = 'G-VVGW3VPZZG'

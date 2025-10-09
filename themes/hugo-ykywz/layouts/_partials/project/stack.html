@@ -1,0 +1,20 @@
+{{ if .Params.stack }}
+<div class="project-tech-stack">
+    <h2 class="section-title">
+        <i class="fas fa-code"></i>
+        Teknologi yang Digunakan 
+    </h2>
+    <div class="tech-stack-grid">
+        <div class="tech-category">
+            <div class="tech-list">
+                {{ range $index, $item := $.Page.Params.stack }}
+                <div class="tech-item">
+                    <i class="fas fa-code"></i>
+                    <span>{{ $item }}</span>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

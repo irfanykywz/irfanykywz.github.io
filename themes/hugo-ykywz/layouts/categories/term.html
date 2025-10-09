@@ -1,0 +1,77 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/terms.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+
+        <section class="tags-content">
+            <div class="container">
+
+
+                <div class="tag-content" id="tagContent">
+                    <div class="tag-header">
+                        <h2 id="tagTitle">Konten dengan Kategori: <span id="currentTag">{{ .Title }}</span></h2>
+                        <a href="{{ $.Site.BaseURL }}categories/" class="close-tag-view" id="closeTagView">
+                            <i class="fas fa-arrow-left"></i>
+                            Kembali
+                        </a>
+                    </div>
+
+                    <div class="tag-results">
+
+                        <div class="results-content">
+                            <div class="tab-content active" id="allContent">
+                                <div class="content-grid" id="allResults">
+
+                                    {{ range .Pages }}
+                                    <div class="content-item">
+                                        <div class="content-meta">
+                                            {{ $urls := urls.Parse .Path }}
+                                            {{ $subs := index (split $urls "/") 1 | humanize }}
+                                            <span>
+                                                {{ if strings.Contains $subs "Posts"}}
+                                                <i class="fas fa-blog"></i>
+                                                {{ else if strings.Contains $subs "Journal" }}
+                                                <i class="fas fa-book"></i>
+                                                {{ else }}
+                                                <i class="fas fa-blog"></i>
+                                                {{ end }}
+                                                {{ $subs }}
+                                            </span>
+                                            <span><i class="fas fa-calendar"></i> {{ .Date | time.Format ":date_medium" }} </span>
+                                            <span><i class="fas fa-clock"></i> {{ printf "%d min read" .ReadingTime }}</span>
+                                        </div>
+                                        <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+                                        <p>
+                                            {{ if isset .Params "description" }}
+                                            {{ .Description }}
+                                            {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                                            {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                                            {{ else }}
+                                            {{ .Content | plainify | safeHTML }}
+                                            {{ end }}
+                                        </p>
+                                        <a href="{{ .RelPermalink }}" class="read-more">
+                                            <i class="fas fa-arrow-right"></i>
+                                            Selengkapnya
+                                        </a>
+                                    </div>
+                                    {{ end }}
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+{{ end }}

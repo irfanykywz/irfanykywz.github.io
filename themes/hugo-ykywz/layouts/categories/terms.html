@@ -1,0 +1,36 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/terms.css") }}
+{{ end }}
+
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="tags-content">
+            <div class="container">
+
+
+                <h1 class="page-title">{{ .Name }}</h1>
+
+                <div class="tags-cloud">
+
+                    {{ $data := .Data }}
+                    {{ range $key, $value := .Data.Terms.ByCount }}
+                    <div class="tag-item large">
+                        <a href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/{{ $value.Name | urlize }}/" class="tag-link">
+                            <i class="fas fa-hashtag"></i>
+                            <span class="tag-name">{{ $value.Name }}</span>
+                            <span class="tag-count">{{ $value.Count }}</span>
+                        </a>
+                    </div>
+                    {{ end }}
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+{{ end }}

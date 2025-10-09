@@ -1,0 +1,92 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/donate.css") }}
+{{ end }}
+
+{{ define "config" }}
+    {{ .Scratch.Set "hideHeader" true }} 
+    {{ .Scratch.Set "hideFooter" true }} 
+{{ end }}
+
+{{ define "main" }}
+
+<!-- ...existing code... -->
+<main class="main">
+    <div class="donate-page">
+
+        <section class="donate-intro">
+            <h1>{{ .Title }}</h1>
+            {{ with .Params.description }}
+            <p>{{ . }}</p>
+            {{ end }}
+        </section>
+
+        {{ with .Params.funding }}
+            <section class="donate-funding">
+                <h2>{{ $.Params.funding_title }}</h2>
+                <div class="funding-cards">
+                {{ range $i, $f := . }}
+                    <div class="funding-card">
+                    <div class="funding-card-content">
+                        <strong>{{ $f.type }}:</strong>
+                        <div class="funding-value" id="funding-{{ $i }}">
+                            {{ $f.value }}
+                        </div>
+                        <div>{{ $f.owner }}</div>
+                    </div>
+                    <button class="copy-btn" data-target="funding-{{ $i }}" title="Salin">Copy</button>
+                    </div>
+                {{ end }}
+                </div>
+            </section>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.copy-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                var targetId = btn.getAttribute('data-target');
+                var value = document.getElementById(targetId).innerText;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(value).then(function() {
+                    btn.textContent = 'Tersalin!';
+                    setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
+                    });
+                } else {
+                    // fallback
+                    var textarea = document.createElement('textarea');
+                    textarea.value = value;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    btn.textContent = 'Tersalin!';
+                    setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
+                }
+                });
+            });
+            });
+            </script>
+        {{ end }}
+
+        {{ with .Params.qr }}
+        <section class="donate-qr">
+            <h2>Scan QR</h2>
+            <img src="{{ . }}" alt="QR Code" class="qr-image" />
+        </section>
+        {{ end }}
+
+        <section class="donate-thanks">
+            <p>{{ with .Params.thanks }}{{ . }}{{ else }}Thank you for your support!{{ end }}</p>
+        </section>
+
+        </section>
+        <section class="donate-body">
+            {{ .Content }}
+        </section>
+
+        <div class="donate-back-home">
+            <a href="/" class="btn btn-primary">&larr; Kembali ke Halaman Utama</a>
+        </div>
+
+    </div>
+
+</main>
+ {{ end }}

@@ -1,0 +1,21 @@
+{{ if .Params.feature }}
+    <div class="project-results">
+        <h2 class="section-title">
+            <i class="fas fa-rocket fa-solid"></i>
+            Fitur Utama
+        </h2>
+        <div class="results-grid">
+
+            {{ range $index, $element := .Params.feature }}
+                <div class="result-card">
+                    <div class="result-number">
+                        <i class='{{ $element.icon }}'></i>
+                    </div>
+                    <div class="result-label">{{ $element.name }}</div>
+                    <p>{{ $element.description }}</p>
+                </div>
+            {{ end }}
+
+        </div>
+    </div>
+{{ end }}

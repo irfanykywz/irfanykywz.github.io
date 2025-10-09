@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+
+{{- with resources.Get "css/main.css" }}
+	{{- if hugo.IsDevelopment }}
+		<link rel="stylesheet" href="{{ .RelPermalink }}">
+	{{- else }}	
+		{{- with . | minify | fingerprint }}
+			<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+		{{- end }}
+	{{- end }}
+{{- end }}

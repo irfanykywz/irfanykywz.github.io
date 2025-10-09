@@ -1,0 +1,104 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/posts.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-blog"></i>
+                    {{.Title}}
+                </h1>
+                <p class="page-description">{{ .Description }}</p>
+            </div>
+        </section>
+
+        <section class="posts-content">
+            <div class="container">
+                <div class="posts-grid">
+
+                    {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
+                    {{ range $paginator.Pages }}
+                        <article class="blog-post">
+                            <div class="post-header">
+                                <div class="post-meta">
+                                    <span class="post-date">
+                                        <i class="fas fa-calendar"></i>
+                                        {{ .Date | time.Format "2 January 2006" }}
+                                    </span>
+                                    <!-- {{ if .Params.categories }}
+                                        <span class="post-category">
+                                            <i class="fas fa-tag"></i>
+                                            {{ .Params.categories }}
+                                        </span>
+                                    {{ end }} -->
+                                    <span class="post-read-time">
+                                        <i class="fas fa-clock"></i>
+                                        {{ printf "%d min waktu baca" .ReadingTime }}
+                                    </span>
+                                </div>
+                                <h2 class="post-title">
+                                    <a href="{{ .Permalink }}">
+                                        {{ .Title }}
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="post-content">
+                                <p>
+                                    {{ if isset .Params "description" }}
+                                        {{ .Description }}
+                                    {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                                        {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                                    {{ else }}
+                                        {{ .Content | plainify | safeHTML }}
+                                    {{ end }}
+                                </p>
+                            </div>
+                            <div class="post-footer">
+                                {{ if gt .Params.tags 0 }}
+                                    <div class="post-tags">
+                                        {{ range .Params.tags }}
+                                            <span class="tag">{{ . }}</span>
+                                        {{ end }}
+                                    </div>
+                                {{ end }}
+
+                                <a href="{{ .Permalink }}" class="read-more">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Selengkapnya
+                                </a>
+
+                            </div>
+                        </article>
+                    {{ end }}
+
+                </div>
+
+                {{ with $paginator }}
+                    <div class="pagination">
+
+                        {{ with .Prev }}
+                            <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
+                                <i class="fas fa-chevron-left"></i>
+                                <span aria-hidden="true">Sebelumnya</span>
+                            </a>
+                        {{ end }}
+
+                        <span class="pagination-info">{{ .PageNumber }}/{{ .TotalPages }}</span>
+                        
+                        {{ with .Next }}
+                            <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
+                                <span aria-hidden="true">Selanjutnya</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        {{ end }}
+                    </div>
+                {{ end }}
+
+            </div>
+        </section>
+    </main>
+
+{{ end }}

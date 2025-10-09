@@ -1,0 +1,60 @@
+<main class="main">
+
+    <section class="detail-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="{{ $.Site.BaseURL }}research/">
+                    <i class="fas fa-flask"></i>
+                    Research
+                </a>
+                <i class="fas fa-chevron-right"></i>
+                <span>{{ .Title }}</span>
+            </nav>
+        </div>
+    </section>
+
+    <article class="detail-content">
+        <div class="container">
+            <div class="research-detail">
+                <!-- Research Hero Section -->
+                <header class="research-hero">
+                    <div class="research-hero-content">
+                        <h1 class="research-title">{{ .Title }}</h1>
+                        <p class="research-subtitle">{{ .Description }}</p>
+                    </div>
+                </header>
+
+                <!-- Research Content -->
+                <div class="research-body">
+                    {{ range .Pages }}
+                        {{ if .Params.type }}
+
+                            {{ if eq .Params.type "table" }}
+                                {{ partial "research/single-table.html" . }}
+                            {{ end }}
+
+                            {{ if eq .Params.type "html" }}
+                                {{ partial "research/single-html.html" . }}
+                            {{ end }}                            
+
+                        {{ else }}
+
+                            {{ partial "research/single-card.html" . }}
+                        {{ end }}
+
+                    {{ end }}
+                </div>
+
+                <!-- Research Footer -->
+                <footer class="research-footer">
+                    <div class="research-navigation">
+                        <a href="javascript:window.history.go(-1);" class="nav-button">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Research
+                        </a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </article>
+</main>

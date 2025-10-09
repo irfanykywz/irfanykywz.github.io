@@ -1,0 +1,102 @@
+{{ define "head" }}
+  {{ partial "style.html" (dict "css" "css/quote.css") }}
+{{ end }}
+
+{{ define "config" }}
+    {{ .Scratch.Set "noIndex" true }} 
+{{ end }}
+
+{{ define "main" }}
+<main class="main">
+    <div class="quote-list-page">
+
+        <header class="quote-list-header">
+            <h1>🌟 {{ .Title }}</h1>
+            <p>
+                {{ .Description }}
+            </p>
+        </header>
+
+        <div class="quote-filters" aria-label="Filter kutipan">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <!-- category buttons will be injected here -->
+        </div>
+
+        <div class="quotes-grid">
+            {{ range .Pages }}
+            <article class="quote-card" data-cats="{{ delimit .Params.categories "|" }}">
+                <div class="quote-content">{{ .Summary | safeHTML }}</div>
+                <div class="quote-meta">
+                <div class="quote-author">
+                {{ with .Params.author }}
+                    {{ . }}
+                {{ else }}
+                    — Anonymous
+                {{ end }}
+                </div>
+                <button class="quote-copy" data-target="quote-{{ .File.UniqueID }}">Salin</button>
+                </div>
+                <textarea id="quote-{{ .File.UniqueID }}" class="quote-hidden">{{ .Plain }}</textarea>
+            </article>
+            {{ end }}
+        </div>
+
+        <script>
+        // Build category buttons and wire filtering + copy
+        document.addEventListener('DOMContentLoaded', function(){
+            var cards = Array.from(document.querySelectorAll('.quote-card'));
+            var categorySet = new Set();
+            cards.forEach(function(c){
+            var cats = c.getAttribute('data-cats');
+            if(!cats) return;
+            cats.split('|').map(function(s){ return s.trim(); }).forEach(function(cat){ if(cat) categorySet.add(cat); });
+            });
+
+            var filtersContainer = document.querySelector('.quote-filters');
+            if(filtersContainer){
+            Array.from(categorySet).sort().forEach(function(cat){
+                var btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.setAttribute('data-filter', cat);
+                btn.textContent = cat;
+                filtersContainer.appendChild(btn);
+            });
+            }
+
+            // Filter logic
+            filtersContainer.addEventListener('click', function(e){
+            if(!e.target || !e.target.classList.contains('filter-btn')) return;
+            var filter = e.target.getAttribute('data-filter');
+            // set active class
+            filtersContainer.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+            e.target.classList.add('active');
+            // show/hide cards
+            cards.forEach(function(c){
+                var cats = c.getAttribute('data-cats') || '';
+                if(filter === 'all' || (cats.split('|').map(function(s){return s.trim();}).indexOf(filter) !== -1)){
+                c.style.display = '';
+                } else {
+                c.style.display = 'none';
+                }
+            });
+            });
+
+            // Copy logic (delegated)
+            document.addEventListener('click', function(e){
+            if(e.target && e.target.classList.contains('quote-copy')){
+                var id = e.target.getAttribute('data-target');
+                var ta = document.getElementById(id);
+                if(!ta) return;
+                // fallback copy using temporary textarea
+                var text = ta.value || ta.innerText || ta.textContent;
+                if(navigator.clipboard){ navigator.clipboard.writeText(text).then(function(){ e.target.textContent='Tersalin!'; setTimeout(function(){ e.target.textContent='Copy'; },900); }); }
+                else {
+                ta.select(); try{ document.execCommand('copy'); e.target.textContent='Tersalin!'; setTimeout(function(){ e.target.textContent='Copy'; },900);}catch(err){console.warn(err)}
+                }
+            }
+            });
+        });
+        </script>
+    </div>
+</main>
+{{ end }}

@@ -1,0 +1,46 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/project.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-briefcase"></i>
+                    {{ .Title }}
+                </h1>
+                <p class="page-description">{{ len .Data.Pages }} {{ .Description }}</p>
+            </div>
+        </section>
+
+        <section class="portfolio-filters">
+            <div class="container">
+                <div class="filter-buttons">
+                     {{- range $index, $element := .Params.filtertab -}}
+                        <button class="filter-btn {{ if eq $index 0 }} active{{ end }}" data-filter="{{ $element.filter }}">
+                            <i class="{{ $element.icon }}"></i>
+                            {{ $element.name }}
+                        </button>
+                    {{- end -}}
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio-grid">
+            <div class="container">
+                <div class="projects-grid">
+                    {{ range .Data.Pages }}
+                        {{ partial "project/list-card.html" . }}
+                    {{ end }}
+
+                </div>
+            </div>
+        </section>
+
+        {{ partial "cta.html" . }}
+        
+    </main>
+
+{{ end }}

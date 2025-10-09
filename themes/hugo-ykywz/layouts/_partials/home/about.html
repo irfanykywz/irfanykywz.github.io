@@ -1,0 +1,15 @@
+<section>
+<div class="about-section container">
+    <h2 class="section-title">
+        ✨
+        {{ .Params.abouttitle }}
+    </h2>
+    <div class="about-content">
+        {{ range .Params.about }}
+            <p>
+                {{ . }}
+            </p>
+        {{ end }}
+    </div>
+</div>
+</section>

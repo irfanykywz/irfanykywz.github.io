@@ -1,0 +1,49 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>
+{{ if .IsHome }}
+	{{ site.Title }}
+{{ else }}
+	{{ printf "%s | %s" .Title site.Title }}
+{{ end }}
+</title>
+
+{{ if .IsHome }}
+	<meta name="description" content="{{ .Site.Params.description }}" />
+	<meta name="author" content="{{ .Site.Params.author }}" />
+	<meta name="keywords" content="{{ .Site.Params.keywords }}" />
+{{ else }}
+
+{{ end }}
+
+{{ $noIndex := .Scratch.Get "noIndex" }}
+{{ if $noIndex }}
+	<meta name="robots" content="noindex" />
+	<meta name="googlebot" content="noindex" />
+{{ else }}
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow" />
+{{ end }}
+
+<link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
+<link rel="sitemap" type="application/xml" title="Sitemap" href='{{ "sitemap.xml" | absURL }}' />
+
+<meta name="google-site-verification" content="lDWGSmP0hlTFnz59wlaQqzwpVJeznar9HRdFtgZnnEI" />
+<meta name="google-adsense-account" content="ca-pub-2846006866814506">
+
+{{ if isset .Site.Params "favicon" }}
+	<link rel="icon" type="image/png" href={{ $.Site.BaseURL }}{{ .Site.Params.favicon }} />
+{{ end }}
+
+
+{{ with .OutputFormats.Get "RSS" }}
+  <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+  <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+{{ end }}
+
+
+{{- template "_internal/schema.html" . -}}
+{{- template "_internal/opengraph.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}
+{{ partial "google_analytics.html" . }}

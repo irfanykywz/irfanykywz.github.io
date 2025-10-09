@@ -1,0 +1,122 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/journal.css") }}
+{{ end }}
+
+{{ define "main" }}
+    <main class="main">
+        <section class="detail-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="{{ $.Site.BaseURL }}journal/">
+                        <i class="fas fa-pencil"></i>
+                        Jurnal
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>{{ .Title }}</span>
+                </nav>
+            </div>
+        </section>
+
+        <article class="detail-content">
+            <div class="container">
+                <div class="detail-article">
+                    <header class="detail-article-header">
+                        <div class="journal-date-large">
+                            <div class="date-day">{{ .Date.Day }}</div>
+                            <div class="date-month">{{ i18n .Date.Month }}</div>
+                            <div class="date-year">{{ .Date.Year }}</div>
+                        </div>
+                        <div class="detail-meta">
+                            <div class="detail-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>{{ .Date.Format "3:04 PM" }}</span>
+                            </div>
+
+                            <div class="detail-meta-item">
+                                <i class="fa fa-fire"></i>
+                                {{ partial "view-count.html" . }}
+                            </div>
+
+                            {{ if .Params.weather }}
+                            <div class="detail-meta-item">
+                                {{ partial "journal/weather.html" . }}
+                            </div>
+                            {{ end }}
+
+                            {{ if .Params.location }}
+                            <div class="detail-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>{{ .Params.location }}</span>
+                            </div>
+                            {{ end }}              
+
+                        </div>
+                        <h1 class="detail-title">{{ .Title }}</h1>
+                    </header>
+
+                    <div class="detail-body">
+                        <div class="journal-entry-full">
+
+                            {{ with .Content }}
+                            {{ . | safeHTML }}
+                            {{ end }}
+                            
+
+                            <div class="journal-signature">
+                                {{ partial "reaction.html" . }}
+                                <div>
+                                    <p>
+                                        <em>
+                                            Sampai jumpa ditulisan lainnya,
+                                            <br>Irfan
+                                        </em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ if gt .Params.tags 0 }}
+                            <div class="detail-tags">
+                                <h4>Tags:</h4>
+                                <div class="tags-list">
+                                    {{ range .Params.tags }}
+                                        <span class="tag">{{ . }}</span>
+                                    {{ end }}
+                                </div>
+                            </div>
+                        {{ end }}
+
+                    </div>
+
+                    <footer class="detail-footer">
+                        <div class="detail-navigation">
+                            <a href="javascript:window.history.go(-1);" class="nav-button">
+                                <i class="fas fa-arrow-left"></i>
+                                Kembali
+                            </a>
+                            <div class="nav-buttons">
+
+                                {{ $pages := .CurrentSection.Pages.ByWeight }}
+
+                                {{ with $pages.Prev . }}
+                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                    <i class="fas fa-chevron-left"></i>
+                                    Sebelumnya
+                                    <!-- {{ .LinkTitle }} -->
+                                </a>
+                                {{ end }}
+
+                                {{ with $pages.Next . }}
+                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                    Selanjutnya
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </article>
+    </main>
+{{ end }}

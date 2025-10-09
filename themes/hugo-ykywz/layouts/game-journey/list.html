@@ -1,0 +1,24 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/game-journey.css") }}
+    {{ partial "style.html" (dict "css" "css/learn.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    {{ $split := "/"}}
+    {{ if strings.Contains .File.Dir "\\" }}
+        {{ $split = "\\"}}
+    {{ end }}
+    {{ $dirParts := split .File.Dir $split }}
+
+    {{ if gt (len $dirParts) 2 }}
+        {{ partial "game-journey/module.html" . }}
+    {{ else if eq (len $dirParts) 2 }}
+        {{ partial "game-journey/list.html" . }}
+    {{ end }}
+
+{{ end }}
+
+{{ define "footer" }}
+    {{ partial "script.html" (dict "js" "js/learn.js") }}
+{{ end }}

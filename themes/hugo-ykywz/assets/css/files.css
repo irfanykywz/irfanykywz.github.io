@@ -1,0 +1,463 @@
+.file-manager-main {
+max-width: 1100px;
+margin: 40px auto;
+padding: 30px;
+background: var(--bg-secondary);
+border-radius: var(--radius-xl, 12px);
+box-shadow: var(--shadow-md);
+transition: background var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* --- 3. Header and Controls --- */
+.header-controls {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-bottom: 20px;
+border-bottom: 1px solid var(--border-color);
+margin-bottom: 10px;
+}
+
+.header-controls h1 {
+color: var(--text-primary);
+font-size: 1.8em;
+font-weight: 600;
+margin: 0;
+}
+
+.header-right {
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+gap: 10px;
+}
+
+.search-bar {
+display: flex;
+align-items: center;
+background-color: var(--bg-tertiary);
+border-radius: var(--radius-md);
+padding: 8px 12px;
+width: 350px;
+}
+
+.search-bar .search-icon { color: var(--text-muted); margin-right: 8px; font-size: 1.1em; }
+.search-bar input {
+border: none;
+background: transparent;
+font-size: 1em;
+padding: 0;
+width: 100%;
+color: var(--text-primary);
+}
+.search-bar input:focus { outline: none; }
+
+.utility-button {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+}
+
+.utility-button {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.utility-button:hover:hover {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+}
+
+/* --- 4. Filter Panel --- */
+.filter-panel {
+display: flex;
+align-items: center;
+padding: 10px 0;
+margin-bottom: 15px;
+border-bottom: 1px solid var(--border-color);
+}
+
+.filter-label, .pagination-label { 
+font-size: 0.9em; 
+color: var(--text-secondary); 
+font-weight: 500; 
+margin-right: 15px; 
+}
+
+.filter-select, .pagination-select {
+padding: 8px 12px;
+border: 1px solid var(--border-color);
+border-radius: var(--radius-md);
+background-color: var(--bg-secondary);
+color: var(--text-primary);
+margin-right: 15px;
+font-size: 0.9em;
+cursor: pointer;
+/*appearance: none;*/
+background-repeat: no-repeat;
+background-position: right 8px center;
+padding-right: 25px;
+transition: border-color var(--transition-normal);
+position: relative;
+}
+
+.clear-filters-btn {
+background-color: transparent;
+color: var(--text-muted);
+padding: 8px 12px;
+font-size: 0.9em;
+margin-left: auto;
+cursor: pointer;
+border: 1px solid transparent;
+border-radius: var(--radius-md);
+transition: all var(--transition-normal);
+opacity: 0.5;
+}
+
+.clear-filters-btn.is-active {
+opacity: 1;
+color: var(--accent-danger);
+border-color: var(--accent-danger);
+background-color: color-mix(in srgb, var(--accent-danger) 10%, transparent); /* Light background tint based on danger */
+font-weight: 500;
+}
+
+.clear-filters-btn.is-active:hover {
+background-color: color-mix(in srgb, var(--accent-danger) 20%, transparent);
+box-shadow: var(--shadow-sm, none);
+}
+
+/* --- 5. List View (Table) Styling --- */
+.table-responsive { overflow-x: auto; }
+.file-list-container table { width: 100%; border-collapse: collapse; min-width: 650px; margin:0; border-radius: 0}
+
+.file-list-container thead th {
+text-align: left;
+color: var(--text-secondary);
+font-size: 0.9em;
+font-weight: 600;
+padding: 12px 15px;
+border-bottom: 2px solid var(--border-color);
+}
+
+.file-list-container thead th.col-size {text-align: right;}
+.file-list-container thead th.col-actions { text-align: right; width:10% }
+
+.file-item td { 
+border:none !important;
+padding: 15px; 
+/*border-bottom: 1px solid var(--border-color); */
+font-size: 0.95em; 
+color: var(--text-primary);
+}
+
+.file-item:hover {
+background-color: var(--hover-bg);
+}
+
+.file-item .col-name { font-weight: 500; display: flex; align-items: center; }
+.file-item .icon { font-size: 1.2em; margin-right: 10px; line-height: 1; }
+
+/* Icon Colors mapped to accents */
+.folder .icon { color: var(--accent-warning); } /* Yellow */
+.pdf .icon { color: var(--accent-danger); } /* Red */
+.docx .icon { color: var(--accent-primary); } /* Blue */
+.xlsx .icon { color: var(--accent-secondary); } /* Green */
+
+.col-size { color: var(--text-muted); font-size: 0.9em; text-align: right; }
+.col-actions { text-align: right; white-space: nowrap; }
+
+/* Action Buttons Styling */
+.action-button {
+background: none;
+border: none;
+color: var(--text-muted);
+cursor: pointer;
+font-size: 1.1em;
+margin-left: 10px;
+padding: 5px 8px;
+border-radius: var(--radius-sm, 4px);
+transition: all var(--transition-fast);
+line-height: 1;
+}
+
+.action-button:hover {
+color: var(--accent-primary);
+background-color: var(--bg-tertiary);
+}
+
+/* Protection logic: Download/Copy are hidden if locked */
+.action-unlocked-group {
+    display: inline-block;
+}
+
+.file-item[data-locked="true"] .action-unlocked-group {
+    display: none;
+}
+
+/* Lock Button specific coloring */
+.lock-btn[data-locked="true"] {
+    color: var(--accent-danger); /* Show red lock when protected */
+}
+
+.lock-btn[data-locked="false"] {
+    color: var(--accent-secondary); /* Show green unlock when safe */
+}
+
+/* Success State for Copy Button */
+.copied-success {
+background-color: var(--accent-secondary) !important;
+color: var(--text-primary) !important;
+font-size: 0.8em !important;
+font-weight: 600;
+padding: 5px 10px !important;
+box-shadow: var(--shadow-sm);
+}
+
+/* --- 6. Pagination Footer --- */
+.pagination-footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-top: 15px;
+border-top: 1px solid var(--border-color);
+}
+
+.pagination-info {align-items: center;}
+
+.page-info { font-size: 0.9em; color: var(--text-secondary); margin-right: 20px; }
+.page-button {
+background: var(--bg-secondary);
+border: 1px solid var(--border-color);
+color: var(--text-primary);
+padding: 8px 12px;
+margin: 0 4px;
+border-radius: var(--radius-md);
+cursor: pointer;
+transition: all var(--transition-normal);
+font-size: 0.9em;
+}
+.page-button:hover:not(.disabled) { background-color: var(--hover-bg); }
+.page-button.active { background-color: var(--accent-primary); color: var(--text-primary); border-color: var(--accent-primary); }
+.page-button.disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* --- 4. Modals (General Styling) --- */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.7);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+visibility: hidden;
+opacity: 0;
+transition: opacity var(--transition-normal), visibility var(--transition-normal);
+
+/* ADDED: Allow scrolling if content is too tall */
+overflow-y: auto; 
+padding: 20px 0; 
+}
+
+.modal-overlay.open {
+visibility: visible;
+opacity: 1;
+}
+
+.modal-content-box {
+background: var(--bg-secondary);
+padding: 30px;
+border-radius: var(--radius-lg);
+box-shadow: var(--shadow-xl);
+width: 90%;
+max-width: 400px;
+transform: scale(0.9);
+transition: transform var(--transition-normal);
+/* ADDED: Max height constraint for scrollability */
+max-height: 95vh;
+overflow-y: auto;
+}
+
+.encrypt-tool-modal { max-width: 600px; } 
+
+.modal-overlay.open .modal-content-box {
+transform: scale(1);
+}
+
+.modal-content-box h3 {
+color: var(--text-primary);
+margin-top: 0;
+margin-bottom: 20px;
+font-size: 1.4em;
+border-bottom: 1px solid var(--border-color);
+padding-bottom: 10px;
+}
+
+.modal-content-box input, .modal-content-box textarea {
+width: 100%;
+padding: 12px;
+margin-bottom: 15px;
+border: 1px solid var(--border-color);
+border-radius: var(--radius-md);
+background: var(--bg-tertiary);
+color: var(--text-primary);
+font-size: 1em;
+transition: border-color var(--transition-fast);
+resize: none;
+}
+
+.modal-content-box input:focus, .modal-content-box textarea:focus {
+outline: none;
+border-color: var(--accent-primary);
+}
+
+.form-group label {
+display: block;
+font-size: 0.85em;
+color: var(--text-secondary);
+margin-bottom: 5px;
+font-weight: 500;
+}
+
+.output-group {
+position: relative;
+margin-bottom: 20px;
+}
+
+.output-group code {
+display: block;
+word-break: break-all;
+background: var(--bg-tertiary);
+padding: 10px;
+border-radius: var(--radius-md);
+font-size: 0.8em;
+color: var(--accent-secondary);
+min-height: 40px;
+border: 1px solid var(--border-color);
+cursor: pointer;
+user-select: all; /* Allow easy selection on click/tap */
+}
+
+.output-group code:empty:before {
+content: "Encrypted output will appear here...";
+color: var(--text-muted);
+}
+
+.password-error {
+color: var(--accent-danger);
+margin-bottom: 15px;
+font-size: 0.85em;
+height: 1.2em;
+}
+
+.modal-buttons {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+margin-top: 20px;
+}
+
+.modal-buttons button {
+padding: 10px 20px;
+border: none;
+border-radius: var(--radius-md);
+cursor: pointer;
+font-weight: 600;
+transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.modal-buttons .cancel-btn {
+background: var(--bg-tertiary);
+color: var(--text-secondary);
+}
+
+.modal-buttons .cancel-btn:hover {
+background: var(--hover-bg);
+}
+
+.modal-buttons .confirm-btn, .modal-buttons .encrypt-btn {
+background: var(--accent-primary);
+color: white; /* Changed to white for better contrast on accent */
+}
+
+.modal-buttons .confirm-btn:hover, .modal-buttons .encrypt-btn:hover {
+background: color-mix(in srgb, var(--accent-primary) 80%, var(--bg-secondary));
+}
+
+.copy-message {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: var(--accent-secondary);
+color: var(--bg-secondary);
+padding: 5px 10px;
+border-radius: var(--radius-sm);
+font-size: 0.75em;
+font-weight: 600;
+opacity: 0;
+transition: opacity 0.3s ease-out;
+pointer-events: none; /* Ensure it doesn't block clicks */
+}
+.copy-message.show {
+opacity: 1;
+}
+
+/* --- 7. Responsive Adjustments --- */
+@media (max-width: 768px) {
+.file-manager-main {
+margin: 20px 10px;
+padding: 20px;
+}
+.header-controls {
+flex-direction: column;
+align-items: flex-start;
+}
+.header-controls > div {
+margin-top: 10px;
+width: 100%;
+justify-content: space-between;
+}
+.header-right {
+    width: 100%;
+    justify-content: space-between;
+}
+.search-bar {
+width: 100%;
+}
+.utility-button {
+    flex-grow: 1;
+}
+.theme-toggle {
+margin-left: 10px;
+}
+.filter-panel {
+flex-wrap: wrap;
+}
+.filter-select {
+margin-bottom: 10px;
+}
+.pagination-footer {
+flex-direction: column;
+gap: 15px;
+}
+.pagination-info {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+.page-info {
+flex-basis: 100%;
+text-align: center;
+margin-bottom: 10px;
+}
+}

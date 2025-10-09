@@ -1,0 +1,10 @@
+{{ if eq .Params.weather "Rain"}}
+<i class="fas fa-cloud-rain"></i>
+{{ else if eq .Params.weather "Bright" }}
+<i class="fas fa-sun"></i>
+{{ else if eq .Params.weather "Clear" }}
+<i class="fas fa-star"></i>
+{{ else }}
+<i class="fas fa-cloud"></i>
+{{ end }}
+{{ .Params.weather }}

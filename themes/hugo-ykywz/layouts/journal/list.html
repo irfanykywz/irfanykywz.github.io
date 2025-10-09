@@ -1,0 +1,91 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/journal.css") }}
+    {{ partial "style.html" (dict "css" "css/pagination.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-pencil"></i>
+                    {{.Title}}
+                </h1>
+                <p class="page-description">{{ .Description }}</p>
+            </div>
+        </section>
+
+        <section class="journal-content">
+            <div class="container">
+                <div class="journal-entries">
+
+                    {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
+                    {{ range $paginator.Pages }}
+                        <article class="journal-entry">
+                            <div class="journal-header">
+                                <div class="journal-date">
+                                    <div class="date-day">{{ .Date.Day }}</div>
+                                    <div class="date-month">{{ i18n .Date.Month }}</div>
+                                    <div class="date-year">{{ .Date.Year }}</div>
+                                </div>
+                                <div class="journal-meta">
+                                    <div class="journal-time">
+                                        <i class="fas fa-clock"></i>
+                                        {{ .Date.Format "3:04 PM" }}
+                                    </div>
+
+                                    <div class="journal-time">
+                                        <i class="fa fa-fire"></i>
+                                        {{ partial "view-count.html" . }}
+                                    </div>                                    
+
+                                    {{ if .Params.weather }}
+                                        <div class="journal-weather">
+                                            {{ partial "journal/weather.html" . }}
+                                        </div>
+                                    {{ end }}
+
+                                </div>
+                            </div>
+                            <div class="journal-content-body">
+                                <h2 class="journal-title">
+                                    <a href="{{ .RelPermalink }}">{{.Title}}{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}</a>
+                                </h2>
+                                <div class="journal-text">
+                                    <p>
+                                        {{ if isset .Params "description" }}
+                                            {{ .Description }}
+                                        {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                                            {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                                        {{ else }}
+                                            {{ .Content | plainify | safeHTML }}
+                                        {{ end }}
+                                    </p>
+                                </div>
+                                {{ if gt .Params.tags 0 }}
+                                <div class="journal-tags">
+                                    {{ range .Params.tags }}
+                                        <span class="tag">{{ . }}</span>
+                                    {{ end }}
+                                </div>
+                                {{ end }}
+                            </div>
+                            <div class="journal-footer">
+                                <a href="{{ .RelPermalink }}" class="read-more">
+                                    <i class="fas fa-book-open"></i>
+                                    Selengkapnya
+                                </a>
+                            </div>
+                        </article>
+                    {{- end -}}
+
+                </div>
+
+                {{ template "_internal/pagination.html" . }}
+
+            </div>
+        </section>
+    </main>
+
+{{ end }}

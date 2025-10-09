@@ -1,0 +1,88 @@
+{{ define "head" }}
+  {{ partial "style.html" (dict "css" "css/tools.css") }}
+{{ end }}
+
+{{ define "main" }}
+    <main class="main">
+        <section class="tools-header">
+            <div class="container">
+                <h1 class="page-title">
+                    🔨
+                    {{.Title}}
+                </h1>
+                <p class="page-description">{{ .Description }}</p>
+                <div class="tools-search" role="search">
+                    <input id="toolsSearch" type="search" placeholder="Cari alat berdasarkan nama atau deskripsi..." aria-label="Cari alat">
+                    <button id="toolsSearchClear" class="search-clear" aria-label="Bersihkan pencarian">✕</button>
+                </div>
+            </div>
+        </section>
+
+		<section class="tools-section">
+            <div class="container">
+                <ul class="tools-list">
+                    {{ range .Pages }}
+                        <li class="tools-list-item">
+                            <a class="tool-card" href="{{ .RelPermalink }}">
+                                <div class="card-head">
+                                    <span class="card-icon">
+                                        {{ $icon := or .Params.icon "fa-solid fa-wrench" }}
+                                        <i class="{{ $icon }}" aria-hidden="true"></i>
+                                    </span>
+                                    <div>
+                                        <div class="card-title">
+                                            <h2>
+                                                {{ .Title }}
+                                            </h2>
+                                        </div>
+                                        {{ with .Params.description }}
+                                            <div class="card-desc">{{ . }}</div>
+                                        {{ end }}
+                                    </div>
+                                </div>
+                                <div class="card-meta">
+                                    <span>
+                                        <i class="fa fa-calendar"></i>
+                                        {{ .Date | time.Format "2 January 2006" }}
+                                    </span>
+                                    <span>Buka →</span>
+                                </div>
+                            </a>
+                        </li>
+                    {{ end }}
+                </ul>
+                                <div id="noResults" class="no-results" hidden>Tidak ada alat yang cocok dengan pencarian.</div>
+            </div>
+		</section>
+
+        <script>
+        (function(){
+            const input = document.getElementById('toolsSearch');
+            const clear = document.getElementById('toolsSearchClear');
+            const items = Array.from(document.querySelectorAll('.tools-list-item'));
+            const noResults = document.getElementById('noResults');
+
+            function normalize(s){ return (s||'').toLowerCase(); }
+
+            function filter(){
+                const q = normalize(input.value.trim());
+                let shown = 0;
+                items.forEach(li => {
+                    const title = normalize(li.querySelector('.card-title')?.innerText);
+                    const desc = normalize(li.querySelector('.card-desc')?.innerText);
+                    if(!q || title.includes(q) || desc.includes(q)){
+                        li.style.display = '';
+                        shown++;
+                    } else {
+                        li.style.display = 'none';
+                    }
+                });
+                noResults.hidden = shown > 0;
+            }
+
+            input.addEventListener('input', filter);
+            clear.addEventListener('click', () => { input.value=''; input.focus(); filter(); });
+        })();
+        </script>
+	</main>
+{{ end }}

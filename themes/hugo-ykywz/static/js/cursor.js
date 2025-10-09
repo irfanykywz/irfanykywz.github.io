@@ -1,0 +1,1 @@
+document.body.style.cursor = "url(https://cur.cursors-4u.net/cursors/cur-2/cur222.cur), auto";

@@ -1,0 +1,170 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/contact.css") }}
+{{ end }}
+
+{{ define "main" }}
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-envelope"></i>
+                    {{ .Title }}
+                </h1>
+                <p class="page-description">{{ .Description }}</p>
+            </div>
+        </section>
+
+        <section class="contact-content">
+            <div class="container">
+                <div class="contact-grid">
+
+                    <div class="contact-container">
+                        <form id="form" class="contact-form">
+                            <input type="hidden" name="access_key" value="feedd383-8f73-47a0-8f20-f20696999a1a">
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                            <div class="form-group">
+                                <label for="name">Nama Lengkap</label>
+                                <input type="text" id="name" name="name" required placeholder="Masukkan nama">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Alamat Email</label>
+                                <input type="email" id="email" name="email" required placeholder="jack@gmail.com">
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label for="subject">Subjek</label>
+                                <input type="text" id="subject" name="subject" required placeholder="Subjek pesan Anda">
+                            </div> -->
+
+                            <div class="form-group">
+                                <label for="message">Pesan</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Tulis pesan di sini..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-button">Kirim Pesan</button>
+                            
+                            <p id="result" class="form-result" style="display: none;"></p>
+
+                        </form>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <h3>
+                                <i class="fas fa-paper-plane"></i>
+                                Kontak
+                            </h3>
+                            
+                            <div class="contact-methods">
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Email</h4>
+                                        <a target="_blank" href="mailto:{{ .Params.Email }}">{{ .Params.Email }}</a>
+                                    </div>
+                                </div>
+
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>WhatsApp</h4>
+                                        <a target="_blank" href="{{ .Params.Whatsapp }}">
+                                            {{ .Params.Phone }}
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fa-brands fa-telegram"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Telegram</h4>
+                                        <a target="_blank" href="{{ .Params.Telegram }}">
+                                            {{ .Params.Telegram }}
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="availability-status">
+                                <div class="status-indicator available"></div>
+                                <span>{{ .Params.Status }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const form = document.getElementById('form');
+        const result = document.getElementById('result');
+        
+        // Tampilkan elemen result di awal (untuk memastikan styling diterapkan)
+        result.style.display = "block"; 
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 1. Persiapan Data
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            
+            // 2. Tampilkan pesan tunggu
+            result.innerHTML = "Mohon tunggu sebentar...";
+            result.className = "form-result form-result-loading"; // Terapkan styling loading
+
+            // 3. Kirim data menggunakan Fetch API
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let resJson = await response.json();
+                
+                if (response.status === 200) {
+                    // Sukses
+                    result.innerHTML = "Pesan berhasil terkirim! Terima kasih.";
+                    result.className = "form-result form-result-success"; 
+                } else {
+                    // Error dari Web3Forms (misalnya key salah)
+                    console.error("Web3Forms Error:", resJson);
+                    result.innerHTML = resJson.message || "Terjadi kesalahan saat mengirim pesan.";
+                    result.className = "form-result form-result-error";
+                }
+            })
+            .catch(error => {
+                // Error koneksi/jaringan
+                console.error("Fetch Error:", error);
+                result.innerHTML = "Terjadi kesalahan jaringan! Coba lagi.";
+                result.className = "form-result form-result-error";
+            })
+            .finally(function() {
+                // Dijalankan setelah sukses atau error
+                form.reset();
+                // Pesan akan hilang setelah 5 detik
+                setTimeout(() => {
+                    // Mengganti display dengan innerHTML kosong lebih baik
+                    result.innerHTML = ""; 
+                    result.className = "form-result"; // Reset class
+                }, 5000); 
+            });
+        });
+    </script>
+{{ end }}

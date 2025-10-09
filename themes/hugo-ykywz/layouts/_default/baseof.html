@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+
+<head>
+    {{ block "config" . }}{{ end }} 
+
+    {{ partial "baseof/head.html" . }}
+
+    {{ partialCached "baseof/css.html" . }}
+
+    {{ block "head" . }}{{ end }}
+
+    {{ partialCached "baseof/js.html" . }}
+
+</head>
+
+<body>
+
+    {{ $hideHeader := .Scratch.Get "hideHeader" }}
+    {{ if not $hideHeader }}
+        {{ partial "baseof/header.html" . }}
+    {{ end }}
+
+    {{ block "main" . }}{{ end }}
+
+    {{ $hideFooter := .Scratch.Get "hideFooter" }}
+    {{ if not $hideFooter }}
+        {{ partial "baseof/footer.html" . }}
+    {{ end }}
+
+    {{ partial "baseof/js-bottom.html" . }}
+
+    {{ block "footer" . }}{{ end }}
+
+</body>
+
+</html>

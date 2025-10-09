@@ -1,0 +1,58 @@
+<main class="main">
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-flask"></i>
+                {{.Title}}
+            </h1>
+            <p class="page-description">{{ .Description }}</p>
+        </div>
+    </section>
+
+    <section class="research-content">
+        <div class="container">
+            <div class="research-table-wrapper">
+                <table class="research-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                            <th width="20%">Last Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range .Data.Pages }}
+                            <tr>
+                                <td class="w-30">
+                                    {{ if isset .Params "image" }}
+                                    <img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" class="w-40 h-40 obj-cover rounded-md bg-dark">
+                                    {{ else }}
+                                    <i class="fas fa-flask icon-lg text-accent"></i>
+                                    {{ end }}
+                                </td>
+                                <td>
+                                    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                                    {{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}
+                                    <div class="research-description-table">
+                                        {{ if isset .Params "description" }}
+                                        {{ .Description }}
+                                        {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                                        {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                                        {{ else }}
+                                        {{ .Content | plainify | safeHTML }}
+                                        {{ end }}
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ $sorted := sort .Pages "Date" }}
+                                    {{ $lastUpdate := index $sorted (sub (len $sorted) 1) }}
+                                    {{ $lastUpdate.Date.Format "2 January 2006" }}
+                                </td>
+                            </tr>
+                        {{ end }}                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>

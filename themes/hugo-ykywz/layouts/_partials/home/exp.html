@@ -1,0 +1,28 @@
+<section>
+    <div class="experience container">
+        <h2 class="section-title">
+            💼
+            {{ .Params.experiencetitle }}
+        </h2>
+        <div class="grid">
+            {{- range $index, $element := .Params.experience -}}
+                <div class="card">
+                    <div class="card-head">
+                        <h3>{{ $element.title }}</h3>
+                        <p class="company-name">{{ $element.company }}</p>
+                        <p class="duration">{{ $element.time }}</p>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            {{ range $element.jobs }}
+                                <li>
+                                    {{ . }}
+                                </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+</section>

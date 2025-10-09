@@ -1,0 +1,211 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/project.css") }}
+{{ end }}
+
+{{ define "main" }}
+    <main class="main">
+        <section class="detail-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="{{ $.Site.BaseURL }}projects/">
+                        <i class="fas fa-briefcase"></i>
+                        Projek
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>{{ .Title }}</span>
+                </nav>
+            </div>
+        </section>
+
+        <article class="portfolio-detail">
+            <div class="container">
+
+                {{ partial "project/hero.html" . }}           
+                {{ partial "project/overview.html" . }}           
+                {{ partial "project/feature.html" . }}           
+                {{ partial "project/stack.html" . }}           
+                {{ partial "project/galery.html" . }}           
+                <!-- {{ partial "project/lesson.html" . }}            -->
+                {{ partial "project/review.html" . }}           
+
+                <div class="project-navigation">
+                    <div class="nav-section">
+                        <a href="{{ $.Site.BaseURL}}projects/" class="nav-button">
+                            <i class="fas fa-arrow-left"></i>
+                            Kembali
+                        </a>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-buttons">
+                            {{ $pages := .CurrentSection.Pages.ByWeight }}
+
+                            {{ with $pages.Prev . }}
+                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                    <i class="fas fa-chevron-left"></i>
+                                    Proyek Sebelumnya
+                                </a>
+                            {{ end }}
+
+                            {{ with $pages.Next . }}
+                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                    Proyek Selanjutnya
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </article>
+    </main>
+
+<!-- Lightbox Modal -->
+<div id="lightbox-modal" class="lightbox-modal">
+    <div class="lightbox-content">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-image" src="" alt="" />
+        <div class="lightbox-caption"></div>
+    </div>
+</div>
+
+<style>
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: #ccc;
+}
+
+#lightbox-image {
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+#lightbox-image:hover {
+    transform: scale(1.02);
+}
+
+.lightbox-caption {
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    max-width: 80%;
+}
+
+.lightbox-trigger {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lightbox-trigger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .lightbox-content {
+        width: 95%;
+        height: 95%;
+        padding: 10px;
+    }
+    
+    .lightbox-close {
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+    }
+    
+    #lightbox-image {
+        max-height: 70%;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxCaption = document.querySelector('.lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const triggers = document.querySelectorAll('.lightbox-trigger');
+
+    // Open lightbox
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+            const imageSrc = this.getAttribute('data-src');
+            const imageAlt = this.getAttribute('alt');
+            
+            lightboxImage.src = imageSrc;
+            lightboxImage.alt = imageAlt;
+            lightboxCaption.textContent = imageAlt;
+            lightboxModal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+    });
+
+    // Close lightbox
+    function closeLightbox() {
+        lightboxModal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    // Close on background click
+    lightboxModal.addEventListener('click', function(e) {
+        if (e.target === lightboxModal) {
+            closeLightbox();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightboxModal.style.display === 'block') {
+            closeLightbox();
+        }
+    });
+});
+</script>
+    
+{{ end }}

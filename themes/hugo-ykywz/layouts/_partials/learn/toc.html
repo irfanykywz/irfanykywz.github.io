@@ -1,0 +1,45 @@
+<!-- Table of Contents -->
+{{ if .Page.Params.toc | default true }}
+    {{ $headers := findRE "<h[2-6].*?>(.|\n])+?</h[2-6]>" .Content }}
+    {{ if ge (len $headers) 1 }}
+        <aside class="toc-sidebar">
+            <h3 class="toc-title">Daftar Isi</h3>
+            <ul class="toc-list">
+                {{ range $i, $header := $headers }}
+                    {{ $headerLevel := index (findRE "[2-6]" $header 1) 0 }}
+                    {{ $headerLevel := int $headerLevel }}
+                    {{ $headerID := $header | replaceRE ".* id=\"([^\"]+)\".*" "$1" }}
+                    {{ if not $headerID }}
+                        {{ $headerID = $header | plainify | anchorize }}
+                    {{ end }}
+                    {{ $headerText := $header | plainify | htmlUnescape }}
+
+                    {{ if eq $i 0 }}
+
+                        <li class="toc-item">
+                            <a href="#{{ $headerID }}" class="toc-link toc-level-{{ $headerLevel }}">{{ $headerText }}</a>
+                        </li>
+
+                    {{ else }}
+
+                        {{ $prevHeaderLevel := index (findRE "[2-6]" (index $headers (sub $i 1)) 1) 0 }}
+                        {{ $prevHeaderLevel := int $prevHeaderLevel }}
+
+                        {{ if gt $headerLevel $prevHeaderLevel }}
+                            <ul class="toc-list-sub">
+                        {{ else if lt $headerLevel $prevHeaderLevel }}
+                            {{ range seq (sub $prevHeaderLevel $headerLevel) }}
+                                </ul>
+                            {{ end }}
+                        {{ end }}
+
+                        <ul class="toc-list">
+                            <li class="toc-item"><a href="#{{ $headerID }}" class="toc-link toc-level-{{ $headerLevel }}">{{ $headerText }}</a></li>
+                        </ul>
+                    {{ end }}
+
+                {{ end }}
+            </ul>
+        </aside>
+    {{ end }}
+{{ end }}

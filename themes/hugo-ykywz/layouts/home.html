@@ -1,0 +1,100 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/home.css") }}
+    {{ partial "style.html" (dict "css" "css/project.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <img src="{{ .Site.Params.Avatar | safeURL }}" alt="{{ .Site.Title }}" />
+                    </div>
+                    <div class="profile-info">
+                        <h1 class="profile-name">{{ .Title }}</h1>
+                        <p class="profile-title">{{ .Description }}</p>
+                        <div class="profile-actions">
+                            <a href="{{ .Params.Cv }}" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-download"></i>
+                                Unduh CV
+                            </a>
+                            <a href="mailto:{{ .Params.Email }}" class="btn btn-secondary profile-button">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="{{ .Params.Linkedin }}" target="_blank" class="btn btn-secondary profile-button">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="{{ .Params.Github }}" target="_blank" class="btn btn-secondary profile-button">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {{ partial "home/about.html" . }}
+        
+        {{ if .Params.servicestatus }}
+            {{ partial "home/service.html" . }}
+        {{ end }}
+
+        {{ if .Params.experiencestatus }}
+            {{ partial "home/exp.html" . }}
+        {{ end }}
+
+        {{ if .Params.educationstatus }}
+            {{ partial "home/edu.html" . }}
+        {{ end }}
+
+        {{ if .Params.skill }}
+            {{ partial "home/skills.html" . }}
+        {{ end }}
+
+        {{ if .Params.project }}
+            {{ partial "home/project.html" . }}
+        {{ end }}
+
+        {{ if .Params.cta }}
+            {{ partial "cta.html" . }}
+        {{ end }}
+
+    </main>
+
+    <script>
+        (function(){
+            var tabs = document.querySelectorAll('.pn-tabs');
+            for (var i=0;i<tabs.length;i++){
+                (function(tabRoot){
+                    var btns = tabRoot.querySelectorAll('.pn-tab');
+                    var panels = tabRoot.querySelectorAll('.pn-tabpanel');
+                    for (var j=0;j<btns.length;j++){
+                        btns[j].addEventListener('click', function(ev){
+                            for (var k=0;k<btns.length;k++){
+                                btns[k].classList.remove('active');
+                                btns[k].setAttribute('aria-selected','false');
+                            }
+                            for (var p=0;p<panels.length;p++){
+                                panels[p].classList.remove('active');
+                                panels[p].setAttribute('hidden','');
+                            }
+                            var btn = ev.currentTarget;
+                            btn.classList.add('active');
+                            btn.setAttribute('aria-selected','true');
+                            var panelId = btn.getAttribute('aria-controls');
+                            var panel = tabRoot.querySelector('#'+panelId);
+                            if(panel){
+                                panel.classList.add('active');
+                                panel.removeAttribute('hidden');
+                            }
+                        });
+                    }
+                })(tabs[i]);
+            }
+        })();
+        </script>
+
+{{ end }}

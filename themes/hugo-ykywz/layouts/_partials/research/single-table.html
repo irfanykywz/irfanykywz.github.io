@@ -1,0 +1,366 @@
+<section class="research-table">
+    {{ if .Params.data }}
+    <!-- Search and Filter Controls -->
+    <div class="table-controls">
+        <!-- Search Input -->
+        <div class="search-section">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="researchTableSearch" class="search-input" placeholder="Search table data..." />
+                <button type="button" id="clearSearch" class="clear-search" title="Clear search">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Alphabet Filter -->
+        <div class="filter-section">
+            <div class="filter-controls">
+                <!-- <label for="alphabetFilter" class="filter-label">Filter by:</label> -->
+                <select id="alphabetFilter" class="filter-select">
+                    <option value="">All</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Sort Controls -->
+        <div class="sort-section">
+            <div class="sort-controls">
+                <!-- <label for="sortColumn" class="sort-label">Sort by:</label> -->
+                <select id="sortColumn" class="sort-select">
+                    <option value="">No sorting</option>
+                </select>
+                <button type="button" id="sortDirection" class="sort-direction" title="Sort direction">
+                    <i class="fas fa-sort"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-info">
+        <span id="searchResults">Showing all results</span>
+    </div>
+
+    {{ $firstItem := index .Params.data 0 }}
+    {{ $columnOrder := slice }}
+    {{ range $key, $value := $firstItem }}
+    {{ $columnOrder = $columnOrder | append $key }}
+    {{ end }}
+
+    <div class="table-header">
+        <div class="table-row header-row">
+            {{ range $columnOrder }}
+            <div class="table-cell header-cell">{{ . | title }}</div>
+            {{ end }}
+        </div>
+    </div>
+    <div class="table-body" id="researchTableBody">
+        {{ range $index, $item := .Params.data }}
+        <div class="table-row data-row" data-searchable="true">
+            {{ range $columnOrder }}
+            {{ $key := . }}
+            {{ $value := index $item $key }}
+            <div class="table-cell {{ $key }}-cell">
+                {{ if eq $key "field" }}
+                <span class="field-label">
+                    <i class="fas fa-info-circle"></i>
+                    {{ $value | default "Field" }}
+                </span>
+                {{ else if eq $key "value" }}
+                {{ if (index $item "url") }}
+                <a href="{{ index $item "url" }}" target="_blank" rel="noopener" class="value-link">
+                    {{ $value | default "Value" }}
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                {{ else }}
+                <span class="value-text">{{ $value | default "Value" }}</span>
+                {{ end }}
+                {{ else if eq $key "description" }}
+                <span class="description-text">{{ $value | default "-" }}</span>
+                {{ else if ne $key "url" }}
+                <span class="value-text">{{ $value | default "-" }}</span>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+
+    <!-- No Results Placeholder -->
+    <div id="noResultsPlaceholder" class="no-results-placeholder hidden">
+        <div class="no-results-content">
+            <i class="fas fa-search"></i>
+            <h3>No results found</h3>
+            <p>Try adjusting your search terms or filters to find what you're looking for.</p>
+            <button type="button" class="clear-all-filters" onclick="clearAllFilters()">
+                <i class="fas fa-times"></i>
+                Clear all filters
+            </button>
+        </div>
+    </div>
+    {{ end }}
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('researchTableSearch');
+        const clearButton = document.getElementById('clearSearch');
+        const tableBody = document.getElementById('researchTableBody');
+        const searchResults = document.getElementById('searchResults');
+        const alphabetFilter = document.getElementById('alphabetFilter');
+        const sortColumn = document.getElementById('sortColumn');
+        const sortDirection = document.getElementById('sortDirection');
+        const noResultsPlaceholder = document.getElementById('noResultsPlaceholder');
+
+        if (!searchInput || !tableBody) return;
+
+        let totalRows = 0;
+        let visibleRows = 0;
+        let currentSortColumn = '';
+        let currentSortDirection = 'asc';
+        let originalRowOrder = [];
+
+        // Initialize row count and setup
+        function initializeTable() {
+            const rows = tableBody.querySelectorAll('.table-row[data-searchable="true"]');
+            totalRows = rows.length;
+            visibleRows = totalRows;
+
+            // Store original order
+            originalRowOrder = Array.from(rows);
+
+            // Setup sort column options
+            setupSortColumns();
+
+            updateSearchInfo();
+        }
+
+        // Setup sort column options based on first row
+        function setupSortColumns() {
+            const firstRow = tableBody.querySelector('.table-row[data-searchable="true"]');
+            if (!firstRow) return;
+
+            const cells = firstRow.querySelectorAll('.table-cell');
+            const headerRow = document.querySelector('.header-row');
+            const headerCells = headerRow.querySelectorAll('.header-cell');
+
+            sortColumn.innerHTML = '<option value="">No sorting</option>';
+
+            headerCells.forEach((headerCell, index) => {
+                const columnName = headerCell.textContent.trim();
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = columnName;
+                sortColumn.appendChild(option);
+            });
+        }
+
+        // Update search results info
+        function updateSearchInfo() {
+            if (visibleRows === totalRows) {
+                searchResults.textContent = `Showing all ${totalRows} results`;
+            } else {
+                searchResults.textContent = `Showing ${visibleRows} of ${totalRows} results`;
+            }
+
+            // Show/hide no results placeholder
+            if (visibleRows === 0 && totalRows > 0) {
+                noResultsPlaceholder.style.display = 'flex';
+                tableBody.style.display = 'none';
+            } else {
+                noResultsPlaceholder.style.display = 'none';
+                tableBody.style.display = '';
+            }
+        }
+
+        // Get row text for filtering
+        function getRowText(row) {
+            const cells = row.querySelectorAll('.table-cell');
+            let rowText = '';
+            cells.forEach(cell => {
+                rowText += cell.textContent.toLowerCase() + ' ';
+            });
+            return rowText;
+        }
+
+        // Get cell text for sorting
+        function getCellText(row, columnIndex) {
+            const cells = row.querySelectorAll('.table-cell');
+            if (cells[columnIndex]) {
+                return cells[columnIndex].textContent.trim().toLowerCase();
+            }
+            return '';
+        }
+
+        // Check if row starts with letter
+        function rowStartsWithLetter(row, letter) {
+            if (!letter) return true;
+            const cells = row.querySelectorAll('.table-cell');
+            for (let cell of cells) {
+                const text = cell.textContent.trim();
+                if (text && text.toUpperCase().startsWith(letter)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Apply all filters
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const alphabetLetter = alphabetFilter.value;
+            const rows = tableBody.querySelectorAll('.table-row[data-searchable="true"]');
+
+            visibleRows = 0;
+
+            rows.forEach(row => {
+                const rowText = getRowText(row);
+                const matchesSearch = searchTerm === '' || rowText.includes(searchTerm);
+                const matchesAlphabet = rowStartsWithLetter(row, alphabetLetter);
+
+                if (matchesSearch && matchesAlphabet) {
+                    row.style.display = '';
+                    visibleRows++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updateSearchInfo();
+
+            // Show/hide clear button
+            if (searchTerm !== '') {
+                clearButton.style.display = 'flex';
+            } else {
+                clearButton.style.display = 'none';
+            }
+        }
+
+        // Sort table
+        function sortTable() {
+            const columnIndex = parseInt(sortColumn.value);
+            if (isNaN(columnIndex)) {
+                // Reset to original order
+                resetToOriginalOrder();
+                return;
+            }
+
+            const rows = Array.from(tableBody.querySelectorAll('.table-row[data-searchable="true"]'));
+
+            rows.sort((a, b) => {
+                const aText = getCellText(a, columnIndex);
+                const bText = getCellText(b, columnIndex);
+
+                let comparison = 0;
+                if (aText < bText) comparison = -1;
+                if (aText > bText) comparison = 1;
+
+                return currentSortDirection === 'asc' ? comparison : -comparison;
+            });
+
+            // Reorder rows in DOM
+            rows.forEach(row => {
+                tableBody.appendChild(row);
+            });
+
+            updateSortDirectionIcon();
+        }
+
+        // Reset to original order
+        function resetToOriginalOrder() {
+            originalRowOrder.forEach(row => {
+                tableBody.appendChild(row);
+            });
+            updateSortDirectionIcon();
+        }
+
+        // Update sort direction icon
+        function updateSortDirectionIcon() {
+            const icon = sortDirection.querySelector('i');
+            if (currentSortColumn === '') {
+                icon.className = 'fas fa-sort';
+            } else if (currentSortDirection === 'asc') {
+                icon.className = 'fas fa-sort-up';
+            } else {
+                icon.className = 'fas fa-sort-down';
+            }
+        }
+
+        // Clear search
+        function clearSearch() {
+            searchInput.value = '';
+            applyFilters();
+            searchInput.focus();
+        }
+
+        // Clear all filters
+        function clearAllFilters() {
+            searchInput.value = '';
+            alphabetFilter.value = '';
+            sortColumn.value = '';
+            currentSortColumn = '';
+            currentSortDirection = 'asc';
+            applyFilters();
+            resetToOriginalOrder();
+        }
+
+        // Make clearAllFilters globally accessible
+        window.clearAllFilters = clearAllFilters;
+
+        // Event listeners
+        searchInput.addEventListener('input', applyFilters);
+        clearButton.addEventListener('click', clearSearch);
+        alphabetFilter.addEventListener('change', applyFilters);
+        sortColumn.addEventListener('change', function() {
+            currentSortColumn = this.value;
+            if (this.value === '') {
+                resetToOriginalOrder();
+            } else {
+                sortTable();
+            }
+        });
+
+        sortDirection.addEventListener('click', function() {
+            if (currentSortColumn !== '') {
+                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+                sortTable();
+            }
+        });
+
+        // Keyboard shortcuts
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                clearAllFilters();
+            }
+        });
+
+        // Initialize
+        initializeTable();
+    });
+</script>

@@ -1,0 +1,79 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/book-lesson.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+  <main class="main">
+    <section class="detail-header">
+      <div class="container">
+        <nav class="breadcrumb">
+          <a href="{{ .CurrentSection.RelPermalink }}">
+            <i class="fas fa-book"></i>
+            {{ .CurrentSection.Title }}
+          </a>
+          <i class="fas fa-chevron-right"></i>
+          <span>{{ .Title }}</span>
+        </nav>
+      </div>
+    </section>
+
+    <article class="detail-content">
+      <div class="container">
+        <div class="detail-article">
+           <header class="detail-article-header">
+             <div class="book-cover">
+                  {{ if hasPrefix .Params.image "http" }}
+                      <img class="book-list-cover" src='{{ .Params.image }}' alt='{{ .Title }}' />
+                  {{ else }}
+                      <img class="book-list-cover" src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+                  {{ end }}
+              </div>
+            <div class="detail-meta">
+              <div class="detail-meta-item">
+                <i class="fas fa-pen"></i>
+                <span>{{ with .Params.author }}{{ . }}{{ else }}Author{{ end }}</span>
+              </div>
+              <div class="detail-meta-item">
+                <i class="fas fa-clock"></i>
+                <span>{{ .Date | time.Format "2 January 2006" }}</span>
+              </div>
+            </div>
+            <h1 class="detail-title">{{ .Title }}</h1>
+          </header>
+
+          <div class="detail-body">
+            <div class="post-content-full">
+              {{ .Content }}
+            </div>
+          </div>
+
+          <footer class="detail-footer">
+            <div class="detail-navigation">
+              <a href="javascript:window.history.go(-1);" class="nav-button">
+                <i class="fas fa-arrow-left"></i>
+                Back
+              </a>
+              <div class="nav-buttons">
+                {{ $pages := .CurrentSection.Pages.ByDate }}
+                {{ with $pages.Prev . }}
+                <a href="{{ .RelPermalink }}" class="nav-button">
+                  <i class="fas fa-chevron-left"></i>
+                  Previous
+                </a>
+                {{ end }}
+                {{ with $pages.Next . }}
+                <a href="{{ .RelPermalink }}" class="nav-button">
+                  Next
+                  <i class="fas fa-chevron-right"></i>
+                </a>
+                {{ end }}
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </article>
+  </main>
+
+{{ end }}

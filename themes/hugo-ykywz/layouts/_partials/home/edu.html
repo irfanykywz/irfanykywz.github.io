@@ -1,0 +1,94 @@
+<section>
+    <div class="pn-section pn-education container">
+        <div class="pn-head">
+            <h3 class="mono">{{ .Params.educationtitle}}</h3>
+        </div>
+
+        <div class="pn-tabs" data-tabs>
+            <div class="pn-tablist" role="tablist" aria-label="education Tabs">
+                {{- range $index, $element := .Params.educationtab -}}
+                    <button class="pn-tab{{ if eq $index 0 }} active{{ end }}" role="tab" aria-selected="true" aria-controls="{{ $element.class }}" id="tabbtn-{{ $element.class }}">{{ $element.name }}</button>
+                {{- end -}}
+            </div>
+
+            <div class="pn-tabpanels">
+                {{- range $index, $element := .Params.educationtab -}}
+                    <div id="{{ $element.class }}" class="pn-tabpanel {{ if eq $index 0 }} active{{ end }}" role="tabpanel" aria-labelledby="tabbtn-{{ $element.class }}" {{ if ne $index 0 }} hidden{{ end }}>
+                        {{- range index $.Params.education $element.id -}}
+                            {{ if ne $element.id "certification" }}
+                                <ul class="pn-cards pn-cards-edu">
+                                    <li class="pn-card edu-card">
+                                        <div class="edu-head">
+                                            <div class="campus">
+                                                {{ with .logo }}
+                                                    <img class="campus-logo" src="{{ . }}" alt="{{ $.Title }} campus" loading="lazy">
+                                                {{ else }}
+                                                    {{ with .initial }}
+                                                        <div class="campus-initials" aria-hidden="true">
+                                                            {{ . }}
+                                                        </div>
+                                                    {{ end }}
+                                                {{ end }}
+                                                <div class="campus-meta">
+                                                    <div class="degree">{{ .degree }}</div>
+                                                    {{ with .field }}<div class="field">{{ . }}</div>{{ end }}
+                                                    <div class="school">{{ .school }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="edu-actions">
+                                                {{ with .link }}<a class="btn btn-outline btn-small" href="{{ . }}" target="_blank" rel="noopener">Lihat Transkrip</a>{{ end }}
+                                            </div>
+                                        </div>
+                                        <div class="edu-meta">
+                                            {{ with .period }}<span class="badge mono">{{ . }}</span>{{ end }}
+                                            {{ with .location }}<span class="badge mono"><i class="fa-solid fa-location-dot"></i> {{ . }}</span>{{ end }}
+                                            {{ with .gpa }}<span class="badge mono success">IPK {{ . }}</span>{{ end }}
+                                            {{ with .honors }}<span class="badge mono warn">{{ . }}</span>{{ end }}
+                                            {{ if .certificate }}<span class="badge mono success">Bersertifikat</span>{{ end }}
+                                        </div>
+                                        {{ with .activities }}
+                                        <ul class="bullets">
+                                            {{ range . }}<li>{{ . }}</li>{{ end }}
+                                        </ul>
+                                        {{ end }}
+                                    </li>
+                                </ul>   
+                            {{ else }}
+                                
+                                <ul class="pn-cards pn-cards-cert">
+                                    <li class="pn-card cert-card">
+                                        <div class="cert-head">
+                                            <div class="issuer">
+                                                {{ with .logo }}
+                                                    <img class="issuer-logo" src="{{ . }}" alt="{{ $.Title }} issuer" loading="lazy">
+                                                {{ else }}
+                                                    <div class="issuer-initials" aria-hidden="true">{{ .initial }}</div>
+                                                {{ end }}
+                                                <div class="issuer-meta">
+                                                    <div class="title">{{ or .name .title }}</div>
+                                                    <div class="org">{{ .org }}</div>
+                                                </div>
+                                            </div>
+                                            {{ if or .link .credential_id }}
+                                                <div class="cert-actions">
+                                                    {{ with .link }}<a class="btn btn-primary btn-small" href="{{ . }}" target="_blank" rel="noopener">Lihat Kredensial</a>{{ end }}
+                                                </div>
+                                            {{ end }}
+                                        </div>
+                                        <div class="cert-meta">
+                                            {{ with .issued }}<span class="badge mono">Diterbitkan: {{ . }}</span>{{ end }}
+                                            {{ with .expires }}<span class="badge mono warn">Kedaluwarsa: {{ . }}</span>{{ end }}
+                                            {{ with .year }}<span class="badge mono">Tahun: {{ . }}</span>{{ end }}
+                                            {{ with .credential_id }}<span class="badge mono mute">ID: {{ . }}</span>{{ end }}
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            {{ end }}             
+                        {{- end -}}
+                    </div>                    
+                {{- end -}}
+            </div>
+        </div>
+    </div>
+</section>

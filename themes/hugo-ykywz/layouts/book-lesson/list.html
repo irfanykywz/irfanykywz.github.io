@@ -1,0 +1,56 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/book-lesson.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-book"></i>
+                {{ .Title }}
+            </h1>
+            {{ with .Params.description }}
+              <p class="page-description">{{ . }}</p>
+            {{ end }}
+            </div>
+        </section>
+
+        <section class="book-list">
+            <div class="container book-list-list">
+                <div class="book-list-grid">
+                  {{ $pages := .Data.Pages }}
+                  {{ range $pages.ByDate.Reverse }}
+                    <article class="book-list-card">
+                      <a class="book-list-link book-list-cover-container" href="{{ .RelPermalink }}" aria-label="Open {{ .Title }}">
+
+                        {{ if hasPrefix .Params.image "http" }}
+                            <img class="book-list-cover" src='{{ .Params.image }}' alt='{{ .Title }}' />
+                        {{ else }}
+                            <img class="book-list-cover" src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+                        {{ end }}
+
+                      </a>
+                      <div class="book-list-card-body">
+                        <h2 class="book-list-title"><a class="book-list-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                        {{ with .Params.description }}<p class="book-list-desc">{{ . }}</p>{{ else }}{{ with .Summary }}<p class="book-list-desc">{{ . }}</p>{{ end }}{{ end }}
+                        <div class="book-list-meta">
+                          <span class="book-list-chip">
+                            <span class="dot"></span>
+                            {{ with .Params.author }}{{ . }} · {{ end }}{{ .Date | time.Format "2 Jan 2006" }}
+                          </span>
+                          <!-- <a class="book-list-link" href="{{ .RelPermalink }}">Baca</a> -->
+                        </div>
+                      </div>
+                    </article>
+                    {{ else }}
+                        Tidak ada Konten Ringkasan Buku.
+                  {{ end }}
+                </div>
+              </div>
+        </section>
+    </main>
+{{ end }}
+
+

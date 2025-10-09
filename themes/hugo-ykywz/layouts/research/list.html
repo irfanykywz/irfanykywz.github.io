@@ -1,0 +1,20 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/research.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    {{ $split := "/"}}
+    {{ if strings.Contains .File.Dir "\\" }}
+        {{ $split = "\\"}}
+    {{ end }}
+    {{ $dirParts := split .File.Dir $split }}
+
+
+    {{ if gt (len $dirParts) 2 }}
+        {{ partial "research/list-detail.html" . }}
+    {{ else if eq (len $dirParts) 2 }}
+        {{ partial "research/list.html" . }}
+    {{ end }}
+
+{{ end }}

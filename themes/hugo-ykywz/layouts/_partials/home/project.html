@@ -1,0 +1,18 @@
+<section>
+    <div class="project-section container">
+        <div class="section-title">        
+            <h2>        
+                {{ .Params.projecttitle }}
+            </h2>
+
+            <a href="{{ $.Site.BaseURL }}projects/">Selengkapnya</a>
+        </div>
+
+        <div class="projects-grid">
+            {{ $pages := where site.RegularPages "Section" "eq" "projects" -}}
+            {{ range first .Params.projectcount $pages }}
+                {{ partial "project/list-card.html" . }}
+            {{ end }}
+        </div>
+    </div>
+</section>

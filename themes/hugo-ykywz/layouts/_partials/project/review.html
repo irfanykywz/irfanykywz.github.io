@@ -1,0 +1,30 @@
+{{ if .Params.review }}
+<div class="project-testimonial">
+    <h2 class="section-title">
+        <i class="fas fa-quote-left"></i>
+        Testimoni Klien
+    </h2>
+
+    {{ range $index, $element := .Params.review }}
+        <div class="testimonial-card">
+            <div class="testimonial-content">
+                <p>
+                    "{{ $element.content }}"
+                </p>
+            </div>
+            <div class="testimonial-author">
+                <div class="author-info">
+                    <h4>{{ $element.author }}</h4>
+                    <p>{{ $element.from }}</p>
+                </div>
+                <div class="testimonial-rating">
+                    {{ range (seq $element.rating )}}
+                        <i class="fas fa-star"></i>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    {{ end }}
+
+</div>
+{{ end }}

@@ -1,0 +1,55 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/change-log.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+<main class="main">
+
+<section class="detail-content">
+<div class="container">
+    <header class="header-changelog">
+        <h1>{{ .Title }}</h1>
+        <p>{{ .Content }}</p> 
+    </header>
+
+    {{ range .Params.changelog }}
+        
+    {{ $version := .version }}
+    {{ $date := .date }}
+
+    <div class="release-section">
+        <div class="release-header">
+            <span class="version">Versi {{ $version }}</span>
+            <span class="date">{{ $date }}</span>
+        </div>
+        
+        <ul class="change-list">
+        {{ range .changes }}
+            
+            {{ $tagClass := "" }}
+            {{ if eq .tag "Fitur Baru" }}
+                {{ $tagClass = "tag-new" }}
+            {{ else if eq .tag "Peningkatan" }}
+                {{ $tagClass = "tag-imp" }}
+            {{ else if eq .tag "Perbaikan" }}
+                {{ $tagClass = "tag-fix" }}
+            {{ else if eq .tag "Pembaruan" }}
+                {{ $tagClass = "tag-update" }}
+            {{ end }}
+
+            <li class="change-item">
+                <span class="tag {{ $tagClass }}">{{ .tag }}</span>
+                
+                <span class="description">{{ .description | safeHTML }}</span>
+            </li>
+        {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+</div>
+</section>
+    
+</main>
+
+{{ end }}

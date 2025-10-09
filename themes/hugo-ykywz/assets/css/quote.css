@@ -1,0 +1,21 @@
+/* quote.css - styles for quote listing page, uses variables from main.css */
+
+.quote-list-page{max-width:1000px;margin:3rem auto;padding:0 1rem;font-family:var(--font-family);color:var(--text-primary)}
+.quote-list-header{text-align:center;margin-bottom:2rem}
+.quote-list-header h1{font-size:2rem;color:var(--text-primary);margin-bottom:0.25rem}
+.quote-list-header p{color:var(--text-secondary)}
+
+.quote-filters{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
+.filter-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:0.35rem 0.75rem;border-radius:999px;cursor:pointer}
+.filter-btn.active{background:var(--accent-primary);color:var(--text-primary);border-color:var(--accent-primary)}
+
+.quotes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.quote-card{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:1rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:0.75rem; justify-content: space-between;}
+.quote-content{font-size:1rem;color:var(--text-secondary);line-height:1.6}
+.quote-meta{display:flex;align-items:center;justify-content:space-between;gap:0.5rem}
+.quote-author{font-weight:600;color:var(--text-primary)}
+.quote-copy{background:var(--accent-primary);color:#fff;border:none;padding:0.4rem 0.75rem;border-radius:6px;cursor:pointer}
+.quote-copy:hover{background:var(--accent-secondary)}
+.quote-hidden{position:absolute;left:-9999px;top:auto;width:0;height:0;opacity:0}
+
+@media (max-width:480px){.quote-list-page{padding:0 .5rem}.quote-copy{padding:0.3rem 0.5rem}}

@@ -1,0 +1,258 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/search.css") }}
+{{ end }}
+
+{{ define "main" }}
+    <div class="search-page">
+        <div class="search-page-container">
+            <!-- Search Header -->
+            <div class="search-header">
+                <h1 class="search-title">{{ .Title }}</h1>
+                <p class="search-description">{{ .Description }}</p>
+            </div>
+
+            <!-- Search Input -->
+            <div class="search-input-container">
+                <div class="search-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-page-input" 
+                        placeholder="Masukan kata yang ingin dicari"
+                        autocomplete="off"
+                    >
+                    <button id="searchIcon" class="search-button" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="search-page-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Stats -->
+            <div class="search-stats">
+                <span id="resultCount" class="result-count">0 hasil</span>
+                <span id="searchTime" class="search-time"></span>
+            </div>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="search-results hidden">
+                <div class="search-table-container">
+                    <table class="search-table">
+                        <thead>
+                            <tr>
+                                <th class="table-header">Judul</th>
+                                <th class="table-header">Tanggal</th>
+                                <!-- <th class="table-header">Tags</th> -->
+                                <th class="table-header">Pratinjau</th>
+                                <th class="table-header">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="searchTableBody">
+                            <!-- Results will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- No Results -->
+            <div id="noResults" class="no-results hidden">
+                <div class="no-results-content">
+                    <div class="no-results-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
+                        </svg>
+                    </div>
+                    <h3 class="no-results-title">Hasil tidak ditemukan</h3>
+                    <p class="no-results-text">Coba sesuaikan kata kunci pencarian Anda atau telusuri kategori kami</p>
+                </div>
+            </div>
+
+            <!-- Initial State -->
+            <div id="initialState" class="initial-state">
+                <div class="initial-state-content">
+                    <div class="initial-state-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="initial-state-title">Mulai Pencarian</h3>
+                    <p class="initial-state-text">Masukkan kata kunci untuk menemukan konten yang relevan</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchIcon = document.getElementById('searchIcon');
+            const searchResults = document.getElementById('searchResults');
+            const noResults = document.getElementById('noResults');
+            const initialState = document.getElementById('initialState');
+            const resultCount = document.getElementById('resultCount');
+            const searchTime = document.getElementById('searchTime');
+            
+            let searchData = [];
+            
+            // Load JSON data
+            fetch('{{ "index.json" | absURL }}')
+                .then(response => response.json())
+                .then(data => {
+                    searchData = data;
+                })
+                .catch(error => {
+                    console.error('Error loading search index:', error);
+                });
+            
+            // Search function
+            function performSearch(query) {
+                if (!query.trim()) {
+                    searchResults.classList.add('hidden');
+                    noResults.classList.add('hidden');
+                    initialState.classList.remove('hidden');
+                    resultCount.textContent = '0 results';
+                    searchTime.textContent = '';
+                    return;
+                }
+                
+                initialState.classList.add('hidden');
+                const startTime = performance.now();
+                const results = searchData.filter(item => {
+                    const content = `${item.title || ''} ${item.content || ''} ${item.tags || ''}`.toLowerCase();
+                    return content.includes(query.toLowerCase());
+                });
+                
+                const endTime = performance.now();
+                const searchDuration = (endTime - startTime).toFixed(2);
+                
+                displayResults(results, query, searchDuration);
+            }
+            
+            // Display results
+            function displayResults(results, query, duration) {
+                if (results.length === 0) {
+                    searchResults.classList.add('hidden');
+                    noResults.classList.remove('hidden');
+                    resultCount.textContent = '0 results';
+                    searchTime.textContent = `${duration}ms`;
+                    return;
+                }
+                
+                noResults.classList.add('hidden');
+                searchResults.classList.remove('hidden');
+                
+                let resultsHTML = '';
+                
+                results.forEach(item => {
+                    // Highlight matching text
+                    const titleHighlighted = highlightText(item.title || '', query);
+                    let contentPreview = item.content ? item.content.substring(0, 150) : '';
+                    contentPreview = highlightText(contentPreview, query);
+                    
+                    // Format tags
+                    let tagsHTML = '';
+                    if (item.tags) {
+                        const tags = item.tags.split(',').map(tag => tag.trim());
+                        tagsHTML = tags.map(tag => 
+                            `<span class="table-tag">${highlightText(tag, query)}</span>`
+                        ).join('');
+                    }
+                    
+                    resultsHTML += `
+                        <tr>
+                            <td class="search-table-cell">
+                                <div class="table-title">${titleHighlighted}</div>
+                            </td>
+                            <td class="search-table-cell">
+                                <div class="table-date">${formatDate(item.date)}</div>
+                            </td>
+                            <!-- 
+                                <td class="search-table-cell">
+                                    <div class="table-tags">${tagsHTML}</div>
+                                </td>
+                            -->
+                            <td class="search-table-cell">
+                                <div class="table-preview">${contentPreview}...</div>
+                            </td>
+                            <td class="search-table-cell table-action">
+                                <a href="${item.permalink}" class="table-link">
+                                    View
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                document.getElementById('searchTableBody').innerHTML = resultsHTML;
+                resultCount.textContent = `${results.length} ${results.length === 1 ? 'result' : 'results'}`;
+                searchTime.textContent = `${duration}ms`;
+            }
+            
+            // Highlight matching text
+            function highlightText(text, query) {
+                if (!query) return text;
+                
+                const regex = new RegExp(query, 'gi');
+                return text.replace(regex, match => `<span class="search-highlight">${match}</span>`);
+            }
+            
+            // Format date
+            function formatDate(dateString) {
+                if (!dateString) {
+                    return '';
+                }
+
+                // Tambahkan pemeriksaan: jika dateString mengandung '0001', anggap tidak valid.
+                if (dateString.includes('0001')) {
+                    return '';
+                }
+
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                };
+
+                // Coba buat objek Date. Jika dateString tidak valid (misalnya, 'Invalid Date'), 
+                // toLocaleDateString akan menghasilkan output yang tidak diinginkan, jadi kita harus tangani.
+                const dateObject = new Date(dateString);
+
+                if (isNaN(dateObject.getTime())) {
+                    // Cek jika objek Date yang dihasilkan adalah 'Invalid Date'
+                    return '';
+                }
+
+                // Gunakan 'id-ID' (Indonesia) sebagai locale untuk format Tanggal Bulan Tahun
+                return dateObject.toLocaleDateString('id-ID', options);
+            }
+            
+            // Event listeners
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch(this.value);
+                }
+            });
+            
+            searchIcon.addEventListener('click', function() {
+                performSearch(searchInput.value);
+            });
+            
+            // Debounce search for better performance
+            let debounceTimer;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    performSearch(this.value);
+                }, 300);
+            });
+            
+            // Focus search input on page load
+            searchInput.focus();
+        });
+
+    </script>
+{{ end }}

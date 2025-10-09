@@ -1,0 +1,197 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/research.css") }}
+{{ end }}
+
+
+{{ define "main" }}
+
+<main class="main">
+    <section class="detail-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="{{ $.Site.BaseURL }}research/">
+                    <i class="fas fa-flask"></i>
+                    Research
+                </a>
+                <i class="fas fa-chevron-right"></i>
+                <span>{{ .Title }}</span>
+            </nav>
+        </div>
+    </section>
+
+    <article class="detail-content">
+        <div class="container">
+            <div class="research-detail">
+                <!-- Research Hero Section -->
+                <header class="research-hero">
+                    <div class="research-hero-image">
+                        <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=800&h=400&fit=crop" alt="Research Hero Image">
+                    </div>
+                    <div class="research-hero-content">
+                        <div class="research-meta">
+                            <span class="research-category">Machine Learning</span>
+                            <span class="research-status">Published</span>
+                        </div>
+                        <h1 class="research-title">{{ .Title }}</h1>
+                        <p class="research-subtitle">A comprehensive study on the application of deep learning in natural language processing</p>
+                        <div class="research-authors">
+                            <span class="author">Dr. John Smith</span>
+                            <span class="author">Prof. Jane Doe</span>
+                            <span class="author">Dr. Mike Johnson</span>
+                        </div>
+                        <div class="research-info">
+                            <div class="info-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>Published: January 15, 2024</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Reading time: 8 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-university"></i>
+                                <span>Stanford University</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Research Content -->
+                <div class="research-body">
+                    <!-- Abstract Section -->
+                    <section class="research-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-file-alt"></i>
+                            Abstract
+                        </h2>
+                        <div class="section-content">
+                            <p>This research investigates the effectiveness of transformer-based models in natural language processing tasks. We conducted extensive experiments on multiple datasets including GLUE, SuperGLUE, and custom domain-specific corpora. Our findings demonstrate significant improvements in performance across various NLP benchmarks, with particular emphasis on question-answering and text classification tasks.</p>
+                            <p>The study introduces a novel attention mechanism that reduces computational complexity while maintaining model accuracy. We also explore the impact of pre-training strategies on downstream task performance and provide insights into optimal hyperparameter configurations.</p>
+                        </div>
+                    </section>
+
+                    <!-- Methodology Section -->
+                    <section class="research-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-cogs"></i>
+                            Methodology
+                        </h2>
+                        <div class="section-content">
+                            <h3>Dataset</h3>
+                            <p>We utilized three primary datasets for our experiments:</p>
+                            <ul>
+                                <li><strong>GLUE Benchmark:</strong> A collection of 9 natural language understanding tasks</li>
+                                <li><strong>SuperGLUE:</strong> An enhanced version with more challenging tasks</li>
+                                <li><strong>Custom Corpus:</strong> Domain-specific data from medical and legal documents</li>
+                            </ul>
+                            
+                            <h3>Model Architecture</h3>
+                            <p>Our proposed model builds upon the Transformer architecture with the following modifications:</p>
+                            <ul>
+                                <li>Multi-head attention with 12 heads</li>
+                                <li>Hidden size of 768 dimensions</li>
+                                <li>12 transformer layers</li>
+                                <li>Dropout rate of 0.1</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Results Section -->
+                    <section class="research-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-line"></i>
+                            Results
+                        </h2>
+                        <div class="section-content">
+                            <div class="results-grid">
+                                <div class="result-card">
+                                    <div class="result-number">94.2%</div>
+                                    <div class="result-label">Accuracy</div>
+                                    <p>Overall accuracy across all tasks</p>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-number">2.3x</div>
+                                    <div class="result-label">Speed Improvement</div>
+                                    <p>Faster inference compared to baseline</p>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-number">87%</div>
+                                    <div class="result-label">Memory Reduction</div>
+                                    <p>Reduced memory usage during training</p>
+                                </div>
+                            </div>
+                            
+                            <h3>Key Findings</h3>
+                            <p>Our experiments revealed several important insights:</p>
+                            <ul>
+                                <li>The proposed attention mechanism reduces computational complexity by 40%</li>
+                                <li>Pre-training on domain-specific data improves performance by 15%</li>
+                                <li>Multi-task learning enhances generalization across different NLP tasks</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Conclusion Section -->
+                    <section class="research-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Conclusion
+                        </h2>
+                        <div class="section-content">
+                            <p>This research demonstrates the effectiveness of our proposed transformer-based approach in natural language processing tasks. The novel attention mechanism successfully balances computational efficiency with model performance, making it suitable for real-world applications.</p>
+                            <p>Future work will focus on extending this approach to multilingual models and exploring applications in other domains such as computer vision and speech processing.</p>
+                        </div>
+                    </section>
+
+                    <!-- References Section -->
+                    <section class="research-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-book"></i>
+                            References
+                        </h2>
+                        <div class="section-content">
+                            <ol class="references-list">
+                                <li>Vaswani, A., et al. "Attention is all you need." Advances in neural information processing systems 30 (2017).</li>
+                                <li>Devlin, J., et al. "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." arXiv preprint arXiv:1810.04805 (2018).</li>
+                                <li>Wang, A., et al. "GLUE: A multi-task benchmark and analysis platform for natural language understanding." arXiv preprint arXiv:1804.07461 (2018).</li>
+                            </ol>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Research Footer -->
+                <footer class="research-footer">
+                    <div class="research-tags">
+                        <h4>Tags:</h4>
+                        <div class="tags-list">
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">NLP</span>
+                            <span class="tag">Transformers</span>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                    </div>
+                    
+                    <div class="research-navigation">
+                        <a href="javascript:window.history.go(-1);" class="nav-button">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Research
+                        </a>
+
+                        <div class="nav-buttons">
+                            <a href="#" class="nav-button">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous Research
+                            </a>
+                            <a href="#" class="nav-button">
+                                Next Research
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </article>
+</main>
+
+{{ end }}

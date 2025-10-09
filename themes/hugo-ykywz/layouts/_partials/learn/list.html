@@ -1,0 +1,78 @@
+<main class="main">
+    <section class="page-header">
+        <div class="container-full">
+            <h1 class="page-title">    
+                💡             
+                {{ .Title }}
+            </h1>
+            <p class="page-description">{{ .Description }}</p>
+        </div>
+    </section>
+
+    <section class="learn-content">
+        <div class="container-full">
+            <div class="courses-container">
+                <div class="courses-list">
+                    {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
+                    {{ range $paginator.Pages }}
+                    <div class="course-card-tutorial">
+                        <div class="course-icon">
+                            {{ if isset .Params "image" }}
+                                <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}'>
+                            {{ end }}
+                        </div>
+                        <div class="course-info">
+                            <h3 class="course-title">
+                                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                            </h3>
+                            <p class="course-description">
+                                {{ .Description }}
+                            </p>
+                        </div>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-file-alt"></i>
+                                <span>{{ (len .Pages) }} Konten</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                {{ $totalReadingTime := 0 }}
+                                {{ range .Pages }}
+                                {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
+                                {{ end }}
+                                <span>{{ printf "%d min waktu baca" $totalReadingTime }}</span>
+                            </div>
+                            <div class="meta-item">
+                                <a href="{{ .RelPermalink }}" class="read-more">
+                                    <i class="fas fa-book-open"></i>
+                                    Mulai Belajar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+
+                </div>
+
+                {{ with $paginator }}
+                <div class="pagination">
+                    {{ with .Prev }}
+                    <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                        <span aria-hidden="true">Sebelumnya</span>
+                    </a>
+                    {{ end }}
+                    <span class="pagination-info">{{ .PageNumber }}/{{ .TotalPages }}</span>
+                    {{ with .Next }}
+                    <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
+                        <span aria-hidden="true">Selanjutnya</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    {{ end }}
+                </div>
+                {{ end }}
+
+            </div>
+        </div>
+    </section>
+</main>
