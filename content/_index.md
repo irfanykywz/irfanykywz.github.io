@@ -102,7 +102,10 @@ skilltab:
       class: "tab-1"
     - name: "Software Engineering"
       id: "software_engineering"
-      class: "tab-2"                  
+      class: "tab-2"
+    - name: "Bahasa"
+      id: "bahasa"
+      class: "tab-3"                        
 skills:
     it_support:
         scopes:
@@ -164,8 +167,8 @@ skills:
           - title: "Basis Data"
             items:
               - JSON         
-              - database.txt        
-              - Mysql          
+              - MYSQL         
+              - SQLite
           - title: "Alat Kolaborasi"
             items:
               - Notion
@@ -174,10 +177,16 @@ skills:
           - title: "Alat Kerja"
             items:
               - Laragonzo
-              - Cursor
+              - Cursor / VSCode
               - Git
               - Github
               - Node.js
+    bahasa:
+        scopes:
+          - title: "Indonesia"
+            description: "bisa dengan lancar melakukan  membaca, mendengar dan menulis menggunakan bahasa indonesia"
+          - title: "Inggris"
+            description: "bisa memahami bahasa inggris dengan baik, belum terbiasa menggunakannya untuk menulis dan berbicara"   
 # =====================================
 project: true
 projecttitle: "🌘 Project terbaru"

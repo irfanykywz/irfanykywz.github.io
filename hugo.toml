@@ -20,11 +20,11 @@ pygmentscodefencesguesssyntax = true
 [params]
 	# browser icon
 	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
-  favicon = "avatar.jpg"
+  favicon = "avatar.avif"
 
 	# Optional 64x64 avatar image.
 	# avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
-  avatar = "avatar.jpg"
+  avatar = "avatar.avif"
 
   author = "Muhamad Irfan"
   description = "Website Muhamad Irfan: Memiliki skill dibidang IT Support dan Software Engineering. siap direkrut kapan saja, segera hubungi saya"

@@ -5,7 +5,7 @@ description: digunakan untuk upscaling / memperbesar gambar
 image: "preview.avif"
 stack: ['python', 'pyside6', 'requests']
 category: Desktop
-status: Product
+status: Produk
 demo: https://youtube.com/@YkywzCode
 download: https://lynk.id/irfanykywz/rlo97nzy92og
 # buy: https:google.com/ncr

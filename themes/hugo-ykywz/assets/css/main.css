@@ -86,7 +86,7 @@ blockquote footer::before{content:"— "}
 [data-theme="light"] .code-copy-btn{background:rgba(0,0,0,0.1);color:#475569}
 [data-theme="light"] .code-copy-btn:hover{background:rgba(0,0,0,0.2);color:#1e293b}
 .highlight pre{margin-bottom:0;margin-top:0;background-color:transparent!important;overflow:auto;font-family:'Courier New',Courier,monospace;white-space:pre;line-height:1.5}
-.highlight > pre{padding: 20px}
+.highlight > pre{padding: 20px;white-space: break-spaces;}
 .highlight{background-color:var(--bg-secondary);border-radius:8px;margin:1.5em 0;overflow:auto;font-family:'Fira Code','Consolas','Monaco',monospace;font-size:0.9em;line-height:1.5;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
 .highlight table{width: 100%}
 

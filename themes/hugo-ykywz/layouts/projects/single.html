@@ -9,7 +9,9 @@
                 <nav class="breadcrumb">
                     <a href="{{ $.Site.BaseURL }}projects/">
                         <i class="fas fa-briefcase"></i>
-                        Projek
+                        {{ with .Parent }}
+                            {{ .Title }}
+                        {{ end }}
                     </a>
                     <i class="fas fa-chevron-right"></i>
                     <span>{{ .Title }}</span>

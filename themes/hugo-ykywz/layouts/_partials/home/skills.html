@@ -18,11 +18,23 @@
                             {{- range index $.Params.skills $element.id -}}
                                 {{ range . }}
                                     <li class="pn-card scope-card">
-                                    <div class="scope-title">{{ .title }}</div>
-                                    <ul class="pn-pill-list">
-                                        {{- range .items }}<li class="pill">{{ . }}</li>{{ end -}}
-                                    </ul>
-                                </li>
+                                        <div class="scope-title">
+                                            {{ .title }}
+                                        </div>
+                                        <ul class="pn-pill-list">
+                                            {{ if .description }}
+                                                <li class="pill-desc">
+                                                    <p>
+                                                        {{ .description }}
+                                                    </p>
+                                                </li>
+                                            {{ else }}
+                                                {{- range .items }}
+                                                    <li class="pill">{{ . }}</li>
+                                                {{ end -}}
+                                            {{ end }}
+                                        </ul>
+                                    </li>
                                 {{- end -}}
                             {{- end -}}
                         </ul>

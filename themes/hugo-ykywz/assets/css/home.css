@@ -67,8 +67,14 @@
 
 /* Tabs */
 .pn-tabs{display:block}
-.pn-tablist{display:flex;gap:var(--space-2);background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius-xl) var(--radius-xl) 0 0;padding:var(--space-2)}
-.pn-tab{display:inline-flex;align-items:center;gap:var(--space-2);background:transparent;color:var(--text-secondary);border:1px solid transparent;border-radius:var(--radius-lg);padding:var(--space-3) var(--space-6);cursor:pointer;transition:all var(--transition-fast);position:relative;font-weight:600}
+.pn-tablist{
+    display:flex;gap:var(--space-2);background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius-xl) var(--radius-xl) 0 0;padding:var(--space-2);
+    flex-grow:1;overflow-y:auto;padding-bottom:var(--space-4);-webkit-overflow-scrolling:touch
+}
+.pn-tab{
+    display:inline-flex;align-items:center;gap:var(--space-2);background:transparent;color:var(--text-secondary);border:1px solid transparent;border-radius:var(--radius-lg);padding:var(--space-3) var(--space-6);cursor:pointer;transition:all var(--transition-fast);position:relative;font-weight:600;
+    white-space: nowrap;
+}
 .pn-tab:hover{color:var(--text-primary);background:var(--hover-bg);transform:translateY(-1px)}
 .pn-tab.active{color:#fff;background:linear-gradient(180deg, color-mix(in oklab, var(--accent-primary) 92%, transparent), var(--accent-primary));border-color:var(--accent-primary);box-shadow:0 4px 10px -2px rgb(0 0 0 / 0.35)}
 .pn-tab.active::after{content:"";position:absolute;left:10%;right:10%;bottom:-6px;height:3px;background:var(--accent-primary);border-radius:999px}
@@ -81,6 +87,13 @@
 .pn-pill-list{display:flex;flex-wrap:wrap;gap:var(--space-2);margin:0;padding: 0}
 .pn-pill-list .pill{
     display:flex;align-items:center;gap:var(--space-2);background:var(--bg-secondary);color:var(--text-secondary);padding:var(--space-1) var(--space-2);border-radius:var(--radius-md);font-size:0.875rem;font-weight:500;border:1px solid var(--border-color);transition:all var(--transition-fast)
+}
+.pn-pill-list .pill-desc {
+    display:flex;
+    align-items:center;
+    gap:var(--space-2);
+    font-size:0.875rem;
+    color: var(--text-secondary);
 }
 .pn-pill-list .pill:hover{background:var(--accent-primary);color:white;border-color:var(--accent-primary);transform:translateY(-2px)}
 @keyframes pnFade{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:translateY(0)}}
