@@ -40,8 +40,19 @@
                                             </div>
                                         </div>
                                         <div class="edu-meta">
-                                            {{ with .period }}<span class="badge mono">{{ . }}</span>{{ end }}
-                                            {{ with .location }}<span class="badge mono"><i class="fa-solid fa-location-dot"></i> {{ . }}</span>{{ end }}
+                                            
+                                            {{ with .period }}
+                                                <span class="badge mono">
+                                                    {{ . }}
+                                                </span>
+                                            {{ end }}
+
+                                            {{ with .location }}
+                                                <span class="badge mono">
+                                                    <i class="ri-map-pin-line"></i> {{ . }}
+                                                </span>
+                                            {{ end }}
+
                                             {{ with .gpa }}<span class="badge mono success">IPK {{ . }}</span>{{ end }}
                                             {{ with .honors }}<span class="badge mono warn">{{ . }}</span>{{ end }}
                                             {{ if .certificate }}<span class="badge mono success">Bersertifikat</span>{{ end }}

@@ -6,7 +6,7 @@ image: "simple-live-stream.avif"
 stack: ['python', 'ffmpeg', 'pyside6']
 category: Desktop
 status: Freelance
-demo: https://youtube.com/@YkywzCode
+# demo: https://youtube.com/@YkywzCode
 # buy: https:google.com/ncr
 # github: https://github.com/kurteyki/
 date: 2023-12-22T16:00:35+07:00
@@ -18,13 +18,13 @@ overview:
 # =============================
 feature:
     - name: "Download Live"
-      icon: "fas fa-file"
+      icon: "ri-file-text-line"
       description: "Live menggunakan file maupun url dari website streaming lain"
     - name: "Authentication"
-      icon: "fas fa-cog"
+      icon: "ri-file-text-line"
       description: "Bisa mengatur jenis render, untuk pengaturan bitrate, dll"
     - name: "Logging"
-      icon: "fa-solid fa-terminal"
+      icon: "ri-file-text-line"
       description: "bisa melihat logging untuk melihat proses berjalan"
 # ============================= 
 review:

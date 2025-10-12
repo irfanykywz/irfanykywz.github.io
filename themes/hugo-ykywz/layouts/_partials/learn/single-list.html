@@ -1,0 +1,78 @@
+{{ if .IsSection }}
+    {{ $split := "/"}}
+    {{ if strings.Contains .File.Dir "\\" }}
+        {{ $split = "\\"}}
+    {{ end }}
+    {{ $dirParts := split .File.Dir $split }}
+
+    <!-- when accessing section redirect to parent -->
+
+    {{ if (eq (len $dirParts) 4) }}
+        {{ with .Parent }}
+            <meta http-equiv="refresh" content="0; url={{ .RelPermalink }}" />
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+<main class="main">
+
+    {{ partial "learn/single-list-breadcrumb.html" . }}
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        {{ partial "learn/single-list-sidebar.html" . }}
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="content-header">
+                    <h1 class="content-title">
+                        {{ .Title }}
+                    </h1>
+                </div>
+
+                <div class="content-text">
+                    {{ with .Content }}
+                    {{ . | safeHTML }}
+                    {{ end }}
+                </div>
+
+                <!-- Navigation Between Submodules -->
+                {{ $sortedPosts := sort .Data.Pages "Weight" }}
+                {{ $first := first 1 $sortedPosts}}
+                {{ if $first }}
+                    <div class="module-navigation">
+                        <span class="nav-button disabled">
+                            <i class="ri-arrow-left-s-line"></i>                        
+                        </span>
+                        {{ range $first }}
+                            <div class="nav-section">
+                                <a href="{{ .RelPermalink }}" class="nav-button">
+
+                                    <!-- Selanjutnya: -->
+
+                                    {{ if .Params.section }}
+                                        {{ .Params.section }}
+                                    {{ else }}
+                                        {{ .Title }}
+                                    {{ end }}
+
+                                    <i class="ri-arrow-right-line"></i>
+                                </a>
+                            </div>
+                        {{ end }}
+                    </div>
+                {{ end }}
+
+            </main>
+        </div>
+
+        {{ partial "learn/toc.html" . }}
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+</main>

@@ -2,11 +2,10 @@
 title: Buat Starter Pyside6
 slug: buat starter pyside6
 date: 2025-07-04T16:25:58+07:00
-draft: false
-mood: Happy
-weather: Clear
+weather: Cerah
 location: Bogor, Indonesia
 tags: []
+draft: false
 ---
 
 mencoba buat starter lagi, tapi kali ini cuma basicnya aja tanpa tampilan

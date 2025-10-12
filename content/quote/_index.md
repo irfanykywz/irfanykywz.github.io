@@ -1,4 +1,4 @@
 ---
 title: Kutipan
-description: kumpulan kata yang terkadang dibutuhkan
+description: kumpulan kata-kata inspirasi, motivasi. 
 ---

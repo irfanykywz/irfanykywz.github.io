@@ -6,7 +6,7 @@ image: "preview.avif"
 stack: ['python', 'pyside6', 'requests']
 category: Desktop
 status: Produk
-demo: https://youtube.com/@YkywzCode
+# demo: https://youtube.com/@YkywzCode
 download: https://lynk.id/irfanykywz/rlo97nzy92og
 # buy: https:google.com/ncr
 # github: https://google.com
@@ -18,12 +18,12 @@ overview:
 # =============================
 feature:
     - name: "Upscale 2x"
-      icon: 'fas fa-rocket'
+      icon: 'ri-file-text-line'
       description: "memperbesar gambar 2x"
     - name: "Proses Sekaligus"
-      icon: 'fas fa-rocket'
+      icon: 'ri-file-text-line'
       description: "bisa memproses banyak gambar secara bergantian"
     - name: "Updater"
-      icon: 'fas fa-rocket'
+      icon: 'ri-file-text-line'
       description: "tersedia fitur updater jika sewaktu-waktu dibutuhkan"          
 ---

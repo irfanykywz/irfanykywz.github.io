@@ -2,7 +2,7 @@
 title: Mulai dari hal yang sederhana
 slug: 'mulai dari hal yang sederhana'
 date: 2025-07-18T04:42:02+07:00
-weather: Clear
+weather: Cerah
 location: Bogor, Indonesia
 tags: []
 draft: false

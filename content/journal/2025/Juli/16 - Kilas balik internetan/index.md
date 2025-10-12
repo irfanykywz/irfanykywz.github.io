@@ -2,11 +2,10 @@
 title: Kilas balik internetan waktu masih sekolah menengah pertama
 slug: kilas balik internetan jalan sekolah
 date: 2025-07-16T15:19:24+07:00
-draft: false
-mood: Laaa
-weather: Clear
+weather: Cerah
 location: Bogor, Indonesia
 tags: []
+draft: false
 ---
 
 saya mengenal internet sudah dari kecil

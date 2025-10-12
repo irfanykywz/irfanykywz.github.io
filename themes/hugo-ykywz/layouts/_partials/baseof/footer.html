@@ -3,17 +3,17 @@
         <div class="footer-content">            
             <p class="footer-copyright">
                 <span>
-                    &copy; {{ now.Year }} {{ $.Site.Title }} 
+                    &copy; {{ now.Year }} {{ .Site.Copyright }}
                     • 
                     <a href="{{ $.Site.BaseURL }}change-log/">
-                        v1.0.7
+                        {{ .Site.Params.version }}
                     </a>
                 </span>
                 <br />
                 <span>Menggunakan
                     <a target="_blank" rel="nofollow" href="https://gohugo.io"> Hugo {{ hugo.Version }}</a>
                     <a target="_blank" href="{{ $.Site.BaseURL }}index.xml">
-                        <i class="fa fa-rss"></i>
+                        <i class="ri-rss-line"></i>
                     </a>
                 </span>
                 <br />
@@ -35,41 +35,63 @@
                 </button>
             </div>
 
-            <button class="offcanvas-button" id="toggleOffcanvasBtn">
-                <i class="fa-solid fa-ellipsis"></i>
+            <button class="offcanvas-button toggleOffcanvasBtn">
+                <i class="ri-more-2-fill"></i>
             </button>
-
-            <div class="offcanvas-backdrop" id="offcanvasBackdrop"></div>
-
-            <div class="offcanvas-bottom" id="offcanvasMenu" role="dialog" aria-modal="true" aria-labelledby="offcanvasTitle">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasTitle">Menu Lainnya</h5>
-                    <button type="button" class="offcanvas-close-btn" id="closeOffcanvasBtn" aria-label="Tutup Navigasi">
-                        &times;
-                    </button>
-                </div>
-                <div class="offcanvas-body">
-                    <nav>
-                        {{ range .Site.Menus.footer }}
-
-                            {{ $menu_item_url := .URL | relLangURL }}
-                            {{/* {{ $menu_item_url }} */}}
-                            
-                            {{ $page_url := $.Page.RelPermalink | relLangURL }}
-                            {{ $page_split := index (split $page_url "/") 1 }}
-                            {{/* {{ $page_split }} */}}
-                            
-                            {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
-
-                            <a class="offcanvas-nav-link {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}active{{ end }}" href="{{ .URL | relLangURL }}">
-                                {{ .Name | safeHTML  }}
-                            </a>
-                        {{ end}}
-                    </nav>
-                </div>
-            </div>
-
-
         </div>
     </div>
+
 </footer>
+
+<div class="offcanvas-backdrop" id="offcanvasBackdrop"></div>
+
+<div class="offcanvas-bottom" id="offcanvasMenu" role="dialog" aria-modal="true" aria-labelledby="offcanvasTitle">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTitle">Menu Lainnya</h5>
+        <button type="button" class="offcanvas-close-btn" id="closeOffcanvasBtn" aria-label="Tutup Navigasi">
+            &times;
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <nav>
+            {{ range .Site.Menus.footer }}
+
+                {{ $menu_item_url := .URL | relLangURL }}
+                {{/* {{ $menu_item_url }} */}}
+                
+                {{ $page_url := $.Page.RelPermalink | relLangURL }}
+                {{ $page_split := index (split $page_url "/") 1 }}
+                {{/* {{ $page_split }} */}}
+                
+                {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
+
+                <a class="offcanvas-nav-link {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}active{{ end }}" href="{{ .URL | relLangURL }}">
+                    {{ .Name | safeHTML  }}
+                </a>
+            {{ end}}
+        </nav>
+    </div>
+</div>
+
+<nav class="bottom-nav">
+    {{ range .Site.Menus.main }}
+    
+        {{ $menu_item_url := .URL | relLangURL }}
+        {{/* {{ $menu_item_url }} */}}
+
+        {{ $page_url := $.Page.RelPermalink | relLangURL }}
+        {{ $page_split := index (split $page_url "/") 1 }}
+        {{/* {{ $page_split }} */}}
+
+        {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
+        
+        <a href="{{ .URL | relLangURL }}" class='nav-item {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}active{{ end }}'>
+            <i class="{{ .Pre }}"></i>
+            <span>{{ .Name }}</span>
+        </a>
+    {{ end}}
+
+     <a href="javascript:;" class="nav-item toggleOffcanvasBtn">
+        <i class="ri-more-2-fill"></i>
+    </a>
+</nav>

@@ -25,16 +25,21 @@
         <div class="quotes-grid">
             {{ range .Pages }}
             <article class="quote-card" data-cats="{{ delimit .Params.categories "|" }}">
-                <div class="quote-content">{{ .Summary | safeHTML }}</div>
+                <div class="quote-content">{{ .Content | safeHTML }}</div>
                 <div class="quote-meta">
-                <div class="quote-author">
-                {{ with .Params.author }}
-                    {{ . }}
-                {{ else }}
-                    — Anonymous
-                {{ end }}
-                </div>
-                <button class="quote-copy" data-target="quote-{{ .File.UniqueID }}">Salin</button>
+                    <div class="quote-attribution">
+                        <div class="quote-author">
+                        {{ with .Params.author }}
+                            - {{ . }}
+                        {{ else }}
+                            — Anonymous
+                        {{ end }}
+                        </div>
+                        <div class="quote-date">{{ .Date.Format "2 January 2006" }}</div>
+                    </div>
+                    <button class="quote-copy" title="Salin kutipan" data-target="quote-{{ .File.UniqueID }}">
+                        <i class="ri-file-copy-line"></i>
+                    </button>
                 </div>
                 <textarea id="quote-{{ .File.UniqueID }}" class="quote-hidden">{{ .Plain }}</textarea>
             </article>
@@ -83,15 +88,34 @@
 
             // Copy logic (delegated)
             document.addEventListener('click', function(e){
-            if(e.target && e.target.classList.contains('quote-copy')){
-                var id = e.target.getAttribute('data-target');
+            var copyButton = e.target.closest('.quote-copy');
+            if(copyButton){
+                var id = copyButton.getAttribute('data-target');
                 var ta = document.getElementById(id);
                 if(!ta) return;
-                // fallback copy using temporary textarea
+
+                var originalContent = copyButton.innerHTML;
+                var successContent = '<i class="ri-check-line"></i>';
+
+                function showSuccess(button) {
+                    button.innerHTML = successContent;
+                    setTimeout(function() {
+                        button.innerHTML = originalContent;
+                    }, 1200);
+                }
+
                 var text = ta.value || ta.innerText || ta.textContent;
-                if(navigator.clipboard){ navigator.clipboard.writeText(text).then(function(){ e.target.textContent='Tersalin!'; setTimeout(function(){ e.target.textContent='Copy'; },900); }); }
+                if(navigator.clipboard){ 
+                    navigator.clipboard.writeText(text).then(function() { showSuccess(copyButton); }); 
+                }
                 else {
-                ta.select(); try{ document.execCommand('copy'); e.target.textContent='Tersalin!'; setTimeout(function(){ e.target.textContent='Copy'; },900);}catch(err){console.warn(err)}
+                    ta.select(); 
+                    try { 
+                        document.execCommand('copy'); 
+                        showSuccess(copyButton);
+                    } catch(err) {
+                        console.warn(err)
+                    }
                 }
             }
             });

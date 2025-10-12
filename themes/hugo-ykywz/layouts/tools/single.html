@@ -7,13 +7,13 @@
         <section class="detail-header">
             <div class="container">
                 <nav class="breadcrumb">
-                    <a href="{{ $.Site.BaseURL }}/tools/">
+                    <a href="{{ .CurrentSection.RelPermalink }}">
                         🔨
                         {{ with .Parent }}
                             {{ .Title }}
                         {{ end   }}
                     </a>
-                    <i class="fas fa-chevron-right"></i>
+                    <i class="ri-arrow-right-s-line"></i>
                     <span>{{ .Title }}</span>
                 </nav>
             </div>
@@ -22,7 +22,7 @@
             <div class="container">
                 <header>
                     <h1 class="page-title">
-                        {{ $icon := or .Params.icon "fa-solid fa-wrench" }}
+                        {{ $icon := or .Params.icon "ri-wrench-line" }}
                         <i class="{{ $icon }}" aria-hidden="true"></i>
                         {{ .Title }}
                     </h1>

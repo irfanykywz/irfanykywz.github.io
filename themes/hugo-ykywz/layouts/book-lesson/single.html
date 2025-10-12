@@ -9,10 +9,10 @@
       <div class="container">
         <nav class="breadcrumb">
           <a href="{{ .CurrentSection.RelPermalink }}">
-            <i class="fas fa-book"></i>
+            📖
             {{ .CurrentSection.Title }}
           </a>
-          <i class="fas fa-chevron-right"></i>
+          <i class="ri-arrow-right-s-line"></i>
           <span>{{ .Title }}</span>
         </nav>
       </div>
@@ -31,11 +31,11 @@
               </div>
             <div class="detail-meta">
               <div class="detail-meta-item">
-                <i class="fas fa-pen"></i>
+                <i class="ri-quill-pen-ai-line"></i>
                 <span>{{ with .Params.author }}{{ . }}{{ else }}Author{{ end }}</span>
               </div>
               <div class="detail-meta-item">
-                <i class="fas fa-clock"></i>
+                <i class="ri-time-line"></i>
                 <span>{{ .Date | time.Format "2 January 2006" }}</span>
               </div>
             </div>
@@ -51,21 +51,21 @@
           <footer class="detail-footer">
             <div class="detail-navigation">
               <a href="javascript:window.history.go(-1);" class="nav-button">
-                <i class="fas fa-arrow-left"></i>
+                <i class="ri-arrow-left-line"></i>
                 Back
               </a>
               <div class="nav-buttons">
                 {{ $pages := .CurrentSection.Pages.ByDate }}
                 {{ with $pages.Prev . }}
                 <a href="{{ .RelPermalink }}" class="nav-button">
-                  <i class="fas fa-chevron-left"></i>
+                  <i class="ri-arrow-left-s-line"></i>
                   Previous
                 </a>
                 {{ end }}
                 {{ with $pages.Next . }}
                 <a href="{{ .RelPermalink }}" class="nav-button">
                   Next
-                  <i class="fas fa-chevron-right"></i>
+                  <i class="ri-arrow-right-s-line"></i>
                 </a>
                 {{ end }}
               </div>

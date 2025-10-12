@@ -39,101 +39,66 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Add scroll effect to navigation
+  // let lastScrollTop = 0;
+  // const header = document.querySelector('.header');
+  
+  // window.addEventListener('scroll', function() {
+  //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+  //   if (scrollTop > lastScrollTop && scrollTop > 100) {
+  //     // Scrolling down
+  //     header.style.transform = 'translateY(-100%)';
+  //   } else {
+  //     // Scrolling up
+  //     header.style.transform = 'translateY(0)';
+  //   }
+    
+  //   lastScrollTop = scrollTop;
+  // });
+
+  // Add scroll effect to navigation
   let lastScrollTop = 0;
-  const header = document.querySelector('.header');
-  
+  // Select the bottom navigation bar
+  const bottomNav = document.querySelector('.bottom-nav');
+  // Define the threshold (how far to scroll before hiding)
+  const scrollThreshold = 100;
+
   window.addEventListener('scroll', function() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      // Scrolling down
-      header.style.transform = 'translateY(-100%)';
-    } else {
-      // Scrolling up
-      header.style.transform = 'translateY(0)';
-    }
-    
-    lastScrollTop = scrollTop;
-  });
-
-  // Add intersection observer for animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+          // Scrolling down, hide the navigation
+          bottomNav.classList.add('hide');
+      } else {
+          // Scrolling up or near the top, show the navigation
+          bottomNav.classList.remove('hide');
       }
-    });
-  }, observerOptions);
+      
+      lastScrollTop = scrollTop;
+  });  
 
-  // Observe elements for animation
-  document.querySelectorAll('.project-item, .blog-post, .favorite-item, .faq-item, .journal-entry, .tag-item, .popular-tag-card').forEach(el => {
-    observer.observe(el);
-  });
-
-  // Add hover effects to project cards and skill tags
-  document.querySelectorAll('.project-item, .favorite-item, .popular-tag-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-8px)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-      this.style.transform = 'translateY(0)';
-    });
-  });
-
-  // Add loading states for external links
-  document.querySelectorAll('a[href^="http"], a[href^="mailto:"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      if (this.textContent.includes('Demo') || this.textContent.includes('GitHub') || this.textContent.includes('Visit')) {
-        // Add loading state for external links
-        const originalText = this.innerHTML;
-        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-        
-        setTimeout(() => {
-          this.innerHTML = originalText;
-        }, 2000);
-      }
-    });
-  });
-
-  
-  // Skill tag hover effects
-  document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-2px)';
-    });
-    
-    tag.addEventListener('mouseleave', function() {
-      this.style.transform = 'translateY(0)';
-    });
-  });
 
   console.log('Muhamad Irfan\'s portfolio initialized successfully!');
 });
 
-// Utility functions
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
+// // Utility functions
+// function debounce(func, wait) {
+//   let timeout;
+//   return function executedFunction(...args) {
+//     const later = () => {
+//       clearTimeout(timeout);
+//       func(...args);
+//     };
+//     clearTimeout(timeout);
+//     timeout = setTimeout(later, wait);
+//   };
+// }
 
-// Add resize handler for responsive adjustments
-window.addEventListener('resize', debounce(() => {
-  // Recalculate any dynamic layouts if needed
-  console.log('Window resized');
-}, 250));
+// // Add resize handler for responsive adjustments
+// window.addEventListener('resize', debounce(() => {
+//   // Recalculate any dynamic layouts if needed
+//   console.log('Window resized');
+// }, 250));
 
 // Theme toggle functionality (optional future enhancement)
 function toggleTheme() {
@@ -149,15 +114,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Ofcanvas
+// Offcanvas
 document.addEventListener('DOMContentLoaded', function() {
-    const toggleBtn = document.getElementById('toggleOffcanvasBtn');
+    const toggleBtns = document.getElementsByClassName('toggleOffcanvasBtn');
     const closeBtn = document.getElementById('closeOffcanvasBtn');
     const menu = document.getElementById('offcanvasMenu');
     const backdrop = document.getElementById('offcanvasBackdrop');
 
+    // A reference to the button that opened the offcanvas (important for focus management)
+    let lastToggleBtn = null;
+
     // Fungsi untuk menampilkan/menyembunyikan offcanvas
-    function toggleOffcanvas() {
+    function toggleOffcanvas(event) {
         const isShown = menu.classList.contains('show');
         
         menu.classList.toggle('show', !isShown);
@@ -165,20 +133,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Mengatur fokus ke elemen yang sesuai
         if (!isShown) {
+            // Save the button that was clicked to open the menu
+            // We check event.currentTarget because the event might come from the backdrop or Esc key
+            if (event && event.currentTarget && event.currentTarget.classList.contains('toggle-offcanvas-btn')) {
+                lastToggleBtn = event.currentTarget;
+            }
             menu.focus(); // Fokus ke menu saat ditampilkan (untuk aksesibilitas)
         } else {
-            toggleBtn.focus(); // Kembali fokus ke tombol saat ditutup
+            // Check if we have a saved button to focus on, otherwise, focus on the close button or body
+            if (lastToggleBtn) {
+                lastToggleBtn.focus(); // Kembali fokus ke tombol yang membuka offcanvas
+                lastToggleBtn = null; // Clear the reference
+            } else if (closeBtn) {
+                 // Fallback if the menu was closed by backdrop/escape and lastToggleBtn wasn't set
+                 closeBtn.focus();
+            }
         }
     }
 
+    // 2. **Changed:** Loop through all buttons with the class and attach the event listener
+    for (let i = 0; i < toggleBtns.length; i++) {
+        toggleBtns[i].addEventListener('click', toggleOffcanvas);
+    }
+    
     // Event listener untuk tombol dan backdrop
-    toggleBtn.addEventListener('click', toggleOffcanvas);
     closeBtn.addEventListener('click', toggleOffcanvas);
     backdrop.addEventListener('click', toggleOffcanvas);
     
     // Tambahan: Tutup dengan tombol ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && menu.classList.contains('show')) {
+            // Call toggleOffcanvas without an event object for Escape key
             toggleOffcanvas();
         }
     });

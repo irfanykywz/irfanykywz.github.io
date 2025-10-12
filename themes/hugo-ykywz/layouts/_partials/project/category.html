@@ -1,10 +1,8 @@
 {{ if eq .Params.category "Desktop" }}
-	<i class="fas fa-desktop"></i>
+	<i class="ri-computer-line"></i>
 {{ else if eq .Params.category "Seluler" }}
-	<i class="fas fa-mobile-screen"></i>
+	<i class="ri-smartphone-line"></i>
 {{ else if eq .Params.category "Website" }}
-	<i class="fas fa-globe"></i>
-{{ else }}
-	<i class="fas fa-window-maximize"></i>
+	<i class="ri-earth-line"></i>
 {{ end }}
 {{ .Params.category }}

@@ -2,10 +2,10 @@
 title: Vibe Coding Sampai Jadi Aplikasi Untuh
 slug: vibe coding sampai jadi aplikasi
 date: 2025-07-05T20:44:09+07:00
-draft: false
-weather: Clear
+weather: Cerah
 location: Bogor, Indonesia
-tags: ['vibe code']
+tags: []
+draft: false
 ---
 
 vibe coding sudah tidak asing lagi bagi banyak orang yang berkecimpung didunia online

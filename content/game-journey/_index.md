@@ -1,4 +1,4 @@
 ---
 title: Jurnal Game
-description: Catatan dari game yang telah dimainkan.
+description: Catatan game yang pernah dimainkan, berisi tips dan panduan
 ---

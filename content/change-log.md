@@ -1,30 +1,33 @@
 ---
 # Front Matter (YAML)
-title: "Website - Change Log"
-date: 2025-10-09T00:00:00+08:00 # Tanggal pembuatan halaman ini
+title: "Catatan Perubahan"
+description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan peningkatan di setiap versi.
+date: 2025-10-09T00:00:00+08:00
 
-# Parameter Kustom: 'changelog' (Daftar Versi)
 changelog:
 
-  # - version: "2.1.0"
-  #   date: "9 Oktober 2025"
-  #   changes:
-  #     - tag: "Fitur Baru"
-  #       description: "Menambahkan fitur **Mode Gelap Otomatis** berdasarkan preferensi sistem operasi pengguna."
-  #     - tag: "Peningkatan"
-  #       description: "Optimasi performa pada pemuatan halaman utama, mengurangi waktu loading hingga **30%**."
-  #     - tag: "Perbaikan"
-  #       description: "Memperbaiki bug di mana notifikasi terkadang tidak muncul pada perangkat Android tertentu."
-  #     - tag: "Pembaruan"
-  #       description: "Pembaruan tampilan (UI) untuk formulir *login* dan *registrasi* agar lebih modern dan responsif."
-
-  # - version: "2.0.5"
-  #   date: "20 September 2025"
-  #   changes:
-  #     - tag: "Perbaikan"
-  #       description: "Perbaikan kecil pada validasi input di halaman pengaturan profil."
-  #     - tag: "Peningkatan"
-  #       description: "Peningkatan keamanan untuk API endpoint."
+  - version: "1.0.9"
+    date: "12 Oktober 2025"
+    changes:
+      - tag: "Fitur Baru"
+        description: "menambahkan menu navigasi bawah, membuat menu lainnya mudah diklik"  
+      - tag: "Pembaruan"
+        description: "mengubah fontawesome menjadi remixicon"          
+  - version: "1.0.8"
+    date: "11 Oktober 2025"
+    changes:
+      - tag: "Pembaruan"
+        description: "memperbarui menu pada halaman belajar, sekarang bisa menambahkan section kedalam menu"  
+      - tag: "Pembaruan"
+        description: "memperbarui deskripsi halaman: riset, game, kumpulan kata, belajar, artikel"    
+      - tag: "Fitur Baru"
+        description: "menambah fitur lightbox menggunakan library glightbox. untuk melihat gambar secara penuh. diterapkan pada halaman project, dan riset"
+      - tag: "Pembaruan"
+        description: "menghapus script lightbox pada halaman project yang sudah tidak digunakan"  
+      - tag: "Pembaruan"
+        description: "menambahkan gambar ilustrasi pada halaman donasi"
+      - tag: "Fitur Baru"
+        description: "menambah halaman film"                   
 
   - version: "1.0.7"
     date: "09 Oktober 2025"
@@ -102,5 +105,3 @@ changelog:
       - tag: "Fitur Baru"
         description: "Rilis Awal Website Portofolio Menggunakan Hugo. Menyediakan fitur dasar: halaman beranda, project, post, dan kontak."
 ---
-
-Riwayat perubahan, fitur baru, perbaikan bug, dan peningkatan di setiap versi.

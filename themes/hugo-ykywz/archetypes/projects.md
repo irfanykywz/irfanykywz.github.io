@@ -18,7 +18,7 @@ overview:
 # =============================
 feature:
     - name: "example"
-      icon: 'fas fa-edit'
+      icon: 'ri-function-add-line'
       description: "example"
 # ============================= 
 galery:

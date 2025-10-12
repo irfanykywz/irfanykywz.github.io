@@ -1,14 +1,14 @@
 baseURL = "https://irfanykywz.github.io/"
+theme = "hugo-ykywz"
 languageCode = "en-us"
 title = "irfanykywz"
-theme = "hugo-ykywz"
+copyright = "irfanykywz"
 
 enableEmoji = true
 enableGitInfo = true
 enableRobotsTXT = true
 canonifyURLs = true
 
-copyright = "irfanykywz"
 
 pagination.pagerSize = 5
 
@@ -18,6 +18,7 @@ pygmentscodefencesguesssyntax = true
 
 
 [params]
+  version = "1.0.9"
 	# browser icon
 	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
   favicon = "avatar.avif"
@@ -34,32 +35,26 @@ pygmentscodefencesguesssyntax = true
 [[menu.main]]
 name = "Beranda"
 url = "/"
-pre = "fas fa-home"
-weight = 1
+pre = "ri-home-line"
+weight = 10
 
 [[menu.main]]
 name = "Proyek"
 url = "/projects/"
-pre = "fas fa-briefcase"
-weight = 2
-
-# [[menu.main]]
-# name = "Learn"
-# url = "/learn/"
-# pre = "fas fa-graduation-cap"
-# weight = 3
+pre = "ri-briefcase-2-line"
+weight = 20
 
 [[menu.main]]
 name = "Artikel"
 url = "/posts/"
-pre = "fas fa-blog"
-weight = 4
+pre = "ri-article-line"
+weight = 30
 
 [[menu.main]]
 name = "Kontak"
 url = "/contact/"
-pre = "fas fa-envelope"
-weight = 5
+pre = "ri-mail-line"
+weight = 40
 
 # Menu Footer
 [[menu.footer]]
@@ -78,6 +73,11 @@ url = "/book-lesson/"
 weight = 40
 
 [[menu.footer]]
+name = "🎞️ Film"
+url = "/movie-watches/"
+weight = 41
+
+[[menu.footer]]
 name = "📁 File"
 url = "/files/"
 weight = 50
@@ -88,7 +88,7 @@ url = "/tools/"
 weight = 60
 
 [[menu.footer]]
-name = "🌟 Kumpulan Kata"
+name = "🌟 Kutipan"
 url = "/quote/"
 weight = 70
 

@@ -48,6 +48,14 @@
 }
 .donate-intro p {
 	margin-bottom: 1.5rem;
+	padding-right: 85px;
+}
+
+.donate-ilustration {
+	position: absolute;
+    top: 20px;
+    right: 0;
+    width: 200px;
 }
 
 .donate-funding {

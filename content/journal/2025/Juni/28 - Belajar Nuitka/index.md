@@ -1,11 +1,11 @@
 ---
 title: Belajar Nuitka
+slug: belajar nuitka
 date: 2025-06-28T19:35:43+07:00
-draft: false
-mood: Paw
-weather: Rain
+weather: Hujan
 location: Bogor, Indonesia
-tags: ['python']
+tags: []
+draft: false
 ---
 
 hari ini bangun pagi tiba-tiba buka nuitka untuk dipelajari
@@ -35,4 +35,4 @@ berikut previewnya
 
 untuk reponya bisa dicek disini
 
-[https://github.com/ykywz-python-journey/pyside6-nuitka-compiler](https://github.com/ykywz-python-journey/pyside6-nuitka-compiler)
+[https://github.com/ykywz-python](https://github.com/ykywz-python)

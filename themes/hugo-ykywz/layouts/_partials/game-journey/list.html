@@ -31,7 +31,7 @@
                                 {{ with .Params.description }}<p class="gj-summary">{{ . }}</p>{{ end }}
                                 <div class="gj-meta">
                                     <span class="gj-reading-time">
-                                        <i class="fas fa-clock"></i>
+                                        <i class="ri-time-line"></i>
                                         {{ $totalReadingTime := 0 }}
                                         {{ range .Pages }}
                                         {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
@@ -39,7 +39,7 @@
                                         <span>{{ printf "%d min waktu baca" $totalReadingTime }}</span>
                                     </span>
                                     <span class="gj-count-content">
-                                        <i class="fas fa-file-alt"></i>
+                                        <i class="ri-file-text-line"></i>
                                         <span>{{ (len .Pages) }} Konten</span>
                                     </span>
                                 </div>

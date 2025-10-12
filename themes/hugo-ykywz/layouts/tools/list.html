@@ -26,7 +26,7 @@
                             <a class="tool-card" href="{{ .RelPermalink }}">
                                 <div class="card-head">
                                     <span class="card-icon">
-                                        {{ $icon := or .Params.icon "fa-solid fa-wrench" }}
+                                        {{ $icon := or .Params.icon "ri-wrench-line" }}
                                         <i class="{{ $icon }}" aria-hidden="true"></i>
                                     </span>
                                     <div>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="card-meta">
                                     <span>
-                                        <i class="fa fa-calendar"></i>
+                                        <i class="ri-calendar-2-line"></i>
                                         {{ .Date | time.Format "2 January 2006" }}
                                     </span>
                                     <span>Buka →</span>
@@ -51,7 +51,7 @@
                         </li>
                     {{ end }}
                 </ul>
-                                <div id="noResults" class="no-results" hidden>Tidak ada alat yang cocok dengan pencarian.</div>
+                <div id="noResults" class="no-results" hidden>Tidak ada alat yang cocok dengan pencarian.</div>
             </div>
 		</section>
 

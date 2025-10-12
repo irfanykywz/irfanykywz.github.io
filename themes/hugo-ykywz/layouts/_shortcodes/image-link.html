@@ -1,0 +1,10 @@
+{{ $src := .Get 0 }}
+{{ $alt := .Get 1 | default "Gallery Image" }}
+{{ $group := .Get 2 | default "gallery" }}
+
+{{/* The <a> tag links to the full image and has the 'glightbox' class 
+     for the lightbox library to hook into. 
+     'data-gallery' groups images so users can click next/prev. */}}
+<a href="{{ $src }}" class="grid-item glightbox" data-gallery="{{ $group }}" data-desc-position="bottom" data-description="{{ $alt }}">
+    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" />
+</a>

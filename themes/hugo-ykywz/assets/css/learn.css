@@ -101,19 +101,7 @@
 .course-meta{flex:0 0 auto;display:flex;flex-direction:column;gap:0.75rem;align-items:flex-end;text-align:right}
 .meta-item{display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--text-muted);white-space:nowrap}
 .meta-item i{color:#87ceeb;width:16px;text-align:center}
-/* Specific icon colors */
-.course-icon .fa-html5{color:#e34f26}
-.course-icon .fa-css3-alt{color:#1572b6}
-.course-icon .fa-js-square{color:#f7df1e}
-.course-icon .fa-react{color:#61dafb}
-.course-icon .fa-node-js{color:#339933}
-.course-icon .fa-python{color:#3776ab}
-.course-icon .fa-vuejs{color:#4fc08d}
-.course-icon .fa-laravel{color:#ff2d20}
-.course-icon .fa-database{color:#336791}
-.course-icon .fa-git-alt{color:#f05032}
-.course-icon .fa-docker{color:#2496ed}
-.course-icon .fa-plug{color:#ff6b6b}
+
 
 
 /* Responsive Design */
@@ -146,12 +134,6 @@
 .course-card-tutorial.loading{opacity:0.7;pointer-events:none}
 .course-card-tutorial.loading .course-icon{animation:pulse 1.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-/* Pagination hover animations */
-.pagination-link i,.pagination-number{transition:transform 0.2s ease}
-.pagination-link:hover:not(.disabled) i{transform:translateX(2px)}
-.pagination-link:hover:not(.disabled) i.fa-chevron-left{transform:translateX(-2px)}
-
-
 
 .detail-header {
     position: sticky;

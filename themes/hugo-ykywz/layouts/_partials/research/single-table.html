@@ -5,10 +5,10 @@
         <!-- Search Input -->
         <div class="search-section">
             <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
+                <i class="ri-search-line"></i>
                 <input type="text" id="researchTableSearch" class="search-input" placeholder="Search table data..." />
                 <button type="button" id="clearSearch" class="clear-search" title="Clear search">
-                    <i class="fas fa-times"></i>
+                    <i class="ri-close-line"></i>
                 </button>
             </div>
         </div>
@@ -57,7 +57,7 @@
                     <option value="">No sorting</option>
                 </select>
                 <button type="button" id="sortDirection" class="sort-direction" title="Sort direction">
-                    <i class="fas fa-sort"></i>
+                    <i class="ri-sort-asc"></i>
                 </button>
             </div>
         </div>
@@ -89,14 +89,14 @@
             <div class="table-cell {{ $key }}-cell">
                 {{ if eq $key "field" }}
                 <span class="field-label">
-                    <i class="fas fa-info-circle"></i>
+                    <i class="ri-information-line"></i>
                     {{ $value | default "Field" }}
                 </span>
                 {{ else if eq $key "value" }}
                 {{ if (index $item "url") }}
                 <a href="{{ index $item "url" }}" target="_blank" rel="noopener" class="value-link">
                     {{ $value | default "Value" }}
-                    <i class="fas fa-external-link-alt"></i>
+                    <i class="ri-external-link-line"></i>
                 </a>
                 {{ else }}
                 <span class="value-text">{{ $value | default "Value" }}</span>
@@ -115,11 +115,11 @@
     <!-- No Results Placeholder -->
     <div id="noResultsPlaceholder" class="no-results-placeholder hidden">
         <div class="no-results-content">
-            <i class="fas fa-search"></i>
+            <i class="ri-search-line"></i>
             <h3>No results found</h3>
             <p>Try adjusting your search terms or filters to find what you're looking for.</p>
             <button type="button" class="clear-all-filters" onclick="clearAllFilters()">
-                <i class="fas fa-times"></i>
+                <i class="ri-close-line"></i>
                 Clear all filters
             </button>
         </div>
@@ -304,11 +304,11 @@
         function updateSortDirectionIcon() {
             const icon = sortDirection.querySelector('i');
             if (currentSortColumn === '') {
-                icon.className = 'fas fa-sort';
+                icon.className = 'ri-sort-asc';
             } else if (currentSortDirection === 'asc') {
-                icon.className = 'fas fa-sort-up';
+                icon.className = 'ri-sort-asc';
             } else {
-                icon.className = 'fas fa-sort-down';
+                icon.className = 'ri-sort-desc';
             }
         }
 

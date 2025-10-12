@@ -1,44 +1,51 @@
 ---
-title: Panduan Dasar Pengembangan Hugo
+title: Example Learn
 slug: example-learn
-description: Seri tutorial lengkap untuk pemula tentang instalasi, konfigurasi, dan deployment Hugo.
-section: Dasar
+description: Lorem ipsum dolor sit amet, consectetur adipisicing elit
+section: Index
 image: image.avif
 date: 2025-10-09T16:00:35+07:00
 draft: false
 ---
 
-# Hugo 101: Membangun Situs Web Statis dalam 5 Menit
+## Lorem ipsum dolor sit amet
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-Selamat datang di panduan pengembangan situs statis menggunakan **Hugo**! Hugo adalah *framework* yang sangat cepat, ditulis dalam Go (Golang), yang memungkinkan Anda membuat situs web dengan *performance* tinggi.
+### tempor incididunt ut labore e
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-Panduan ini akan membawa Anda dari instalasi dasar hingga *deployment* situs pertama Anda.
+### ercitation ullamco laboris nis
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
----
+#### Excepteur sint occaecat
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-## Modul 1: Persiapan Lingkungan
+### officia deserunt mollit
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-Sebelum kita mulai, pastikan sistem Anda memenuhi persyaratan berikut:
-
-### 1. Instalasi Go (Opsional, tapi Disarankan)
-Meskipun Hugo dapat diinstal tanpa Go, memilikinya akan mempermudah kompilasi dari sumber.
-
-* **Linux/macOS:**
-    ```bash
-    brew install go
-    ```
-* **Windows:** Unduh installer dari [situs resmi Golang](https://golang.org/dl/).
-
-### 2. Instalasi Hugo
-Gunakan manajer paket favorit Anda:
-
-| Sistem Operasi | Perintah Instalasi |
-| :--- | :--- |
-| **macOS (Homebrew)** | `brew install hugo` |
-| **Windows (Chocolatey)** | `choco install hugo -confirm` |
-| **Linux (Snap)** | `snap install hugo` |
-
-Verifikasi instalasi Anda dengan menjalankan:
-```bash
-hugo version
-# Output: hugo v0.120.0+extended linux/amd64 BuildDate...
+#### reprehenderit in voluptate
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

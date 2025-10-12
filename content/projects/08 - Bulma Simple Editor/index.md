@@ -6,7 +6,7 @@ image: "bulma-simple-editor.avif"
 stack: ['python', 'ffmpeg', 'pyside6', 'exiftool']
 category: Desktop
 status: Freelance
-demo: https://youtube.com/@YkywzCode
+# demo: https://youtube.com/@YkywzCode
 # buy: https://t.me/ykywz
 # github: https://github.com/kurteyki/
 date: 2024-12-16T16:00:35+07:00
@@ -19,13 +19,13 @@ overview:
 # =============================
 feature:
     - name: "Simple Editing"
-      icon: 'fas fa-edit'
+      icon: 'ri-file-text-line'
       description: "melakukan edit video secara masal dengan efek khusus"
     - name: "Authentication"
-      icon: 'fas fa-lock'
+      icon: 'ri-file-text-line'
       description: "terdapat fitur authentication berdasarkan waktu"
     - name: "Logging"
-      icon: 'fa-solid fa-terminal'
+      icon: 'ri-file-text-line'
       description: "bisa melihat logging untuk melihat proses berjalan"
 # ============================= 
 review:

@@ -4,11 +4,11 @@
     <section class="detail-header">
         <div class="container">
             <nav class="breadcrumb">
-                <a href="{{ $.Site.BaseURL }}posts/">
-                    <i class="fas fa-blog"></i>
-                    Artikel
+                <a href="{{ .CurrentSection.RelPermalink }}">
+                    <i class="ri-article-line"></i>
+                    {{ .Parent.Title }}
                 </a>
-                <i class="fas fa-chevron-right"></i>
+                <i class="ri-arrow-right-s-line"></i>
                 <span>{{ .Title }}</span>
             </nav>
         </div>
@@ -20,24 +20,19 @@
                 <header class="detail-article-header">
                     <div class="post-meta-large">
                         <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
+                            <i class="ri-calendar-2-line"></i>
                             <span>{{ .Date | time.Format "2 January 2006" }}</span>
                         </div>
                         <!-- {{ if .Params.categories }}
-                        <div class="meta-item">
-                            <i class="fas fa-tag"></i>
+                        <div class="meta-item">                            
                             <span>{{ .Params.categories}}</span>
                         </div>
                         {{ end }} -->
                         <div class="meta-item">
-                            <i class="fas fa-clock"></i>
+                            <i class="ri-time-line"></i>
                             <span>
                                 {{ printf "%d min waktu baca" .ReadingTime }}
                             </span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-user"></i>
-                            <span>{{ .Site.Copyright }}</span>
                         </div>
                     </div>
                     <h1 class="detail-title">{{ .Title }}</h1>
@@ -51,6 +46,19 @@
                             {{ . | safeHTML }}
                         {{ end }}
 
+                    </div>
+
+                    <div class="post-footer">
+                        {{ partial "reaction.html" . }}
+                        <div>
+                            <p>
+                                <em>
+                                    Telah dilihat sebanyak:
+                                    <br>
+                                    {{ partial "view-count.html" . }}x
+                                </em>
+                            </p>
+                        </div>
                     </div>
 
                     {{ if gt .Params.tags 0 }}
@@ -69,7 +77,7 @@
                 <footer class="detail-footer">
                     <div class="detail-navigation">
                         <a href="javascript:window.history.go(-1);" class="nav-button">
-                            <i class="fas fa-arrow-left"></i>
+                            <i class="ri-arrow-left-line"></i>
                             Kembali
                         </a>
 
@@ -78,7 +86,7 @@
 
                             {{ with $pages.Prev . }}
                                 <a href="{{ .RelPermalink }}" class="nav-button">
-                                    <i class="fas fa-chevron-left"></i>
+                                    <i class="ri-arrow-left-s-line"></i>
                                     Sebelumnya
                                 </a>
                             {{ end }}
@@ -86,7 +94,7 @@
                             {{ with $pages.Next . }}
                                 <a href="{{ .RelPermalink }}" class="nav-button">
                                     Selanjutnya
-                                    <i class="fas fa-chevron-right"></i>
+                                    <i class="ri-arrow-right-s-line"></i>
                                 </a>
                             {{ end }}
                         </div>

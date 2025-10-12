@@ -12,4 +12,5 @@ funding:
     owner: "(a.n. Muhamad Irfan)"
 qr: ""
 thanks: "Terima kasih atas dukungannya!"
+image: need-donation.avif
 ---

@@ -18,7 +18,7 @@
                     {{ range $key, $value := .Data.Terms.ByCount }}
                     <div class="tag-item large">
                         <a href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/{{ $value.Name | urlize }}/" class="tag-link">
-                            <i class="fas fa-hashtag"></i>
+                            <i class="ri-hashtag"></i>
                             <span class="tag-name">{{ $value.Name }}</span>
                             <span class="tag-count">{{ $value.Count }}</span>
                         </a>

@@ -1,0 +1,104 @@
+
+{{/* 1. Dynamic logic to find the top-level section path (your code) */}}
+{{ $split := "/"}}
+{{ if and .File (strings.Contains .File.Dir "\\") }}
+    {{ $split = "\\"}}
+{{ end }}
+{{ $dirParts := split .File.Dir $split }}
+
+{{/*
+    Find the parent section. Assuming $rootPath correctly identifies the 'example learn' section.
+    If $rootPath needs adjustment for different environments, you may need to check the array index.
+*/}}
+{{ $rootPath := index $dirParts 1 }}
+{{ $rootSection := .Site.GetPage "section" $rootPath }}
+
+{{/* 2. Initialize and build the custom page slice (array) */}}
+{{ $collectedAllPage := slice }}
+
+{{/* Loop through immediate children of $rootSection */}}
+{{ range $rootSection.Pages }}
+    {{/* If the page is a regular page (like 01, 02), append it. */}}
+    {{ if not .IsSection }}
+        {{ $collectedAllPage = $collectedAllPage | append . }}
+    
+    {{/* If the page is a sub-section (like 03 - section 3), loop through its pages. */}}
+    {{ else }}
+        {{/* Use .Pages on the section to get its immediate children */}}
+        {{/* Sort the children by Weight before appending */}}
+        {{ $sortedChildren := .Pages.ByWeight }}
+        
+        {{ range $sortedChildren }}
+            {{/* Append each child page (03.1, 03.2) to the main collection */}}
+            {{ $collectedAllPage = $collectedAllPage | append . }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{/* 3. Find the current page's index in the collected array */}}
+{{ $currentIndex := -1 }}
+{{ range $index, $page := $collectedAllPage }}
+    {{ if eq $page.RelPermalink $.RelPermalink }}
+        {{ $currentIndex = $index }}
+    {{ end }}
+{{ end }}
+
+{{/* 4. Determine Previous and Next Pages based on the index */}}
+{{ $prevPage := "" }}
+{{ $nextPage := "" }}
+
+{{ if gt $currentIndex 0 }}
+    {{ $prevPage = index $collectedAllPage (sub $currentIndex 1) }}
+{{ end }}
+
+{{ if and (ne $currentIndex -1) (lt (add $currentIndex 1) (len $collectedAllPage)) }}
+    {{ $nextPage = index $collectedAllPage (add $currentIndex 1) }}
+{{ end }}
+
+<div class="module-navigation">
+    {{/* --- PREVIOUS BUTTON --- */}}
+    <div class="nav-prev">
+        {{ with $prevPage }}
+            <a href="{{ .RelPermalink }}" class="nav-button prev-button">
+                <i class="ri-arrow-left-line"></i>
+                Prev:
+                {{ if .Params.section }}
+                    {{ .Params.section }}
+                {{ else }}
+                    {{ .LinkTitle }}
+                {{ end }}
+            </a>
+        {{ else }}
+            {{ with .Parent }}
+                <a href="{{ .RelPermalink }}" class="nav-button">
+                    <i class="ri-arrow-left-s-line"></i>
+                    {{ if .Params.section }}
+                        {{ .Params.section }}
+                    {{ else }}
+                        {{ .Title }}
+                    {{ end }}
+                </a>
+            {{ end }}
+        {{ end }}
+    </div>
+
+    {{/* --- NEXT BUTTON --- */}}
+    <div class="nav-next">
+        {{ with $nextPage }}
+            <a href="{{ .RelPermalink }}" class="nav-button next-button">
+                <!-- Next: -->
+                {{ if .Params.section }}
+                    {{ .Params.section }}
+                {{ else }}
+                    {{ .LinkTitle }}
+                {{ end }}
+                <i class="ri-arrow-right-line"></i>
+            </a>
+        {{ else }}
+            <span class="nav-button disabled">
+                <!-- Next: End of Module -->
+                <i class="ri-arrow-right-s-line"></i>
+            </span>
+        {{ end }}
+    </div>
+</div>

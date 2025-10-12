@@ -1,6 +1,6 @@
 ---
 title: Hubungi Kapan Saja
-description: Saya sedang mencari peluang kerja penuh waktu dan siap memberikan kontribusi terbaik.
+description: Berikut alamat email dan kontak lainnya yang bisa dihubungi.
 email: irfanyouth@gmail.com
 phone: +6281389215100
 whatsapp: https://api.whatsapp.com/send?phone=6281389215100&text=Halo

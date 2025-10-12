@@ -1,0 +1,50 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/movie-watches.css") }}
+{{ end }}
+
+{{ define "main" }}
+<div class="movie-detail-page">
+    <nav class="breadcrumb">
+        <a href="{{ .CurrentSection.RelPermalink }}">
+            {{ with .Parent }}
+                {{ .Title }}
+            {{ end }}
+        </a>
+        <span>/</span>
+        <span>{{ .Title }}</span>
+    </nav>
+
+    <div class="movie-detail-container">
+        <div class="movie-detail-layout">
+            <div class="movie-detail-poster">
+                <img src="{{ .Params.poster }}" alt="Poster Film {{ .Title }}">
+            </div>
+            <div class="movie-detail-content">
+                <h1 class="movie-detail-title">{{ .Title }}</h1>
+                <div class="movie-detail-meta">
+                    <span class="meta-item">{{ .Params.year }}</span>
+                    <span class="meta-item">{{ delimit .Params.genres ", " }}</span>
+                    {{ with .Params.watched_on }}
+                        <span class="meta-item">Ditonton pada {{ (time.AsTime .).Format "2 Jan 2006" }}</span>
+                    {{ end }}
+                    <span class="watched-badge" data-status="{{ .Params.status | lower }}">{{ .Params.status }}</span>
+                </div>
+                <div class="movie-detail-rating">
+                    <span class="rating-star">⭐</span>
+                    <span class="rating-text">{{ .Params.rating }}/10</span>
+                </div>
+                <p class="movie-detail-synopsis">{{ .Params.synopsis }}</p>
+                {{ if .Content }}
+                <div class="movie-detail-review post-content-full">
+                    {{ .Content }}
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+
+    <div class="movie-detail-footer">
+        <a href="{{ .CurrentSection.RelPermalink }}" class="back-button">&larr; Kembali ke Daftar Film</a>
+    </div>
+</div>
+{{ end }}

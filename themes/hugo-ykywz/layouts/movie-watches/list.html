@@ -1,0 +1,115 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/movie-watches.css") }}
+{{ end }}
+
+{{ define "main" }}
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="ri-movie-line"></i>
+                    {{.Title}}
+                </h1>
+                <p class="page-description">{{ .Description }}</p>
+            </div>
+        </section>
+
+        <section class="movie-watches">
+
+            <div class="container">
+                <div class="controls">
+                    <input type="search" id="search-input" class="search-input" placeholder="Cari Judul Film...">
+                    
+                    <div class="filter-group">
+                        <select id="genre-filter" class="filter-select">
+                            <option value="all">Semua Genre</option>                            
+                            {{ $allGenres := slice }}
+                            {{ range .Pages }}
+                                {{ range .Params.genres }}
+                                    {{ $allGenres = $allGenres | append . }}
+                                {{ end }}
+                            {{ end }}
+                            {{ $uniqueGenres := uniq $allGenres }}
+                            {{ range sort $uniqueGenres }}
+                                <option value="{{ . | lower }}">{{ . | humanize | title }}</option>
+                            {{ end }}
+                        </select>
+
+                    </div>
+                    
+                </div>
+
+                <div class="movie-list" id="movie-list">
+                    {{ range .Pages }}
+                    <a href="{{ .RelPermalink }}" class="movie-card-link">
+                        <div class="movie-card" data-title="{{ .Title }}" data-genre="{{ delimit .Params.genres " " }}" data-rating="{{ .Params.rating }}">
+                            <img src="{{ .Params.poster }}" alt="Poster Film {{ .Title }}" class="movie-poster">
+                            <div class="movie-content">
+                                <div class="watched-badge" data-status="{{ .Params.status | lower }}">{{ .Params.status }}</div>
+                                <h2 class="movie-title">{{ .Title }}</h2>
+                                <p class="movie-year">Tahun Rilis: {{ .Params.year }}</p>
+                                <p class="movie-genre">Genre: {{ delimit .Params.genres ", " }}</p>
+                                <div class="movie-rating">
+                                    <span class="rating-star">⭐</span>
+                                    <span class="rating-text">{{ .Params.rating }}/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {{ end }}
+                </div>
+                <div class="not-found" id="not-found" style="display: none;">
+                    <p>Film yang Anda cari tidak ditemukan.</p>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+
+<script>
+function filterMovies() {
+    const searchString = document.getElementById('search-input').value.toLowerCase();
+    const genreFilter = document.getElementById('genre-filter').value.toLowerCase();
+    const cardLinks = document.querySelectorAll('.movie-card-link');
+    const notFoundMessage = document.getElementById('not-found');
+    
+    let visibleMovies = 0;
+
+    cardLinks.forEach(link => {
+        const card = link.querySelector('.movie-card');
+        const title = card.getAttribute('data-title').toLowerCase();
+        const genres = card.getAttribute('data-genre').toLowerCase();
+        
+        let matchesSearch = title.includes(searchString);
+        let matchesGenre = (genreFilter === 'all') || genres.includes(genreFilter);
+
+        if (matchesSearch && matchesGenre) {
+            link.classList.remove('hidden');
+            visibleMovies++;
+        } else {
+            link.classList.add('hidden');
+        }
+    });
+
+    if (visibleMovies === 0) {
+        notFoundMessage.style.display = 'block';
+    } else {
+        notFoundMessage.style.display = 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const genreFilter = document.getElementById('genre-filter');
+
+    searchInput.addEventListener('input', filterMovies);
+    genreFilter.addEventListener('change', filterMovies);
+
+    // Initial filter on page load
+    filterMovies();
+});
+</script>
+
+{{ end }}

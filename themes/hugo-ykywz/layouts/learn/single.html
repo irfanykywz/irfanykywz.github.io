@@ -4,60 +4,112 @@
 
 {{ define "main" }}
 
-    <main class="main">
-        
-        {{ partial "learn/breadcrumb.html" . }}
+    {{/* 1. Get the current directory parts, handling both Linux/Windows paths */}}
+    {{ $split := "/" }}
+    {{ if strings.Contains .File.Dir "\\" }}
+      {{ $split = "\\" }}
+    {{ end }}
+    {{ $dirParts := split .File.Dir $split }}
 
-        {{ $split := "/"}}
-        {{ if strings.Contains .File.Dir "\\" }}
-            {{ $split = "\\"}}
-        {{ end }}
-        {{ $dirParts := split .File.Dir $split }}
-        {{ $page := index $dirParts 1 }}
+    {{/* 2. Get the specific subdirectory name (e.g., "example learn") */}}
+    {{/* Assuming the structure is 'learn/example learn', the subdirectory name is at index 1 */}}
+    {{ $subDirName := index $dirParts 1 }}
+
+    {{/* *** FIX: Convert the extracted directory name to a URL-safe slug *** */}}
+    {{ $subDirSlug := $subDirName | urlize }}
+
+    {{/* 3. Construct the full directory path to match (e.g., "learn/example learn/") */}}
+    {{/* Note the trailing slash is important for exact directory matching */}}
+    {{ $targetPath := printf "/%s/%s/" .Section $subDirSlug | lower }}
+
+    {{/* 4. Filter all regular pages in the site */}}
+    {{/* We use .Site.RegularPages for content pages, excluding lists, taxonomy, etc. */}}
+    {{ $allRegularPages := .Site.Pages }}
+
+    {{/* 5. Filter the pages to match the specific directory */}}
+    {{/* We use the 'Dir' property of the page object for filtering */}}
+    {{ $specificPages := where $allRegularPages "Section" "eq" "learn" }}
+
+    {{ $specificPages := where $allRegularPages ".Path" "like" $targetPath }}
+
+    {{/* 6. Sort and display the pages */}}
+    {{ $sortedPages := sort $specificPages "Weight" "asc" }}
+
+    <main class="main">        
+
+        <section class="detail-header">
+            <div class="container-full">
+                <nav class="breadcrumb">
+                    {{ if eq (len $dirParts) 5 }}
+                        {{ with .Parent }}
+                            {{ with .Parent }}
+                                <a href="{{ .RelPermalink }}">
+                                    💡
+                                    {{ .Title }}
+                                </a>
+                            {{ end }}
+                        {{ end }}
+                    {{ else }}
+                        {{ with .Parent }}
+                            <a href="{{ .RelPermalink }}">
+                                💡
+                                {{ .Title }}
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                    <i class="ri-arrow-right-s-line"></i>
+                    <span class="u-grow">{{ .Title }}</span>
+                    
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        Menu
+                    </button>
+                </nav>
+            </div>
+        </section>
 
         <!-- Main Container -->
         <div class="main-container">
             <!-- Sidebar -->
             <aside class="sidebar" id="sidebar">
                 <h2 class="sidebar-title">
-                    {{ with .Parent }}
-                        {{ .Title }}
+                    {{ if eq (len $dirParts) 5 }}
+                        {{ with .Parent }}
+                            {{ with .Parent }}
+                                {{ .Title }}
+                            {{ end }}
+                        {{ end }}
+                    {{ else }}
+                        {{ with .Parent }}
+                            {{ .Title }}
+                        {{ end }}
                     {{ end }}
                 </h2>
                 <ul class="lesson-list">
 
-                    {{ with .Parent }}
-                        <li class="lesson-item">
-                            <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                                <svg class="lesson-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                </svg>
-
-                                {{ if .Params.section }}
-                                    {{ .Params.section }}
-                                {{ else }}
-                                    {{ .Title }}
-                                {{ end }}
-                            </a>
-                        </li>
+                    {{ if eq (len $dirParts) 5 }}
+                        {{ with .Parent }}
+                            {{ with .Parent }}
+                                {{ partial "learn/single-sidebar.html" . }}
+                            {{ end }}
+                        {{ end }}
+                    {{ else }}
+                        {{ with .Parent }}
+                            {{ partial "learn/single-sidebar.html" . }}
+                        {{ end }}
                     {{ end }}
 
-                    {{ $posts := where .Site.Pages "Section" "learn" }}
-                    {{ $sortedPosts := sort $posts "Date" }}
+                    {{ range $sortedPages }}
 
-                    {{ range $sortedPosts }}
-
-                        {{/* we must add logic here for muliple page learn and module  */}}
                         {{ $split := "/"}}
                         {{ if strings.Contains .File.Dir "\\" }}
                             {{ $split = "\\"}}
                         {{ end }}
                         {{ $dirParts := split .File.Dir $split }}
-                        {{/* dir path posts : {{ $dirParts }}
-                        index : {{ index $dirParts 1 }}
-                        len : {{ len $dirParts }} */}}
 
-                        {{ if and (eq $page (index $dirParts 1)) (eq (len $dirParts) 4) }}
+                        {{ if and (eq (len $dirParts) 4) (.IsPage) }}
                             <li class="lesson-item">
                                 <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
                                     <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +123,32 @@
                                     {{ end }}
                                 </a>
                             </li>
+                        {{ else if and (.IsSection) (eq (len $dirParts) 4) }}
+                            <li style="margin: 20px 0">
+                                <strong>{{ .Title }}</strong>
+                                {{ $sortedPosts := sort .Data.Pages "Weight" }}
+                                {{ $first := first 1 $sortedPosts}}
+                                <ul class="lesson-list">
+                                    {{ range $sortedPosts }}
+                                        <li class="lesson-item">
+                                            <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
+                                                <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                                </svg>
+
+                                                {{ if .Params.section }}
+                                                    {{ .Params.section }}
+                                                {{ else }}
+                                                    {{ .Title }}
+                                                {{ end }}
+                                            </a>
+                                        </li>
+                                    {{ end }}
+                                </ul>
+                            </li>
+
                         {{ end }}
+
                     {{ end }}
 
                 </ul>
@@ -94,55 +171,7 @@
                     </div>
 
                     <!-- Navigation Between Submodules -->
-                    {{ with .Parent }}
-                        <div class="module-navigation">
-
-                            {{ with $.PrevInSection }}
-                                <div class="nav-section">
-                                    <a href="{{ .RelPermalink }}" class="nav-button">
-                                        <i class="fas fa-arrow-left"></i>
-                                        <!-- Sebelumnya: -->
-                                        {{ if .Params.section }}
-                                            {{ .Params.section }}
-                                        {{ else }}
-                                            {{ .Title }}
-                                        {{ end }}
-                                    </a>
-                                </div>
-                            {{ else }}
-
-                                <a href="{{ .RelPermalink }}" class="nav-button">
-                                    <i class="fas fa-chevron-left"></i>
-                                    <!-- Sebelumnya: -->
-                                    {{ if .Params.section }}
-                                        {{ .Params.section }}
-                                    {{ else }}
-                                        {{ .Title }}
-                                    {{ end }}
-                                </a>
-
-                            {{ end }}
-
-                            {{ with $.NextInSection }}
-                                <div class="nav-section">
-                                    <a href="{{ .RelPermalink }}" class="nav-button">
-                                        <!-- Selanjutnya: -->
-                                        {{ if .Params.section }}
-                                        {{ .Params.section }}
-                                        {{ else }}
-                                        {{ .Title }}
-                                        {{ end }}
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            {{ else }}
-                                <span class="nav-button disabled">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-                            {{ end }}
-                        </div>
-                    {{ end }}
-
+                    {{ partial "learn/single-next-prev.html" . }}
 
                 </main>
             </div>

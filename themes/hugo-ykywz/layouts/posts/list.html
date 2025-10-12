@@ -8,7 +8,7 @@
         <section class="page-header">
             <div class="container">
                 <h1 class="page-title">
-                    <i class="fas fa-blog"></i>
+                    <i class="ri-article-line"></i>
                     {{.Title}}
                 </h1>
                 <p class="page-description">{{ .Description }}</p>
@@ -25,17 +25,16 @@
                             <div class="post-header">
                                 <div class="post-meta">
                                     <span class="post-date">
-                                        <i class="fas fa-calendar"></i>
+                                        <i class="ri-calendar-2-line"></i>
                                         {{ .Date | time.Format "2 January 2006" }}
                                     </span>
                                     <!-- {{ if .Params.categories }}
                                         <span class="post-category">
-                                            <i class="fas fa-tag"></i>
                                             {{ .Params.categories }}
                                         </span>
                                     {{ end }} -->
                                     <span class="post-read-time">
-                                        <i class="fas fa-clock"></i>
+                                        <i class="ri-time-line"></i>
                                         {{ printf "%d min waktu baca" .ReadingTime }}
                                     </span>
                                 </div>
@@ -66,7 +65,7 @@
                                 {{ end }}
 
                                 <a href="{{ .Permalink }}" class="read-more">
-                                    <i class="fas fa-arrow-right"></i>
+                                    <i class="ri-arrow-right-line"></i>
                                     Selengkapnya
                                 </a>
 
@@ -81,7 +80,7 @@
 
                         {{ with .Prev }}
                             <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
-                                <i class="fas fa-chevron-left"></i>
+                                <i class="ri-arrow-left-s-line"></i>
                                 <span aria-hidden="true">Sebelumnya</span>
                             </a>
                         {{ end }}
@@ -91,7 +90,7 @@
                         {{ with .Next }}
                             <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
                                 <span aria-hidden="true">Selanjutnya</span>
-                                <i class="fas fa-chevron-right"></i>
+                                <i class="ri-arrow-right-s-line"></i>
                             </a>
                         {{ end }}
                     </div>

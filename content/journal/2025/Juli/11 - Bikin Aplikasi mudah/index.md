@@ -2,11 +2,10 @@
 title: Bikin Aplikasi itu gampang, yang susah adalah...
 slug: bikin aplikasi mudah
 date: 2025-07-11T11:00:04+07:00
-draft: false
-mood: Uwwu
-weather: Clear
+weather: Cerah
 location: Bogor, Indonesia
 tags: []
+draft: false
 ---
 
 yang susah adalah menjawab pertanyaan "aplikasi ini bisa ngasih solusi apa ?"

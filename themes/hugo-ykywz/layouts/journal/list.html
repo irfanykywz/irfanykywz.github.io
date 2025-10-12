@@ -9,7 +9,7 @@
         <section class="page-header">
             <div class="container">
                 <h1 class="page-title">
-                    <i class="fas fa-pencil"></i>
+                    📝
                     {{.Title}}
                 </h1>
                 <p class="page-description">{{ .Description }}</p>
@@ -31,12 +31,12 @@
                                 </div>
                                 <div class="journal-meta">
                                     <div class="journal-time">
-                                        <i class="fas fa-clock"></i>
+                                        <i class="ri-time-line"></i>
                                         {{ .Date.Format "3:04 PM" }}
                                     </div>
 
                                     <div class="journal-time">
-                                        <i class="fa fa-fire"></i>
+                                        <i class="ri-eye-2-line"></i>
                                         {{ partial "view-count.html" . }}
                                     </div>                                    
 
@@ -73,7 +73,7 @@
                             </div>
                             <div class="journal-footer">
                                 <a href="{{ .RelPermalink }}" class="read-more">
-                                    <i class="fas fa-book-open"></i>
+                                    <i class="ri-book-open-line"></i>
                                     Selengkapnya
                                 </a>
                             </div>

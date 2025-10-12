@@ -1,11 +1,11 @@
 ---
 title: Berlangganan Gratis AI Bolt.news
+slug: berlangganan gratis ai blot news
 date: 2025-06-14T16:43:59+07:00
-draft: false
-mood: Happy
-weather: Clear
+weather: Cerah
 location: Bogor, Indonesia
 tags: []
+draft: false
 ---
 
 ai bolt news ini, adalah jenis ai yang digunakan untuk koding

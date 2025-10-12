@@ -36,9 +36,9 @@
                             </svg>
 
                             {{ if .Params.section }}
-                            {{ .Params.section }}
+                                {{ .Params.section }}
                             {{ else }}
-                            {{ .Title }}
+                                {{ .Title }}
                             {{ end }}
                         </a>
                     </li>
@@ -49,31 +49,31 @@
 
                     {{ range $sortedPosts }}
 
-                    {{/* we must add logic here for muliple page learn and module  */}}
-                    {{ $split := "/"}}
-                    {{ if strings.Contains .File.Dir "\\" }}
-                    {{ $split = "\\"}}
-                    {{ end }}
-                    {{ $dirParts := split .File.Dir $split }}
-                    {{/* dir path posts : {{ $dirParts }}
-                    index : {{ index $dirParts 1 }}
-                    len : {{ len $dirParts }} */}}
+                        {{/* we must add logic here for muliple page learn and module  */}}
+                        {{ $split := "/"}}
+                        {{ if strings.Contains .File.Dir "\\" }}
+                        {{ $split = "\\"}}
+                        {{ end }}
+                        {{ $dirParts := split .File.Dir $split }}
+                        {{/* dir path posts : {{ $dirParts }}
+                        index : {{ index $dirParts 1 }}
+                        len : {{ len $dirParts }} */}}
 
-                    {{ if and (eq $page (index $dirParts 1)) (eq (len $dirParts) 4) }}
-                    <li class="lesson-item">
-                        <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                            <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
+                        {{ if and (eq $page (index $dirParts 1)) (eq (len $dirParts) 4) }}
+                            <li class="lesson-item">
+                                <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
+                                    <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
 
-                            {{ if .Params.section }}
-                            {{ .Params.section }}
-                            {{ else }}
-                            {{ .Title }}
-                            {{ end }}
-                        </a>
-                    </li>
-                    {{ end }}
+                                    {{ if .Params.section }}
+                                        {{ .Params.section }}
+                                    {{ else }}
+                                        {{ .Title }}
+                                    {{ end }}
+                                </a>
+                            </li>
+                        {{ end }}
                     {{ end }}
 
                 </ul>
@@ -91,7 +91,7 @@
 
                     <div class="content-text">
                         {{ with .Content }}
-                        {{ . | safeHTML }}
+                            {{ . | safeHTML }}
                         {{ end }}
                     </div>
 
@@ -99,11 +99,11 @@
                     {{ with .Parent }}
                         <div class="module-navigation">
 
-                            {{ with $.PrevInSection }}
+                            {{ with $.NextInSection }}
                                 <div class="nav-section">
                                     <a href="{{ .RelPermalink }}" class="nav-button">
-                                        <i class="fas fa-arrow-left"></i>
-                                        Prev:
+                                        <i class="ri-arrow-left-line"></i>
+                                        <!-- Next: -->
                                         {{ if .Params.section }}
                                             {{ .Params.section }}
                                         {{ else }}
@@ -113,8 +113,8 @@
                                 </div>
                             {{ else }}
                                 <a href="{{ .RelPermalink }}" class="nav-button">
-                                    <i class="fas fa-chevron-left"></i>
-                                    Previous:
+                                    <i class="ri-arrow-left-s-line"></i>
+                                    <!-- Nextious: -->
                                     {{ if .Params.section }}
                                         {{ .Params.section }}
                                     {{ else }}
@@ -123,22 +123,22 @@
                                 </a>
                             {{ end }}
 
-                            {{ with $.NextInSection }}
+                            {{ with $.PrevInSection }}
                                 <div class="nav-section">
                                     <a href="{{ .RelPermalink }}" class="nav-button">
-                                        Next:
+                                        <!-- Next: -->
                                         {{ if .Params.section }}
                                             {{ .Params.section }}
                                         {{ else }}
                                             {{ .Title }}
                                         {{ end }}
-                                        <i class="fas fa-arrow-right"></i>
+                                        <i class="ri-arrow-right-line"></i>
                                     </a>
                                 </div>
                             {{ else }}
                                 <span class="nav-button disabled">
-                                    Next: Coming Soon
-                                    <i class="fas fa-chevron-right"></i>
+                                    <!-- Next: Coming Soon -->
+                                    <i class="ri-arrow-right-s-line"></i>
                                 </span>
                             {{ end }}
                         </div>

@@ -12,6 +12,11 @@
 <!-- ...existing code... -->
 <main class="main">
     <div class="donate-page">
+        {{ with .Params.image }}
+            <div class="donate-ilustration">
+                <img src="{{ . }}" alt="mendpat donasi">
+            </div>
+        {{ end }}
 
         <section class="donate-intro">
             <h1>{{ .Title }}</h1>
@@ -22,6 +27,7 @@
 
         {{ with .Params.funding }}
             <section class="donate-funding">
+
                 <h2>{{ $.Params.funding_title }}</h2>
                 <div class="funding-cards">
                 {{ range $i, $f := . }}
@@ -79,7 +85,7 @@
 
         </section>
         <section class="donate-body">
-            {{ .Content }}
+            {{ .Content }}            
         </section>
 
         <div class="donate-back-home">

@@ -1,11 +1,11 @@
 ---
-title:  Bikin Aplikasi Web Dengan AI
+title: Bikin Aplikasi Web Dengan AI
+slug: bikin aplikasi web dengan ai
 date: 2025-06-29T18:33:39+07:00
-draft: false
-mood: Yuhu
-weather: Clear
+weather: Cerah
 location: Bogor, Indonesia
 tags: []
+draft: false
 ---
 
 minggu ini dapat kabar bahwa aplikasi bolt news gratis untuk digunakan
@@ -30,4 +30,4 @@ dari banyaknya aplikasi yang dibuat menggunakan bolt dengan 20M Token, banyak ya
 
 semua aplikasi yang dibuat saya host diblogger secara gratis agar bisa diakses kapan saja oleh ketika dibutuhkan
 
-untuk melihat daftar reponya bisa langsung mengunjungi halaman [github ini](https://github.com/ykywz-website-journey/)
+untuk melihat daftar reponya bisa langsung mengunjungi halaman [github ini](https://github.com/ykywz-website/)

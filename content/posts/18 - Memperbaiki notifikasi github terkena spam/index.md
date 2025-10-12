@@ -1,6 +1,7 @@
 ---
 title: Memperbaiki notifikasi github terkena spam
 slug: notifikasi github kena spam
+description: mendapat notifikasi spam pada akun github dan cara menghilangkannya, mudah dilakukan hanya membutuhkan akses api
 date: 2025-10-10T00:14:31+07:00
 categories: 
 tags: []
@@ -21,7 +22,7 @@ ini membuat user yang dimention tidak bisa melihat pesan notifikasinya dan menja
 
 ![spam notifikasi](spam-notifikasi.avif)
 
-`***`
+`...`
 
 karena ini sangat mengganggu maka saya cari solusi untuk mengatasinya dan ketemu pada [tautan ini](https://github.com/orgs/community/discussions/174283#discussioncomment-14533335)
 

@@ -1,0 +1,18 @@
+{{/* layouts/_default/_markup/render-image.html */}}
+
+{{ $destination := .Destination | safeURL }}
+{{ $altText := .PlainText }}
+{{ $title := .Title }}
+
+<a href="{{ $destination }}"
+   class="glightbox"
+   data-title="{{ with $title }}{{ . }}{{ end }}"
+   data-description="{{ with $altText }}{{ . }}{{ end }}">
+    
+    <img src="{{ $destination }}" 
+         alt="{{ $altText }}" 
+         {{ with $title }}title="{{ . }}"{{ end }}
+         loading="lazy" />
+</a>
+
+{{- /* Pastikan tidak ada newline berlebih */ -}}

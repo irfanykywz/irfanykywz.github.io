@@ -14,7 +14,7 @@
                     <div class="tag-header">
                         <h2 id="tagTitle">Konten dengan Kategori: <span id="currentTag">{{ .Title }}</span></h2>
                         <a href="{{ $.Site.BaseURL }}categories/" class="close-tag-view" id="closeTagView">
-                            <i class="fas fa-arrow-left"></i>
+                            <i class="ri-arrow-left-line"></i>
                             Kembali
                         </a>
                     </div>
@@ -31,17 +31,11 @@
                                             {{ $urls := urls.Parse .Path }}
                                             {{ $subs := index (split $urls "/") 1 | humanize }}
                                             <span>
-                                                {{ if strings.Contains $subs "Posts"}}
-                                                <i class="fas fa-blog"></i>
-                                                {{ else if strings.Contains $subs "Journal" }}
-                                                <i class="fas fa-book"></i>
-                                                {{ else }}
-                                                <i class="fas fa-blog"></i>
-                                                {{ end }}
+                                                <i class="ri-article-line"></i>
                                                 {{ $subs }}
                                             </span>
-                                            <span><i class="fas fa-calendar"></i> {{ .Date | time.Format ":date_medium" }} </span>
-                                            <span><i class="fas fa-clock"></i> {{ printf "%d min read" .ReadingTime }}</span>
+                                            <span><i class="ri-calendar-2-line"></i> {{ .Date | time.Format ":date_medium" }} </span>
+                                            <span><i class="ri-time-line"></i> {{ printf "%d min read" .ReadingTime }}</span>
                                         </div>
                                         <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
                                         <p>
@@ -54,7 +48,7 @@
                                             {{ end }}
                                         </p>
                                         <a href="{{ .RelPermalink }}" class="read-more">
-                                            <i class="fas fa-arrow-right"></i>
+                                            <i class="ri-arrow-right-line"></i>
                                             Selengkapnya
                                         </a>
                                     </div>

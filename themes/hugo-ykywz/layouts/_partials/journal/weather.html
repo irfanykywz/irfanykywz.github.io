@@ -1,10 +1,14 @@
-{{ if eq .Params.weather "Rain"}}
-<i class="fas fa-cloud-rain"></i>
-{{ else if eq .Params.weather "Bright" }}
-<i class="fas fa-sun"></i>
-{{ else if eq .Params.weather "Clear" }}
-<i class="fas fa-star"></i>
+{{ if eq .Params.weather "Hujan"}}
+<i class="ri-cloud-windy-line" style="color:var(--accent-primary)"></i>
+{{ else if eq .Params.weather "Badai" }}
+<i class="ri-typhoon-line" style="color:var(--accent-primary)"></i>
+{{ else if eq .Params.weather "Cerah" }}
+<i class="ri-sun-foggy-line" style="color:var(--accent-warning)"></i>
+{{ else if eq .Params.weather "Berawan" }}
+<i class="ri-sun-cloudy-line" style="color:var(--accent-primary)"></i>
+{{ else if eq .Params.weather "Mendung" }}
+<i class="ri-rainy-line" style="color:var(--accent-primary)"></i>
 {{ else }}
-<i class="fas fa-cloud"></i>
+<i class="ri-windy-line" style="color:var(--accent-primary)"></i>
 {{ end }}
 {{ .Params.weather }}

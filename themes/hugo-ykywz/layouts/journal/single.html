@@ -7,11 +7,11 @@
         <section class="detail-header">
             <div class="container">
                 <nav class="breadcrumb">
-                    <a href="{{ $.Site.BaseURL }}journal/">
-                        <i class="fas fa-pencil"></i>
-                        Jurnal
+                    <a href="{{ .CurrentSection.RelPermalink }}">
+                        📝
+                        {{ .Parent.Title }}
                     </a>
-                    <i class="fas fa-chevron-right"></i>
+                    <i class="ri-arrow-right-s-line"></i>
                     <span>{{ .Title }}</span>
                 </nav>
             </div>
@@ -28,12 +28,12 @@
                         </div>
                         <div class="detail-meta">
                             <div class="detail-meta-item">
-                                <i class="fas fa-clock"></i>
+                                <i class="ri-time-line"></i>
                                 <span>{{ .Date.Format "3:04 PM" }}</span>
                             </div>
 
                             <div class="detail-meta-item">
-                                <i class="fa fa-fire"></i>
+                                <i class="ri-eye-2-line"></i>
                                 {{ partial "view-count.html" . }}
                             </div>
 
@@ -45,7 +45,7 @@
 
                             {{ if .Params.location }}
                             <div class="detail-meta-item">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <i class="ri-map-pin-line"></i>
                                 <span>{{ .Params.location }}</span>
                             </div>
                             {{ end }}              
@@ -91,7 +91,7 @@
                     <footer class="detail-footer">
                         <div class="detail-navigation">
                             <a href="javascript:window.history.go(-1);" class="nav-button">
-                                <i class="fas fa-arrow-left"></i>
+                                <i class="ri-arrow-left-line"></i>
                                 Kembali
                             </a>
                             <div class="nav-buttons">
@@ -100,7 +100,7 @@
 
                                 {{ with $pages.Prev . }}
                                 <a href="{{ .RelPermalink }}" class="nav-button">
-                                    <i class="fas fa-chevron-left"></i>
+                                    <i class="ri-arrow-left-s-line"></i>
                                     Sebelumnya
                                     <!-- {{ .LinkTitle }} -->
                                 </a>
@@ -109,7 +109,7 @@
                                 {{ with $pages.Next . }}
                                 <a href="{{ .RelPermalink }}" class="nav-button">
                                     Selanjutnya
-                                    <i class="fas fa-chevron-right"></i>
+                                    <i class="ri-arrow-right-s-line"></i>
                                 </a>
                                 {{ end }}
                             </div>

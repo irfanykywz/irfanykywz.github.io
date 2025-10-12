@@ -2,7 +2,7 @@
 title: "Enkripsi Konten"
 date: 2025-10-07T00:00:00+07:00
 description: "Alat sederhana untuk mengenkripsi konten dan hanya bisa dilihat dengan kunci yang benar"
-icon: "fa-solid fa-key"
+icon: "ri-key-fill"
 ---
 
 <style>

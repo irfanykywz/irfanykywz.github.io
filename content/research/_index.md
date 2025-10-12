@@ -1,4 +1,4 @@
 ---
 title: Riset 
-description: Kumpulan riset data untuk kebutuhan tertentu.
+description: Kumpulan riset data terkadang suka dibutuhkan
 ---

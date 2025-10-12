@@ -18,7 +18,7 @@ service:
     - title: "Dukungan IT"
       icon: "🖥️"
       jobs: 
-        - "Membantu merawat dan memastikan perangkat keras (hardware) serta sistem operasi komputer berfungsi dengan optimal dan bebas masalah."
+        - "Membantu merawat dan memastikan perangkat keras (hardware) serta sistem operasi dan aplikasi (software) komputer berfungsi dengan optimal dan bebas masalah."
         - "Mendiagnosis dan memperbaiki berbagai masalah teknis pada jaringan, koneksi internet, perangkat lunak, dan keamanan dasar."
     - title: "Pengembangan Perangkat Lunak"
       icon: "🧑‍💻"
@@ -79,16 +79,16 @@ education:
           location: "Cibinong, Bogor"
     non_formal:
         - degree: "Pelatihan Jabar Digital Academy"
-          field: "Junior Web Programmer"
-          school: "Alkademi, JDA"
+          field: "Fullstack Web Programming"
+          school: "JDA x Alkademi"
           initial: "JDA"
           period: "Desember 2023 - Juli 2024"
-          location: "Online"    
+          location: "Hybrid"    
           certificate: true      
     certification:
-        - name: "Junior Web Programmer"
-          initial: "WP"
-          org: "Alkademi"
+        - name: "Fullstack Web Programming"
+          initial: "FWB"
+          org: "JDA x Alkademi"
           issued: "2024-07"
           expires: ""
           # credential_id: "ABC-123"
@@ -184,9 +184,9 @@ skills:
     bahasa:
         scopes:
           - title: "Indonesia"
-            description: "bisa dengan lancar melakukan  membaca, mendengar dan menulis menggunakan bahasa indonesia"
+            description: "bisa dengan lancar berbicara, mendengar dan menulis menggunakan bahasa indonesia"
           - title: "Inggris"
-            description: "bisa memahami bahasa inggris dengan baik, belum terbiasa menggunakannya untuk menulis dan berbicara"   
+            description: "bisa membaca bahasa inggris dengan baik, belum terbiasa menggunakannya untuk berbicara, menulis dan mendengar"   
 # =====================================
 project: true
 projecttitle: "🌘 Project terbaru"

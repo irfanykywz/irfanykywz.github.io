@@ -1,4 +1,4 @@
 ---
 title: Perjalanan Belajar
-description: Saya mendokumentasikan hal yang dipelajari sebagai referensi ketika dibutuhkan.
+description: Membuat Panduan dari hal yang pernah dipelajari adalah gaya belajar saya
 ---

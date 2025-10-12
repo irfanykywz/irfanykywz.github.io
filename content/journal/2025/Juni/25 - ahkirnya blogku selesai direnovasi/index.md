@@ -1,11 +1,11 @@
 ---
-title: Ahkirnya blogku selesai direnovasi
+title: Ahkirnya blog selesai direnovasi
+slug: akhirnya blog selesai renovasi
 date: 2025-06-25T19:54:10+07:00
-draft: false
-mood: Pao
-weather: Cloud
+weather: Berawan
 location: Bogor, Indonesia
-tags: ['learn journey']
+tags: []
+draft: false
 ---
 
 sudah hampir seminggu sejak tanggal 19 juni 2025, saya melakukan renovasi blog ini

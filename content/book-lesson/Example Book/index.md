@@ -1,10 +1,10 @@
 ---
 title: Example Book Lesson
-description: Membongkar mitos keuangan, memahami mengapa rumah bukan aset, dan strategi keluar dari 'The Rat Race'.
+description: Lorem ipsum dolor sit amet, consectetur adipisicing elit
 date: 2025-08-27
 author: Robert T. Kiyosaki
 image: image.avif
-draft: false
+draft: true
 ---
 
 # Bab 3: Perlombaan Tikus dan Bahasa Uang
@@ -36,5 +36,3 @@ Ini adalah satu-satunya aturan yang harus Anda ingat. Uang masuk atau uang kelua
 
 1.  **Arus Kas Negatif:** Uang terus mengalir keluar (cicilan KPR, PBB, listrik, perbaikan).
 2.  **Ilusi Kenaikan Harga:** Bahkan jika nilainya naik, Anda tidak mendapatkan uang tersebut sampai Anda menjualnya. Sementara itu, biaya harian terus membebani Anda.
-
-**Fokus Rich

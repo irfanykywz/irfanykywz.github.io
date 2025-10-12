@@ -6,7 +6,7 @@ image: "preview.avif"
 stack: ['python', 'pyside6', 'pyppeteer', 'chrome extensions']
 category: Desktop
 status: Freelance
-demo: https://youtube.com/@YkywzCode
+# demo: https://youtube.com/@YkywzCode
 # buy: https:google.com/ncr
 # github: https://google.com
 date: 2025-06-20T04:51:35+07:00
@@ -18,13 +18,13 @@ overview:
 # =============================
 feature:
     - name: "Live Data"
-      icon: 'fas fa-rocket'
+      icon: 'ri-file-text-line'
       description: "Melihat data live terbaru"
     - name: "Affiliate Product"
-      icon: 'fas fa-rocket'
+      icon: 'ri-file-text-line'
       description: "*** generate csv"
     - name: "*** Affiliate"
-      icon: 'fas fa-rocket'
+      icon: 'ri-file-text-line'
       description: "***"   
 # =============================     
 review:

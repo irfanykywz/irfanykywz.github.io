@@ -2,11 +2,10 @@
 title: Bertanya dengan Gemini Coding Partner
 slug: gemini coding partner
 date: 2025-07-07T19:43:26+07:00
-draft: false
-mood: Uraa
-weather: Rain
+weather: Hujan
 location: Indonesia
 tags: []
+draft: false
 ---
 
 banyak hal yang mulai saya explore pada model gems coding partner ini
