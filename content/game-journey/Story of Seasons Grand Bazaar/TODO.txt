@@ -1,8 +1,0 @@
-gold medal = pink diamon
-silver = power berry
-bronze medal = adamantite
-
-power berry
-- dig  farm field
-- storage expansion max 
-- spinning	

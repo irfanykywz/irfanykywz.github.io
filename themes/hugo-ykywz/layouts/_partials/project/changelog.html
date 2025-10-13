@@ -1,0 +1,35 @@
+{{ if .Params.changelog }}
+<div class="project-changelog">
+    <h2 class="section-title">
+        <i class="ri-history-line"></i>
+        Riwayat Perubahan
+    </h2>
+
+    <div class="changelog-list-wrapper">
+        {{ range .Params.changelog }}
+        <div class="release-section">
+            <div class="release-header">
+                <span class="version">Versi {{ .version }}</span>
+                <span class="date">{{ .date }}</span>
+            </div>
+            
+            <ul class="change-list">
+            {{ range .changes }}
+                {{ $tagClass := "" }}
+                {{ if eq .tag "Fitur Baru" }}{{ $tagClass = "tag-new" }}
+                {{ else if eq .tag "Peningkatan" }}{{ $tagClass = "tag-imp" }}
+                {{ else if eq .tag "Perbaikan" }}{{ $tagClass = "tag-fix" }}
+                {{ else if eq .tag "Pembaruan" }}{{ $tagClass = "tag-update" }}
+                {{ end }}
+
+                <li class="change-item">
+                    <span class="tag {{ $tagClass }}">{{ .tag }}</span>
+                    <span class="description">{{ .description | safeHTML }}</span>
+                </li>
+            {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

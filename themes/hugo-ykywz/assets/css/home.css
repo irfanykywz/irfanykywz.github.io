@@ -1,7 +1,7 @@
 /* Profile Section */
 .profile-section{display:flex;align-items:center;gap:var(--space-8);margin-bottom:var(--space-4);padding:var(--space-12) 0}
 .profile-image{flex-shrink:0}
-.profile-image img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--accent-primary)}
+.profile-image > img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--accent-primary)}
 .profile-info h1{font-size:2.5rem;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-2)}
 .profile-title{font-size:1.25rem;color:var(--text-secondary);margin-bottom:var(--space-6)}
 .profile-actions{display:flex;gap:var(--space-2);flex-wrap:wrap}
@@ -143,6 +143,16 @@
 .cert-meta .badge{display:flex;align-items:center;gap:var(--space-2);background:var(--bg-secondary);color:var(--text-secondary);padding:var(--space-1) var(--space-2);border-radius:var(--radius-md);font-size:0.875rem;font-weight:500;border:1px solid var(--border-color);transition:all var(--transition-fast)}
 .cert-meta .badge.warn{background:color-mix(in oklab, var(--accent-warning) 15%, var(--bg-secondary));border-color:color-mix(in oklab, var(--accent-warning) 40%, var(--border-color));color:#fff}
 .cert-meta .badge.mute{opacity:.85}
+
+/* badge */
+.open-to-work-wrapper{position:relative;width:120px;height:120px;box-shadow:var(--shadow-md);border-radius:50%;display:flex;justify-content:center;align-items:center}
+@keyframes rotate-border-gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.profile-image-border-wrapper{position:absolute;top:1px;left:1px;right:1px;bottom:1px;border-radius:50%;padding:4px;background:linear-gradient(45deg,var(--accent-secondary),var(--accent-primary),var(--accent-warning),var(--accent-danger),var(--accent-secondary)
+            );background-size:300% 300%;animation:rotate-border-gradient 8s ease-in-out infinite alternate;z-index:0}
+.profile-image-badge{width:calc(100% - 8px);height:calc(100% - 8px);border-radius:50%;object-fit:cover;z-index:1}
+@keyframes color-cycle{0%{background-color:var(--accent-secondary)}25%{background-color:var(--accent-primary)}50%{background-color:var(--accent-warning)}75%{background-color:var(--accent-danger)}100%{background-color:var(--accent-secondary)}}
+.open-to-work-badge-wrapper{position:absolute;bottom:-25px;right:-10px;left:0;text-align:center;z-index:10}
+.open-to-work-badge{max-width:80px;color:var(--text-primary);padding:var(--space-2) var(--space-3);border-radius:var(--radius-xl);font-size:0.75rem;font-weight:700;letter-spacing:0.05em;animation:color-cycle 4s ease-in-out infinite alternate;width:100%;height:100%;display:inline-block;border:2px solid var(--bg-primary);box-shadow:var(--shadow-md)}
 
 /* Responsive Design */
 @media (max-width: 768px) {

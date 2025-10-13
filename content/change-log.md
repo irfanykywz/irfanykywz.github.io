@@ -6,6 +6,13 @@ date: 2025-10-09T00:00:00+08:00
 
 changelog:
 
+  - version: "1.1.0"
+    date: "13 Oktober 2025"
+    changes:
+      - tag: "Fitur Baru"
+        description: "menambahkan border warna warni pada foto profile halaman beranda"  
+      - tag: "Perbaikan"
+        description: "perbaikan responsive, halaman kontak dan belajar"
   - version: "1.0.9"
     date: "12 Oktober 2025"
     changes:

@@ -161,6 +161,8 @@ blockquote footer::before{content:"— "}
 @media (max-width: 768px) {
     .detail-title{font-size:2rem}
     .detail-navigation{flex-direction:column;align-items:stretch}
+    .detail-header{padding:var(--space-6) 0}
+    .detail-content{padding:var(--space-6) 0}   
 }
 @media (max-width: 480px) {
     .detail-title{font-size:1.75rem}
@@ -195,7 +197,8 @@ blockquote footer::before{content:"— "}
 .breadcrumb{display:flex;align-items:center;gap:var(--space-2);font-size:0.875rem;color:var(--text-muted)}
 .breadcrumb a{display:flex;align-items:center;gap:var(--space-1);color:var(--accent-primary);text-decoration:none;transition:color var(--transition-fast);text-wrap-mode:nowrap}
 .breadcrumb a:hover{color:#2563eb}
-.breadcrumb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block}
+.breadcrumb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;}
+.breadcrumb span:last-child {flex-grow: 1;}
 
 .post-content-full{color:var(--text-secondary);line-height:1.8;font-size:1.125rem}
 .post-content-full p{margin-bottom:var(--space-6)}

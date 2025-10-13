@@ -6,36 +6,9 @@
 {{ define "main" }}
 
     <main class="main">
-        <section class="hero">
-            <div class="container">
-                <div class="profile-section">
-                    <div class="profile-image">
-                        <img src="{{ .Site.Params.Avatar | safeURL }}" alt="{{ .Site.Title }}" />
-                    </div>
-                    <div class="profile-info">
-                        <h1 class="profile-name">{{ .Title }}</h1>
-                        <p class="profile-title">{{ .Description }}</p>
-                        <div class="profile-actions">
-                            <a href="{{ .Params.Cv }}" target="_blank" class="btn btn-primary">
-                                <i class="ri-download-2-line"></i>
-                                Unduh CV
-                            </a>
-                            <a href="mailto:{{ .Params.Email }}" class="btn btn-secondary profile-button">
-                                <i class="ri-mail-line"></i>
-                            </a>
-                            <a href="{{ .Params.Linkedin }}" target="_blank" class="btn btn-secondary profile-button">
-                                <i class="ri-linkedin-fill"></i>
-                            </a>
-                            <a href="{{ .Params.Github }}" target="_blank" class="btn btn-secondary profile-button">
-                                <i class="ri-github-line"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
+        
+        {{ partial "home/hero.html" . }}
+        
         {{ partial "home/about.html" . }}
         
         {{ if .Params.servicestatus }}

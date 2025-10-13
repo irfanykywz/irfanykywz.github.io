@@ -113,5 +113,8 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .contact-grid{display: block;}
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
 }

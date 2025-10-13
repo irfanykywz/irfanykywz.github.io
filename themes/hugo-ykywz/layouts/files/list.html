@@ -527,12 +527,43 @@
             const fileName = row.querySelector('.col-name').textContent.trim();
 
             if (row.getAttribute('data-locked') === 'true') {
-                 // Should be hidden, but as a safeguard:
-                 return openDecryptModal(row);
+                // Should be hidden, but as a safeguard:
+                return openDecryptModal(row);
             }
-            // alert(`Downloading: "${fileName}" from path: ${filePath}`);
-            // window.location.href =  filePath
-            window.open(filePath, '_blank', 'noopener,noreferrer');
+            
+            // Check if the file path is a data URI for HTML
+            if (filePath.startsWith('data:text/html,')) {
+                try {
+                    // Extract and decode the content
+                    const encodedContent = filePath.split(',')[1];
+                    const decodedContent = decodeURIComponent(encodedContent);
+
+                    // Create a Blob from the decoded content
+                    const blob = new Blob([decodedContent], { type: 'text/html' });
+
+                    // Create a temporary URL for the Blob
+                    const blobUrl = URL.createObjectURL(blob);
+
+                    // Open the Blob URL in a new window
+                    const newWindow = window.open(blobUrl, '_blank', 'noopener,noreferrer');
+
+                    // Handle memory cleanup after the window is loaded
+                    if (newWindow) {
+                        newWindow.addEventListener('load', () => {
+                            URL.revokeObjectURL(blobUrl);
+                        }, { once: true });
+                    } else {
+                        console.log('Popup blocked. Please enable popups for this site.');
+                    }
+                } catch (error) {
+                    console.error('Failed to handle data:text/html URI:', error);
+                    console.log('Error opening content. See console for details.');
+                }
+            } else {
+                // Handle regular file paths
+                window.open(filePath, '_blank', 'noopener,noreferrer');
+            }
+
             e.stopPropagation();
         }
 

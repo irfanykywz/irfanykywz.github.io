@@ -25,5 +25,12 @@ feature:
       description: "bisa memproses banyak gambar secara bergantian"
     - name: "Updater"
       icon: 'ri-file-text-line'
-      description: "tersedia fitur updater jika sewaktu-waktu dibutuhkan"          
+      description: "tersedia fitur updater jika sewaktu-waktu dibutuhkan"
+
+changelog:
+  - version: "1.0.0"
+    date: "09 Oktober 2025"
+    changes:
+      - tag: "Fitur Baru"
+        description: "rilis project"                
 ---

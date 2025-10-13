@@ -150,3 +150,54 @@
     justify-content: center;
     text-align: center;
 }
+.donate-back-home a {
+	display: inline-block;
+	background: var(--accent-secondary);
+	color: var(--text-primary);
+	padding: 0.5rem 1rem;
+	border-radius: var(--radius-md);
+	text-decoration: none;
+	font-weight: 600;
+	box-shadow: var(--shadow-sm);
+	transition: background 0.15s, color 0.15s;
+}
+
+.donate-back-home a:hover, .donate-back-home a:focus {
+	background: #059669;
+	color: #fff;
+	outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+	.donate-page {
+		border: 0;
+	}
+	.donate-ilustration {
+		position: static;
+		width: 100%;
+		height: auto;
+		margin-bottom: var(--space-1);
+	}
+	.donate-intro p {
+		padding-right: 0;
+	}
+	.funding-cards {
+		gap: 0.75rem;
+	}
+	.funding-card {
+		padding: 1rem;
+		min-height: 56px;
+	}
+	.funding-card .copy-btn {
+		right: 0.75rem;
+	}
+	.qr-image {
+		width: 150px;
+		height: 150px;
+	}
+	.donate-back-home {
+		position: static;
+		margin-top: 1.5rem;
+	}
+}	

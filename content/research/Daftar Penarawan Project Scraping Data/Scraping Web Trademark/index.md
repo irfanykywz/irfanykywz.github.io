@@ -1,8 +1,11 @@
 ---
 title: Scraping data Trademark
+slug: scraping-web-trademark
 date: 2025-07-13T05:00:35+07:00
 ---
 
-![preview](scraping-web-trademark/preview.webp)
+{{< image-grid >}}
 
-[keterangan](https://drive.google.com/file/d/1K9m1mfrbA-Gdu8_hTmhRYMjOeOeIPdym/view?usp=drive_link)
+{{< image-link "scraping-web-trademark/preview.avif" "Image 1" "scdt" >}}
+
+{{< /image-grid >}}

@@ -3,15 +3,15 @@ title: Proyek
 description: Kumpulan proyek yang pernah dibuat sebagai bahan referensi
 filtertab:
     - name: "Semua"
-      icon: "fas fa-th"
+      icon: "ri-apps-2-line"
       filter: "all"
     - name: "Desktop"
-      icon: "fas fa-desktop"
+      icon: "ri-computer-line"
       filter: "Desktop"
     - name: "Situs Web"
-      icon: "fas fa-globe"
+      icon: "ri-earth-line"
       filter: "Website"
     - name: "Seluler"
-      icon: "fas fa-mobile"
+      icon: "ri-smartphone-line"
       filter: "Mobile"                  
 ---
