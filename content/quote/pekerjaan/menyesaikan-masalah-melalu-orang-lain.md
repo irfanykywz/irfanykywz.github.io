@@ -1,6 +1,6 @@
 ---
 date: 2025-10-13T00:00:00+07:00
-author: "ykywz"
+author: "catatan kerja"
 categories: ["pekerjaan"]
 ---
 

@@ -18,7 +18,7 @@ pygmentscodefencesguesssyntax = true
 
 
 [params]
-  version = "1.1.0"
+  version = "1.1.1"
 	# browser icon
 	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
   favicon = "avatar.avif"
@@ -86,6 +86,11 @@ weight = 50
 name = "🔨 Alat"
 url = "/tools/"
 weight = 60
+
+[[menu.footer]]
+name = "✨ Bank Prompt"
+url = "/bank-prompt/"
+weight = 61
 
 [[menu.footer]]
 name = "🌟 Kutipan"

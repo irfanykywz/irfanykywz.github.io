@@ -68,48 +68,52 @@
 
     </main>
 
-<script>
-function filterMovies() {
-    const searchString = document.getElementById('search-input').value.toLowerCase();
-    const genreFilter = document.getElementById('genre-filter').value.toLowerCase();
-    const cardLinks = document.querySelectorAll('.movie-card-link');
-    const notFoundMessage = document.getElementById('not-found');
-    
-    let visibleMovies = 0;
+{{ end }}
 
-    cardLinks.forEach(link => {
-        const card = link.querySelector('.movie-card');
-        const title = card.getAttribute('data-title').toLowerCase();
-        const genres = card.getAttribute('data-genre').toLowerCase();
+{{ define "footer" }}
+
+    <script>
+    function filterMovies() {
+        const searchString = document.getElementById('search-input').value.toLowerCase();
+        const genreFilter = document.getElementById('genre-filter').value.toLowerCase();
+        const cardLinks = document.querySelectorAll('.movie-card-link');
+        const notFoundMessage = document.getElementById('not-found');
         
-        let matchesSearch = title.includes(searchString);
-        let matchesGenre = (genreFilter === 'all') || genres.includes(genreFilter);
+        let visibleMovies = 0;
 
-        if (matchesSearch && matchesGenre) {
-            link.classList.remove('hidden');
-            visibleMovies++;
+        cardLinks.forEach(link => {
+            const card = link.querySelector('.movie-card');
+            const title = card.getAttribute('data-title').toLowerCase();
+            const genres = card.getAttribute('data-genre').toLowerCase();
+            
+            let matchesSearch = title.includes(searchString);
+            let matchesGenre = (genreFilter === 'all') || genres.includes(genreFilter);
+
+            if (matchesSearch && matchesGenre) {
+                link.classList.remove('hidden');
+                visibleMovies++;
+            } else {
+                link.classList.add('hidden');
+            }
+        });
+
+        if (visibleMovies === 0) {
+            notFoundMessage.style.display = 'block';
         } else {
-            link.classList.add('hidden');
+            notFoundMessage.style.display = 'none';
         }
-    });
-
-    if (visibleMovies === 0) {
-        notFoundMessage.style.display = 'block';
-    } else {
-        notFoundMessage.style.display = 'none';
     }
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('search-input');
-    const genreFilter = document.getElementById('genre-filter');
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search-input');
+        const genreFilter = document.getElementById('genre-filter');
 
-    searchInput.addEventListener('input', filterMovies);
-    genreFilter.addEventListener('change', filterMovies);
+        searchInput.addEventListener('input', filterMovies);
+        genreFilter.addEventListener('change', filterMovies);
 
-    // Initial filter on page load
-    filterMovies();
-});
-</script>
+        // Initial filter on page load
+        filterMovies();
+    });
+    </script>
 
 {{ end }}

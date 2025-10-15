@@ -19,7 +19,17 @@
 
         <div class="quote-filters" aria-label="Filter kutipan">
             <button class="filter-btn active" data-filter="all">Semua</button>
-            <!-- category buttons will be injected here -->
+            {{ $allCategories := slice }}
+            {{ range .Pages }}
+                {{ with .Params.categories }}
+                    {{ $allCategories = $allCategories | append . }}
+                {{ end }}
+            {{ end }}
+            
+            {{ $uniqueCategories := uniq (sort $allCategories) }}
+            {{ range $uniqueCategories }}
+                <button class="filter-btn" data-filter="{{ . }}">{{ . }}</button>
+            {{ end }}
         </div>
 
         <div class="quotes-grid">
@@ -45,82 +55,93 @@
             </article>
             {{ end }}
         </div>
-
-        <script>
-        // Build category buttons and wire filtering + copy
-        document.addEventListener('DOMContentLoaded', function(){
-            var cards = Array.from(document.querySelectorAll('.quote-card'));
-            var categorySet = new Set();
-            cards.forEach(function(c){
-            var cats = c.getAttribute('data-cats');
-            if(!cats) return;
-            cats.split('|').map(function(s){ return s.trim(); }).forEach(function(cat){ if(cat) categorySet.add(cat); });
-            });
-
-            var filtersContainer = document.querySelector('.quote-filters');
-            if(filtersContainer){
-            Array.from(categorySet).sort().forEach(function(cat){
-                var btn = document.createElement('button');
-                btn.className = 'filter-btn';
-                btn.setAttribute('data-filter', cat);
-                btn.textContent = cat;
-                filtersContainer.appendChild(btn);
-            });
-            }
-
-            // Filter logic
-            filtersContainer.addEventListener('click', function(e){
-            if(!e.target || !e.target.classList.contains('filter-btn')) return;
-            var filter = e.target.getAttribute('data-filter');
-            // set active class
-            filtersContainer.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-            e.target.classList.add('active');
-            // show/hide cards
-            cards.forEach(function(c){
-                var cats = c.getAttribute('data-cats') || '';
-                if(filter === 'all' || (cats.split('|').map(function(s){return s.trim();}).indexOf(filter) !== -1)){
-                c.style.display = '';
-                } else {
-                c.style.display = 'none';
-                }
-            });
-            });
-
-            // Copy logic (delegated)
-            document.addEventListener('click', function(e){
-            var copyButton = e.target.closest('.quote-copy');
-            if(copyButton){
-                var id = copyButton.getAttribute('data-target');
-                var ta = document.getElementById(id);
-                if(!ta) return;
-
-                var originalContent = copyButton.innerHTML;
-                var successContent = '<i class="ri-check-line"></i>';
-
-                function showSuccess(button) {
-                    button.innerHTML = successContent;
-                    setTimeout(function() {
-                        button.innerHTML = originalContent;
-                    }, 1200);
-                }
-
-                var text = ta.value || ta.innerText || ta.textContent;
-                if(navigator.clipboard){ 
-                    navigator.clipboard.writeText(text).then(function() { showSuccess(copyButton); }); 
-                }
-                else {
-                    ta.select(); 
-                    try { 
-                        document.execCommand('copy'); 
-                        showSuccess(copyButton);
-                    } catch(err) {
-                        console.warn(err)
-                    }
-                }
-            }
-            });
-        });
-        </script>
     </div>
 </main>
+{{ end }}
+
+{{ define "footer" }}
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const cards = Array.from(document.querySelectorAll('.quote-card'));
+        const filtersContainer = document.querySelector('.quote-filters');
+
+        function applyFilter(filter) {
+            // Set active class on the correct button
+            filtersContainer.querySelectorAll('.filter-btn').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            const activeBtn = filtersContainer.querySelector(`.filter-btn[data-filter="${filter}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Show or hide cards based on the filter
+            cards.forEach(function(c) {
+                const cats = c.getAttribute('data-cats') || '';
+                const shouldShow = (filter === 'all') || cats.split('|').includes(filter);
+                c.style.display = shouldShow ? '' : 'none';
+            });
+        }
+
+        // Filter logic
+        filtersContainer.addEventListener('click', function(e){
+            if(!e.target || !e.target.classList.contains('filter-btn')) return;
+            
+            const filter = e.target.getAttribute('data-filter');
+            applyFilter(filter);
+
+            // Update URL without reloading the page
+            const url = new URL(window.location);
+            if (filter === 'all') {
+                url.searchParams.delete('filter');
+            } else {
+                url.searchParams.set('filter', filter);
+            }
+            window.history.pushState({}, '', url);
+        });
+
+        // Copy logic (delegated)
+        document.addEventListener('click', function(e){
+        var copyButton = e.target.closest('.quote-copy');
+        if(copyButton){
+            var id = copyButton.getAttribute('data-target');
+            var ta = document.getElementById(id);
+            if(!ta) return;
+
+            var originalContent = copyButton.innerHTML;
+            var successContent = '<i class="ri-check-line"></i>';
+
+            function showSuccess(button) {
+                button.innerHTML = successContent;
+                setTimeout(function() {
+                    button.innerHTML = originalContent;
+                }, 1200);
+            }
+
+            var text = ta.value || ta.innerText || ta.textContent;
+            if(navigator.clipboard){ 
+                navigator.clipboard.writeText(text).then(function() { showSuccess(copyButton); }); 
+            }
+            else {
+                ta.select(); 
+                try { 
+                    document.execCommand('copy'); 
+                    showSuccess(copyButton);
+                } catch(err) {
+                    console.warn(err)
+                }
+            }
+        }
+        });
+
+        // On page load, check for a filter in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterFromUrl = urlParams.get('filter');
+        if (filterFromUrl) {
+            applyFilter(filterFromUrl);
+        }
+    });
+    </script>
+
 {{ end }}

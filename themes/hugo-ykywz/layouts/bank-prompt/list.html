@@ -1,0 +1,386 @@
+{{ define "head" }}
+  {{ partial "style.html" (dict "css" "css/bank-prompt.css") }}
+{{ end }}
+
+{{ define "config" }}
+    {{ .Scratch.Set "noIndex" true }} 
+{{ end }}
+
+{{ define "main" }}
+    <main class="main">
+
+        <div class="page-header">
+            <h1>{{ .Title }}</h1>
+            <p>{{ .Description }}</p>
+        </div>
+        
+        {{ if .Pages }}
+        <div class="page-container">
+            <aside class="page-sidebar">
+                <button class="sidebar-toggle" aria-label="Toggle categories" aria-expanded="false">
+                    <span>Kategori</span>
+                    <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <div class="sidebar-sticky">
+                    <h3 class="sidebar-title">Kategori</h3>
+                    <nav class="category-nav">
+                        <ul class="category-list" aria-label="Filter prompt">
+                            <li>
+                                <button class="category-item filter-btn active" data-filter="all">
+                                    <span>Semua</span>
+                                    <span class="category-count">{{ len .Pages }}</span>
+                                </button>
+                            </li>
+
+                            {{/* Group categories by the 'group' front matter param */}}
+                            {{ $groupedCategories := dict }}
+                            {{ range .Pages }}
+                                {{ $normalizedPath := replace .File.Dir "\\" "/" }}
+                                {{ $pathParts := split $normalizedPath "/" }}
+                                {{ $group := "Lainnya" }}
+                                {{ if gt (len $pathParts) 1 }}
+                                    {{/* The group is the directory name after the section name */}}
+                                    {{ $group = index $pathParts 1 | humanize | title }}
+                                {{ end }}
+
+                                {{ $pageCategories := .Params.categories | default (slice) }}
+                                {{ if not (reflect.IsSlice $pageCategories) }}{{ $pageCategories = slice $pageCategories }}{{ end }}
+
+                                {{ $existingCategories := index $groupedCategories $group | default (slice) }}
+                                {{ $allCatsForGroup := $existingCategories | append $pageCategories | uniq }}
+                                {{ $groupedCategories = merge $groupedCategories (dict $group $allCatsForGroup) }}
+                            {{ end }}
+
+                            {{ range $group, $categories := $groupedCategories }}
+                                <li class="category-group is-open">
+                                    <button class="group-toggle" aria-expanded="true">
+                                        <span class="group-title">{{ $group }}</span>
+                                        <i class="ri-arrow-down-s-line"></i>
+                                    </button>
+                                    <ul class="group-list">
+                                        {{ range sort $categories }}
+                                            {{ $category := . }}
+                                            <li>
+                                                <button class="category-item filter-btn" data-filter="{{ $category }}">
+                                                    <span>{{ $category }}</span>
+                                                    {{ $count := len (where $.Site.RegularPages.ByDate.Reverse "Params.categories" "intersect" (slice $category)) }}
+                                                    <span class="category-count">{{ $count }}</span>
+                                                </button>
+                                            </li>
+                                        {{ end }}
+                                    </ul>
+                                </li>
+                            {{ end }}
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <div class="page-content">
+                
+                <header class="content-header">
+                    <div class="search-wrapper">
+                        <i class="ri-search-line"></i>
+                        <input type="search" class="search-input" placeholder="Cari prompt...">
+                    </div>
+                    <div class="view-switcher">
+                        <button class="view-btn active" data-view="list" title="Tampilan Daftar"><i class="ri-list-check"></i></button>
+                        <button class="view-btn" data-view="grid" title="Tampilan Grid"><i class="ri-layout-grid-line"></i></button>
+                    </div>
+                    <button class="clear-filters-btn" style="display: none;" title="Hapus filter">
+                        <i class="ri-close-line"></i> Hapus
+                    </button>
+                </header>
+
+                <div class="prompts-grid view-list">
+                    <p class="no-results" style="display:none;">Tidak ada prompt yang ditemukan.</p>
+                    {{ range .Pages }}
+                    <article class="prompt-card" data-cats="{{ delimit .Params.categories "|" }}" data-title="{{ lower .Title }}" data-content="{{ lower .Plain }}">
+                        <div class="prompt-details">
+                            <div class="prompt-content">
+                                {{ with .Params.image }}
+                                <div class="prompt-image-wrapper">
+                                    <!-- <img src="{{ . | relURL }}" alt="Ilustrasi untuk {{ $.Title }}" class="prompt-image"> -->
+                                    <img src="http://localhost:1313/avatar.avif" alt="Ilustrasi untuk {{ $.Title }}" class="prompt-image">
+                                </div>
+                                {{ end }}
+                                <pre><code id="prompt-{{ .File.UniqueID }}">{{ .Plain | safeHTML }}</code></pre>
+                            </div>
+                            <div class="prompt-meta">
+                                <div class="prompt-attribution">
+                                    <div class="prompt-title">{{ .Title }}</div>
+                                    <div class="prompt-date">{{ .Date.Format "2 January 2006" }}</div>
+                                </div>
+                                <button class="prompt-copy" title="Salin prompt" data-target="prompt-{{ .File.UniqueID }}"><i class="ri-file-copy-line"></i></button>
+                            </div>
+                        </div>
+                    </article>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        {{ else }}
+        <div class="empty-state">
+            <div class="empty-state-icon">💡</div>
+            <h2>Belum Ada Prompt</h2>
+            <p>Saat ini belum ada prompt yang tersedia. Silakan tambahkan file markdown baru di dalam direktori <code>content/bank-prompt/</code> untuk memulai.</p>
+        </div>
+        {{ end }}
+    </main>
+{{ end }}
+
+{{ define "footer" }}
+    {{ if .Pages }}
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const cards = Array.from(document.querySelectorAll('.prompt-card'));
+        const categoryNav = document.querySelector('.category-nav');
+        const searchInput = document.querySelector('.search-input');
+        const noResultsEl = document.querySelector('.no-results');
+        const clearBtn = document.querySelector('.clear-filters-btn');
+        const viewSwitcher = document.querySelector('.view-switcher');
+        const promptsGrid = document.querySelector('.prompts-grid');
+
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+
+        function checkFiltersActive() {
+            const isActive = currentFilter !== 'all' || currentSearch !== '';
+            clearBtn.style.display = isActive ? 'inline-flex' : 'none';
+        }
+
+        function applyFilters() {
+            let found = false;
+            cards.forEach(function(card) {
+                const cats = card.getAttribute('data-cats') || '';
+                const title = card.getAttribute('data-title') || '';
+                const content = card.getAttribute('data-content') || '';
+                const categoryMatch = (currentFilter === 'all') || (cats.split('|').map(s => s.trim()).includes(currentFilter));
+                const searchMatch = title.includes(currentSearch) || content.includes(currentSearch);
+                
+                const shouldShow = categoryMatch && searchMatch;
+                card.style.display = shouldShow ? '' : 'none';
+                if (shouldShow) found = true;
+            });
+            noResultsEl.style.display = found ? 'none' : 'block';
+            checkFiltersActive();
+        }
+
+        function highlightText(text, query) {
+            if (!query) {
+                return text;
+            }
+            const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+        }
+
+        function updateHighlights() {
+            cards.forEach(card => {
+                const titleEl = card.querySelector('.prompt-title');
+                const codeEl = card.querySelector('code');
+
+                // Restore original text before applying new highlight
+                if (titleEl.dataset.originalText) titleEl.innerHTML = titleEl.dataset.originalText;
+                if (codeEl.dataset.originalText) codeEl.innerHTML = codeEl.dataset.originalText;
+
+                // Apply highlight
+                titleEl.innerHTML = highlightText(titleEl.innerHTML, currentSearch);
+                codeEl.innerHTML = highlightText(codeEl.innerHTML, currentSearch);
+            });
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            categoryNav.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = categoryNav.querySelector(`.filter-btn[data-filter="${filter}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            applyFilters();
+            updateHighlights();
+        }
+
+        // Category filter logic
+        categoryNav.addEventListener('click', function(e){
+            const filterBtn = e.target.closest('.filter-btn');
+            const groupToggle = e.target.closest('.group-toggle');
+
+            if (groupToggle) {
+                const group = groupToggle.parentElement;
+                if (group) {
+                    const isExpanded = group.classList.toggle('is-open');
+                    groupToggle.setAttribute('aria-expanded', isExpanded);
+
+                    // Save state to localStorage
+                    const groupStates = {};
+                    document.querySelectorAll('.category-group').forEach(g => {
+                        const groupName = g.querySelector('.group-title').textContent;
+                        groupStates[groupName] = g.classList.contains('is-open');
+                    });
+                    localStorage.setItem('categoryGroupStates', JSON.stringify(groupStates));
+                }
+                return; // Stop further execution
+            }
+
+            if (!filterBtn) return;        
+            const newFilter = filterBtn.getAttribute('data-filter');
+            setFilter(newFilter);
+
+            // Update URL
+            const url = new URL(window.location);
+            if (newFilter === 'all') {
+                url.searchParams.delete('category');
+            } else {
+                url.searchParams.set('category', newFilter);
+            }
+            window.history.pushState({}, '', url);
+        });
+
+        const updateSearchUrl = debounce(function(searchValue) {
+            const url = new URL(window.location);
+            if (searchValue) {
+                url.searchParams.set('search', searchValue);
+            } else {
+                url.searchParams.delete('search');
+            }
+            window.history.pushState({}, '', url);
+        }, 300);
+
+        // Search logic
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            currentSearch = searchTerm.toLowerCase();
+            applyFilters();
+            updateHighlights();
+            updateSearchUrl(searchTerm);
+        });
+
+        // Clear filters button logic
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            currentSearch = '';
+            setFilter('all');
+            const url = new URL(window.location);
+            url.searchParams.delete('category');
+            url.searchParams.delete('search');
+            window.history.pushState({}, '', url);
+        });
+
+        function setView(view) {
+            if (!promptsGrid || !viewSwitcher) return;
+            promptsGrid.classList.remove('view-list', 'view-grid');
+            promptsGrid.classList.add(`view-${view}`);
+            viewSwitcher.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = viewSwitcher.querySelector(`.view-btn[data-view="${view}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        // View switcher logic
+        if (viewSwitcher) {
+            viewSwitcher.addEventListener('click', function(e) {
+                const viewBtn = e.target.closest('.view-btn');
+                if (!viewBtn) return;
+                const view = viewBtn.dataset.view;
+                setView(view);
+
+                // Update URL
+                const url = new URL(window.location);
+                if (view === 'list') { // 'list' is default
+                    url.searchParams.delete('view');
+                } else {
+                    url.searchParams.set('view', view);
+                }
+                window.history.pushState({}, '', url);
+            });
+        }
+
+        // Sidebar toggle for mobile
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        const sidebar = document.querySelector('.page-sidebar');
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', function() {
+                const isExpanded = sidebar.classList.toggle('is-open');
+                sidebarToggle.setAttribute('aria-expanded', isExpanded);
+            });
+        }
+
+        // Copy logic
+        document.querySelector('.page-content').addEventListener('click', function(e){
+            const copyButton = e.target.closest('.prompt-copy');
+            if (!copyButton) return;
+
+            const id = copyButton.getAttribute('data-target');
+            const codeElement = document.getElementById(id);
+            if (!codeElement) return;
+
+            const originalContent = copyButton.innerHTML;
+            const successContent = '<i class="ri-check-line"></i>';
+
+            navigator.clipboard.writeText(codeElement.textContent).then(() => {
+                copyButton.innerHTML = successContent;
+                setTimeout(() => { copyButton.innerHTML = originalContent; }, 1200);
+            }).catch(err => console.warn('Gagal menyalin:', err));
+        });
+
+        // Read filter from URL on initial load
+        const urlParams = new URLSearchParams(window.location.search);
+        let needsFilter = false;
+        const categoryFromUrl = urlParams.get('category');
+        if (categoryFromUrl) {
+            setFilter(categoryFromUrl);
+            if (sidebar) {
+                sidebar.classList.add('is-open');
+                if (sidebarToggle) sidebarToggle.setAttribute('aria-expanded', 'true');
+            }
+            needsFilter = true;
+        }
+        const searchFromUrl = urlParams.get('search');
+        if (searchFromUrl) {
+            searchInput.value = searchFromUrl;
+            currentSearch = searchFromUrl.toLowerCase();
+            needsFilter = true;
+        }
+        const viewFromUrl = urlParams.get('view');
+        if (viewFromUrl) {
+            setView(viewFromUrl);
+        }
+        if (needsFilter) applyFilters();
+
+        // Store original text and apply initial highlights
+        cards.forEach(card => {
+            const titleEl = card.querySelector('.prompt-title');
+            const codeEl = card.querySelector('code');
+            if (titleEl) titleEl.dataset.originalText = titleEl.innerHTML;
+            if (codeEl) codeEl.dataset.originalText = codeEl.innerHTML;
+        });
+        updateHighlights();
+
+        // Load category group states from localStorage
+        const savedGroupStates = localStorage.getItem('categoryGroupStates');
+        if (savedGroupStates) {
+            try {
+                const groupStates = JSON.parse(savedGroupStates);
+                document.querySelectorAll('.category-group').forEach(g => {
+                    const groupName = g.querySelector('.group-title').textContent;
+                    const toggle = g.querySelector('.group-toggle');
+                    if (groupStates.hasOwnProperty(groupName)) {
+                        const isOpen = groupStates[groupName];
+                        g.classList.toggle('is-open', isOpen);
+                        if (toggle) toggle.setAttribute('aria-expanded', isOpen);
+                    }
+                });
+            } catch (e) { console.error("Failed to parse category states from localStorage", e); }
+        }
+    });
+    </script>
+    {{ end }}
+{{ end }}

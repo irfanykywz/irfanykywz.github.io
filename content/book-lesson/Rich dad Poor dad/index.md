@@ -178,6 +178,13 @@ karena perubahan menuju realitas baru itu seperti mengganti kebiasaan lama denga
 
 > Ketika anda memiliki mengapanya maka anda akan menemukan cara bagaimananya. Tanpa mengapa, bagaimananya menjadi mustahil.
 
+> Orang yang tidak belajar menggunakan semakin banyak peralatan daya ungkit akan tertinggal secara finansial atau harus bekerja semakin keras supaya tetap unggul.
+
+> saya menyarankan agar anda menyediakan paling sedikit satu jam setiap bulan untuk sungguh-sungguh memikirkan hidup anda
+
+> kesuksesan finansial bukanlah ilmu yang sulit. Ini adalah
+soft skill, di mana bagaimana anda berperilaku lebih penting daripada apa yang anda ketahui.
+
 ## Hal yang ingin sekali saya lakukan setelah membaca buku ini
 
 - belajar pendidikan finansial

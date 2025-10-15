@@ -13,5 +13,8 @@ filtertab:
       filter: "Website"
     - name: "Seluler"
       icon: "ri-smartphone-line"
-      filter: "Mobile"                  
+      filter: "Mobile"    
+    - name: "CLI"
+      icon: "ri-terminal-box-line"
+      filter: "CLI"                        
 ---

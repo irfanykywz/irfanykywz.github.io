@@ -9,9 +9,21 @@
 .filter-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:0.35rem 0.75rem;border-radius:999px;cursor:pointer}
 .filter-btn.active{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
 
-.quotes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-.quote-card{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:1rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:0.75rem; justify-content: space-between;}
+.quotes-grid{
+    column-count: 1;
+    column-gap: 1rem;
+}
+@media (min-width: 640px) { .quotes-grid { column-count: 2; } }
+@media (min-width: 1000px) { .quotes-grid { column-count: 3; } }
+
+.quote-card{
+    background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:1rem;box-shadow:var(--shadow-sm);
+    display:inline-block; width: 100%;
+    margin-bottom: 1rem;
+    break-inside: avoid;
+}
 .quote-content{font-size:1rem;color:var(--text-secondary);line-height:1.6}
+.quote-content p {margin-bottom: 1rem}
 .quote-meta{display:flex;align-items:center;justify-content:space-between;gap:0.5rem}
 .quote-author{font-weight:600;color:var(--text-primary)}
 .quote-copy{background:var(--accent-primary);color:#fff;border:none;padding:0.4rem 0.75rem;border-radius:6px;cursor:pointer}

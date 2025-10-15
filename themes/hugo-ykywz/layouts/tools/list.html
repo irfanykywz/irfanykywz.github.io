@@ -55,7 +55,13 @@
             </div>
 		</section>
 
-        <script>
+
+	</main>
+{{ end }}
+
+{{ define "footer" }}
+
+    <script>
         (function(){
             const input = document.getElementById('toolsSearch');
             const clear = document.getElementById('toolsSearchClear');
@@ -83,6 +89,6 @@
             input.addEventListener('input', filter);
             clear.addEventListener('click', () => { input.value=''; input.focus(); filter(); });
         })();
-        </script>
-	</main>
+    </script>
+
 {{ end }}
