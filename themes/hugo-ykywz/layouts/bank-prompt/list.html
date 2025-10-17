@@ -100,16 +100,15 @@
                             <div class="prompt-content">
                                 {{ with .Params.image }}
                                 <div class="prompt-image-wrapper">
-                                    <!-- <img src="{{ . | relURL }}" alt="Ilustrasi untuk {{ $.Title }}" class="prompt-image"> -->
-                                    <img src="http://localhost:1313/avatar.avif" alt="Ilustrasi untuk {{ $.Title }}" class="prompt-image">
+                                    <img src="{{ . | relURL }}" alt="Ilustrasi untuk {{ $.Title }}" class="prompt-image">
                                 </div>
                                 {{ end }}
-                                <pre><code id="prompt-{{ .File.UniqueID }}">{{ .Plain | safeHTML }}</code></pre>
+                                <pre><code id="prompt-{{ .File.UniqueID }}">{{ .Content | safeHTML }}</code></pre>
                             </div>
                             <div class="prompt-meta">
                                 <div class="prompt-attribution">
                                     <div class="prompt-title">{{ .Title }}</div>
-                                    <div class="prompt-date">{{ .Date.Format "2 January 2006" }}</div>
+                                    <div class="prompt-date">{{ .Date | time.Format "2 January 2006" }}</div>
                                 </div>
                                 <button class="prompt-copy" title="Salin prompt" data-target="prompt-{{ .File.UniqueID }}"><i class="ri-file-copy-line"></i></button>
                             </div>
@@ -325,7 +324,51 @@
             const originalContent = copyButton.innerHTML;
             const successContent = '<i class="ri-check-line"></i>';
 
-            navigator.clipboard.writeText(codeElement.textContent).then(() => {
+            // 1. Store the original HTML content
+            const originalHTML = codeElement.innerHTML;
+            console.log(originalHTML)
+
+            // 2. Temporarily modify the HTML to convert <p> tags to newlines
+            //    - Replace closing </p> tag with a unique newline placeholder.
+            //    - Replace opening <p> tag with an empty string or nothing (since the newline is from the closing tag).
+            // Define the placeholder once
+            const NL_PLACEHOLDER = 'NL_PLACEHOLDER_489';
+
+            let modifiedHTML = originalHTML
+                // Step 1: Replace all CLOSING block tags with the placeholder.
+                // The regex matches </ and then p, h1-h6, li, div, etc., followed by >.
+                .replace(/<\/(p|h[1-6]|li|div|ul|ol|pre|blockquote)>/gi, NL_PLACEHOLDER) 
+                
+                // Step 2: Remove all OPENING block tags.
+                // The regex matches < and then p, h1-h6, li, div, etc., followed by >.
+                .replace(/<(p|h[1-6]|li|div|ul|ol|pre|blockquote)>/gi, '') 
+                
+                // Step 3: Remove any remaining HTML tags (like <a>, <span>, or non-block tags).
+                // This is important because innerText might handle them poorly, and you only want raw text.
+                .replace(/<[^>]*>/g, '')
+
+                // Step 4: Remove duplicate spaces in the *already text-based* content.
+                .replace(/ {2,}/g, ' ') 
+                
+                // Step 5: Trim external whitespace.
+                .trim();
+
+            // 3. Set the modified content and retrieve the text using innerText
+            codeElement.innerHTML = modifiedHTML;
+            let textToCopy = codeElement.innerText;
+
+            // 4. Immediately restore the original HTML content
+            codeElement.innerHTML = originalHTML;
+
+            // 5. Replace the placeholder with actual newlines to get the final text
+            let finalContent = textToCopy.split(NL_PLACEHOLDER).join('\n\n'); // Use double newline for paragraph spacing
+
+            // === Start your custom processing logic on the final string ===
+
+            // 6. Clean up excessive blank lines (3+ newlines becomes 2, preserving paragraph separation)
+            finalContent = finalContent.replace(/\n{3,}/g, '\n\n');
+
+            navigator.clipboard.writeText(finalContent).then(() => {
                 copyButton.innerHTML = successContent;
                 setTimeout(() => { copyButton.innerHTML = originalContent; }, 1200);
             }).catch(err => console.warn('Gagal menyalin:', err));

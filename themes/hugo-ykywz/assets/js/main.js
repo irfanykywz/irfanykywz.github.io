@@ -1,28 +1,59 @@
 // Portfolio filter functionality
 document.addEventListener('DOMContentLoaded', function() {
   // Portfolio filtering
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectItems = document.querySelectorAll('.project-item');
+  const filterContainer = document.querySelector('.portfolio-filters');
+  if (filterContainer) {
+    const filterButtons = filterContainer.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
 
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Remove active class from all buttons
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      // Add active class to clicked button
-      button.classList.add('active');
+    // Fungsi untuk menerapkan filter
+    function applyFilter(filterValue) {
+        // Set kelas aktif pada tombol yang sesuai
+        filterButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-filter') === filterValue);
+        });
 
-      const filterValue = button.getAttribute('data-filter');
+        // Tampilkan/sembunyikan item proyek
+        projectItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.style.display = 'block';
+                item.style.animation = 'fadeInUp 0.5s ease-out';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
 
-      projectItems.forEach(item => {
-        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-          item.style.display = 'block';
-          item.style.animation = 'fadeInUp 0.5s ease-out';
-        } else {
-          item.style.display = 'none';
-        }
-      });
+    // Tambahkan event listener ke setiap tombol
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filterValue = button.getAttribute('data-filter');
+            
+            // Perbarui URL tanpa memuat ulang halaman
+            const url = new URL(window.location);
+            url.searchParams.set('filter', filterValue);
+            window.history.pushState({}, '', url);
+
+            // Terapkan filter
+            applyFilter(filterValue);
+        });
     });
-  });
+
+    // Periksa URL saat halaman dimuat
+    function checkUrlForFilter() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterFromUrl = urlParams.get('filter');
+        
+        if (filterFromUrl) {
+            applyFilter(filterFromUrl);
+        } else {
+            // Jika tidak ada filter di URL, terapkan filter default ('all' atau yang pertama)
+            const defaultFilter = filterContainer.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+            applyFilter(defaultFilter);
+        }
+    }
+    checkUrlForFilter();
+  }
 
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

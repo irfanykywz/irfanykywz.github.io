@@ -18,8 +18,14 @@
         <section class="portfolio-filters">
             <div class="container">
                 <div class="filter-buttons">
+                    {{ $currentFilter := .Scratch.Get "currentFilter" | default (index .Params.filtertab 0).filter }}
+                    {{ with .Site.Params.filter }}
+                        {{ $currentFilter = . }}
+                    {{ end }}
+
                      {{- range $index, $element := .Params.filtertab -}}
-                        <button class="filter-btn {{ if eq $index 0 }} active{{ end }}" data-filter="{{ $element.filter }}">
+                        {{ $is_active := and (not .Site.Params.filter) (eq $index 0) }}
+                        <button class="filter-btn {{ if or (eq .Site.Params.filter $element.filter) $is_active }}active{{ end }}" data-filter="{{ $element.filter }}">
                             <i class="{{ $element.icon }}"></i>
                             {{ $element.name }}
                         </button>
@@ -43,4 +49,63 @@
         
     </main>
 
+{{ end }}
+
+{{ define "footer" }}
+
+    {{ partial "view-count-js.html" . }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Ambil semua elemen yang diperlukan
+        const filterContainer = document.querySelector('.portfolio-filters');
+        if (filterContainer) {
+            const filterButtons = filterContainer.querySelectorAll('.filter-btn');
+            // Pastikan selector ini cocok dengan item proyek Anda. 
+            // Di partial "project/list-card.html", itemnya memiliki class .project-item
+            const projectItems = document.querySelectorAll('.project-item');
+
+            // Fungsi untuk menerapkan filter
+            function applyFilter(filterValue) {
+                // 1. Atur kelas 'active' pada tombol yang sesuai
+                filterButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-filter') === filterValue);
+                });
+
+                // 2. Tampilkan atau sembunyikan item proyek berdasarkan kategori
+                projectItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (filterValue === 'all' || itemCategory === filterValue) {
+                        item.style.display = 'block';
+                        // Anda bisa menambahkan animasi jika mau
+                        // item.style.animation = 'fadeInUp 0.5s ease-out'; 
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            // Tambahkan event listener ke setiap tombol filter
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Perbarui URL dengan parameter 'filter' tanpa memuat ulang halaman
+                    const url = new URL(window.location);
+                    url.searchParams.set('filter', filterValue);
+                    window.history.pushState({}, '', url);
+
+                    // Terapkan filter yang baru dipilih
+                    applyFilter(filterValue);
+                });
+            });
+
+            // Periksa URL saat halaman pertama kali dimuat
+            const urlParams = new URLSearchParams(window.location.search);
+            const filterFromUrl = urlParams.get('filter');
+            const initialFilter = filterFromUrl || (filterContainer.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all');
+            applyFilter(initialFilter);
+        }
+        });
+    </script>
 {{ end }}

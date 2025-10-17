@@ -22,7 +22,7 @@
         <article class="portfolio-detail">
             <div class="container">
 
-                {{ partial "project/hero.html" . }}           
+                {{ partial "project/hero.html" . }}
                 {{ partial "project/overview.html" . }}           
                 {{ partial "project/feature.html" . }}           
                 {{ partial "project/stack.html" . }}           
@@ -63,5 +63,29 @@
             </div>
         </article>
     </main>
+
+{{ end }}
+
+{{ define "footer" }}
+    {{ partial "project/share-offcanvas.html" . }}
+    {{ partial "view-count-js.html" . }}
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const triggerBtn = document.getElementById('share-offcanvas-trigger');
+        const closeBtn = document.getElementById('close-share-offcanvas-btn');
+        const backdrop = document.getElementById('share-offcanvas-backdrop');
+        const menu = document.getElementById('share-offcanvas-menu');
+
+        const toggleMenu = () => {
+            backdrop.classList.toggle('show');
+            menu.classList.toggle('show');
+        };
+
+        if (triggerBtn) triggerBtn.addEventListener('click', toggleMenu);
+        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+        if (backdrop) backdrop.addEventListener('click', toggleMenu);
+    });
+    </script>
 
 {{ end }}

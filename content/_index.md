@@ -26,7 +26,7 @@ service:
         - "Mengembangkan aplikasi desktop dan situs web, dengan teknologi terkini"
         - "Membuat skrip otomatisasi tugas-tugas berulang guna meningkatkan efisiensi kerja."        
 # =====================================
-experiencestatus: true
+experiencestatus: false
 experiencetitle: "Pengalaman Kerja"
 experience:
     - title: "Pekerja Lepas Pembuatan Aplikasi"
@@ -57,7 +57,7 @@ experience:
         - "Laporan Hasil Pemeliharaan"
         - "Pemecah masalah jaringan & Komputer"
 # =====================================
-educationstatus: true
+educationstatus: false
 educationtitle: "🎓 Pendidikan"
 educationtab:
     - name: "Formal"

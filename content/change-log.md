@@ -5,6 +5,19 @@ description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan pe
 date: 2025-10-09T00:00:00+08:00
 
 changelog:
+  - version: "1.1.2"
+    date: "17 Oktober 2025"
+    changes:
+      - tag: "Fitur Baru"
+        description: "menambahkan halaman profile test, halaman yang berisi hasil tes kepribadian minat dan bakat"
+      - tag: "Fitur Baru"
+        description: "menambahkan tombol donate paypal.me, dan email paypal pada halaman donate"
+      - tag: "Fitur Baru"
+        description: "menambahkan jenis tombol pada styling css, menambahkan styling pada scroll"
+      - tag: "Pembaruan"
+        description: "menambahkan view count dihalaman project"
+      - tag: "Perbaikan"
+        description: "perbaikan js view count sekarang jsnya dipisah soalnya kalau ditaruh sama partialnya bakal ngeloop kalau ditaruh di list page"        
   - version: "1.1.1"
     date: "15 Oktober 2025"
     changes:
@@ -15,7 +28,7 @@ changelog:
       - tag: "Fitur Baru"
         description: "menambahkan halaman bank prompt, untuk menaruh prompt-prompt ai siap pakai"    
       - tag: "Pembaruan"
-        description: "membuat halaman kutipan, kategorinya tersimpan diurl agar saat diload tidak kembali keawal"   
+        description: "halaman kutipan dan project kategorinya tersimpan diurl agar saat diload tidak kembali keawal"   
       - tag: "Pembaruan"
         description: "halaman- yang memiliki javascript sekarang ditaruh dibagian bawah menggunakan define footer"                     
   - version: "1.1.0"

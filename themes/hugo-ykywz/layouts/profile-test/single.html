@@ -1,0 +1,91 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/profile-test.css") }}
+{{ end }}
+
+{{ define "main" }}
+<main class="main">
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="ri-user-search-line"></i>
+                {{ .Title }}
+            </h1>
+            {{ with .Params.description }}
+            <p class="page-description">{{ . }}</p>
+            {{ end }}
+        </div>
+    </section>
+
+    <section class="profile-content">
+        <div class="container">
+            <div class="profile-grid">
+                {{ range .Params.profile_data }}
+                <div class="profile-card">
+                    <div class="profile-card-header">
+                        {{ with .icon }}<i class="{{ . }}"></i>{{ end }}
+                        <h3>{{ .title }}</h3>
+                    </div>
+                    <div class="profile-card-body">
+                        {{ range .items }}
+                        <div class="profile-item">
+                            <div class="profile-item-name">{{ .name }}</div>
+                            {{ if or .percentage .strength }} 
+                            <div class="progress-bar-wrapper">
+                                <div class="progress-bar-container">
+                                    <div
+                                        class="progress-bar"
+                                        style="width: 0%;" 
+                                        data-strength="{{ .strength | default .percentage }}" 
+                                    ></div>
+                                </div>
+                                {{ if .level }}
+                                    <span class="progress-level">{{ .level }}</span>
+                                {{ else }}
+                                    <span class="progress-percentage">{{ .percentage }}%</span>
+                                {{ end }}
+                            </div>
+                            {{ else }}
+                                <div class="profile-item-value">{{ .value }}</div>
+                            {{ end }}
+                            {{ with .description | default .value }}
+                            <div class="profile-item-description">{{ . }}</div>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+                    {{ if or .test_date .source_url }}
+                    <div class="profile-card-footer">
+                        {{ with .test_date }}
+                        <span class="test-date">Tes terakhir: {{ dateFormat "2 Jan 2006" . }}</span>
+                        {{ end }}
+                        {{ with .source_url }}
+                        <a href="{{ . | relURL }}" class="source-link" title="Lihat Bukti Tes">Lihat <i class="ri-arrow-right-up-line"></i></a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+
+            <div class="profile-body-content">
+                {{ .Content }}
+            </div>
+        </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBars = document.querySelectorAll('.profile-card-body .progress-bar');
+        progressBars.forEach(bar => {
+            const targetStrength = bar.dataset.strength;
+            if (targetStrength) {
+                // Use requestAnimationFrame for smoother animation
+                requestAnimationFrame(() => {
+                    bar.style.width = targetStrength + '%';
+                });
+            }
+        });
+    });
+    </script>
+</main>
+{{ end }}

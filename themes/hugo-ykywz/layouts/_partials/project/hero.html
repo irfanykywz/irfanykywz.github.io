@@ -65,4 +65,16 @@
             <img class="glightbox" data-src="{{ .RelPermalink }}{{ .Params.image }}" src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' data-description="{{ .Description }}" data-gallery="hero" />
         {{ end }}  
     </div>
+
+    <div class="project-hero-footer">
+        <a href="javascript:;" id="share-offcanvas-trigger">
+            <i class="ri-share-line"></i>
+            Bagikan
+        </a>
+        <span>
+            <i class="ri-fire-line"></i>
+            {{ partial "view-count.html" . }}
+        </span>
+    </div>
+
 </div>     

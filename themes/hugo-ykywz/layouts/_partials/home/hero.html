@@ -14,8 +14,8 @@
                 <p class="profile-title">{{ .Description }}</p>
                 <div class="profile-actions">
                     <a href="{{ .Params.Cv }}" target="_blank" class="btn btn-primary">
-                        <i class="ri-download-2-line"></i>
-                        Unduh CV
+                        <i class="ri-file-list-line"></i>
+                        CV
                     </a>
                     <a href="mailto:{{ .Params.Email }}" class="btn btn-secondary profile-button">
                         <i class="ri-mail-line"></i>
@@ -25,6 +25,9 @@
                     </a>
                     <a href="{{ .Params.Github }}" target="_blank" class="btn btn-secondary profile-button">
                         <i class="ri-github-line"></i>
+                    </a>
+                    <a href="{{ "/profile-test/" | relURL }}" class="btn btn-indigo profile-button" title="Lihat Profil Tes">
+                        <i class="ri-user-search-line"></i>
                     </a>
                 </div>
             </div>

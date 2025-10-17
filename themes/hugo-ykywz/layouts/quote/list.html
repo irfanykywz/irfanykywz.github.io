@@ -45,7 +45,7 @@
                             — Anonymous
                         {{ end }}
                         </div>
-                        <div class="quote-date">{{ .Date.Format "2 January 2006" }}</div>
+                        <div class="quote-date">{{ .Date | time.Format "2 January 2006" }}</div>
                     </div>
                     <button class="quote-copy" title="Salin kutipan" data-target="quote-{{ .File.UniqueID }}">
                         <i class="ri-file-copy-line"></i>

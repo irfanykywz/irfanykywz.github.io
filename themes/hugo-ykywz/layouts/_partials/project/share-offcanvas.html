@@ -1,0 +1,59 @@
+<div class="share-offcanvas-backdrop" id="share-offcanvas-backdrop"></div>
+
+<div class="share-offcanvas" id="share-offcanvas-menu" role="dialog" aria-modal="true" aria-labelledby="share-offcanvas-title">
+    <div class="share-offcanvas-header">
+        <h5 class="share-offcanvas-title" id="share-offcanvas-title">Bagikan Proyek Ini</h5>
+        <button type="button" class="share-offcanvas-close-btn" id="close-share-offcanvas-btn" aria-label="Tutup">
+            &times;
+        </button>
+    </div>
+    <div class="share-offcanvas-body">
+        <div class="share-buttons-grid">
+            <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="share-grid-item twitter">
+                <i class="ri-twitter-fill"></i>
+                <span>Twitter</span>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="share-grid-item facebook">
+                <i class="ri-facebook-fill"></i>
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="share-grid-item linkedin">
+                <i class="ri-linkedin-fill"></i>
+                <span>LinkedIn</span>
+            </a>
+            <a href="https://api.whatsapp.com/send?text={{ .Title | urlize }}%20{{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="share-grid-item whatsapp">
+                <i class="ri-whatsapp-fill"></i>
+                <span>WhatsApp</span>
+            </a>
+            <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="share-grid-item telegram">
+                <i class="ri-telegram-fill"></i>
+                <span>Telegram</span>
+            </a>
+            <button class="share-grid-item copy-link" id="copy-share-link">
+                <i class="ri-link"></i>
+                <span>Salin</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const copyButton = document.getElementById('copy-share-link');
+    if (copyButton) {
+        copyButton.addEventListener('click', function() {
+            navigator.clipboard.writeText('{{ .Permalink }}').then(() => {
+                const icon = this.querySelector('i');
+                const text = this.querySelector('span');
+                const originalIconClass = icon.className;
+                icon.className = 'ri-check-line';
+                text.textContent = 'Tersalin!';
+                setTimeout(() => {
+                    icon.className = originalIconClass;
+                    text.textContent = 'Salin Tautan';
+                }, 1500);
+            });
+        });
+    }
+});
+</script>
