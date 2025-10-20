@@ -4,4 +4,4 @@ Situs personal yang dibuat menggunakan hugo
 ![preview](irfanykywz.github.jpg)
 
 ## Todo
-- component: badge, twibon
+- halaman proyek: filter kalau opsinya banyak, tambahin 1 tombol buat dropdown
