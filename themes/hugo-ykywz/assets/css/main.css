@@ -236,6 +236,7 @@ blockquote footer::before{content:"— "}
 .breadcrumb a:hover{color:#2563eb}
 .breadcrumb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;}
 .breadcrumb span:last-child {flex-grow: 1;}
+.breadcrumb .grow {flex-grow: 1;}
 
 .post-content-full{color:var(--text-secondary);line-height:1.8;font-size:1.125rem}
 .post-content-full p{margin-bottom:var(--space-6)}

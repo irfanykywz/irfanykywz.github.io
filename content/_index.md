@@ -6,7 +6,7 @@ email: irfanyouth@gmail.com
 linkedin: https://linkedin.com/in/irfanykywz
 github: https://github.com/irfanykywz
 # =====================================
-abouttitle: "Ringkasan"
+abouttitle: "Perkenalan Singkat"
 about:
     - "Halo, nama saya Muhamad Irfan. Saya adalah teknisi IT pemula yang bersemangat mencari pengalaman kerja."
     - "Saya memiliki pemahaman dasar yang kuat tentang sistem operasi, hardware, dan jaringan komputer. Meskipun belum banyak pengalaman formal, saya aktif belajar dan siap menerapkan keterampilan saya untuk membantu mengatasi masalah IT."
@@ -95,8 +95,11 @@ education:
           link: "https://www.google.com"
 # =====================================
 skill: true
-skilltitle: "🤺 Ruang Lingkup Keahlian"
+skilltitle: "☑️ Ruang Lingkup Kemampuan"
 skilltab:
+    - name: "Non-Teknis"
+      id: "non_teknis"
+      class: "tab-0"
     - name: "IT Support"
       id: "it_support"
       class: "tab-1"
@@ -107,6 +110,20 @@ skilltab:
       id: "bahasa"
       class: "tab-3"                        
 skills:
+    non_teknis:
+        scopes:
+          - title: "Kerja Sama Tim"
+            description: "kemampuan untuk bekerja bersama anggota tim dengan baik untuk mencapai tujuan bersama"
+          - title: "Pemecah Masalah"
+            description: "bisa mengidentifikasi adanya masalah dan mencari solusi efektif untuk penyelesaiannya" 
+          - title: "Mudah Beradaptasi"
+            description: "mudah menyesuaikan diri diberbagai kondisi dan lingkungan, cepat menyesuaikan perubahan"
+          - title: "Manajemen Waktu"
+            description: "dapat mengatur dan merencanakan waktu secara efisien untuk mencapai target deadline yang sudah ditentukan"  
+          - title: "Berpikir Kritis"
+            description: "Kemampuan untuk menganalisis fakta, data, dan informasi secara objektif dan logis"  
+          - title: "Etika dan Profesionalisme"
+            description: "memegang penuh tanggung jawab, integritas, ketekunan, dan dedikasi terhadap tugas yang diberikan"                                                 
     it_support:
         scopes:
           - title: "Sistem Operasi"
@@ -189,7 +206,7 @@ skills:
             description: "bisa membaca bahasa inggris dengan baik, belum terbiasa menggunakannya untuk berbicara, menulis dan mendengar"   
 # =====================================
 project: true
-projecttitle: "🌘 Project terbaru"
+projecttitle: "🎲 Proyek terbaru"
 projectcount: 3
 # =====================================
 cta: true

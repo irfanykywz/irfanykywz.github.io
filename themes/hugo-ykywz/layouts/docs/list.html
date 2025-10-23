@@ -1,0 +1,59 @@
+{{ define "head" }}
+    {{/* Memuat CSS khusus untuk halaman dokumentasi */}}
+    {{ $css := resources.Get "css/docs.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.Permalink }}">
+{{ end }}
+
+{{ define "main" }}
+<main class="main">
+    {{/* Header Halaman Daftar Dokumentasi */}}
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                📄 {{ .Title }}
+            </h1>
+            {{ if .Content }}
+                <p class="page-description">{{ .Content | plainify }}</p>
+            {{ end }}
+
+            {{/* Kolom Pencarian */}}
+            <div class="search-wrapper">
+                <i class="ri-search-line"></i>
+                <input type="search" id="docsSearchInput" placeholder="Cari dokumentasi berdasarkan judul atau deskripsi...">
+            </div>
+
+        </div>
+        <!-- <section class="docs-search-section">
+            <div class="container">
+            </div>
+        </section> -->
+    </section>
+
+
+    {{/* Daftar Artikel Dokumentasi */}}
+    <section class="docs-list-section">
+        <div class="container">
+            <div class="docs-grid">
+                {{ range .Pages.ByDate.Reverse }}
+                    <a href="{{ .Permalink }}" class="doc-card">
+                        <h3 class="doc-card-title">{{ .Title }}</h3>
+                        <p class="doc-card-description">{{ .Description }}</p>
+                        <div class="doc-card-footer">
+                            <span>Baca Selengkapnya <i class="ri-arrow-right-line"></i></span>
+                        </div>
+                    </a>
+                {{ end }}
+            </div>
+            <div id="noResultsMessage" class="no-results-message" style="display: none;">
+                <p>Tidak ada dokumentasi yang cocok dengan pencarian Anda.</p>
+            </div>
+        </div>
+    </section>
+</main>
+{{ end }}
+
+{{ define "footer" }}
+    {{/* Memuat skrip khusus untuk pencarian di halaman daftar dokumentasi */}}
+    {{ $js := resources.Get "js/docs-search.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $js.Permalink }}" defer></script>
+{{ end }}

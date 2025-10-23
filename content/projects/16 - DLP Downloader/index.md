@@ -4,7 +4,7 @@ slug: DLP Downloader
 description: unduh video dari platform social media dengan mudah
 image: "dlp-downloader.avif"
 stack: ['python', 'yt-dlp', 'pyside6', 'qtawesome']
-category: CLI
+category: Desktop
 status: Personal
 # demo: https://youtu.be/Vg8MTB6wFoE
 download: https://lynk.id/irfanykywz/v8xz90wg8kj5
@@ -50,6 +50,26 @@ galery:
       image: "dlp-downloader-7.avif"             
 
 changelog:
+  - version: "1.0.3"
+    date: "23 Oktober 2025"
+    changes:  
+      - tag: "Pembaruan"
+        description: "menghilangkan args untuk memperbaiki error 403, yt-dlp sudah update"
+      - tag: "Pembaruan"
+        description: "menambahkan binary deno untuk yt-dlp kedepannya, yt-dlp update pakai nightly build"        
+  - version: "1.0.2"
+    date: "22 Oktober 2025"
+    changes:
+      - tag: "Perbaikan"
+        description: "memperbaiki qlabel textnya kepanjangan dengan wordwrap pada halaman single download"
+      - tag: "Perbaikan"
+        description: "yt-dlp yang error dengan ditambahkan args, tapi fungsi kualitas jadi tidak berfungsi hanya bisa 1080p"
+      - tag: "Pembaruan"
+        description: "menampilkan download speed dan size untuk update aplikasi dan download"
+      - tag: "Pembaruan"
+        description: "menghilangkan tombol browser, sekarang menu halaman dipindah kesebelah kanan"
+      - tag: "Pembaruan"
+        description: "menambahkan opsi pada halaman single, format output dan kualitas"        
   - version: "1.0.1"
     date: "20 Oktober 2025"
     changes:

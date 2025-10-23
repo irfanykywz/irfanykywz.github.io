@@ -18,18 +18,33 @@
         <section class="portfolio-filters">
             <div class="container">
                 <div class="filter-buttons">
-                    {{ $currentFilter := .Scratch.Get "currentFilter" | default (index .Params.filtertab 0).filter }}
-                    {{ with .Site.Params.filter }}
-                        {{ $currentFilter = . }}
-                    {{ end }}
-
-                     {{- range $index, $element := .Params.filtertab -}}
-                        {{ $is_active := and (not .Site.Params.filter) (eq $index 0) }}
-                        <button class="filter-btn {{ if or (eq .Site.Params.filter $element.filter) $is_active }}active{{ end }}" data-filter="{{ $element.filter }}">
+                    {{ $filters := .Params.filtertab }}
+                    {{ $visibleFiltersCount := 5 }}
+                    
+                    {{/* Visible Filters */}}
+                    {{ range $index, $element := first $visibleFiltersCount $filters }}
+                        <button class="filter-btn" data-filter="{{ $element.filter }}">
                             <i class="{{ $element.icon }}"></i>
                             {{ $element.name }}
                         </button>
                     {{- end -}}
+
+                    {{/* Dropdown for More Filters */}}
+                    {{ if gt (len $filters) $visibleFiltersCount }}
+                        <div class="filter-dropdown">
+                            <button class="filter-btn" id="more-filters-btn">
+                                <i class="ri-more-2-fill"></i>
+                            </button>
+                            <div class="filter-dropdown-content" id="more-filters-content">
+                                {{ range after $visibleFiltersCount $filters }}
+                                    <a href="#" class="filter-dropdown-item" data-filter="{{ .filter }}">
+                                        <i class="{{ .icon }}"></i>
+                                        {{ .name }}
+                                    </a>
+                                {{ end }}
+                            </div>
+                        </div>
+                    {{ end }}
                 </div>
             </div>
         </section>
@@ -57,55 +72,86 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        // Ambil semua elemen yang diperlukan
-        const filterContainer = document.querySelector('.portfolio-filters');
-        if (filterContainer) {
-            const filterButtons = filterContainer.querySelectorAll('.filter-btn');
-            // Pastikan selector ini cocok dengan item proyek Anda. 
-            // Di partial "project/list-card.html", itemnya memiliki class .project-item
-            const projectItems = document.querySelectorAll('.project-item');
+            const filterContainer = document.querySelector('.portfolio-filters');
+            if (!filterContainer) return;
 
-            // Fungsi untuk menerapkan filter
+            const filterButtons = filterContainer.querySelectorAll('.filter-btn:not(#more-filters-btn)');
+            const projectItems = document.querySelectorAll('.project-item');
+            const moreFiltersBtn = document.getElementById('more-filters-btn');
+            const moreFiltersContent = document.getElementById('more-filters-content');
+            const dropdownItems = document.querySelectorAll('.filter-dropdown-item');
+
             function applyFilter(filterValue) {
-                // 1. Atur kelas 'active' pada tombol yang sesuai
+                let activeFilterFoundInVisible = false;
+
+                // Update active state for visible buttons
                 filterButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.getAttribute('data-filter') === filterValue);
+                    const isActive = btn.getAttribute('data-filter') === filterValue;
+                    btn.classList.toggle('active', isActive);
+                    if (isActive) activeFilterFoundInVisible = true;
                 });
 
-                // 2. Tampilkan atau sembunyikan item proyek berdasarkan kategori
+                // Update active state for "More" button if filter is from dropdown
+                if (moreFiltersBtn) {
+                    moreFiltersBtn.classList.toggle('active', !activeFilterFoundInVisible);
+                }
+
+                // Show/hide project items
                 projectItems.forEach(item => {
                     const itemCategory = item.getAttribute('data-category');
-                    if (filterValue === 'all' || itemCategory === filterValue) {
-                        item.style.display = 'block';
-                        // Anda bisa menambahkan animasi jika mau
-                        // item.style.animation = 'fadeInUp 0.5s ease-out'; 
-                    } else {
-                        item.style.display = 'none';
-                    }
+                    const shouldShow = (filterValue === 'all' || itemCategory === filterValue);
+                    item.style.display = shouldShow ? 'block' : 'none';
                 });
             }
 
-            // Tambahkan event listener ke setiap tombol filter
+            function updateUrl(filterValue) {
+                const url = new URL(window.location);
+                url.searchParams.set('filter', filterValue);
+                window.history.pushState({}, '', url);
+            }
+
+            // Event listener for visible filter buttons
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const filterValue = button.getAttribute('data-filter');
-                    
-                    // Perbarui URL dengan parameter 'filter' tanpa memuat ulang halaman
-                    const url = new URL(window.location);
-                    url.searchParams.set('filter', filterValue);
-                    window.history.pushState({}, '', url);
-
-                    // Terapkan filter yang baru dipilih
+                    updateUrl(filterValue);
                     applyFilter(filterValue);
                 });
             });
 
-            // Periksa URL saat halaman pertama kali dimuat
+            // Event listener for dropdown items
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const filterValue = item.getAttribute('data-filter');
+                    updateUrl(filterValue);
+                    applyFilter(filterValue);
+                    if (moreFiltersContent) moreFiltersContent.style.display = 'none'; // Hide dropdown
+                });
+            });
+
+            // Logic to toggle dropdown
+            if (moreFiltersBtn) {
+                moreFiltersBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    moreFiltersContent.style.display = moreFiltersContent.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+
+            // Close dropdown if clicking outside
+            window.addEventListener('click', (e) => {
+                if (moreFiltersContent && moreFiltersContent.style.display === 'block') {
+                    if (!moreFiltersBtn.contains(e.target)) {
+                        moreFiltersContent.style.display = 'none';
+                    }
+                }
+            });
+
+            // Initial load check
             const urlParams = new URLSearchParams(window.location.search);
             const filterFromUrl = urlParams.get('filter');
-            const initialFilter = filterFromUrl || (filterContainer.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all');
+            const initialFilter = filterFromUrl || (filterContainer.querySelector('.filter-btn')?.getAttribute('data-filter') || 'all');
             applyFilter(initialFilter);
-        }
         });
     </script>
 {{ end }}

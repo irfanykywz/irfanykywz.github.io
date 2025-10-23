@@ -101,7 +101,7 @@
 /* skills */
 .pn-cards-scope{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .scope-card{padding:var(--space-6)}
-.scope-title{font-weight:800;color:var(--text-primary);margin-bottom:var(--space-3)}
+.scope-title{font-weight:800;color:var(--text-secondary);margin-bottom:var(--space-3)}
 
 /* Cards for Education */
 /*.pn-cards{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-6)}*/

@@ -5,6 +5,37 @@
 .filter-buttons{display:flex;justify-content:center;gap:var(--space-4);flex-wrap:wrap}
 .filter-btn{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);border:2px solid var(--border-color);background:var(--bg-primary);color:var(--text-secondary);border-radius:var(--radius-lg);font-weight:600;cursor:pointer;transition:all var(--transition-fast)}
 .filter-btn:hover,.filter-btn.active{border-color:var(--accent-primary);background:var(--accent-primary);color:white}
+
+/* Filter Dropdown Styles */
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.filter-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-secondary);
+    min-width: 160px;
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+    border-radius: var(--radius-lg);
+    padding: var(--space-2) 0;
+    border: 1px solid var(--border-color);
+    margin-top: var(--space-2);
+}
+.filter-dropdown-item {
+    color: var(--text-secondary);
+    padding: var(--space-3) var(--space-4);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: background-color var(--transition-fast);
+}
+.filter-dropdown-item:hover {
+    background-color: var(--hover-bg);
+    color: var(--text-primary);
+}
 .portfolio-grid{padding:var(--space-16) 0}
 .projects-grid{
     display:grid;

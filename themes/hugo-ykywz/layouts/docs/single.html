@@ -1,0 +1,56 @@
+{{ define "head" }}
+    {{/* Memuat CSS khusus untuk halaman dokumentasi */}}
+    {{ $css := resources.Get "css/docs.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.Permalink }}">
+{{ end }}
+
+{{ define "main" }}
+<main class="main">
+    <section class="detail-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="{{ .CurrentSection.RelPermalink }}">
+                    <i class="ri-file-text-line"></i>
+                    {{ with .Parent }}
+                        {{ .Title }}
+                    {{ end }}
+                </a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="grow">{{ .Title }}</span>
+                <button class="docs-menu-toggle" id="docsMenuToggle" aria-label="Toggle Table of Contents">
+                    <i class="ri-menu-line"></i>
+                </button>
+            </nav>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="docs-layout">
+            {{/* Sidebar untuk Daftar Isi */}}
+            <aside class="docs-sidebar">
+                <h4>Daftar Isi</h4>
+                {{ .TableOfContents }}
+            </aside>
+    
+            {{/* Konten Utama Dokumentasi */}}
+            <article class="docs-content">
+                <h1>{{ .Title }}</h1>
+                {{ if .Description }}
+                    <p class="lead">{{ .Description }}</p>
+                {{ end }}
+                
+                {{ .Content }}
+            </article>
+        </div>
+    </div>
+</main>
+{{ end }}
+
+{{ define "footer" }}
+    {{/* Overlay untuk sidebar offcanvas di mobile */}}
+    <div class="docs-overlay" id="docsOverlay"></div>
+
+    {{/* Memuat skrip khusus untuk halaman dokumentasi */}}
+    {{ $js := resources.Get "js/docs.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $js.Permalink }}" defer></script>
+{{ end }}

@@ -8,7 +8,7 @@ filtertab:
     - name: "Desktop"
       icon: "ri-computer-line"
       filter: "Desktop"
-    - name: "Situs Web"
+    - name: "Web"
       icon: "ri-earth-line"
       filter: "Website"
     - name: "Seluler"
@@ -16,5 +16,8 @@ filtertab:
       filter: "Mobile"    
     - name: "CLI"
       icon: "ri-terminal-box-line"
-      filter: "CLI"                        
+      filter: "CLI"
+    - name: "Desain Grafis"
+      icon: "ri-terminal-box-line"
+      filter: "DesainGrafis"                              
 ---

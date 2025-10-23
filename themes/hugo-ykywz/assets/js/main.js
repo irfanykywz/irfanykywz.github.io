@@ -1,73 +1,29 @@
-// Portfolio filter functionality
 document.addEventListener('DOMContentLoaded', function() {
-  // Portfolio filtering
-  const filterContainer = document.querySelector('.portfolio-filters');
-  if (filterContainer) {
-    const filterButtons = filterContainer.querySelectorAll('.filter-btn');
-    const projectItems = document.querySelectorAll('.project-item');
-
-    // Fungsi untuk menerapkan filter
-    function applyFilter(filterValue) {
-        // Set kelas aktif pada tombol yang sesuai
-        filterButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.getAttribute('data-filter') === filterValue);
-        });
-
-        // Tampilkan/sembunyikan item proyek
-        projectItems.forEach(item => {
-            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                item.style.display = 'block';
-                item.style.animation = 'fadeInUp 0.5s ease-out';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    // Tambahkan event listener ke setiap tombol
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filterValue = button.getAttribute('data-filter');
-            
-            // Perbarui URL tanpa memuat ulang halaman
-            const url = new URL(window.location);
-            url.searchParams.set('filter', filterValue);
-            window.history.pushState({}, '', url);
-
-            // Terapkan filter
-            applyFilter(filterValue);
-        });
-    });
-
-    // Periksa URL saat halaman dimuat
-    function checkUrlForFilter() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const filterFromUrl = urlParams.get('filter');
-        
-        if (filterFromUrl) {
-            applyFilter(filterFromUrl);
-        } else {
-            // Jika tidak ada filter di URL, terapkan filter default ('all' atau yang pertama)
-            const defaultFilter = filterContainer.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
-            applyFilter(defaultFilter);
-        }
-    }
-    checkUrlForFilter();
-  }
-
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            // Get the raw href value (e.g., "#2-judul-headings")
+            const rawHref = this.getAttribute('href');
+            
+            // 1. Remove the leading '#'
+            const id = rawHref.substring(1); 
+            
+            // 2. Escape the ID and re-add the '#' for the selector
+            const validSelector = '#' + CSS.escape(id);
+            
+            // Use the valid selector to find the element
+            const target = document.querySelector(validSelector);
+            
+            if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            }
         });
-      }
     });
-  });
 
   // Add scroll effect to navigation
   // let lastScrollTop = 0;

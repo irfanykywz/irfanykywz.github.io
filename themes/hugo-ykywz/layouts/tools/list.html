@@ -12,8 +12,7 @@
                 </h1>
                 <p class="page-description">{{ .Description }}</p>
                 <div class="tools-search" role="search">
-                    <input id="toolsSearch" type="search" placeholder="Cari alat berdasarkan nama atau deskripsi..." aria-label="Cari alat">
-                    <button id="toolsSearchClear" class="search-clear" aria-label="Bersihkan pencarian">✕</button>
+                    <input id="toolsSearch" type="search" placeholder="Cari alat berdasarkan nama atau deskripsi..." aria-label="Cari alat">                    
                 </div>
             </div>
         </section>
@@ -64,7 +63,6 @@
     <script>
         (function(){
             const input = document.getElementById('toolsSearch');
-            const clear = document.getElementById('toolsSearchClear');
             const items = Array.from(document.querySelectorAll('.tools-list-item'));
             const noResults = document.getElementById('noResults');
 
@@ -87,7 +85,6 @@
             }
 
             input.addEventListener('input', filter);
-            clear.addEventListener('click', () => { input.value=''; input.focus(); filter(); });
         })();
     </script>
 

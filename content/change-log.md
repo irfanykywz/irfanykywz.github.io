@@ -5,6 +5,13 @@ description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan pe
 date: 2025-10-09T00:00:00+08:00
 
 changelog:
+  - version: "1.1.3"
+    date: "23 Oktober 2025"
+    changes:
+      - tag: "Fitur Baru"
+        description: "menambahkan halaman docs, untuk membuat panduan penggunaan aplikasi pada proyek"    
+      - tag: "Pembaruan"
+        description: "menambahkan menu dropdown filter pada halaman proyek, bertujuan agar ketika filter terlalu banyak tidak menumpuk disatu tempat"
   - version: "1.1.2"
     date: "17 Oktober 2025"
     changes:

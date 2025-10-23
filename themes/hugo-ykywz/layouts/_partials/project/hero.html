@@ -52,7 +52,14 @@
             {{ if .Params.download }}
             <a target="_blank" href=' {{ .Params.download }}' class="btn btn-primary">
                 <i class="ri-file-download-line"></i>
-                Download
+                Unduh
+            </a>
+            {{ end }}
+
+             {{ if .Params.doc }}
+            <a href='{{ .Params.doc }}' class="btn btn-outline">
+                <i class="ri-file-text-line"></i>
+                Panduan
             </a>
             {{ end }}
         </div>
