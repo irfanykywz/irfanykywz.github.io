@@ -1,5 +1,6 @@
 ---
 title: "Tes Kepribadian"
+slug: "Tes Kepribadian"
 date: 2022-07-16T16:00:35+07:00
 draft: False
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Beberapa tahun ini Tidak banyak yang dilakukan"
+slug: "Beberapa tahun ini Tidak banyak yang dilakukan"
 date: 2022-04-04T09:08:30+07:00
 draft: False
 ---

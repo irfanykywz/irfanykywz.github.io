@@ -21,7 +21,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{ range .Data.Pages }}
+                        {{ $sort_pages := sort .Pages.ByDate.Reverse }}
+                        {{ range $sort_pages }}
                             <tr>
                                 <td class="w-30">
                                     {{ if isset .Params "image" }}
@@ -46,7 +47,7 @@
                                 <td>
                                     {{ $sorted := sort .Pages "Date" }}
                                     {{ $lastUpdate := index $sorted (sub (len $sorted) 1) }}
-                                    {{ $lastUpdate.Date.Format "2 January 2006" }}
+                                    {{ $lastUpdate.Date | time.Format "2 January 2006" }}
                                 </td>
                             </tr>
                         {{ end }}                       

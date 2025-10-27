@@ -1,0 +1,239 @@
+/* Styling Dasar */
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: var(--space-8);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    padding: var(--space-8) var(--space-6);
+}
+
+h1 {
+    color: var(--accent-primary);
+    margin-bottom: var(--space-4);
+    text-align: center;
+    font-size: var(--space-8);
+}
+
+
+/* --- LAYOUT DUA KOLOM --- */
+.content-wrapper {
+    display: flex;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8); /* Jarak ke Konfirmasi Pesan di bawah */
+}
+
+.left-column {
+    flex: 1;
+    min-width: 0;
+}
+
+.right-column {
+    flex: 1;
+    min-width: 0;
+}
+
+.column-header {
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--space-2);
+    margin-top: var(--space-1);
+    margin-bottom: var(--space-4);
+    font-size: var(--space-6);
+}
+
+@media (max-width: 850px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+}
+
+/* --- SCROLLBOX APLIKASI --- */
+.app-selection-scrollbox {
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: var(--space-2);
+}
+
+/* Gaya Scrollbar */
+.app-selection-scrollbox::-webkit-scrollbar {
+    width: 8px;
+}
+.app-selection-scrollbox::-webkit-scrollbar-thumb {
+    background-color: var(--text-muted);
+    border-radius: var(--radius-sm);
+}
+.app-selection-scrollbox::-webkit-scrollbar-track {
+    background-color: var(--bg-tertiary);
+}
+
+/* --- CARD STYLING --- */
+.app-card-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+}
+
+.app-card {
+    background-color: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.app-card:hover {
+    border-color: var(--accent-secondary);
+    background-color: var(--hover-bg);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.app-card.selected {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-primary);
+    background-color: var(--hover-bg);
+}
+
+.app-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.app-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: var(--space-3);
+    background-color: var(--accent-primary); 
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: var(--space-4);
+}
+
+.app-name {
+    font-size: var(--space-5);
+    font-weight: bold;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.app-description {
+    font-size: var(--space-3);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-3);
+}
+
+.app-price {
+    font-size: var(--space-4);
+    font-weight: bold;
+    color: var(--accent-secondary);
+}
+
+/* --- TOTAL HARGA BOX --- */
+.total-price-box {
+    background-color: var(--accent-secondary);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-price-box p {
+    margin: 0;
+    font-size: var(--space-5);
+    font-weight: bold;
+}
+
+.total-amount {
+    font-size: var(--space-8);
+    font-weight: bold;
+    color: var(--bg-primary); 
+}
+
+/* --- GAYA TRANSFER & KONFIRMASI --- */
+.transfer-info {
+    background-color: var(--bg-tertiary);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--space-6);
+}
+
+.account-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    padding: var(--space-3);
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent-secondary);
+}
+
+.account-details strong { display: block; color: var(--accent-secondary); font-size: var(--space-4); }
+.copy-btn { background-color: var(--accent-primary); color: var(--text-primary); border: none; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); cursor: pointer; transition: background-color var(--transition-fast); font-size: var(--space-3); }
+.copy-btn:hover { background-color: #2563eb; }
+.note { font-size: var(--space-3); color: var(--text-muted); margin-top: var(--space-2); }
+
+/* Styling untuk Konfirmasi Pesan di bawah */
+.confirmation-section {
+    background-color: var(--bg-secondary); /* Menggunakan latar belakang kontainer utama */
+    padding: var(--space-6) 0; 
+    border-top: 2px solid var(--border-color);
+}
+
+.confirmation-section h2 {
+    border-bottom: none;
+    margin-top: 0;
+}
+
+textarea {
+    width: 100%;
+    padding: var(--space-3);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+    font-size: var(--space-4);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+textarea:focus {
+    border-color: var(--accent-primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.button-group { 
+    display: flex; 
+    gap: var(--space-4); 
+    margin-top: var(--space-6); 
+}
+.btn { flex: 1; padding: var(--space-4); border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: bold; font-size: var(--space-4); transition: opacity var(--transition-fast), transform var(--transition-fast); }
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-whatsapp { background-color: var(--accent-secondary); color: var(--text-primary); }
+.btn-telegram { background-color: var(--accent-primary); color: var(--text-primary); }
+.text-center { text-align: center; }

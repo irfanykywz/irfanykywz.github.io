@@ -1,5 +1,6 @@
 ---
 title: "Akhirnya punya akun Jenius"
+slug: "Akhirnya punya akun Jenius"
 date: 2023-12-30T18:42:31+07:00
 draft: false
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Melakukannya sekali tapi hasilnya berkali-kali"
+slug: "Melakukannya sekali tapi hasilnya berkali-kali"
 date: 2024-01-13T20:00:26+07:00
 tags: []
 draft: false

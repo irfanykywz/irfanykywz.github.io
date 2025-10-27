@@ -1,0 +1,167 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/buy-license.css") }}
+{{ end }}
+
+{{ define "config" }}
+    {{ .Scratch.Set "hideHeader" true }} 
+    {{ .Scratch.Set "hideFooter" true }} 
+{{ end }}
+
+{{ define "main" }}
+<main class="main">
+    <div class="container">
+        <h1>🔑 Pembelian Lisensi Aplikasi</h1>
+        <p class="text-center" style="color: var(--text-secondary);">Pilih lisensi, lakukan transfer, dan kirim konfirmasi di bagian bawah.</p>
+
+        <hr style="border-color: var(--border-color); margin-top: var(--space-5); margin-bottom: var(--space-5);">
+
+        <form id="purchase-form">
+            <div class="content-wrapper">
+                <div class="left-column">
+                    <h2 class="column-header">1. Pilih Lisensi Aplikasi</h2>
+                    
+                    <div class="app-selection-scrollbox">
+                        <div class="app-card-group" id="app-selection-container">
+                            {{ range .Params.licenses }}
+                            <div class="app-card" data-app-name="{{ .name }}" data-app-price="{{ .price }}" data-app-display-price="{{ .display_price }}" onclick="selectApp(this)">
+                                <div class="app-card-header">
+                                    <div class="app-logo" style="background-color: {{ .logo_color }};">{{ .logo_initials }}</div>
+                                    <span class="app-name">{{ .name }}</span>
+                                </div>
+                                <div class="app-description">{{ .description }}</div>
+                                <div class="app-price">{{ .display_price }}</div>
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <h2 class="column-header">2. Total Pembelian</h2>
+                    <div class="total-price-box">
+                        <p>Total yang harus dibayar:</p>
+                        <span id="total-amount-display" class="total-amount">Rp 0</span>
+                    </div>
+
+                    <h2 class="column-header" style="margin-top: var(--space-4);">3. Transfer Tujuan</h2>
+                    <div class="transfer-info">
+                        {{ range .Params.payments }}
+                        <div class="account-item" 
+                             style="{{ if eq .type "qris" }}border-left: 4px solid var(--accent-warning);{{ end }}">
+                            <div class="account-details">
+                                <strong>{{ .name }}</strong>
+                                <span style="font-family: var(--font-mono); {{ if eq .type "qris" }}color: var(--accent-warning);{{ end }}">{{ .account_number }}</span>
+                                <span style="color: var(--text-muted);">{{ .account_name }}</span>
+                            </div>
+                            {{ if eq .type "bank" }}
+                            <button type="button" class="copy-btn" onclick="copyToClipboard('{{ .account_number | replaceRE `[^0-9]` `` }}')">Salin Rek</button>
+                            {{ else if eq .type "ewallet" }}
+                            <button type="button" class="copy-btn" onclick="copyToClipboard('{{ .account_number | replaceRE `[^0-9]` `` }}')">Salin HP</button>
+                            {{ else if eq .type "qris" }}
+                            <button type="button" class="copy-btn" onclick="alert('Silakan hubungi admin untuk link/gambar QRIS.')" style="background-color: var(--accent-warning); color: var(--bg-primary);">Minta QR</button>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        <p class="note text-center"><strong>Penting:</strong> Transfer sesuai total yang ditampilkan di Langkah 2.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <input type="hidden" id="selected_app_name" value="">
+            
+            <div class="confirmation-section">
+                <h2 class="column-header">4. Konfirmasi Pesan</h2>
+                <div class="form-group">
+                    <textarea id="pesan_konfirmasi" name="pesan_konfirmasi" rows="4" readonly required style="font-family: var(--font-mono); color: var(--accent-secondary);">Pilih aplikasi di Langkah 1 untuk membuat pesan konfirmasi otomatis.</textarea>
+                    <p class="note">Pesan akan terisi otomatis. Mohon pastikan sudah transfer sesuai jumlah di Langkah 2.</p>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-whatsapp" onclick="sendConfirmation('whatsapp')">
+                        Kirim via WhatsApp
+                    </button>
+                    <button type="button" class="btn btn-telegram" onclick="sendConfirmation('telegram')">
+                        Kirim via Telegram
+                    </button>
+                </div>
+            </div>
+        </form>
+        
+        <p class="note text-center" style="margin-top: var(--space-4);">*Kami akan memproses lisensi Anda setelah konfirmasi dan pengecekan transfer berhasil.</p>
+    </div>
+</main>
+{{ end }}
+
+{{ define "footer" }}
+    <script>
+        const CONTACT_WA = '{{ .Params.contact_wa }}';
+        const CONTACT_TELEGRAM_USERNAME = '{{ .Params.contact_telegram }}';
+        
+        const priceFormatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        });
+
+        function selectApp(cardElement) {
+            const cards = document.querySelectorAll('.app-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            cardElement.classList.add('selected');
+
+            const appName = cardElement.getAttribute('data-app-name');
+            const appPrice = cardElement.getAttribute('data-app-price'); 
+            const appDisplayPrice = cardElement.getAttribute('data-app-display-price'); 
+
+            document.getElementById('selected_app_name').value = `${appName} (${appDisplayPrice})`;
+            document.getElementById('total-amount-display').textContent = priceFormatter.format(appPrice);
+
+            updateMessage();
+        }
+
+        function updateMessage() {
+            const selectedAppValue = document.getElementById('selected_app_name').value;
+            const textarea = document.getElementById('pesan_konfirmasi');
+
+            if (selectedAppValue) {
+                textarea.value = `Konfirmasi pembelian lisensi aplikasi ${selectedAppValue}. Saya sudah transfer. Ditunggu balasan untuk lisensi key-nya. Terima kasih.`;
+                textarea.style.color = 'var(--text-primary)';
+            } else {
+                textarea.value = 'Pilih aplikasi di Langkah 1 untuk membuat pesan konfirmasi otomatis.';
+                textarea.style.color = 'var(--text-muted)';
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Nomor berhasil disalin: " + text);
+            }).catch(err => {
+                console.error('Gagal menyalin:', err);
+            });
+        }
+
+        function sendConfirmation(platform) {
+            const selectedAppValue = document.getElementById('selected_app_name').value;
+
+            if (!selectedAppValue) {
+                alert('Mohon pilih lisensi di Langkah 1 terlebih dahulu.');
+                return;
+            }
+            
+            const message = document.getElementById('pesan_konfirmasi').value;
+            const encodedMessage = encodeURIComponent(message);
+
+            if (platform === 'whatsapp') {
+                const url = `https://wa.me/${CONTACT_WA}?text=${encodedMessage}`;
+                window.open(url, '_blank');
+            } else if (platform === 'telegram') {
+                const url = `https://t.me/${CONTACT_TELEGRAM_USERNAME}?text=${encodedMessage}`;
+                window.open(url, '_blank');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             updateMessage();
+             document.getElementById('total-amount-display').textContent = priceFormatter.format(0);
+        });
+    </script>
+{{ end }}

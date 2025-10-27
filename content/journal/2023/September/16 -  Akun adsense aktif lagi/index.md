@@ -1,5 +1,6 @@
 ---
 title: "Akun adsense aktif lagi"
+slug: "Akun adsense aktif lagi"
 date: 2023-09-16T16:00:35+07:00
 draft: False
 ---

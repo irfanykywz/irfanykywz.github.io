@@ -1,6 +1,6 @@
 ---
-title: Varia
-slug: Varia
+title: varia
+slug: varia
 date: 2025-10-20T05:00:35+07:00
 ---
 

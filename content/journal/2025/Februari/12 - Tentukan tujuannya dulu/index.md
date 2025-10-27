@@ -1,5 +1,6 @@
 ---
 title: "Sebelum belajar suatu ilmu tentukan tujuannya dulu"
+slug: "Sebelum belajar suatu ilmu tentukan tujuannya dulu"
 date: 2025-02-12T21:30:00+07:00
 tags: []
 draft: false

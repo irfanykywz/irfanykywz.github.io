@@ -140,6 +140,8 @@ skills:
               - "PDF"
               - "Remote Desktop"
               - "Browser"
+              - Outlook
+              - Mail
           - title: "Jaringan"
             items:
               - "Instalasi Jaringan"
