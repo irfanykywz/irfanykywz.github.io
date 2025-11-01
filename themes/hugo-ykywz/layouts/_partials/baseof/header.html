@@ -1,6 +1,13 @@
 <header class="header">
-    <nav class="nav">
-        <div class="nav-links">
+    
+    <div class="nav">
+        <div class="brand">
+            <a href="{{ .Site.BaseURL }}">
+                <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }} logo" class="brand-logo">
+            </a>
+        </div>
+
+        <nav class="nav-links">
             
             {{ range .Site.Menus.main }}
             
@@ -19,7 +26,13 @@
                 </a>
             {{ end}}
 
+        </nav>
+        
+        <div class="search">
+            <a href="/search" class='search-button {{ if or ($active) (and ($.IsHome) (eq .RelPermalink "/")) }}active{{ end }}' aria-label="Search"><i class="ri-search-line"></i></a>
         </div>
 
-    </nav>
+    </div>
+
+    
 </header>

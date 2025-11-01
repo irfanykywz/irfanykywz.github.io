@@ -2,10 +2,6 @@
   {{ partial "style.html" (dict "css" "css/quote.css") }}
 {{ end }}
 
-{{ define "config" }}
-    {{ .Scratch.Set "noIndex" true }} 
-{{ end }}
-
 {{ define "main" }}
 <main class="main">
     <div class="quote-list-page">
