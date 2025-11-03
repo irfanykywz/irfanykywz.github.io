@@ -147,8 +147,20 @@
 /* badge */
 .open-to-work-wrapper{position:relative;width:120px;height:120px;box-shadow:var(--shadow-md);border-radius:50%;display:flex;justify-content:center;align-items:center}
 @keyframes rotate-border-gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.profile-image-border-wrapper{position:absolute;top:1px;left:1px;right:1px;bottom:1px;border-radius:50%;padding:4px;background:linear-gradient(45deg,var(--accent-secondary),var(--accent-primary),var(--accent-warning),var(--accent-danger),var(--accent-secondary)
-            );background-size:300% 300%;animation:rotate-border-gradient 8s ease-in-out infinite alternate;z-index:0}
+.profile-image-border-wrapper{position:absolute;top:1px;left:1px;right:1px;bottom:1px;border-radius:50%;padding:4px;
+    /*background:linear-gradient(45deg,var(--accent-secondary),var(--accent-primary),var(--accent-warning),var(--accent-danger),var(--accent-secondary)
+            );*/
+    background: linear-gradient(
+        135deg,                      
+        #050510,                     
+        #00ffaa 20%,                 
+        #003366 40%,                 
+        #00bbff 60%,                 
+        #330066 80%,                 
+        #cc00ff 90%,                 
+        #050510 100%                  
+    );
+    background-size:300% 300%;animation:rotate-border-gradient 8s ease-in-out infinite alternate;z-index:0}
 .profile-image-badge{width:calc(100% - 8px);height:calc(100% - 8px);border-radius:50%;object-fit:cover;z-index:1}
 @keyframes color-cycle{0%{background-color:var(--accent-secondary)}25%{background-color:var(--accent-primary)}50%{background-color:var(--accent-warning)}75%{background-color:var(--accent-danger)}100%{background-color:var(--accent-secondary)}}
 .open-to-work-badge-wrapper{position:absolute;bottom:-25px;right:-10px;left:0;text-align:center;z-index:10}

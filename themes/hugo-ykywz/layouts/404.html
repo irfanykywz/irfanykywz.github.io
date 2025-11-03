@@ -1,3 +1,263 @@
-heheboi, 404 not found
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 irfanykywz Not Found</title>
+    <meta name="robots" content="noindex, follow">
+  
+    <style>
+        /* 1. BODY and Background Image Setup */
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace, Courier New, monospace;
+            color: #d0d0d0;
+            transition: background-color 0.05s;
+            
+            background-image: url('{{ $.Site.BaseURL }}images/bg.avif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-color: #1a1f33;
+            position: relative;
+        }
 
-<a href="{{ $.Site.BaseURL }}">back to home</a>
+        /* 2. CSS Raindrop Animation */
+        @keyframes fall {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            5% { opacity: 0.8; }
+            95% { opacity: 0.8; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .drop {
+            position: absolute;
+            top: 0;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* 3. Lightning Flash Effect */
+        .flash {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- HACKER TEXT ANIMATIONS --- */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes blink-cursor {
+            50% { border-color: transparent; }
+        }
+
+        /* 4. Content Container Styling */
+        .content-container {
+            z-index: 10;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        /* 5. Content Text and Button Styling */
+        .content-container h1 {
+            font-size: 15vmin;
+            color: #ff5555;
+            margin-bottom: 0.1em;
+            text-shadow: 0 0 15px rgba(255, 85, 85, 0.9);
+            
+            /* Apply Glitch Animation */
+            animation: glitch 0.5s linear infinite alternate;
+        }
+
+        .content-container p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #00ff99;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 0.15em solid #00ff99;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            
+            /* Apply Cursor Blink Animation */
+            animation: 
+                blink-cursor 0.75s step-end infinite;
+        }
+
+        /* Ensure the last paragraph doesn't have the blinking cursor */
+        .content-container p:last-of-type {
+            border-right: none;
+        }
+
+
+        /* Responsive Text Size for Sub-Messages */
+        .content-container p:last-of-type {
+            font-size: 1em;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: #00ff99;
+            border: 2px solid #00ff99;
+            text-decoration: none;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #00ff99;
+            color: #000000;
+            box-shadow: 0 0 15px #00ff99;
+        }
+
+        /* --- 6. RESPONSIVENESS (Media Queries) --- */
+        @media (max-width: 600px) {
+            .content-container {
+                width: 90%;
+                max-width: 90%;
+                padding: 30px 10px;
+            }
+
+            .content-container h1 {
+                font-size: 20vmin;
+            }
+
+            .content-container p {
+                font-size: 1em;
+            }
+            
+            .content-container p:last-of-type {
+                font-size: 0.8em;
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="pageAudio" src="{{ $.Site.BaseURL }}files/musik.mp3" loop preload="auto"></audio>
+
+    <div class="rain-container"></div>
+    <div class="content-container" id="contentContainer">
+        <!-- <h1></h1> -->
+        <p style="color:white">heheboi, 404 not found_</p>
+        <p>{{ $.Site.Title }} has been lost in the storm...</p>
+        
+        <a href="{{ $.Site.BaseURL }}" class="back-button" id="backButton">
+            ← back to home
+        </a>
+    </div>
+
+    <script>
+        const rainContainer = document.querySelector('.rain-container');
+        const contentContainer = document.getElementById('contentContainer');
+        const audio = document.getElementById('pageAudio');
+        const NUM_DROPS = 150; 
+        const DURATION_MIN = 1;
+        const DURATION_MAX = 2;
+        let lightningTimer = 0;
+
+        // ---------------------------------
+        // --- NEW: GLOBAL CLICK TO PLAY AUDIO ---
+        // ---------------------------------
+        function startAudioOnInteraction() {
+            // Attempt to play the audio
+            audio.play().then(() => {
+                // Audio started successfully. Remove the listener.
+                document.removeEventListener('click', startAudioOnInteraction);
+                document.removeEventListener('keydown', startAudioOnInteraction); // Also remove keydown if added
+                console.log("Audio started successfully on first user click.");
+            }).catch(error => {
+                // If it still fails, it's likely muted or another policy issue.
+                console.warn("Audio play failed on interaction:", error);
+            });
+        }
+
+        // Attach the listener to the whole document
+        document.addEventListener('click', startAudioOnInteraction);
+        document.addEventListener('keydown', startAudioOnInteraction); // Optional: also trigger on key press
+
+        // --- 1. Raindrop Generation ---
+        function createDrop() {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            
+            const left = Math.random() * 100;
+            drop.style.left = `${left}vw`;
+            
+            const duration = Math.random() * (DURATION_MAX - DURATION_MIN) + DURATION_MIN;
+            drop.style.animationDuration = `${duration}s`;
+            
+            const delay = Math.random() * -DURATION_MAX; 
+            drop.style.animationDelay = `${delay}s`;
+
+            drop.style.opacity = Math.random() * 0.4 + 0.2;
+            drop.style.transform = `scaleY(${Math.random() * 0.5 + 0.5})`;
+
+            rainContainer.appendChild(drop);
+            
+            setTimeout(() => drop.remove(), (duration + Math.abs(delay)) * 1000);
+        }
+
+        // --- 2. Continuous Rain ---
+        function startRain() {
+             setInterval(createDrop, 1000 / NUM_DROPS); 
+        }
+
+        // --- 3. Lightning Logic ---
+        function handleLightning() {
+            if (lightningTimer <= 0) {
+                lightningTimer = Math.random() * 5000 + 2000; 
+                
+                if (Math.random() < 0.07) {
+                    document.body.classList.add('flash');
+                    contentContainer.classList.add('flashed');
+                    
+                    setTimeout(() => {
+                        document.body.classList.remove('flash');
+                        contentContainer.classList.remove('flashed');
+                    }, 50); 
+                }
+            } else {
+                lightningTimer -= 100;
+            }
+        }
+
+        // --- 4. Animation Loop ---
+        function animate() {
+            handleLightning();
+            requestAnimationFrame(animate);
+        }
+
+        // Start effects
+        startRain();
+        animate();
+    </script>
+</body>
+</html>
+<!-- heheboi, 404 not found
+
+<a href="{{ $.Site.BaseURL }}">back to home</a> -->

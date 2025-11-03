@@ -8,10 +8,16 @@ changelog:
   - version: "1.1.5"
     date: "3 November 2025"
     changes:
-      - tag: "Pembaruan"
+      - tag: "Peningkatan"
         description: "membuat halaman arsip pada proyek yang sudah tidak relevan"
-      - tag: "Pembaruan"
+      - tag: "Peningkatan"
         description: "menambahkan icon pada halaman list dokumentasi"             
+      - tag: "Pembaruan"
+        description: "perubahan css pada shortcode image-card sekarang jadi responsive dan kotak-kotak"  
+      - tag: "Pembaruan"
+        description: "menghilangkan padding dan border radius pada navigasi header"
+      - tag: "Pembaruan"
+        description: "mengubah tampilan halaman 404"        
   - version: "1.1.4"
     date: "2 November 2025"
     changes:

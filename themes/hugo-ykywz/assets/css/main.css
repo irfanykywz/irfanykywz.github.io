@@ -153,7 +153,14 @@ blockquote footer::before{content:"— "}
 .header{background:var(--bg-secondary);border-bottom:1px solid var(--border-color);
     /*position:sticky;*/
     top:0;z-index:99;backdrop-filter:blur(10px)}
-.nav{display:flex;justify-content:space-between;align-items:center;padding-top:var(--space-4);padding-bottom:var(--space-4);max-width:900px;margin:0 auto;position:relative}
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    /*padding-top:var(--space-4);
+    padding-bottom:var(--space-4);*/
+    max-width:900px;margin:0 auto;position:relative
+}
 .brand .brand-logo {
     height: 40px;
     width: auto;
@@ -226,8 +233,8 @@ blockquote footer::before{content:"— "}
 
 .nav-links{
     display:flex;gap:0;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-2xl);
+    /*border: 1px solid var(--border-color);
+    border-radius: var(--radius-2xl);*/
     margin-right: 80px;
     padding:0 15px;
 }
@@ -447,14 +454,32 @@ blockquote footer::before{content:"— "}
 
 /* lightbox  */
 /* Container for the image grid */
-.image-grid-container{display:flex;flex-wrap:wrap;gap:15px;margin:25px 0}
+.image-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
 /* The item wrapper (the <a> tag) */
-.grid-item{flex:1 1 200px;/* Responsive:min width 200px,but can grow/shrink */
-    overflow:hidden;height:200px;/* Set a fixed height for a clean grid look */
-    border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1)}
+.grid-item {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+}
 /* The image itself (inside the <a> tag) */
 .grid-item img{width:100%;height:100%;object-fit:cover;/* This makes all images fill the fixed height without distortion */
     display:block;transition:transform 0.3s ease;cursor:pointer}
 .grid-item img:hover{transform:scale(1.05);/* Zoom effect on hover */}
 .glightbox-clean .gslide-description {background: var(--bg-tertiary)}
 .glightbox-clean .gslide-title {color: var(--text-primary);}
+@media (max-width: 768px) {
+    .image-grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+@media (max-width: 480px) {
+    .image-grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
