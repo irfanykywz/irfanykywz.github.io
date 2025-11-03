@@ -1,0 +1,35 @@
+{{ define "head" }}
+    {{ partial "style.html" (dict "css" "css/project.css") }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="ri-briefcase-2-line"></i>
+                    {{ .Title }}
+                </h1>
+                <p class="page-description">{{ len .Data.Pages }} {{ .Description }}</p>
+
+                <a href="{{ "projects" | absURL }}" class="back-button">
+                    <i class="ri-arrow-left-line"></i>
+                    Kembali
+                </a>                
+            </div>
+        </section>
+
+        <section class="portfolio-grid">
+            <div class="container">
+                <div class="projects-grid">
+                    {{ range .Data.Pages }}
+                        {{ partial "project/list-card.html" . }}
+                    {{ end }}
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+{{ end }}

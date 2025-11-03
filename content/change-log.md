@@ -5,6 +5,18 @@ description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan pe
 date: 2025-10-09T00:00:00+08:00
 
 changelog:
+  - version: "1.1.5"
+    date: "3 November 2025"
+    changes:
+      - tag: "Pembaruan"
+        description: "membuat halaman arsip pada proyek yang sudah tidak relevan"
+      - tag: "Pembaruan"
+        description: "menambahkan icon pada halaman list dokumentasi"             
+  - version: "1.1.4"
+    date: "2 November 2025"
+    changes:
+      - tag: "Pembaruan"
+        description: "Navigasi header sekarang memiliki logo dan tombol pencarian responsive"     
   - version: "1.1.3"
     date: "23 Oktober 2025"
     changes:

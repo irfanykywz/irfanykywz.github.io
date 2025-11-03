@@ -49,6 +49,13 @@ galery:
       image: "aviftool-4.avif"            
 
 changelog:
+  - version: "1.0.1"
+    date: "16 Oktober 2025"
+    changes:
+      - tag: "Pembaruan"
+        description: "menambahkan tombol open dihalaman history"
+      - tag: "Pembaruan"
+        description: "mengganti logo"        
   - version: "1.0.0"
     date: "13 Oktober 2025"
     changes:

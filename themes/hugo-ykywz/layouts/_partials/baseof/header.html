@@ -1,13 +1,16 @@
 <header class="header">
-    
     <div class="nav">
+        <button class="offcanvas-button mobile-nav-toggle toggleOffcanvasBtn" aria-label="Toggle Menu">
+            <i class="ri-apps-2-line"></i>
+        </button>
+
         <div class="brand">
             <a href="{{ .Site.BaseURL }}">
                 <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }} logo" class="brand-logo">
             </a>
         </div>
 
-        <nav class="nav-links">
+        <nav class="nav-links desktop-nav">
             
             {{ range .Site.Menus.main }}
             
@@ -29,10 +32,7 @@
         </nav>
         
         <div class="search">
-            <a href="/search" class='search-button {{ if or ($active) (and ($.IsHome) (eq .RelPermalink "/")) }}active{{ end }}' aria-label="Search"><i class="ri-search-line"></i></a>
-        </div>
-
+            <a href="/search" class='search-button {{ if eq .Page.RelPermalink "/search/" }}active{{ end }}' aria-label="Search"><i class="ri-search-line"></i></a>
+        </button>
     </div>
-
-    
 </header>

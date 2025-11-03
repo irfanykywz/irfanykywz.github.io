@@ -36,6 +36,9 @@
             <div class="docs-grid">
                 {{ range .Pages.ByDate.Reverse }}
                     <a href="{{ .Permalink }}" class="doc-card">
+                        <div class="doc-card-icon">
+                            <i class="ri-file-text-line"></i>
+                        </div>
                         <h3 class="doc-card-title">{{ .Title }}</h3>
                         <p class="doc-card-description">{{ .Description }}</p>
                         <div class="doc-card-footer">

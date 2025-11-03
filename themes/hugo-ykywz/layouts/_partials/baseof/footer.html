@@ -54,6 +54,19 @@
     </div>
     <div class="offcanvas-body">
         <nav>
+            {{ range .Site.Menus.main }}
+                {{ $menu_item_url := .URL | relLangURL }}
+                {{ $page_url := $.Page.RelPermalink | relLangURL }}
+                {{ $page_split := index (split $page_url "/") 1 }}
+                {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
+
+                <a class="offcanvas-nav-link {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}active{{ end }}" href="{{ .URL | relLangURL }}">
+                    <i class="{{ .Pre }}"></i>
+                    {{ .Name | safeHTML  }}
+                </a>
+            {{ end}}
+            <hr style="border-color: var(--border-color); margin: var(--space-4) 0;">
+
             {{ range .Site.Menus.footer }}
 
                 {{ $menu_item_url := .URL | relLangURL }}
@@ -74,7 +87,7 @@
 </div>
 
 <nav class="bottom-nav">
-    {{ range .Site.Menus.main }}
+    {{ range .Site.Menus.bottom }}
     
         {{ $menu_item_url := .URL | relLangURL }}
         {{/* {{ $menu_item_url }} */}}

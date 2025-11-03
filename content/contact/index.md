@@ -1,6 +1,6 @@
 ---
-title: Hubungi Kapan Saja
-description: Berikut alamat email dan kontak lainnya yang bisa dihubungi.
+title: Kontak
+description: Berikut daftar kontak yang bisa dihubungi.
 email: irfanyouth@gmail.com
 phone: +6281389215100
 whatsapp: https://api.whatsapp.com/send?phone=6281389215100&text=Halo

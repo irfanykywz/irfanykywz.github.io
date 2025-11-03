@@ -57,7 +57,7 @@ body{
 .main {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    /*flex-grow: 1;*/
     justify-content: center;
 }
 img,picture,video,canvas,svg{display:block;max-width:100%}
@@ -164,6 +164,14 @@ blockquote footer::before{content:"— "}
     color: var(--text-primary);
     font-size: 1.5rem;
     cursor: pointer;
+    padding: var(--space-2);
+}
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    font-size: 1.5rem;
+    margin: var(--space-2) !important;
+    background: transparent;
+    border:none !important;
 }
 
 /* Page Header */
@@ -217,11 +225,13 @@ blockquote footer::before{content:"— "}
 }
 
 .nav-links{
-    display:flex;gap:var(--space-4);
+    display:flex;gap:0;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-2xl);
+    margin-right: 80px;
+    padding:0 15px;
 }
-.nav-link{display:flex;flex-direction:column;align-items:center;gap:var(--space-1);color:var(--text-secondary);text-decoration:none;font-weight:500;padding:var(--space-3) var(--space-4);border-radius:var(--radius-2xl);transition:all var(--transition-fast);position:relative;font-size:0.875rem}
+.nav-link{display:flex;flex-direction:column;align-items:center;gap:var(--space-1);color:var(--text-secondary);text-decoration:none;font-weight:500;padding:var(--space-3) var(--space-4);border-radius:var(--radius-xl);transition:all var(--transition-fast);position:relative;font-size:0.875rem}
 .nav-link i{font-size:1.125rem}
 .nav-link:hover,.nav-link.active{
     color:var(--text-primary);background-color:var(--hover-bg)
@@ -240,7 +250,20 @@ blockquote footer::before{content:"— "}
 [data-theme="light"] .nav-button.disabled{opacity:0.5;cursor:not-allowed}
 [data-theme="light"] .nav-button.disabled:hover{background:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color)}
 @media (max-width: 768px) {
-    .nav-links{gap:var(--space-3)}
+    .desktop-nav {
+        display: none;
+    }
+    .mobile-nav-toggle {
+        display: flex;
+    }
+    .brand {
+        order: 0; /* Reset order for mobile */
+    }
+    .nav {
+        justify-content: space-between;
+    }
+
+    .nav-links{gap:0}
     .nav-link{font-size:0.75rem;padding:var(--space-2) var(--space-3)}
     .nav-link i{font-size:1rem}
     .nav-buttons{justify-content:space-between}

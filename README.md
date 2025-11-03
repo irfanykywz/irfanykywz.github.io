@@ -1,7 +1,14 @@
-# irfanykywz.github.io
+# irfanykywz.web.id
 Situs personal yang dibuat menggunakan hugo
 
-![preview](irfanykywz.github.jpg)
+![preview](irfanykywz.web.id.avif)
 
 ## Todo
-- halaman proyek: filter kalau opsinya banyak, tambahin 1 tombol buat dropdown
+- x
+
+## Catatan
+
+**Halaman yang pakai logika harcode buat nampilinnya**
+- learn/
+- research/
+- game-journey/

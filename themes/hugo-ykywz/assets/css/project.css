@@ -23,7 +23,7 @@
     border: 1px solid var(--border-color);
     margin-top: var(--space-2);
 }
-.filter-dropdown-item {
+.filter-dropdown-item, .filter-dropdown-item-link {
     color: var(--text-secondary);
     padding: var(--space-3) var(--space-4);
     text-decoration: none;
@@ -32,7 +32,7 @@
     gap: var(--space-2);
     transition: background-color var(--transition-fast);
 }
-.filter-dropdown-item:hover {
+.filter-dropdown-item:hover, .filter-dropdown-item-link:hover {
     background-color: var(--hover-bg);
     color: var(--text-primary);
 }

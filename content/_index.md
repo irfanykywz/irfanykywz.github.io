@@ -6,7 +6,7 @@ email: irfanyouth@gmail.com
 linkedin: https://linkedin.com/in/irfanykywz
 github: https://github.com/irfanykywz
 # =====================================
-abouttitle: "Perkenalan Singkat"
+abouttitle: "Profil Singkat"
 about:
     - "Halo, nama saya Muhamad Irfan. Saya adalah teknisi IT pemula yang bersemangat mencari pengalaman kerja."
     - "Saya memiliki pemahaman dasar yang kuat tentang sistem operasi, hardware, dan jaringan komputer. Meskipun belum banyak pengalaman formal, saya aktif belajar dan siap menerapkan keterampilan saya untuk membantu mengatasi masalah IT."

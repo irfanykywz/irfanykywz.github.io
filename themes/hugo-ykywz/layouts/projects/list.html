@@ -37,11 +37,15 @@
                             </button>
                             <div class="filter-dropdown-content" id="more-filters-content">
                                 {{ range after $visibleFiltersCount $filters }}
-                                    <a href="#" class="filter-dropdown-item" data-filter="{{ .filter }}">
+                                    <a href="javascript:;" class="filter-dropdown-item" data-filter="{{ .filter }}">
                                         <i class="{{ .icon }}"></i>
                                         {{ .name }}
                                     </a>
                                 {{ end }}
+                                <a href="{{ $.Site.BaseURL }}projects/archives/" class="filter-dropdown-item-link">
+                                    <i class="ri-archive-line"></i>
+                                    Diarsipkan
+                                </a>
                             </div>
                         </div>
                     {{ end }}
@@ -52,7 +56,10 @@
         <section class="portfolio-grid">
             <div class="container">
                 <div class="projects-grid">
-                    {{ range .Data.Pages }}
+                    <!-- filter only show type index not _index -->
+                    {{ $filteredPages := .RegularPages }}                    
+                    {{ $nonfilteredPages := .Data.Pages }}                    
+                    {{ range $nonfilteredPages }}
                         {{ partial "project/list-card.html" . }}
                     {{ end }}
 
