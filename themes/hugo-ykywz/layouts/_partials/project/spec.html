@@ -1,0 +1,25 @@
+{{ if .Params.spec }}
+<div class="project-spec">
+    <h2 class="section-title">
+        <i class="ri-cpu-line"></i>
+        Persyaratan Sistem
+    </h2>
+    <div class="spec-columns">
+        {{ range .Params.spec }}
+        <div class="spec-column">
+            <h3 class="spec-group-title">{{ .title }}</h3>
+            <div class="spec-requirements-list">
+                {{ range .requirements }}
+                <div class="spec-list-item">
+                    <i class="{{ .icon | default "ri-arrow-right-s-line" }}"></i>
+                    <div class="spec-item-content">
+                        <span style="color:var(--text-muted)">{{ .name }}:</span> {{ .value }}
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

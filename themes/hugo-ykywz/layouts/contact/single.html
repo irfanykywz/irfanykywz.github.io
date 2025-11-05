@@ -81,14 +81,52 @@
                                     </div>
                                 </div>
 
+                                {{ if .Params.Telegram }}
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="ri-telegram-line"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h4>Telegram</h4>
+                                            <a target="_blank" href="{{ .Params.Telegram }}">
+                                                {{ .Params.Telegram }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                {{ end }}
+
                                 <div class="contact-method">
                                     <div class="contact-icon">
-                                        <i class="ri-telegram-line"></i>
+                                        <i class="ri-facebook-line"></i>
                                     </div>
                                     <div class="contact-details">
-                                        <h4>Telegram</h4>
-                                        <a target="_blank" href="{{ .Params.Telegram }}">
-                                            {{ .Params.Telegram }}
+                                        <h4>Facebook</h4>
+                                        <a target="_blank" href="{{ .Params.Facebook }}">{{ .Params.Facebook }}</a>
+                                    </div>
+                                </div>
+
+                                {{ if .Params.Youtube }}
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="ri-youtube-line"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Youtube</h4>
+                                        <a target="_blank" href="{{ .Params.Youtube }}">
+                                            {{ .Params.Youtube }}
+                                        </a>
+                                    </div>
+                                </div>
+                                {{ end }}
+
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="ri-discord-line"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Discord</h4>
+                                        <a target="_blank" href="{{ .Params.Discord }}">
+                                            {{ .Params.discordusername }}
                                         </a>
                                     </div>
                                 </div>

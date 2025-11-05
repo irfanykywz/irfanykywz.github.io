@@ -9,6 +9,8 @@
     <section class="detail-header">
         <div class="container">
             <nav class="breadcrumb">
+                <!-- use project_url if exist -->
+                                 
                 <a href="{{ .CurrentSection.RelPermalink }}">
                     <i class="ri-file-text-line"></i>
                     {{ with .Parent }}
@@ -16,6 +18,15 @@
                     {{ end }}
                 </a>
                 <i class="ri-arrow-right-s-line"></i>
+
+                {{ if .Params.project_url }}
+                    <a href="{{ $.Site.BaseURL }}{{ .Params.project_url }}">                       
+                        Proyek
+                    </a>
+                    <i class="ri-arrow-right-s-line"></i>
+                {{ else }}
+                {{ end }}                 
+
                 <span class="grow">{{ .Title }}</span>
                 <button class="docs-menu-toggle" id="docsMenuToggle" aria-label="Toggle Table of Contents">
                     <i class="ri-menu-line"></i>
@@ -34,7 +45,16 @@
     
             {{/* Konten Utama Dokumentasi */}}
             <article class="docs-content">
-                <h1>{{ .Title }}</h1>
+                <!-- tambahkan app_icon jika ada -->
+                <div class="docs-content-header">
+                    {{ if .Params.app_icon }}
+                    <div class="docs-app-icon">
+                        <img src="{{ .Params.app_icon }}" alt="{{ .Title }} icon">
+                    </div>
+                    {{ end }}
+
+                    <h1>{{ .Title }}</h1>
+                </div>
                 {{ if .Description }}
                     <p class="lead">{{ .Description }}</p>
                 {{ end }}

@@ -25,9 +25,21 @@ date: 2025-10-09T00:00:00+08:00
 <h3>4. Batasan Tanggung Jawab</h3>
 <p>Informasi di situs ini disediakan "sebagaimana adanya". Kami tidak bertanggung jawab atas kerugian atau kerusakan apa pun yang timbul dari penggunaan atau ketidakmampuan untuk menggunakan situs ini atau ketergantungan pada konten apa pun yang disediakan di sini.</p>
 
-<h3>5. Perubahan Ketentuan</h3>
+<h3 id="pembelian">5. Pembelian </h3>
+<p>Untuk pembelian lisensi aplikasi, Anda setuju bahwa:</p>
+<ul>
+    <li>Semua penjualan lisensi bersifat final. Tidak ada pengembalian uang atau penukaran yang akan diberikan setelah pembelian selesai.</li>
+    <li>Lisensi yang dibeli hanya berlaku untuk satu pengguna atau entitas, sesuai dengan jenis lisensi yang dipilih.</li>
+    <li>Penggunaan lisensi di luar ketentuan yang ditetapkan dapat mengakibatkan pembatalan lisensi tanpa pengembalian dana.</li>
+    <li>Kami berhak untuk mengubah harga lisensi kapan saja, tetapi perubahan tersebut tidak akan memengaruhi pembelian yang sudah selesai.</li>
+</ul>
+
+<h3>6. Pengembalian Dana</h3>
+<p>Semua pembelian lisensi aplikasi bersifat final dan tidak dapat dikembalikan (non-refundable). Kami tidak menawarkan pengembalian uang atau penukaran setelah pembelian selesai. Pastikan Anda telah membaca deskripsi produk dan yakin dengan pilihan Anda sebelum melakukan pembelian.</p>
+
+<h3>7. Perubahan Ketentuan</h3>
 <p>Kami berhak memodifikasi Ketentuan ini kapan saja. Perubahan akan berlaku segera setelah dipublikasikan di halaman ini. Dengan terus menggunakan Layanan setelah perubahan, Anda menyetujui Ketentuan yang direvisi.</p>
 
 <div class="disclaimer">
-<p style="margin: 0;"><strong>Diperbarui pada:</strong> 09 Oktober 2025</p>
+<p style="margin: 0;"><strong>Diperbarui pada:</strong> 05 November 2025</p>
 </div>

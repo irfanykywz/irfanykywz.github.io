@@ -8,11 +8,19 @@ contact_telegram: "irfanykywz"
 
 licenses:
   - name: "Scene Maker"
-    price: 49000
-    display_price: "Rp 49.000"
-    description: "Buat Video Narasi dari Text dengan cepat"
+    price: 99000
+    display_price: "Rp 99.000"
+    description: "Buat Video Narasi dari Text dengan mudah"
     logo_initials: "SM"
     logo_color: "#f59e0b"
+  - name: "Audio Extract Tool"
+    price: 49000
+    display_price: "Rp 49.000"
+    description: "Ekstrak Audio, pisahkan vokal dan instrumental"
+    identity: audio-extract-tool
+    logo_file: audio-extract-tool.avif
+    logo_initials: "AE"
+    logo_color: "#ef4444"
 
 payments:
   - name: "Bank BNI"

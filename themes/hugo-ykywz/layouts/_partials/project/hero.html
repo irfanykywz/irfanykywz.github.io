@@ -42,6 +42,14 @@
             </a>
             {{ end }}
 
+             {{ if .Params.doc }}
+            <a href='{{ .Params.doc }}' class="btn btn-outline">
+                <i class="ri-file-text-line"></i>
+                Panduan
+            </a>
+            {{ end }}
+
+
             {{ if .Params.buy }}
             <a target="_blank" href=' {{ .Params.buy }}' class="btn btn-primary">
                 <i class="ri-shopping-cart-line"></i>
@@ -54,14 +62,7 @@
                 <i class="ri-file-download-line"></i>
                 Unduh
             </a>
-            {{ end }}
-
-             {{ if .Params.doc }}
-            <a href='{{ .Params.doc }}' class="btn btn-outline">
-                <i class="ri-file-text-line"></i>
-                Panduan
-            </a>
-            {{ end }}
+            {{ end }}            
         </div>
     </div>
 

@@ -47,11 +47,13 @@ h1 {
 
 .column-header {
     color: var(--text-primary);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: var(--space-2);
+    background-color: var(--bg-tertiary);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
     margin-top: var(--space-1);
     margin-bottom: var(--space-4);
     font-size: var(--space-6);
+    display: inline-block;
 }
 
 @media (max-width: 850px) {
@@ -62,7 +64,7 @@ h1 {
 
 /* --- SCROLLBOX APLIKASI --- */
 .app-selection-scrollbox {
-    min-height: 500px;
+    /* min-height: 500px; */
     max-height: 500px;
     overflow-y: auto;
     padding-right: var(--space-2);
@@ -120,13 +122,20 @@ h1 {
     width: 32px;
     height: 32px;
     margin-right: var(--space-3);
-    background-color: var(--accent-primary); 
+    /* background-color: var(--accent-primary);  */
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     font-size: var(--space-4);
+}
+
+.app-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
 }
 
 .app-name {
@@ -195,6 +204,12 @@ h1 {
 .account-details strong { display: block; color: var(--accent-secondary); font-size: var(--space-4); }
 .copy-btn { background-color: var(--accent-primary); color: var(--text-primary); border: none; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); cursor: pointer; transition: background-color var(--transition-fast); font-size: var(--space-3); }
 .copy-btn:hover { background-color: #2563eb; }
+.copy-btn.copied-success {
+    background-color: var(--accent-secondary);
+    color: var(--text-primary);
+    pointer-events: none; /* Disable clicking while in "Copied" state */
+}
+
 .note { font-size: var(--space-3); color: var(--text-muted); margin-top: var(--space-2); }
 
 /* Styling untuk Konfirmasi Pesan di bawah */

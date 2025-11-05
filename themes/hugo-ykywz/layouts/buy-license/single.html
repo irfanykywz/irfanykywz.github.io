@@ -10,22 +10,28 @@
 {{ define "main" }}
 <main class="main">
     <div class="container">
-        <h1>🔑 Pembelian Lisensi Aplikasi</h1>
-        <p class="text-center" style="color: var(--text-secondary);">Pilih lisensi, lakukan transfer, dan kirim konfirmasi di bagian bawah.</p>
+        <h1>🛒 Pembelian Aplikasi</h1>
+        <p class="text-center" style="color: var(--text-secondary);">Pilih aplikasi, lakukan transfer, dan kirim konfirmasi di bagian bawah.</p>
 
         <hr style="border-color: var(--border-color); margin-top: var(--space-5); margin-bottom: var(--space-5);">
 
         <form id="purchase-form">
             <div class="content-wrapper">
                 <div class="left-column">
-                    <h2 class="column-header">1. Pilih Lisensi Aplikasi</h2>
+                    <h2 class="column-header">1. Pilih Aplikasi</h2>
                     
                     <div class="app-selection-scrollbox">
                         <div class="app-card-group" id="app-selection-container">
                             {{ range .Params.licenses }}
-                            <div class="app-card" data-app-name="{{ .name }}" data-app-price="{{ .price }}" data-app-display-price="{{ .display_price }}" onclick="selectApp(this)">
+                            <div class="app-card" {{ if .identity}} data-app-id="{{ .identity }}" {{ end }} data-app-name="{{ .name }}" data-app-price="{{ .price }}" data-app-display-price="{{ .display_price }}" onclick="selectApp(this)">
                                 <div class="app-card-header">
-                                    <div class="app-logo" style="background-color: {{ .logo_color }};">{{ .logo_initials }}</div>
+                                    <div class="app-logo" {{ if not .logo_file }}style="background-color: {{ .logo_color }};"{{ end }}>
+                                        {{ if .logo_file }}
+                                            <img src="{{ .logo_file }}" alt="{{ .name }} logo" class="app-logo-img">
+                                        {{ else }}
+                                            {{ .logo_initials }}
+                                        {{ end }}
+                                    </div>
                                     <span class="app-name">{{ .name }}</span>
                                 </div>
                                 <div class="app-description">{{ .description }}</div>
@@ -54,9 +60,9 @@
                                 <span style="color: var(--text-muted);">{{ .account_name }}</span>
                             </div>
                             {{ if eq .type "bank" }}
-                            <button type="button" class="copy-btn" onclick="copyToClipboard('{{ .account_number | replaceRE `[^0-9]` `` }}')">Salin Rek</button>
+                            <button type="button" class="copy-btn" onclick="copyToClipboard(this, '{{ .account_number | replaceRE `[^0-9]` `` }}')">Salin Rek</button>
                             {{ else if eq .type "ewallet" }}
-                            <button type="button" class="copy-btn" onclick="copyToClipboard('{{ .account_number | replaceRE `[^0-9]` `` }}')">Salin HP</button>
+                            <button type="button" class="copy-btn" onclick="copyToClipboard(this, '{{ .account_number | replaceRE `[^0-9]` `` }}')">Salin HP</button>
                             {{ else if eq .type "qris" }}
                             <button type="button" class="copy-btn" onclick="alert('Silakan hubungi admin untuk link/gambar QRIS.')" style="background-color: var(--accent-warning); color: var(--bg-primary);">Minta QR</button>
                             {{ end }}
@@ -78,16 +84,20 @@
 
                 <div class="button-group">
                     <button type="button" class="btn btn-whatsapp" onclick="sendConfirmation('whatsapp')">
+                        <i class="ri-whatsapp-line"></i>
                         Kirim via WhatsApp
                     </button>
                     <button type="button" class="btn btn-telegram" onclick="sendConfirmation('telegram')">
+                        <i class="ri-telegram-line"></i>
                         Kirim via Telegram
                     </button>
                 </div>
             </div>
         </form>
         
-        <p class="note text-center" style="margin-top: var(--space-4);">*Kami akan memproses lisensi Anda setelah konfirmasi dan pengecekan transfer berhasil.</p>
+        <p class="note text-center" style="margin-top: var(--space-4);">
+            * dengan membeli berarti anda sudah membaca <a href="{{ .Site.BaseURL }}terms/#pembelian" target="_blank" style="color: var(--link-color);">Syarat & Ketentuan</a>
+        </p>
     </div>
 </main>
 {{ end }}
@@ -108,6 +118,9 @@
             cards.forEach(card => card.classList.remove('selected'));
             cardElement.classList.add('selected');
 
+            // Scroll the selected card into the nearest view smoothly
+            cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
             const appName = cardElement.getAttribute('data-app-name');
             const appPrice = cardElement.getAttribute('data-app-price'); 
             const appDisplayPrice = cardElement.getAttribute('data-app-display-price'); 
@@ -123,7 +136,7 @@
             const textarea = document.getElementById('pesan_konfirmasi');
 
             if (selectedAppValue) {
-                textarea.value = `Konfirmasi pembelian lisensi aplikasi ${selectedAppValue}. Saya sudah transfer. Ditunggu balasan untuk lisensi key-nya. Terima kasih.`;
+                textarea.value = `Konfirmasi pembelian aplikasi ${selectedAppValue}. Saya sudah transfer. Ditunggu balasan untuk tautan file aplikasi-nya. Terima kasih.`;
                 textarea.style.color = 'var(--text-primary)';
             } else {
                 textarea.value = 'Pilih aplikasi di Langkah 1 untuk membuat pesan konfirmasi otomatis.';
@@ -131,11 +144,21 @@
             }
         }
 
-        function copyToClipboard(text) {
+        function copyToClipboard(buttonElement, text) {
+            const originalText = buttonElement.textContent;
+
             navigator.clipboard.writeText(text).then(() => {
-                alert("Nomor berhasil disalin: " + text);
+                buttonElement.textContent = 'Tersalin!';
+                buttonElement.classList.add('copied-success');
+
+                setTimeout(() => {
+                    buttonElement.textContent = originalText;
+                    buttonElement.classList.remove('copied-success');
+                }, 1500); // Revert back after 1.5 seconds
+
             }).catch(err => {
                 console.error('Gagal menyalin:', err);
+                alert("Gagal menyalin nomor. Silakan coba lagi.");
             });
         }
 
@@ -162,6 +185,17 @@
         document.addEventListener('DOMContentLoaded', () => {
              updateMessage();
              document.getElementById('total-amount-display').textContent = priceFormatter.format(0);
+
+             // Check for product parameter in URL and pre-select the app
+             const urlParams = new URLSearchParams(window.location.search);
+             const productSlug = urlParams.get('product');
+
+             if (productSlug) {
+                const productCard = document.querySelector(`.app-card[data-app-id='${productSlug}']`);
+                if (productCard) {
+                    productCard.click(); // Triggers the selectApp function
+                }
+             }
         });
     </script>
 {{ end }}

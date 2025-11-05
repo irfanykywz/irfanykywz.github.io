@@ -5,6 +5,15 @@ description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan pe
 date: 2025-10-09T00:00:00+08:00
 
 changelog:
+  - version: "1.1.6"
+    date: "5 November 2025"
+    changes:
+      - tag: "Peningkatan"
+        description: "menambahkan komponen spek pada halaman proyek, perbaikan urutan tombol dibagian hero"    
+      - tag: "Peningkatan"
+        description: "menambahkan parameter icon aplikasi pada halaman dokomentasi, menambahkan parameter link proyek untuk ditaruh dibredcrumb"        
+      - tag: "Peningkatan"
+        description: "halaman pembelian aplikasi, tambah icon, auto pilih produk berdasarkan parameter ?product=, perbaikan isi pesan konfirmasi, tambah icon pada tombol konfirmasi"
   - version: "1.1.5"
     date: "3 November 2025"
     changes:

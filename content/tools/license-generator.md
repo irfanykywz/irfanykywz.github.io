@@ -8,34 +8,9 @@ icon: "ri-key-fill"
 
 
 <style>
-:root {
---bg-primary: #0f0f23;
---bg-secondary: #20203c;
---bg-tertiary: #0f172a;
---text-primary: #ffffff;
---text-secondary: #94a3b8;
---text-muted: #64748b;
---accent-primary: #3b82f6;
---accent-danger: #d96d65;
---border-color: #334155;
---font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
---font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
---radius-md: 0.375rem;
---radius-lg: 0.5rem;
---transition-fast: 150ms ease-in-out;
---shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-}
-
-.body {
-font-family: var(--font-family);
-margin: 0;
-padding: 2rem 0;
-background-color: var(--bg-primary);
-color: var(--text-primary);
-display: flex;
-/* Mengatur perataan tengah horizontal dan vertikal */
-justify-content: start;
-align-items: start; 
+.container header {
+	text-align: center;
+	margin-bottom: var(--space-6);
 }
 
 .container-x {
@@ -45,6 +20,7 @@ background: var(--bg-secondary);
 padding: 2rem;
 border-radius: var(--radius-lg);
 box-shadow: var(--shadow-lg);
+margin: auto;
 }
 
 .container-x h1 {
