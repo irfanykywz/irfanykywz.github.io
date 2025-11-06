@@ -3,8 +3,8 @@ title: Muhamad Irfan
 description: IT Support
 cv: https://drive.google.com/drive/folders/13YFtrbO0rbK28MTrAZk5f7Zx2z-0Z7IZ?usp=sharing
 email: irfanyouth@gmail.com
-linkedin: https://linkedin.com/in/irfanykywz
-github: https://github.com/irfanykywz
+# linkedin: https://linkedin.com/in/irfanykywz
+# github: https://github.com/irfanykywz
 # =====================================
 abouttitle: "Profil Singkat"
 about:

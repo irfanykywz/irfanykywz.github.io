@@ -451,6 +451,25 @@ blockquote footer::before{content:"— "}
 .cta-section{padding:var(--space-20) 0;background:var(--bg-secondary);text-align:center;border-top:1px solid var(--border-color)}
 .cta-content h2{font-size:2rem;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-4)}
 .cta-content p{font-size:1.125rem;color:var(--text-secondary);margin-bottom:var(--space-8)}
+/* Animasi untuk tombol CTA di halaman layanan */
+.cta-section .btn-primary {
+    animation: pulse-shadow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-shadow {
+    0% {
+        box-shadow: var(--shadow-md);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: var(--shadow-lg); /* Sedikit bayangan lebih besar */
+        transform: scale(1.01); /* Pertumbuhan halus */
+    }
+    100% {
+        box-shadow: var(--shadow-md);
+        transform: scale(1);
+    }
+}
 
 /* lightbox  */
 /* Container for the image grid */

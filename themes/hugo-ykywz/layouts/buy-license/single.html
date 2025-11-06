@@ -23,7 +23,14 @@
                     <div class="app-selection-scrollbox">
                         <div class="app-card-group" id="app-selection-container">
                             {{ range .Params.licenses }}
-                            <div class="app-card" {{ if .identity}} data-app-id="{{ .identity }}" {{ end }} data-app-name="{{ .name }}" data-app-price="{{ .price }}" data-app-display-price="{{ .display_price }}" onclick="selectApp(this)">
+                            <div class="app-card {{ if not .available }}disabled{{ end }}" 
+                                 {{ if .identity}} data-app-id="{{ .identity }}" {{ end }} data-app-name="{{ .name }}" 
+                                 data-app-price="{{ .price }}" data-app-display-price="{{ .display_price }}" 
+                                 data-license-type="{{ .license_type }}" 
+                                 onclick="{{ if .available }}selectApp(this){{ else }}return false;{{ end }}">
+                                {{ if .original_price }}
+                                <div class="discount-badge">Promo</div>
+                                {{ end }}
                                 <div class="app-card-header">
                                     <div class="app-logo" {{ if not .logo_file }}style="background-color: {{ .logo_color }};"{{ end }}>
                                         {{ if .logo_file }}
@@ -35,7 +42,16 @@
                                     <span class="app-name">{{ .name }}</span>
                                 </div>
                                 <div class="app-description">{{ .description }}</div>
-                                <div class="app-price">{{ .display_price }}</div>
+                                <div class="app-price">
+                                    {{ if .display_original_price }}
+                                        <span class="original-price">{{ .display_original_price }}</span>
+                                    {{ end }}
+                                    {{ .display_price }} 
+                                    <span style="font-size: var(--space-3); color: var(--text-muted); font-weight: normal; margin-left: var(--space-2);">({{ .license_type }})</span>
+                                </div>
+                                {{ if not .available }}
+                                <div class="stock-badge">Tidak Tersedia</div>
+                                {{ end }}
                             </div>
                             {{ end }}
                         </div>
@@ -64,7 +80,7 @@
                             {{ else if eq .type "ewallet" }}
                             <button type="button" class="copy-btn" onclick="copyToClipboard(this, '{{ .account_number | replaceRE `[^0-9]` `` }}')">Salin HP</button>
                             {{ else if eq .type "qris" }}
-                            <button type="button" class="copy-btn" onclick="alert('Silakan hubungi admin untuk link/gambar QRIS.')" style="background-color: var(--accent-warning); color: var(--bg-primary);">Minta QR</button>
+                            <button type="button" class="copy-btn" onclick="showQrisModal('{{ .image | absURL }}')" style="background-color: var(--accent-warning); color: var(--bg-primary);">Lihat QR</button>
                             {{ end }}
                         </div>
                         {{ end }}
@@ -74,6 +90,7 @@
             </div>
             
             <input type="hidden" id="selected_app_name" value="">
+            <input type="hidden" id="selected_license_type" value="">
             
             <div class="confirmation-section">
                 <h2 class="column-header">4. Konfirmasi Pesan</h2>
@@ -98,6 +115,16 @@
         <p class="note text-center" style="margin-top: var(--space-4);">
             * dengan membeli berarti anda sudah membaca <a href="{{ .Site.BaseURL }}terms/#pembelian" target="_blank" style="color: var(--link-color);">Syarat & Ketentuan</a>
         </p>
+
+        <!-- QRIS Modal -->
+        <div id="qris-modal" class="qris-modal-overlay" onclick="hideQrisModal()">
+            <div class="qris-modal-content" onclick="event.stopPropagation()">
+                <button class="qris-modal-close-btn" onclick="hideQrisModal()">&times;</button>
+                <h3 style="margin-top:0; color: var(--accent-warning);">Scan untuk Pembayaran</h3>
+                <img id="qris-image" src="" alt="QRIS Code">
+                <p class="note">Scan kode QR di atas menggunakan aplikasi E-Wallet atau Mobile Banking Anda.</p>
+            </div>
+        </div>
     </div>
 </main>
 {{ end }}
@@ -124,19 +151,22 @@
             const appName = cardElement.getAttribute('data-app-name');
             const appPrice = cardElement.getAttribute('data-app-price'); 
             const appDisplayPrice = cardElement.getAttribute('data-app-display-price'); 
+            const licenseType = cardElement.getAttribute('data-license-type');
 
             document.getElementById('selected_app_name').value = `${appName} (${appDisplayPrice})`;
+            document.getElementById('selected_license_type').value = licenseType;
             document.getElementById('total-amount-display').textContent = priceFormatter.format(appPrice);
 
             updateMessage();
         }
 
         function updateMessage() {
-            const selectedAppValue = document.getElementById('selected_app_name').value;
+            const appName = document.getElementById('selected_app_name').value;
+            const licenseType = document.getElementById('selected_license_type').value;
             const textarea = document.getElementById('pesan_konfirmasi');
 
-            if (selectedAppValue) {
-                textarea.value = `Konfirmasi pembelian aplikasi ${selectedAppValue}. Saya sudah transfer. Ditunggu balasan untuk tautan file aplikasi-nya. Terima kasih.`;
+            if (appName && licenseType) {
+                textarea.value = `Konfirmasi pembelian aplikasi ${appName} lisensi ${licenseType}. Saya sudah transfer. Ditunggu balasan untuk tautan file aplikasi-nya. Terima kasih.`;
                 textarea.style.color = 'var(--text-primary)';
             } else {
                 textarea.value = 'Pilih aplikasi di Langkah 1 untuk membuat pesan konfirmasi otomatis.';
@@ -160,6 +190,20 @@
                 console.error('Gagal menyalin:', err);
                 alert("Gagal menyalin nomor. Silakan coba lagi.");
             });
+        }
+
+        function showQrisModal(imageUrl) {
+            const modal = document.getElementById('qris-modal');
+            const qrisImage = document.getElementById('qris-image');
+            if (modal && qrisImage) {
+                qrisImage.src = imageUrl;
+                modal.classList.add('show');
+            }
+        }
+
+        function hideQrisModal() {
+            const modal = document.getElementById('qris-modal');
+            if (modal) modal.classList.remove('show');
         }
 
         function sendConfirmation(platform) {

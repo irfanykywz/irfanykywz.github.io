@@ -36,7 +36,7 @@ modem ini rusak karena saya bongkar dan antenanya copot... 😂
 
 berikut gambar modemnya
 
-![Modem IVIO](modem-ivio.jpg)
+![Modem IVIO](modem-ivio.avif)
 
 lanjut Modem Kedua yaitu modem SmartFren 4G, dengan paket yang bisa unlimited namun dibatasi FUP
 
@@ -50,7 +50,7 @@ sampai sekarang modem ini masih ada dan berikut gambarnya
 
 berikut gambar aplikasi modemnya
 
-![Modem SmartFren](modem-smartfren.png)
+![Modem SmartFren](modem-smartfren.avif)
 
 ## Penutup
 

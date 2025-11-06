@@ -7,7 +7,10 @@
         <div class="search-page-container">
             <!-- Search Header -->
             <div class="search-header">
-                <h1 class="search-title">{{ .Title }}</h1>
+                <h1 class="search-title">
+                    <i class="ri-search-line"></i>   
+                    {{ .Title }}
+                </h1>
                 <p class="search-description">{{ .Description }}</p>
             </div>
 
@@ -103,6 +106,15 @@
                 .then(response => response.json())
                 .then(data => {
                     searchData = data;
+
+                    // Periksa parameter URL untuk 'q' saat halaman dimuat
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const queryFromUrl = urlParams.get('q');
+                    
+                    if (queryFromUrl) {
+                        searchInput.value = queryFromUrl;
+                        performSearch(queryFromUrl);
+                    }
                 })
                 .catch(error => {
                     console.error('Error loading search index:', error);
@@ -121,15 +133,18 @@
                 
                 initialState.classList.add('hidden');
                 const startTime = performance.now();
-                const results = searchData.filter(item => {
+                let results = searchData.filter(item => {
                     const content = `${item.title || ''} ${item.content || ''} ${item.tags || ''}`.toLowerCase();
                     return content.includes(query.toLowerCase());
                 });
                 
+                // Hapus duplikat berdasarkan permalink
+                const uniqueResults = Array.from(new Map(results.map(item => [item.permalink, item])).values());
+
                 const endTime = performance.now();
                 const searchDuration = (endTime - startTime).toFixed(2);
                 
-                displayResults(results, query, searchDuration);
+                displayResults(uniqueResults, query, searchDuration);
             }
             
             // Display results
@@ -180,7 +195,7 @@
                             </td>
                             <td class="search-table-cell table-action">
                                 <a href="${item.permalink}" class="table-link">
-                                    View
+                                    Lihat
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                     </svg>

@@ -52,6 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.addEventListener('scroll', function() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // check bottomNav first exist or not
+      if (!bottomNav) {
+          return; // Exit if bottomNav does not exist
+      }
+      
       
       if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
           // Scrolling down, hide the navigation
@@ -144,8 +150,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Event listener untuk tombol dan backdrop
-    closeBtn.addEventListener('click', toggleOffcanvas);
-    backdrop.addEventListener('click', toggleOffcanvas);
+    // check element first before addevent
+    if (closeBtn) {    
+        closeBtn.addEventListener('click', toggleOffcanvas);
+    }
+
+    if (backdrop) {
+        backdrop.addEventListener('click', toggleOffcanvas);
+    }
     
     // Tambahan: Tutup dengan tombol ESC
     document.addEventListener('keydown', function(event) {

@@ -94,7 +94,8 @@
                                         </div>
                                     </div>
                                 {{ end }}
-
+                                    
+                                {{ if .Params.Facebook }}
                                 <div class="contact-method">
                                     <div class="contact-icon">
                                         <i class="ri-facebook-line"></i>
@@ -104,6 +105,7 @@
                                         <a target="_blank" href="{{ .Params.Facebook }}">{{ .Params.Facebook }}</a>
                                     </div>
                                 </div>
+                                {{ end }}
 
                                 {{ if .Params.Youtube }}
                                 <div class="contact-method">
@@ -118,7 +120,8 @@
                                     </div>
                                 </div>
                                 {{ end }}
-
+                                
+                                {{ if .Params.Discord }}
                                 <div class="contact-method">
                                     <div class="contact-icon">
                                         <i class="ri-discord-line"></i>
@@ -130,6 +133,36 @@
                                         </a>
                                     </div>
                                 </div>
+                                {{ end }}
+
+                                {{ if .Params.Linkedin }}
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="ri-linkedin-line"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Linkedin</h4>
+                                        <a target="_blank" href="{{ .Params.Linkedin }}">
+                                            {{ .Params.Linkedin }}
+                                        </a>
+                                    </div>
+                                </div>
+                                {{ end }}
+                                
+                                {{ if .Params.Github }}
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="ri-github-line"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Github</h4>
+                                        <a target="_blank" href="{{ .Params.Github }}">
+                                            {{ .Params.Github }}
+                                        </a>
+                                    </div>
+                                </div>
+                                {{ end }}                                
+                                
 
                             </div>
 

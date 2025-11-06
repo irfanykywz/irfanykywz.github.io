@@ -1,263 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 irfanykywz Not Found</title>
+    <title>404 - heheboi...</title>
     <meta name="robots" content="noindex, follow">
-  
     <style>
-        /* 1. BODY and Background Image Setup */
+        /* Variabel CSS Dasar */
+        :root {
+            --bg-primary: #0a0a1a; /* Lebih gelap untuk suasana malam */
+            --bg-secondary: #1a1a3a;
+            --bg-tertiary: #0f172a;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-muted: #a0a0c0;
+            --accent-primary: #8e44ad; /* Ungu gelap untuk sentuhan magis/malam */
+            --accent-secondary: #f39c12; /* Kuning keemasan untuk bulan/bintang */
+            --accent-warning: #f59e0b;
+            --accent-danger: #d96d65;
+            --border-color: #334155;
+            --hover-bg: #1e293b;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4),0 2px 4px -2px rgb(0 0 0 / 0.4);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5),0 4px 6px -4px rgb(0 0 0 / 0.5);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6),0 8px 10px -6px rgb(0 0 0 / 0.6);
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
+            --radius-2xl: 1rem;
+            --transition-fast: 150ms ease-in-out;
+            --transition-normal: 250ms ease-in-out;
+            --transition-slow: 350ms ease-in-out;
+        }
+
+        /* Light Theme Override (tidak terlalu relevan untuk tema ini tapi tetap ada) */
+        [data-theme="light"] {
+            --bg-primary: #f6f3f4;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent-primary: #2563eb;
+            --accent-secondary: #059669;
+            --accent-warning: #d97706;
+            --accent-danger: #dc2626;
+            --border-color: #e2e8f0;
+            --hover-bg: #f1f5f9;
+        }
+
         body {
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
+            font-family: var(--font-family);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: monospace, Courier New, monospace;
-            color: #d0d0d0;
-            transition: background-color 0.05s;
-            
-            background-image: url('{{ $.Site.BaseURL }}images/bg.avif');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-color: #1a1f33;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* Penting untuk animasi latar belakang */
             position: relative;
         }
 
-        /* 2. CSS Raindrop Animation */
-        @keyframes fall {
-            0% { transform: translateY(-100vh); opacity: 0; }
-            5% { opacity: 0.8; }
-            95% { opacity: 0.8; }
-            100% { transform: translateY(100vh); opacity: 0; }
+        .container {
+            padding: var(--space-8);
+            max-width: 600px;
+            position: relative;
+            z-index: 10; /* Pastikan konten di atas animasi latar */
+            background-color: rgba(0, 0, 0, 0.3); /* Sedikit latar belakang transparan */
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
         }
 
-        .drop {
-            position: absolute;
-            top: 0;
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
-            animation: fall linear infinite;
-            pointer-events: none;
-            z-index: 5;
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--accent-secondary); /* Kuning untuk bulan/bintang */
+            line-height: 1;
+            margin-bottom: var(--space-4);
+            position: relative;
+            animation: pulse-glow 2s infinite alternate ease-in-out; /* Efek berdenyut untuk 404 */
+            text-shadow: 0 0 15px rgba(243, 156, 18, 0.6); /* Glow di sekitar 404 */
         }
 
-        /* 3. Lightning Flash Effect */
-        .flash {
-            background-color: rgba(255, 255, 255, 0.9);
+        .title {
+            font-size: var(--space-8);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
         }
 
-        /* --- HACKER TEXT ANIMATIONS --- */
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+        .message {
+            font-size: var(--space-5);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-6);
         }
 
-        @keyframes blink-cursor {
-            50% { border-color: transparent; }
-        }
-
-        /* 4. Content Container Styling */
-        .content-container {
-            z-index: 10;
-            text-align: center;
-            padding: 40px 20px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        /* 5. Content Text and Button Styling */
-        .content-container h1 {
-            font-size: 15vmin;
-            color: #ff5555;
-            margin-bottom: 0.1em;
-            text-shadow: 0 0 15px rgba(255, 85, 85, 0.9);
-            
-            /* Apply Glitch Animation */
-            animation: glitch 0.5s linear infinite alternate;
-        }
-
-        .content-container p {
-            font-size: 1.2em;
-            margin-top: 10px;
-            color: #00ff99;
-            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 0.15em solid #00ff99;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            
-            /* Apply Cursor Blink Animation */
-            animation: 
-                blink-cursor 0.75s step-end infinite;
-        }
-
-        /* Ensure the last paragraph doesn't have the blinking cursor */
-        .content-container p:last-of-type {
-            border-right: none;
-        }
-
-
-        /* Responsive Text Size for Sub-Messages */
-        .content-container p:last-of-type {
-            font-size: 1em;
-        }
-
-        .back-button {
+        .button {
             display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: transparent;
-            color: #00ff99;
-            border: 2px solid #00ff99;
+            background-color: var(--accent-primary);
+            color: var(--text-primary);
+            padding: var(--space-3) var(--space-6);
+            border-radius: var(--radius-lg);
             text-decoration: none;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: background-color var(--transition-fast), transform var(--transition-fast);
+            box-shadow: var(--shadow-md);
+            animation: pulsate-button 2s ease-in-out infinite; /* Animasi berdenyut untuk tombol */
         }
 
-        .back-button:hover {
-            background-color: #00ff99;
-            color: #000000;
-            box-shadow: 0 0 15px #00ff99;
+        .button:hover {
+            background-color: #7d3c9f; /* Sedikit lebih gelap saat hover */
+            transform: translateY(-2px) scale(1.02);
+            animation: none; /* Hentikan pulsate saat hover */
         }
 
-        /* --- 6. RESPONSIVENESS (Media Queries) --- */
-        @media (max-width: 600px) {
-            .content-container {
-                width: 90%;
-                max-width: 90%;
-                padding: 30px 10px;
-            }
-
-            .content-container h1 {
-                font-size: 20vmin;
-            }
-
-            .content-container p {
-                font-size: 1em;
-            }
-            
-            .content-container p:last-of-type {
-                font-size: 0.8em;
-                padding: 0 10px;
-            }
+        .button:active {
+            transform: translateY(0);
         }
+
+        .spacer {
+            height: var(--space-4);
+        }
+
+        .subtitle {
+            font-family: var(--font-family); /* Kembali ke font utama */
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            font-size: var(--space-4);
+        }
+
+        /* --- ANIMASI BULAN --- */
+        .moon {
+            position: absolute;
+            width: 150px; /* Ukuran bulan */
+            height: 150px;
+            background-color: #f7f7e9; /* Warna bulan */
+            border-radius: 50%;
+            top: 10%;
+            left: 15%;
+            box-shadow: 0 0 30px rgba(247, 247, 233, 0.8), 0 0 60px rgba(247, 247, 233, 0.4); /* Efek cahaya bulan */
+            animation: moon-float 8s infinite alternate ease-in-out; /* Animasi bulan bergerak */
+            z-index: 5; /* Di bawah konten, di atas bintang */
+        }
+
+        @keyframes moon-float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* --- ANIMASI BINTANG --- */
+        .star {
+            position: absolute;
+            background: var(--text-primary);
+            border-radius: 50%;
+            opacity: 0; /* Mulai tersembunyi */
+            animation: star-twinkle 4s infinite ease-in-out;
+            z-index: 1; /* Di paling bawah */
+        }
+
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Animasi berdenyut untuk 404 */
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 15px rgba(243, 156, 18, 0.6); }
+            50% { text-shadow: 0 0 25px rgba(243, 156, 18, 0.8), 0 0 40px rgba(243, 156, 18, 0.4); }
+            100% { text-shadow: 0 0 15px rgba(243, 156, 18, 0.6); }
+        }
+
+        /* Animasi berdenyut untuk tombol */
+        @keyframes pulsate-button {
+            0% { transform: scale(1); box-shadow: var(--shadow-md); }
+            50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(142, 68, 173, 0.6); } /* Glow ungu */
+            100% { transform: scale(1); box-shadow: var(--shadow-md); }
+        }
+
     </style>
 </head>
 <body>
+    <div class="moon"></div>
 
-    <audio id="pageAudio" src="{{ $.Site.BaseURL }}files/musik.mp3" loop preload="auto"></audio>
+    <div id="stars-container"></div>
 
-    <div class="rain-container"></div>
-    <div class="content-container" id="contentContainer">
-        <!-- <h1></h1> -->
-        <p style="color:white">heheboi, 404 not found_</p>
-        <p>{{ $.Site.Title }} lost in the storm...</p>
-        
-        <a href="{{ $.Site.BaseURL }}" class="back-button" id="backButton">
-            ← back to home
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1 class="title">heheboi...</h1>
+        <!-- <p class="subtitle">Lokasi Halaman di Luar Peta Galaksi</p> -->
+        <!-- <div class="spacer"></div> -->
+        <p class="message">
+            Anda telah melayang terlalu jauh ke kosmos. Halaman yang Anda cari diluar jangkauan bimasakti.
+        </p>
+        <a href="/" class="button">
+            ✨ Kembali
         </a>
     </div>
 
     <script>
-        const rainContainer = document.querySelector('.rain-container');
-        const contentContainer = document.getElementById('contentContainer');
-        const audio = document.getElementById('pageAudio');
-        const NUM_DROPS = 150; 
-        const DURATION_MIN = 1;
-        const DURATION_MAX = 2;
-        let lightningTimer = 0;
+        const starsContainer = document.getElementById('stars-container');
+        const numStars = 100; // Jumlah bintang
 
-        // ---------------------------------
-        // --- NEW: GLOBAL CLICK TO PLAY AUDIO ---
-        // ---------------------------------
-        function startAudioOnInteraction() {
-            // Attempt to play the audio
-            audio.play().then(() => {
-                // Audio started successfully. Remove the listener.
-                document.removeEventListener('click', startAudioOnInteraction);
-                document.removeEventListener('keydown', startAudioOnInteraction); // Also remove keydown if added
-                console.log("Audio started successfully on first user click.");
-            }).catch(error => {
-                // If it still fails, it's likely muted or another policy issue.
-                console.warn("Audio play failed on interaction:", error);
-            });
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px'; // Ukuran bintang 1-4px
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.animationDelay = (Math.random() * 4) + 's'; // Tunda animasi secara acak
+            starsContainer.appendChild(star);
         }
-
-        // Attach the listener to the whole document
-        document.addEventListener('click', startAudioOnInteraction);
-        document.addEventListener('keydown', startAudioOnInteraction); // Optional: also trigger on key press
-
-        // --- 1. Raindrop Generation ---
-        function createDrop() {
-            const drop = document.createElement('div');
-            drop.classList.add('drop');
-            
-            const left = Math.random() * 100;
-            drop.style.left = `${left}vw`;
-            
-            const duration = Math.random() * (DURATION_MAX - DURATION_MIN) + DURATION_MIN;
-            drop.style.animationDuration = `${duration}s`;
-            
-            const delay = Math.random() * -DURATION_MAX; 
-            drop.style.animationDelay = `${delay}s`;
-
-            drop.style.opacity = Math.random() * 0.4 + 0.2;
-            drop.style.transform = `scaleY(${Math.random() * 0.5 + 0.5})`;
-
-            rainContainer.appendChild(drop);
-            
-            setTimeout(() => drop.remove(), (duration + Math.abs(delay)) * 1000);
-        }
-
-        // --- 2. Continuous Rain ---
-        function startRain() {
-             setInterval(createDrop, 1000 / NUM_DROPS); 
-        }
-
-        // --- 3. Lightning Logic ---
-        function handleLightning() {
-            if (lightningTimer <= 0) {
-                lightningTimer = Math.random() * 5000 + 2000; 
-                
-                if (Math.random() < 0.07) {
-                    document.body.classList.add('flash');
-                    contentContainer.classList.add('flashed');
-                    
-                    setTimeout(() => {
-                        document.body.classList.remove('flash');
-                        contentContainer.classList.remove('flashed');
-                    }, 50); 
-                }
-            } else {
-                lightningTimer -= 100;
-            }
-        }
-
-        // --- 4. Animation Loop ---
-        function animate() {
-            handleLightning();
-            requestAnimationFrame(animate);
-        }
-
-        // Start effects
-        startRain();
-        animate();
     </script>
 </body>
 </html>
-<!-- heheboi, 404 not found
-
-<a href="{{ $.Site.BaseURL }}">back to home</a> -->

@@ -61,7 +61,7 @@ draft: False
 	Berikut Screenshoot Email penerimaan adsense yang saya simpan
 </p>
 
-<img alt="diterima-google-adsense" src="diterima-google-adsense.png"/>
+<img alt="diterima-google-adsense" src="diterima-google-adsense.avif"/>
 
 <p>
 	Mendapat adsense non-hosted pada 18 Desember 2017

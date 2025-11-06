@@ -112,6 +112,44 @@ h1 {
     background-color: var(--hover-bg);
 }
 
+.app-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--bg-tertiary);
+    box-shadow: none;
+    transform: none;
+}
+
+.app-card.disabled:hover {
+    border-color: var(--border-color);
+}
+
+.stock-badge {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    background-color: var(--accent-danger);
+    color: var(--text-primary);
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--space-3);
+    font-weight: bold;
+}
+
+.discount-badge {
+    position: absolute;
+    bottom: 10px;
+    right: -25px;
+    background-color: var(--accent-warning);
+    color: var(--bg-primary);
+    padding: var(--space-1) var(--space-8);
+    font-size: var(--space-3);
+    font-weight: bold;
+    transform: rotate(-40deg);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
 .app-card-header {
     display: flex;
     align-items: center;
@@ -155,6 +193,20 @@ h1 {
     font-size: var(--space-4);
     font-weight: bold;
     color: var(--accent-secondary);
+}
+
+.app-price {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--text-muted);
+    font-size: var(--space-3);
+    margin-right: var(--space-2);
+    font-weight: normal;
 }
 
 /* --- TOTAL HARGA BOX --- */
@@ -252,3 +304,65 @@ textarea:focus {
 .btn-whatsapp { background-color: var(--accent-secondary); color: var(--text-primary); }
 .btn-telegram { background-color: var(--accent-primary); color: var(--text-primary); }
 .text-center { text-align: center; }
+
+/* --- QRIS MODAL STYLING --- */
+.qris-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.qris-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.qris-modal-content {
+    background-color: var(--bg-secondary);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.qris-modal-overlay.show .qris-modal-content {
+    transform: scale(1);
+}
+
+.qris-modal-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+}
+
+.qris-modal-close-btn {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    background: none;
+    border: none;
+    font-size: var(--space-8);
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.app-card {
+    position: relative;
+    overflow: hidden;
+}

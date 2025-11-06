@@ -9,6 +9,13 @@ changelog:
     date: "5 November 2025"
     changes:
       - tag: "Peningkatan"
+        description: "memperbaiki tag favicon"
+      - tag: "Pembaruan"
+        description: "mengubah tampilan halaman 404"
+  - version: "1.1.6"
+    date: "5 November 2025"
+    changes:
+      - tag: "Peningkatan"
         description: "menambahkan komponen spek pada halaman proyek, perbaikan urutan tombol dibagian hero"    
       - tag: "Peningkatan"
         description: "menambahkan parameter icon aplikasi pada halaman dokomentasi, menambahkan parameter link proyek untuk ditaruh dibredcrumb"        

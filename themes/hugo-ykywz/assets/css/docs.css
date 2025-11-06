@@ -108,11 +108,6 @@
 
 .docs-app-icon {
     width: 60px;
-    height: 60px;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: var(--radius-lg);
     /* background-color: var(--bg-secondary); */
     color: var(--accent-primary);
@@ -211,6 +206,40 @@
         right: 0;
         top: 0;
         z-index: 1;
+    }
+
+    .docs-content-header{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-3);
+    }
+
+    .docs-content-header h1 {
+        font-size: 2rem;
+    }
+
+    .docs-app-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .docs-content h1 {
+        font-size: 2rem;
+    }
+
+    .docs-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .docs-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .docs-content {
+        font-size: 1rem;
+    }
+    .docs-content p {
+        margin-bottom: var(--space-4);
     }
 }
 

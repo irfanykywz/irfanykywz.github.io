@@ -20,12 +20,16 @@
                     <a href="mailto:{{ .Params.Email }}" class="btn btn-secondary profile-button">
                         <i class="ri-mail-line"></i>
                     </a>
+                    {{ if .Params.Linkedin }}
                     <a href="{{ .Params.Linkedin }}" target="_blank" class="btn btn-secondary profile-button">
                         <i class="ri-linkedin-fill"></i>
                     </a>
+                    {{ end }}
+                    {{ if .Params.Github }}
                     <a href="{{ .Params.Github }}" target="_blank" class="btn btn-secondary profile-button">
                         <i class="ri-github-line"></i>
                     </a>
+                    {{ end }}
                     <a href="{{ "/profile-test/" | relURL }}" class="btn btn-indigo profile-button" title="Lihat Profil Tes">
                         <i class="ri-user-search-line"></i>
                     </a>

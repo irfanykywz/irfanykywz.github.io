@@ -7,7 +7,7 @@ tags: ['Komputer']
 ---
 
 
-<img alt="hdd external rusak" src="hdd-external-rusak.jpg"/>
+![hdd-external-rusak.avif](hdd-external-rusak.avif)
 
 <p>
 	Pagi ini dikejutkan dengan kejadian yang sangat tidak mengenakan.

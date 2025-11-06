@@ -1,5 +1,5 @@
 ---
 title: "Pencarian"
-description: "Cari semua konten disitus ini."
+description: "Cari artikel yang kamu inginkan."
 layout: "search/list"
 ---

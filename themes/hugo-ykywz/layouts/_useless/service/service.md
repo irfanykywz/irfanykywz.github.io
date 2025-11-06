@@ -1,0 +1,63 @@
+---
+title: "Layanan Saya"
+description: "Temukan berbagai layanan profesional yang saya tawarkan."
+date: 2025-11-05
+type: "service"
+layout: "single"
+services:
+  - icon: "ri-window-line"
+    title: "Pengembangan Web"
+    description: "Membangun situs web yang modern, responsif, dan cepat dengan teknologi terkini untuk memastikan kehadiran online yang kuat."
+    price: "Rp 1.500.000"
+    message: "Halo, saya ingin bertanya lebih lanjut tentang layanan Pengembangan Web."
+    features:
+      - "Desain Responsif & Modern"
+      - "Optimasi SEO Dasar"
+      - "Performa Cepat"
+    popular: true
+  - icon: "ri-smartphone-line"
+    title: "Aplikasi Mobile"
+    description: "Merancang dan mengembangkan aplikasi mobile intuitif untuk platform iOS dan Android yang memberikan pengalaman pengguna terbaik."
+    price: "Rp 3.000.000"
+    message: "Halo, saya tertarik untuk membuat Aplikasi Mobile."
+    features:
+      - "UI/UX Intuitif"
+      - "Performa Native"
+      - "Dukungan Multi-platform"
+  - icon: "ri-cloud-line"
+    title: "Solusi Cloud"
+    description: "Menyediakan infrastruktur cloud yang skalabel dan aman untuk mendukung pertumbuhan bisnis Anda di era digital."
+    price: "Rp 500.000"
+    message: "Halo, bisakah Anda jelaskan lebih detail mengenai Solusi Cloud?"
+    features:
+      - "Skalabilitas Tinggi"
+      - "Keamanan Terjamin"
+      - "Manajemen Mudah"
+  - icon: "ri-seo-line"
+    title: "Optimasi SEO"
+    description: "Meningkatkan peringkat situs web Anda di mesin pencari untuk menjangkau lebih banyak audiens organik dan potensial."
+    price: "Rp 1.000.000"
+    message: "Halo, saya ingin meningkatkan SEO website saya."
+    features:
+      - "Riset Kata Kunci"
+      - "Audit Teknis SEO"
+      - "Link Building"
+  - icon: "ri-paint-brush-line"
+    title: "Desain Grafis"
+    description: "Membuat identitas visual yang kuat dan menarik, mulai dari logo, branding, hingga materi pemasaran digital."
+    price: "Rp 750.000"
+    message: "Halo, saya butuh bantuan untuk desain grafis."
+    features:
+      - "Desain Logo & Branding"
+      - "Materi Pemasaran"
+      - "Desain UI/UX"
+  - icon: "ri-shield-check-line"
+    title: "Keamanan Siber"
+    description: "Melindungi aset digital Anda dari ancaman siber dengan audit keamanan, pengujian penetrasi, dan strategi pertahanan."
+    price: "Rp 2.500.000"
+    message: "Halo, saya tertarik dengan layanan keamanan siber."
+    features:
+      - "Audit Keamanan"
+      - "Pengujian Penetrasi"
+      - "Konsultasi Keamanan"
+---
