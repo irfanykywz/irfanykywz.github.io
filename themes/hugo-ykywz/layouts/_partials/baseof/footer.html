@@ -54,7 +54,7 @@
     </div>
     <div class="offcanvas-body">
         <nav>
-            {{ range .Site.Menus.main }}
+            <!-- {{ range .Site.Menus.main }}
                 {{ $menu_item_url := .URL | relLangURL }}
                 {{ $page_url := $.Page.RelPermalink | relLangURL }}
                 {{ $page_split := index (split $page_url "/") 1 }}
@@ -65,7 +65,7 @@
                     {{ .Name | safeHTML  }}
                 </a>
             {{ end}}
-            <hr style="border-color: var(--border-color); margin: var(--space-4) 0;">
+            <hr style="border-color: var(--border-color); margin: var(--space-4) 0;"> -->
 
             {{ range .Site.Menus.footer }}
 

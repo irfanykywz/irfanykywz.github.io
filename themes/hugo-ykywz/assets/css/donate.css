@@ -32,7 +32,7 @@
 }
 /* Donation Page Styles */
 .donate-page {
-	max-width: 500px;
+	max-width: 600px;
 	margin: 40px auto;
 	padding: 2rem;
     padding-bottom: 4rem;
@@ -162,8 +162,8 @@
 	margin-bottom: 1rem;
 }
 .qr-image {
-	width: 200px;
-	height: 200px;
+	width: 300px;
+	/*height: 200px;*/
 	border-radius: 12px;
 	box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 	background: #edf2f7;
@@ -228,8 +228,7 @@
 		right: 0.75rem;
 	}
 	.qr-image {
-		width: 150px;
-		height: 150px;
+		max-width: 100%;
 	}
 	.donate-back-home {
 		position: static;

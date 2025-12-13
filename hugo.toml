@@ -23,8 +23,6 @@ pygmentscodefencesguesssyntax = true
 	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
   favicon = "favicon.ico"
 
-  logo = "logo.avif"
-
 	# Optional 64x64 avatar image.
 	# avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
   avatar = "avatar.avif"

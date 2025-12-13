@@ -1,6 +1,7 @@
 /* Styling untuk Halaman Dokumentasi */
 .docs-list-section {
-    padding: var(--space-8) 0;);
+    padding: var(--space-8) 0;
+    margin-bottom: 40px;
 }
 
 .docs-layout {

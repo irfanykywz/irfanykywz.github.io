@@ -25,6 +25,13 @@
             {{ end }}
         </section>
 
+        {{ with .Params.qr }}
+        <section class="donate-qr">
+            <h2>Scan QR</h2>
+            <img src="{{ . }}" alt="QR Code" class="qr-image" />
+        </section>
+        {{ end }}
+
         {{ with .Params.funding }}
             <section class="donate-funding">
 
@@ -70,13 +77,6 @@
             });
             });
             </script>
-        {{ end }}
-
-        {{ with .Params.qr }}
-        <section class="donate-qr">
-            <h2>Scan QR</h2>
-            <img src="{{ . }}" alt="QR Code" class="qr-image" />
-        </section>
         {{ end }}
 
         {{ if or .Params.paypal_email .Params.paypal_me }}

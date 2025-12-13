@@ -7,16 +7,28 @@ contact_wa: "6281389215100"
 contact_telegram: "irfanykywz"
 
 licenses:
-  - name: "Scene Maker"
-    original_price: 149000
-    display_original_price: "Rp 149.000"
-    price: 99000
-    display_price: "Rp 99.000"
-    description: "Buat Video Narasi dari Text dengan mudah"
-    available: false
+  - name: "Promise ETY"
+    original_price: 250000
+    display_original_price: "Rp 250.000"  
+    price: 199000
+    display_price: "Rp 199.000"
+    available: true
+    description: "manajemen channel dan konten youtube dengan mudah"
     license_type: "Lifetime"
-    logo_initials: "SM"
-    logo_color: "#f59e0b"
+    identity: promise-ety
+    logo_file: promise-ety.avif
+    logo_initials: "PY"
+    logo_color: "#ef4444"    
+# - name: "Scene Maker"
+  #   original_price: 149000
+  #   display_original_price: "Rp 149.000"
+  #   price: 99000
+  #   display_price: "Rp 99.000"
+  #   description: "Buat Video Narasi dari Text dengan mudah"
+  #   available: false
+  #   license_type: "Lifetime"
+  #   logo_initials: "SM"
+  #   logo_color: "#f59e0b"
   - name: "Audio Extract Tool"
     original_price: 99000
     display_original_price: "Rp 99.000"  

@@ -5,8 +5,8 @@ description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan pe
 date: 2025-10-09T00:00:00+08:00
 
 changelog:
-  - version: "1.1.6"
-    date: "5 November 2025"
+  - version: "1.1.7"
+    date: "6 November 2025"
     changes:
       - tag: "Peningkatan"
         description: "memperbaiki tag favicon"

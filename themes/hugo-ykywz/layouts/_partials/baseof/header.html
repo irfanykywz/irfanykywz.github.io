@@ -6,7 +6,15 @@
 
         <div class="brand">
             <a href="{{ .Site.BaseURL }}">
-                <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }} logo" class="brand-logo">
+                {{/* natal  */}}
+                {{ if eq (now.Format "01") "12" }}
+                    <img src='{{ "logo-natal.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="brand-logo">                
+                {{/* ramadhan */}}
+                {{ else if eq (now.Format "01") "02" }}
+                    <img src='{{ "logo-ramadhan.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="brand-logo">
+                {{ else }}
+                    <img src='{{ "logo.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="brand-logo">
+                {{ end }}
             </a>
         </div>
 

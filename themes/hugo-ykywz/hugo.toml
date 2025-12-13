@@ -1,24 +1,181 @@
-baseURL = 'http://localhost:1313/'
-languageCode = 'en-US'
-title = 'Hugo Ykywz'
+baseURL = "https://irfanykywz.web.id/"
+theme = "hugo-ykywz"
+languageCode = "en-us"
+title = "irfanykywz"
+copyright = "irfanykywz"
 
-# [menus]
-#   [[menus.main]]
-#     name = 'Home'
-#     pageRef = '/'
-#     weight = 10
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+canonifyURLs = true
 
-#   [[menus.main]]
-#     name = 'Posts'
-#     pageRef = '/posts'
-#     weight = 20
 
-#   [[menus.main]]
-#     name = 'Tags'
-#     pageRef = '/tags'
-#     weight = 30
+pagination.pagerSize = 5
 
-[module]
-  [module.hugoVersion]
-    extended = false
-    min = '0.146.0'
+pygmentsstyle = "vs"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+
+[params]
+  version = "1.1.3"
+	# browser icon
+	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
+  favicon = "favicon.ico"
+
+  logo = "logo.avif"
+
+	# Optional 64x64 avatar image.
+	# avatar = "https://avatars.githubusercontent.com/u/117440754?v=4"
+  avatar = "avatar.avif"
+
+  author = "Muhamad Irfan"
+  description = "Website Muhamad Irfan: Memiliki skill dibidang IT Support dan Software Engineering. siap direkrut kapan saja, segera hubungi saya"
+  keywords = "Software Engineer, IT Support, Portofolio, Coding, Troubleshooting, Infrastruktur."
+
+# Menu Header
+[[menu.main]]
+name = "Beranda"
+url = "/"
+pre = "ri-home-line"
+weight = 10
+
+[[menu.main]]
+name = "Proyek"
+url = "/projects/"
+pre = "ri-briefcase-2-line"
+weight = 20
+
+[[menu.main]]
+name = "Artikel"
+url = "/posts/"
+pre = "ri-article-line"
+weight = 30
+
+[[menu.main]]
+name = "Kontak"
+url = "/contact/"
+pre = "ri-mail-line"
+weight = 40
+
+# Menu Footer
+[[menu.footer]]
+name = "📝 Jurnal"
+url = "/journal/"
+weight = 20
+
+[[menu.footer]]
+name = "💡 Belajar"
+url = "/learn/"
+weight = 30
+
+[[menu.footer]]
+name = "📖 Buku"
+url = "/book-lesson/"
+weight = 40
+
+[[menu.footer]]
+name = "🎞️ Film"
+url = "/movie-watches/"
+weight = 41
+
+[[menu.footer]]
+name = "📁 File"
+url = "/files/"
+weight = 50
+
+[[menu.footer]]
+name = "🔨 Alat"
+url = "/tools/"
+weight = 60
+
+[[menu.footer]]
+name = "✨ Bank Prompt"
+url = "/bank-prompt/"
+weight = 61
+
+[[menu.footer]]
+name = "🌟 Kutipan"
+url = "/quote/"
+weight = 70
+
+[[menu.footer]]
+name = "🧪 Riset"
+url = "/research/"
+weight = 80
+
+[[menu.footer]]
+name = "🎮 Game"
+url = "/game-journey/"
+weight = 90
+
+[[menu.footer]]
+name = "📄 Dokumentasi"
+url = "/docs/"
+weight = 91
+
+[[menu.footer]]
+name = "🔍 Pencarian"
+url = "/search/"
+weight = 100
+
+[[menu.bottom]]
+name = "Beranda"
+url = "/"
+pre = "ri-home-line"
+weight = 10
+
+[[menu.bottom]]
+name = "Proyek"
+url = "/projects/"
+pre = "ri-briefcase-2-line"
+weight = 20
+
+[[menu.bottom]]
+name = "Pencarian"
+url = "/search"
+pre = "ri-search-line"
+weight = 100
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    style = "dracula"  # or any other chroma style
+    tabWidth = 4
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+# allow html to content .md
+[markup.goldmark.renderer] 
+	unsafe= true
+
+# allow shortcodes
+[security]
+	enableInlineShortcodes = true	
+
+# output format
+[outputs]
+  home = ["HTML", "RSS", "JSON"]  
+
+[outputFormats]
+[outputFormats.JSON]
+  mediaType = "application/json"
+  baseName = "index"
+  isPlainText = true
+  notAlternative = true  
+
+[languages.id]
+languageName = "Indonesian"
+languageCode = "id"
+
+[services]
+  [services.googleAnalytics]
+    id = 'G-VVGW3VPZZG'
