@@ -12,7 +12,7 @@ licenses:
     display_original_price: "Rp 250.000"  
     price: 199000
     display_price: "Rp 199.000"
-    available: true
+    available: false
     description: "manajemen channel dan konten youtube dengan mudah"
     license_type: "Lifetime"
     identity: promise-ety
@@ -34,7 +34,7 @@ licenses:
     display_original_price: "Rp 99.000"  
     price: 49000
     display_price: "Rp 49.000"
-    available: true
+    available: false
     description: "Ekstrak Audio, pisahkan vokal dan instrumental"
     license_type: "Lifetime"
     identity: audio-extract-tool
