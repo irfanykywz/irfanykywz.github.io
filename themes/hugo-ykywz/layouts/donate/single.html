@@ -1,5 +1,4 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/donate.css") }}
 {{ end }}
 
 {{ define "config" }}
@@ -8,114 +7,107 @@
 {{ end }}
 
 {{ define "main" }}
-
-<!-- ...existing code... -->
-<main class="main">
-    <div class="donate-page">
+<main class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12 px-4" x-data="{
+    copyToClipboard(text, $el) {
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = $el.innerText;
+            $el.innerText = 'Tersalin!';
+            setTimeout(() => {
+                $el.innerText = originalText;
+            }, 1500);
+        });
+    }
+}">
+    <div class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden relative">
+        
         {{ with .Params.image }}
-            <div class="donate-ilustration">
-                <img src="{{ . }}" alt="mendpat donasi">
+            <div class="absolute top-4 right-4 w-24 opacity-20 pointer-events-none">
+                <img src="{{ . }}" alt="ilustrasi donasi" class="w-full h-auto">
             </div>
         {{ end }}
 
-        <section class="donate-intro">
-            <h1>{{ .Title }}</h1>
-            {{ with .Params.description }}
-            <p>{{ . }}</p>
+        <div class="p-8 md:p-12">
+            <section class="text-center mb-10">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">{{ .Title }}</h1>
+                {{ with .Params.description }}
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ . }}</p>
+                {{ end }}
+            </section>
+
+            {{ with .Params.qr }}
+            <section class="text-center mb-10">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Scan QR</h2>
+                <div class="inline-block p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+                    <img src="{{ . }}" alt="QR Code" class="w-48 h-48 object-cover cursor-pointer" 
+                    @click="$store.lightbox.open('{{ . }}', '', '')"
+                    />
+                </div>
+            </section>
             {{ end }}
-        </section>
 
-        {{ with .Params.qr }}
-        <section class="donate-qr">
-            <h2>Scan QR</h2>
-            <img src="{{ . }}" alt="QR Code" class="qr-image" />
-        </section>
-        {{ end }}
-
-        {{ with .Params.funding }}
-            <section class="donate-funding">
-
-                <h2>{{ $.Params.funding_title }}</h2>
-                <div class="funding-cards">
+            {{ with .Params.funding }}
+            <section class="mb-10">
+                <h2 class="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-4">{{ $.Params.funding_title }}</h2>
+                <div class="space-y-4">
                 {{ range $i, $f := . }}
-                    <div class="funding-card">
-                    <div class="funding-card-content">
-                        <strong>{{ $f.type }}:</strong>
-                        <div class="funding-value" id="funding-{{ $i }}">
-                            {{ $f.value }}
+                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-600">
+                        <div class="overflow-hidden">
+                            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $f.type }}</div>
+                            <div class="font-mono text-gray-900 dark:text-white truncate my-1 select-all">{{ $f.value }}</div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400">{{ $f.owner }}</div>
                         </div>
-                        <div>{{ $f.owner }}</div>
-                    </div>
-                    <button class="copy-btn" data-target="funding-{{ $i }}" title="Salin">Copy</button>
+                        <button @click="copyToClipboard('{{ $f.value }}', $el)" class="flex-shrink-0 ml-4 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                            Copy
+                        </button>
                     </div>
                 {{ end }}
                 </div>
             </section>
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.copy-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                var targetId = btn.getAttribute('data-target');
-                var value = document.getElementById(targetId).innerText;
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(value).then(function() {
-                    btn.textContent = 'Tersalin!';
-                    setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
-                    });
-                } else {
-                    // fallback
-                    var textarea = document.createElement('textarea');
-                    textarea.value = value;
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textarea);
-                    btn.textContent = 'Tersalin!';
-                    setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
-                }
-                });
-            });
-            });
-            </script>
-        {{ end }}
-
-        {{ if or .Params.paypal_email .Params.paypal_me }}
-        <section class="donate-paypal">
-            <h2>PayPal</h2>
-            {{ with .Params.paypal_email }}
-            <div class="funding-card">
-                <div class="funding-card-content">
-                    <strong>Email PayPal:</strong>
-                    <div class="funding-value" id="funding-paypal-email">{{ . }}</div>
-                </div>
-                <button class="copy-btn" data-target="funding-paypal-email" title="Salin">Copy</button>
-            </div>
             {{ end }}
-            {{ with .Params.paypal_me }}
-            <div style="text-align: center;">
-                <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="paypal-btn">
-                    <i class="ri-paypal-fill"></i>
-                    <span>PayPal.Me</span>
+
+            {{ if or .Params.paypal_email .Params.paypal_me }}
+            <section class="mb-10">
+                <h2 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-4">PayPal</h2>
+                <div class="space-y-4">
+                    {{ with .Params.paypal_email }}
+                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-600">
+                        <div class="overflow-hidden">
+                            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Email PayPal</div>
+                            <div class="font-mono text-gray-900 dark:text-white truncate my-1 select-all">{{ . }}</div>
+                        </div>
+                        <button @click="copyToClipboard('{{ . }}', $el)" class="flex-shrink-0 ml-4 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                            Copy
+                        </button>
+                    </div>
+                    {{ end }}
+                    
+                    {{ with .Params.paypal_me }}
+                    <div class="text-center pt-2">
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-[#ffc439] text-[#003087] rounded-full font-bold hover:bg-[#f2b930] transition-colors shadow-sm">
+                            <i class="ri-paypal-fill text-xl"></i>
+                            <span>PayPal.Me</span>
+                        </a>
+                    </div>
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+
+            <section class="text-center text-gray-500 dark:text-gray-400 mb-8">
+                <p>{{ with .Params.thanks }}{{ . }}{{ else }}Thank you for your support!{{ end }}</p>
+            </section>
+
+            <div class="prose prose-sm dark:prose-invert max-w-none mb-8 text-center">
+                {{ .Content }}            
+            </div>
+
+            <div class="text-center">
+                <a href="/" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors">
+                    <i class="ri-arrow-left-line"></i>
+                    Kembali ke Halaman Utama
                 </a>
             </div>
-            {{ end }}
-        </section>
-        {{ end }}
-
-        <section class="donate-thanks">
-            <p>{{ with .Params.thanks }}{{ . }}{{ else }}Thank you for your support!{{ end }}</p>
-        </section>
-
-        </section>
-        <section class="donate-body">
-            {{ .Content }}            
-        </section>
-
-        <div class="donate-back-home">
-            <a href="/" class="">&larr; Kembali ke Halaman Utama</a>
         </div>
-
     </div>
-
 </main>
  {{ end }}

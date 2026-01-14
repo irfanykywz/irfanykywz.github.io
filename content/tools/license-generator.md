@@ -4,218 +4,73 @@ date: 2025-10-27T20:00:00+07:00
 description: Alat Generate Lisensi
 icon: "ri-key-fill"
 ---
-
-
-
-<style>
-.container header {
-	text-align: center;
-	margin-bottom: var(--space-6);
-}
-
-.container-x {
-width: 100%;
-max-width: 600px; /* Batasan Lebar Maksimum */
-background: var(--bg-secondary);
-padding: 2rem;
-border-radius: var(--radius-lg);
-box-shadow: var(--shadow-lg);
-margin: auto;
-}
-
-.container-x h1 {
-text-align: center;
-color: var(--text-primary);
-margin-bottom: 1.5rem;
-}
-
-.form-group {
-margin-bottom: 1.5rem;
-}
-
-.container-x label {
-display: block;
-margin-bottom: 0.5rem;
-font-weight: 600;
-color: var(--text-secondary);
-}
-
-/* Styling for Input and Select */
-input, select {
-padding: 0.75rem;
-border: 1px solid var(--border-color);
-border-radius: var(--radius-md);
-box-sizing: border-box;
-background-color: var(--bg-tertiary);
-color: var(--text-primary);
-transition: border-color var(--transition-fast);
-}
-input:focus, select:focus {
-outline: none;
-border-color: var(--accent-primary);
-}
-select {
-width: 100%;
-}
-
-/* Layout for input fields with a paste button */
-.input-with-button {
-display: flex;
-gap: 10px;
-align-items: center;
-}
-.input-with-button input {
-flex-grow: 1;
-width: auto; /* Override default input width */
-}
-
-.warning {
-color: var(--accent-danger);
-font-weight: bold;
-}
-
-.info {
-font-size: 0.75rem;
-color: var(--text-muted);
-margin-top: 0.25rem;
-}
-
-button {
-width: 100%;
-padding: 0.75rem;
-background-color: var(--accent-primary);
-color: var(--text-primary);
-border: none;
-border-radius: var(--radius-md);
-font-size: 1rem;
-cursor: pointer;
-transition: background-color var(--transition-fast), filter var(--transition-fast);
-font-weight: 700;
-}
-
-button:hover {
-filter: brightness(1.2);
-}
-
-/* Paste Button specific style */
-.paste-btn {
-width: auto;
-padding: 0.75rem 1rem;
-background-color: var(--border-color);
-font-size: 0.9rem;
-white-space: nowrap;
-font-weight: 600;
-}
-.paste-btn:hover {
-background-color: var(--text-muted);
-filter: none;
-}
-
-/* Result Display */
-#result {
-margin-top: 1.5rem;
-padding: 1.25rem;
-background: var(--bg-tertiary);
-border: 1px solid var(--border-color);
-border-radius: var(--radius-md);
-word-wrap: break-word;
-font-family: var(--font-mono);
-color: var(--text-secondary);
-position: relative;
-min-height: 3rem; /* Ensure minimum height */
-display: flex; /* Untuk memastikan tombol 'Salin' tetap di sebelah teks jika di-hover */
-align-items: center;
-justify-content: space-between;
-}
-
-#keyOutput {
-flex-grow: 1;
-padding-right: 50px; /* Beri ruang agar teks tidak tertutup tombol */
-word-break: break-all;
-color: var(--text-primary); /* Mengubah warna agar lebih menonjol */
-}
-
-#copyResultBtn {
-position: absolute;
-top: 0.5rem;
-right: 0.5rem;
-width: auto;
-padding: 0.25rem 0.75rem;
-font-size: 0.8rem;
-background-color: var(--border-color);
-display: none;
-}
-#result:hover #copyResultBtn {
-display: block;
-}
-</style>
 <!-- Using a CDN for the UUID library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
 
 
 
 <div class="body">
-<div class="container-x">
+<div class="w-full max-w-2xl bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 mx-auto">
 
 <!-- Input Group: SECRET_KEY (Dengan tombol Tempel) -->
-<div class="form-group">
-<label for="secretKey" class="warning">SECRET_KEY (Jaga kerahasiaannya!)</label>
-<div class="input-with-button">
-<input type="text" id="secretKey" value="your-super-secret-key-that-no-one-should-know">
-<button id="pasteSecretKeyBtn" class="paste-btn">Tempel</button>
+<div class="mb-6">
+<label for="secretKey" class="block mb-2 font-bold text-red-600 dark:text-red-400">SECRET_KEY (Jaga kerahasiaannya!)</label>
+<div class="flex gap-2 items-center">
+<input type="text" id="secretKey" value="your-super-secret-key-that-no-one-should-know" class="flex-grow w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
+<button id="pasteSecretKeyBtn" class="w-auto px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors whitespace-nowrap">Tempel</button>
 </div>
 </div>
 
 <!-- Input Group: Machine ID (Dengan tombol Tempel) -->
-<div class="form-group">
-<label for="machineId">Machine ID</label>
-<div class="input-with-button">
-<input type="text" id="machineId" placeholder="Tempel Machine ID target">
-<button id="pasteMachineIdBtn" class="paste-btn">Tempel</button>
+<div class="mb-6">
+<label for="machineId" class="block mb-2 font-semibold text-gray-600 dark:text-gray-400">Machine ID</label>
+<div class="flex gap-2 items-center">
+<input type="text" id="machineId" placeholder="Tempel Machine ID target" class="flex-grow w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
+<button id="pasteMachineIdBtn" class="w-auto px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors whitespace-nowrap">Tempel</button>
 </div>
-<p class="info">ID ini harus didapatkan dari mesin target (hasil hash).</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">ID ini harus didapatkan dari mesin target (hasil hash).</p>
 </div>
 
 <!-- License Type Selection -->
-<div class="form-group">
-<label for="licenseType">Jenis Lisensi</label>
-<select id="licenseType">
+<div class="mb-6">
+<label for="licenseType" class="block mb-2 font-semibold text-gray-600 dark:text-gray-400">Jenis Lisensi</label>
+<select id="licenseType" class="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
 <option value="standard">Standard</option>
 <option value="lifetime">Lifetime</option>
 </select>
 </div>
 
 <!-- Expiry Duration Group (Dynamic Display) -->
-<div class="form-group" id="expiryDurationGroup">
-<label>Durasi Lisensi (dari sekarang)</label>
-<div style="display: flex; gap: 10px;">
-<div style="flex: 1;">
-<label for="addYears" class="info">Tahun</label>
-<input type="number" id="addYears" value="1" min="0" style="width: 100%;">
+<div class="mb-6" id="expiryDurationGroup">
+<label class="block mb-2 font-semibold text-gray-600 dark:text-gray-400">Durasi Lisensi (dari sekarang)</label>
+<div class="flex gap-3">
+<div class="flex-1">
+<label for="addYears" class="text-xs text-gray-500 dark:text-gray-400 block mb-1">Tahun</label>
+<input type="number" id="addYears" value="1" min="0" class="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
 </div>
-<div style="flex: 1;">
-<label for="addMonths" class="info">Bulan</label>
-<input type="number" id="addMonths" value="0" min="0" style="width: 100%;">
+<div class="flex-1">
+<label for="addMonths" class="text-xs text-gray-500 dark:text-gray-400 block mb-1">Bulan</label>
+<input type="number" id="addMonths" value="0" min="0" class="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
 </div>
-<div style="flex: 1;">
-<label for="addDays" class="info">Hari</label>
-<input type="number" id="addDays" value="0" min="0" style="width: 100%;">
+<div class="flex-1">
+<label for="addDays" class="text-xs text-gray-500 dark:text-gray-400 block mb-1">Hari</label>
+<input type="number" id="addDays" value="0" min="0" class="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
 </div>
-<div style="flex: 1;">
-<label for="addHours" class="info">Jam</label>
-<input type="number" id="addHours" value="0" min="0" style="width: 100%;">
+<div class="flex-1">
+<label for="addHours" class="text-xs text-gray-500 dark:text-gray-400 block mb-1">Jam</label>
+<input type="number" id="addHours" value="0" min="0" class="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
 </div>
 </div>
 </div>
 
 <!-- Generate Button -->
-<button id="generateBtn">Generate Key</button>
+<button id="generateBtn" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-all shadow-md active:scale-95">Generate Key</button>
 
 <!-- Result Display -->
-<div id="result">
+<div id="result" class="mt-6 p-5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg relative flex items-center justify-between min-h-[3rem] group">
 <!-- Key output is now in a dedicated span -->
-<span id="keyOutput">Kunci yang Anda hasilkan akan muncul di sini...</span>
-<button id="copyResultBtn">Salin</button>
+<span id="keyOutput" class="flex-grow pr-12 break-all font-mono text-gray-500 dark:text-gray-400">Kunci yang Anda hasilkan akan muncul di sini...</span>
+<button id="copyResultBtn" class="absolute top-2 right-2 px-3 py-1 text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors hidden group-hover:block">Salin</button>
 </div>
 </div>	
 </div>

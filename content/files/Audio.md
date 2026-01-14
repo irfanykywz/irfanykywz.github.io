@@ -1,9 +1,0 @@
----
-title: "Audio Processing"
-files:
-  - name: "Audio Processing"
-    type: "html"
-    size: "-"    
-    url: data:text/html,%3Cstyle%3E%20body%20%7B%20font-family%3A%20sans-serif%3B%20padding%3A%2015px%3B%20color%3A%20%23333%3B%20background%3A%20%23fff%3B%20%7D%20h1%2C%20h2%2C%20h3%20%7B%20color%3A%20%232563eb%3B%20%7D%20pre%2C%20code%20%7B%20background%3A%20%23eee%3B%20padding%3A%202px%204px%3B%20border-radius%3A%204px%3B%20%7D%3C%2Fstyle%3E%3Cp%3E%3Ca%20href%3D%22https%3A%2F%2Fttsmp3.com%2Fai%22%3Ehttps%3A%2F%2Fttsmp3.com%2Fai%3C%2Fa%3E%3C%2Fp%3E%0A%3Cp%3E%3Ca%20href%3D%22https%3A%2F%2Fgithub.com%2Fsiinghd%2Fauto-subtitle-tts%2Fblob%2Fmain%2Fsrc%2Fcli.py%22%3Ehttps%3A%2F%2Fgithub.com%2Fsiinghd%2Fauto-subtitle-tts%2Fblob%2Fmain%2Fsrc%2Fcli.py%3C%2Fa%3E%3C%2Fp%3E%0A%3Cp%3E%3Ca%20href%3D%22https%3A%2F%2Fgithub.com%2Fjashanpratapsingh%2FAuto_Dubbed_Audio_Sync%2Fblob%2Fmaster%2Fmain.py%22%3Ehttps%3A%2F%2Fgithub.com%2Fjashanpratapsingh%2FAuto_Dubbed_Audio_Sync%2Fblob%2Fmaster%2Fmain.py%3C%2Fa%3E%3C%2Fp%3E%0A%3Cp%3E%3Ca%20href%3D%22https%3A%2F%2Fgithub.com%2Ftecwindow%2FSoundTranscriber%22%3Ehttps%3A%2F%2Fgithub.com%2Ftecwindow%2FSoundTranscriber%3C%2Fa%3E%3C%2Fp%3E%0A%3Cp%3E%3Ca%20href%3D%22https%3A%2F%2Fgithub.com%2Fbnsantoso%2Fsub-to-audio%2Fblob%2Fmain%2Fsubtoaudio%2Fsubtoaudio.py%22%3Ehttps%3A%2F%2Fgithub.com%2Fbnsantoso%2Fsub-to-audio%2Fblob%2Fmain%2Fsubtoaudio%2Fsubtoaudio.py%3C%2Fa%3E%3C%2Fp%3E%0A%3Cp%3E%3Ca%20href%3D%22https%3A%2F%2Fgithub.com%2Flukaszliniewicz%2FSubdub%22%3Ehttps%3A%2F%2Fgithub.com%2Flukaszliniewicz%2FSubdub%3C%2Fa%3E%3C%2Fp%3E%0A%3Cp%3E%3Ca%20href%3D%22https%3A%2F%2Fgithub.com%2Fptmrio%2Fvideo-subtitler%22%3Ehttps%3A%2F%2Fgithub.com%2Fptmrio%2Fvideo-subtitler%3C%2Fa%3E%3C%2Fp%3E%0A
-draft: false
---- 

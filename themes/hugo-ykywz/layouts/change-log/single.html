@@ -1,55 +1,62 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/change-log.css") }}
 {{ end }}
 
 {{ define "main" }}
 
-    <main class="main">
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
 
-        <section class="detail-content">
-        <div class="container">
-            <header class="header-changelog">
-                <h1>{{ .Title }}</h1>
-                <p>{{ .Description }}</p> 
-            </header>
-
-            {{ range .Params.changelog }}
-                
-            {{ $version := .version }}
-            {{ $date := .date }}
-
-            <div class="release-section">
-                <div class="release-header">
-                    <span class="version">Versi {{ $version }}</span>
-                    <span class="date">{{ $date }}</span>
+        <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ .Title }}</h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-300">{{ .Description }}</p> 
                 </div>
-                
-                <ul class="change-list">
-                {{ range .changes }}
-                    
-                    {{ $tagClass := "" }}
-                    {{ if eq .tag "Fitur Baru" }}
-                        {{ $tagClass = "tag-new" }}
-                    {{ else if eq .tag "Peningkatan" }}
-                        {{ $tagClass = "tag-imp" }}
-                    {{ else if eq .tag "Perbaikan" }}
-                        {{ $tagClass = "tag-fix" }}
-                    {{ else if eq .tag "Pembaruan" }}
-                        {{ $tagClass = "tag-update" }}
-                    {{ end }}
 
-                    <li class="change-item">
-                        <span class="tag {{ $tagClass }}">{{ .tag }}</span>
-                        
-                        <span class="description">{{ .description | safeHTML }}</span>
-                    </li>
+                <div class="max-w-4xl mx-auto space-y-8">
+                {{ range .Params.changelog }}
+                    
+                {{ $version := .version }}
+                {{ $date := .date }}
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-gray-50/50 dark:bg-gray-800/50">
+                        <span class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Versi {{ $version }}</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                            {{ partial "icons/calendar.html" (dict "class" "w-4 h-4") }}
+                            {{ $date }}
+                        </span>
+                    </div>
+                    
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                        {{ range .changes }}
+                            
+                            {{ $tagClass := "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" }}
+                            {{ if eq .tag "Fitur Baru" }}
+                                {{ $tagClass = "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" }}
+                            {{ else if eq .tag "Peningkatan" }}
+                                {{ $tagClass = "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" }}
+                            {{ else if eq .tag "Perbaikan" }}
+                                {{ $tagClass = "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" }}
+                            {{ else if eq .tag "Pembaruan" }}
+                                {{ $tagClass = "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" }}
+                            {{ end }}
+
+                            <li class="flex flex-col sm:flex-row sm:items-start gap-3">
+                                <span class="flex-shrink-0 px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wide w-fit {{ $tagClass }}">
+                                    {{ .tag }}
+                                </span>
+                                
+                                <span class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ .description | safeHTML }}</span>
+                            </li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                </div>
                 {{ end }}
-                </ul>
+                </div>
             </div>
-            {{ end }}
-        </div>
         </section>
-        
     </main>
 
 {{ end }}

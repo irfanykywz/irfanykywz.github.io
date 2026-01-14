@@ -1,4 +1,4 @@
 ---
-title: Riset 
-description: Kumpulan riset data terkadang suka dibutuhkan
+title: Riset Data
+description: Kumpulan informasi, inspirasi, referensi
 ---

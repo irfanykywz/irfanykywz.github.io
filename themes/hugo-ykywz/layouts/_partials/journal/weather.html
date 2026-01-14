@@ -1,14 +1,14 @@
 {{ if eq .Params.weather "Hujan"}}
-<i class="ri-cloud-windy-line" style="color:var(--accent-primary)"></i>
+    {{ partial "icons/cloud.html" (dict "class" "w-4 h-4 text-blue-500") }}
 {{ else if eq .Params.weather "Badai" }}
-<i class="ri-typhoon-line" style="color:var(--accent-primary)"></i>
+    {{ partial "icons/bolt.html" (dict "class" "w-4 h-4 text-purple-500") }}
 {{ else if eq .Params.weather "Cerah" }}
-<i class="ri-sun-foggy-line" style="color:var(--accent-warning)"></i>
+    {{ partial "icons/sun.html" (dict "class" "w-4 h-4 text-yellow-500") }}
 {{ else if eq .Params.weather "Berawan" }}
-<i class="ri-sun-cloudy-line" style="color:var(--accent-primary)"></i>
+    {{ partial "icons/cloud.html" (dict "class" "w-4 h-4 text-gray-500") }}
 {{ else if eq .Params.weather "Mendung" }}
-<i class="ri-rainy-line" style="color:var(--accent-primary)"></i>
+    {{ partial "icons/cloud.html" (dict "class" "w-4 h-4 text-gray-600") }}
 {{ else }}
-<i class="ri-windy-line" style="color:var(--accent-primary)"></i>
+    {{ partial "icons/sun.html" (dict "class" "w-4 h-4 text-gray-400") }}
 {{ end }}
 {{ .Params.weather }}

@@ -1,13 +1,13 @@
 {{ if .Params.overview }}
-<div class="project-overview">
-    <div class="overview-grid">
-        <div class="overview-item">
-            <h3>
-                <i class="ri-dashboard-line"></i>
+<div class="mb-16">
+    <div class="grid grid-cols-1 gap-8">
+        <div class="bg-gray-50 dark:bg-gray-800/50 p-8 rounded-2xl border border-gray-200 dark:border-gray-700">
+            <h3 class="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white mb-4">
+                {{ partial "icons/squares-2x2.html" (dict "class" "w-6 h-6 text-indigo-600 dark:text-indigo-400") }}
                 Deskripsi
             </h3>
             {{ range $index, $element := .Params.overview }}
-                <p>
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4 last:mb-0">
                     {{ . }}
                 </p>
             {{ end }}

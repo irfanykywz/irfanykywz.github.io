@@ -1,70 +1,69 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/book-lesson.css") }}
 {{ end }}
 
 {{ define "main" }}
-
-  <main class="main">
-    <section class="detail-header">
-      <div class="container">
-        <nav class="breadcrumb">
-          <a href="{{ .CurrentSection.RelPermalink }}">
-            📖
-            {{ .CurrentSection.Title }}
+  <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+      <div class="container mx-auto px-4 py-4">
+        <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+          <a href="{{ .CurrentSection.RelPermalink }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1">
+            📖 {{ .CurrentSection.Title }}
           </a>
           <i class="ri-arrow-right-s-line"></i>
-          <span>{{ .Title }}</span>
+          <span class="text-gray-900 dark:text-white font-medium truncate">{{ .Title }}</span>
         </nav>
       </div>
     </section>
 
-    <article class="detail-content">
-      <div class="container">
-        <div class="detail-article">
-           <header class="detail-article-header">
-             <div class="book-cover">
+    <article class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto">
+           <header class="text-center mb-12">
+             <div class="flex justify-center mb-8">
+                  <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                   {{ if hasPrefix .Params.image "http" }}
-                      <img class="book-list-cover" src='{{ .Params.image }}' alt='{{ .Title }}' />
+                      <img class="h-48 w-auto object-contain rounded shadow-md" src='{{ .Params.image }}' alt='{{ .Title }}' />
                   {{ else }}
-                      <img class="book-list-cover" src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
+                      <img class="h-48 w-auto object-contain rounded shadow-md" src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' />
                   {{ end }}
+                  </div>
               </div>
-            <div class="detail-meta">
-              <div class="detail-meta-item">
-                <i class="ri-quill-pen-ai-line"></i>
+            
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">{{ .Title }}</h1>
+            
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+              <div class="flex items-center gap-2">
+                <i class="ri-quill-pen-ai-line text-indigo-500"></i>
                 <span>{{ with .Params.author }}{{ . }}{{ else }}Author{{ end }}</span>
               </div>
-              <div class="detail-meta-item">
-                <i class="ri-time-line"></i>
+              <div class="flex items-center gap-2">
+                <i class="ri-time-line text-indigo-500"></i>
                 <span>{{ .Date | time.Format "2 January 2006" }}</span>
               </div>
             </div>
-            <h1 class="detail-title">{{ .Title }}</h1>
           </header>
 
-          <div class="detail-body">
-            <div class="post-content-full">
+          <div class="prose prose-lg dark:prose-invert max-w-none mb-16">
               {{ .Content }}
-            </div>
           </div>
 
-          <footer class="detail-footer">
-            <div class="detail-navigation">
-              <a href="javascript:window.history.go(-1);" class="nav-button">
+          <footer class="border-t border-gray-200 dark:border-gray-700 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+              <a href="javascript:window.history.go(-1);" class="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                 <i class="ri-arrow-left-line"></i>
-                Back
+                Kembali
               </a>
-              <div class="nav-buttons">
+              <div class="flex gap-4">
                 {{ $pages := .CurrentSection.Pages.ByDate }}
                 {{ with $pages.Prev . }}
-                <a href="{{ .RelPermalink }}" class="nav-button">
+                <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
                   <i class="ri-arrow-left-s-line"></i>
-                  Previous
+                  Sebelumnya
                 </a>
                 {{ end }}
                 {{ with $pages.Next . }}
-                <a href="{{ .RelPermalink }}" class="nav-button">
-                  Next
+                <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
+                  Selanjutnya
                   <i class="ri-arrow-right-s-line"></i>
                 </a>
                 {{ end }}
@@ -75,5 +74,4 @@
       </div>
     </article>
   </main>
-
 {{ end }}

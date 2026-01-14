@@ -1,68 +1,68 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/journal.css") }}
 {{ end }}
 
 {{ define "main" }}
-    <main class="main">
-        <section class="detail-header">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="{{ .CurrentSection.RelPermalink }}">
-                        📝
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+        <section class="py-8 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+            <div class="container mx-auto px-4">
+                <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <a href="{{ .CurrentSection.RelPermalink }}" class="flex items-center gap-1 leading-relaxed hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                    {{ partial "icons/newspaper.html" (dict "class" "w-5 h-5") }}
                         {{ .Parent.Title }}
                     </a>
-                    <i class="ri-arrow-right-s-line"></i>
-                    <span>{{ .Title }}</span>
+                    {{ partial "icons/chevron-right.html" (dict "class" "w-5 h-5 text-gray-400") }}
+                    <span class="text-gray-900 leading-relaxed dark:text-white font-medium truncate max-w-[200px] md:max-w-none">{{ .Title }}</span>
                 </nav>
             </div>
         </section>
 
-        <article class="detail-content">
-            <div class="container">
-                <div class="detail-article">
-                    <header class="detail-article-header">
-                        <div class="journal-date-large">
-                            <div class="date-day">{{ .Date.Day }}</div>
-                            <div class="date-month">{{ i18n .Date.Month }}</div>
-                            <div class="date-year">{{ .Date.Year }}</div>
-                        </div>
-                        <div class="detail-meta">
-                            <div class="detail-meta-item">
-                                <i class="ri-time-line"></i>
-                                <span>{{ .Date.Format "3:04 PM" }}</span>
-                            </div>
+        <article class="py-16 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <header class="text-center mb-12 border-b border-gray-200 dark:border-gray-700 pb-12">
 
-                            <div class="detail-meta-item">
-                                <i class="ri-eye-2-line"></i>
+                    <div class="flex justify-center mb-6">
+                        {{ partial "journal/datecard.html" . }}
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-6 mb-6 text-gray-500 dark:text-gray-400">                                            
+                        
+                        <div class="flex items-center gap-2">
+                            {{ partial "icons/clock.html" (dict "class" "w-5 h-5") }}
+                            <span>{{ .Date.Format "3:04 PM" }}</span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            {{ partial "icons/fire.html" (dict "class" "w-5 h-5") }}
+                            <span>
                                 {{ partial "view-count.html" . }}
-                            </div>
-
-                            {{ if .Params.weather }}
-                            <div class="detail-meta-item">
-                                {{ partial "journal/weather.html" . }}
-                            </div>
-                            {{ end }}
-
-                            {{ if .Params.location }}
-                            <div class="detail-meta-item">
-                                <i class="ri-map-pin-line"></i>
-                                <span>{{ .Params.location }}</span>
-                            </div>
-                            {{ end }}              
-
+                            </span>
                         </div>
-                        <h1 class="detail-title">{{ .Title }}</h1>
+
+                        {{ if .Params.weather }}
+                            <span class="flex items-center gap-1 leading-relaxed">
+                                {{ partial "journal/weather.html" . }}
+                            </span>
+                        {{ end }}
+
+
+                        {{ if .Params.location }}
+                        <div class="flex items-center gap-2">
+                            {{ partial "icons/map-pin.html" (dict "class" "w-5 h-5") }}
+                            <span>{{ .Params.location }}</span>
+                        </div>
+                        {{ end }}              
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">{{ .Title }}</h1>
                     </header>
 
-                    <div class="detail-body">
-                        <div class="journal-entry-full">
+                    <div class="prose prose-lg dark:prose-invert max-w-none">
 
                             {{ with .Content }}
                             {{ . | safeHTML }}
                             {{ end }}
                             
 
-                            <div class="journal-signature">
+                            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-6 not-prose">
                                 {{ partial "reaction.html" . }}
                                 <div>
                                     <p>
@@ -73,14 +73,13 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
 
                         {{ if gt .Params.tags 0 }}
-                            <div class="detail-tags">
-                                <h4>Tags:</h4>
-                                <div class="tags-list">
+                            <div class="mt-8 not-prose">
+                                <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-2">Tags:</h4>
+                                <div class="flex flex-wrap gap-2">
                                     {{ range .Params.tags }}
-                                        <span class="tag">{{ . }}</span>
+                                        <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm">{{ . }}</span>
                                     {{ end }}
                                 </div>
                             </div>
@@ -88,28 +87,27 @@
 
                     </div>
 
-                    <footer class="detail-footer">
-                        <div class="detail-navigation">
-                            <a href="javascript:window.history.go(-1);" class="nav-button">
-                                <i class="ri-arrow-left-line"></i>
+                    <footer class="mt-16">
+                        <div class="flex flex-col md:flex-row justify-between gap-4">
+                            <a href="javascript:window.history.go(-1);" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
+                                {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
                                 Kembali
                             </a>
-                            <div class="nav-buttons">
+                            <div class="flex gap-4">
 
                                 {{ $pages := .CurrentSection.Pages.ByWeight }}
 
                                 {{ with $pages.Prev . }}
-                                <a href="{{ .RelPermalink }}" class="nav-button">
-                                    <i class="ri-arrow-left-s-line"></i>
+                                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
+                                    {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
                                     Sebelumnya
-                                    <!-- {{ .LinkTitle }} -->
                                 </a>
                                 {{ end }}
 
                                 {{ with $pages.Next . }}
-                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
                                     Selanjutnya
-                                    <i class="ri-arrow-right-s-line"></i>
+                                    {{ partial "icons/chevron-right.html" (dict "class" "w-5 h-5") }}
                                 </a>
                                 {{ end }}
                             </div>

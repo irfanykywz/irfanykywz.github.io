@@ -10,7 +10,7 @@ enableRobotsTXT = true
 canonifyURLs = true
 
 
-pagination.pagerSize = 5
+pagination.pagerSize = 6
 
 pygmentsstyle = "vs"
 pygmentscodefences = true
@@ -18,7 +18,7 @@ pygmentscodefencesguesssyntax = true
 
 
 [params]
-  version = "1.1.3"
+  version = "2.0.0"
 	# browser icon
 	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
   favicon = "favicon.ico"
@@ -78,11 +78,6 @@ url = "/movie-watches/"
 weight = 41
 
 [[menu.footer]]
-name = "📁 File"
-url = "/files/"
-weight = 50
-
-[[menu.footer]]
 name = "🔨 Alat"
 url = "/tools/"
 weight = 60
@@ -103,25 +98,15 @@ url = "/research/"
 weight = 80
 
 [[menu.footer]]
-name = "🎮 Game"
-url = "/game-journey/"
-weight = 90
-
-[[menu.footer]]
 name = "📄 Dokumentasi"
 url = "/docs/"
 weight = 91
 
-[[menu.footer]]
-name = "🔍 Pencarian"
-url = "/search/"
-weight = 100
-
 [[menu.bottom]]
-name = "Beranda"
-url = "/"
-pre = "ri-home-line"
-weight = 10
+name = "Artikel"
+url = "/posts/"
+pre = "ri-article-line"
+weight = 30
 
 [[menu.bottom]]
 name = "Proyek"
@@ -130,10 +115,10 @@ pre = "ri-briefcase-2-line"
 weight = 20
 
 [[menu.bottom]]
-name = "Pencarian"
-url = "/search"
-pre = "ri-search-line"
-weight = 100
+name = "Kontak"
+url = "/contact/"
+pre = "ri-mail-line"
+weight = 40
 
 [markup]
   [markup.highlight]
@@ -148,7 +133,6 @@ weight = 100
     tabWidth = 4
 
 [taxonomies]
-  category = 'categories'
   tag = 'tags'
 
 # allow html to content .md

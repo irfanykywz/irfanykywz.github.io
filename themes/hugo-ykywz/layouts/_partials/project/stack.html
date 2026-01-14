@@ -1,16 +1,16 @@
 {{ if .Params.stack }}
-<div class="project-tech-stack">
-    <h2 class="section-title">
-        <i class="ri-stack-line"></i>
+<div class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+        {{ partial "icons/square-3-stack-3d.html" (dict "class" "w-8 h-8 text-indigo-600 dark:text-indigo-400") }}
         Teknologi yang Digunakan 
     </h2>
-    <div class="tech-stack-grid">
-        <div class="tech-category">
-            <div class="tech-list">
+    <div class="grid grid-cols-1 gap-8">
+        <div class="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+            <div class="flex flex-wrap gap-3">
                 {{ range $index, $item := $.Page.Params.stack }}
-                <div class="tech-item">
-                    <i class="ri-brackets-line"></i>
-                    <span>{{ $item }}</span>
+                <div class="flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+                    {{ partial "icons/code-bracket.html" (dict "class" "w-5 h-5 text-indigo-600 dark:text-indigo-400") }}
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">{{ $item }}</span>
                 </div>
                 {{ end }}
             </div>

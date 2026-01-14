@@ -2,9 +2,11 @@
 {{ $alt := .Get 1 | default "Gallery Image" }}
 {{ $group := .Get 2 | default "gallery" }}
 
-{{/* The <a> tag links to the full image and has the 'glightbox' class 
-     for the lightbox library to hook into. 
-     'data-gallery' groups images so users can click next/prev. */}}
-<a href="{{ $src }}" class="grid-item glightbox" data-gallery="{{ $group }}" data-desc-position="bottom" data-description="{{ $alt }}">
-    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" />
-</a>
+<div class="image-grid-item relative group rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer bg-gray-100 dark:bg-gray-800 aspect-square"
+     data-src="{{ $src }}" 
+     data-alt="{{ $alt }}" 
+     data-group="{{ $group }}"
+     x-data @click="$store.lightbox.open('{{ $src }}', '{{ $alt }}', '', '{{ $group }}')">
+    <img src="{{ $src }}" alt="{{ $alt }}" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" style="margin:0">
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+</div>

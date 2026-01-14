@@ -1,0 +1,57 @@
+<div 
+    x-data 
+    x-show="$store.lightbox.isOpen"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    @keydown.escape.window="$store.lightbox.close()"
+    @keydown.arrow-right.window="$store.lightbox.next()"
+    @keydown.arrow-left.window="$store.lightbox.prev()"
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
+    style="display: none;">
+
+    <!-- Close Button -->
+    <button 
+        @click="$store.lightbox.close()" 
+        class="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors z-[101] bg-white/10 rounded-full hover:bg-white/20">
+        {{ partial "icons/close.html" (dict "class" "w-6 h-6") }}
+    </button>
+
+    <!-- Counter -->
+    <div 
+        x-show="$store.lightbox.images.length > 1"
+        class="absolute top-4 left-4 px-2 py-1 bg-white/10 backdrop-blur-md rounded-full text-white text-sm font-medium z-[101] border border-white/10">
+        <span x-text="$store.lightbox.index + 1"></span> / <span x-text="$store.lightbox.images.length"></span>
+    </div>
+
+    <!-- Prev Button -->
+    <button 
+        x-show="$store.lightbox.images.length > 1"
+        @click.stop="$store.lightbox.prev()" 
+        class="flex absolute left-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-[101] bg-white/10 rounded-full hover:bg-white/20">
+        {{ partial "icons/chevron-left.html" (dict "class" "w-6 h-6") }}
+    </button>
+
+    <!-- Next Button -->
+    <button 
+        x-show="$store.lightbox.images.length > 1"
+        @click.stop="$store.lightbox.next()" 
+        class="flex absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-[101] bg-white/10 rounded-full hover:bg-white/20">
+        {{ partial "icons/chevron-right.html" (dict "class" "w-6 h-6") }}
+    </button>
+
+    <!-- Image Container -->
+    <div 
+        @click.outside="$store.lightbox.close()"
+        class="relative max-w-full max-h-full flex flex-col items-center justify-center">
+        <img :src="$store.lightbox.src" :alt="$store.lightbox.alt" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+        
+        <!-- Description -->
+        <div x-show="$store.lightbox.desc" class="mt-4 text-center max-w-2xl">
+            <p x-text="$store.lightbox.desc" class="text-white/90 text-lg font-medium"></p>
+        </div>
+    </div>
+</div>

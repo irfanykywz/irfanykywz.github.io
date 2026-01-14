@@ -1,26 +1,25 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/project.css") }}
 {{ end }}
 
 {{ define "main" }}
-    <main class="main">
-        <section class="detail-header">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="{{ .CurrentSection.RelPermalink }}">
-                        <i class="ri-briefcase-2-line"></i>
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+        <section class="py-8 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+            <div class="container mx-auto px-4">
+                <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <a href="{{ .CurrentSection.RelPermalink }}" class="flex items-center gap-1 leading-relaxed hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                        {{ partial "icons/briefcase.html" (dict "class" "w-4 h-4") }}
                         {{ with .Parent }}
                             {{ .Title }}
                         {{ end }}
                     </a>
-                    <i class="ri-arrow-right-s-line"></i>
-                    <span>{{ .Title }}</span>
+                    {{ partial "icons/chevron-right.html" (dict "class" "w-4 h-4 text-gray-400") }}
+                    <span class="leading-relaxed text-gray-900 dark:text-white font-medium truncate max-w-[200px] md:max-w-none">{{ .Title }}</span>
                 </nav>
             </div>
         </section>
 
-        <article class="portfolio-detail">
-            <div class="container">
+        <article class="py-16 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-4 max-w-5xl">
 
                 {{ partial "project/hero.html" . }}
                 {{ partial "project/overview.html" . }}           
@@ -32,31 +31,29 @@
                 <!-- {{ partial "project/lesson.html" . }} -->
                 {{ partial "project/review.html" . }}           
 
-                <div class="project-navigation">
-                    <div class="nav-section">
-                        <a href="{{ $.Site.BaseURL}}projects/" class="nav-button">
-                            <i class="ri-arrow-left-line"></i>
+                <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between gap-4">
+                    <div class="flex-shrink-0">
+                        <a href="{{ "projects/" | relURL }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
+                            {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
                             Kembali
                         </a>
                     </div>
-                    <div class="nav-section">
-                        <div class="nav-buttons">
+                    <div class="flex gap-4">
                             {{ $pages := .CurrentSection.Pages.ByWeight }}
 
                             {{ with $pages.Prev . }}
-                                <a href="{{ .RelPermalink }}" class="nav-button">
-                                    <i class="ri-arrow-left-s-line"></i>
+                                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
+                                    {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
                                     Proyek Sebelumnya
                                 </a>
                             {{ end }}
 
                             {{ with $pages.Next . }}
-                                <a href="{{ .RelPermalink }}" class="nav-button">
+                                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
                                     Proyek Selanjutnya
-                                    <i class="ri-arrow-right-s-line"></i>
+                                    {{ partial "icons/chevron-right.html" (dict "class" "w-5 h-5") }}
                                 </a>
                             {{ end }}
-                        </div>
                     </div>
                 </div>
 
@@ -70,23 +67,4 @@
 {{ define "footer" }}
     {{ partial "project/share-offcanvas.html" . }}
     {{ partial "view-count-js.html" . }}
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const triggerBtn = document.getElementById('share-offcanvas-trigger');
-        const closeBtn = document.getElementById('close-share-offcanvas-btn');
-        const backdrop = document.getElementById('share-offcanvas-backdrop');
-        const menu = document.getElementById('share-offcanvas-menu');
-
-        const toggleMenu = () => {
-            backdrop.classList.toggle('show');
-            menu.classList.toggle('show');
-        };
-
-        if (triggerBtn) triggerBtn.addEventListener('click', toggleMenu);
-        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
-        if (backdrop) backdrop.addEventListener('click', toggleMenu);
-    });
-    </script>
-
 {{ end }}

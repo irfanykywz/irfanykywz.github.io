@@ -1,11 +1,8 @@
-{{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/home.css") }}
-    {{ partial "style.html" (dict "css" "css/project.css") }}
-{{ end }}
+{{ define "head" }}{{ end }}
 
 {{ define "main" }}
 
-    <main class="main">
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
         
         {{ partial "home/hero.html" . }}
         
@@ -37,41 +34,4 @@
 
     </main>
 
-{{ end }}
-
-
-{{ define "footer" }}
-    {{ partial "view-count-js.html" . }}
-    <script>
-        (function(){
-            var tabs = document.querySelectorAll('.pn-tabs');
-            for (var i=0;i<tabs.length;i++){
-                (function(tabRoot){
-                    var btns = tabRoot.querySelectorAll('.pn-tab');
-                    var panels = tabRoot.querySelectorAll('.pn-tabpanel');
-                    for (var j=0;j<btns.length;j++){
-                        btns[j].addEventListener('click', function(ev){
-                            for (var k=0;k<btns.length;k++){
-                                btns[k].classList.remove('active');
-                                btns[k].setAttribute('aria-selected','false');
-                            }
-                            for (var p=0;p<panels.length;p++){
-                                panels[p].classList.remove('active');
-                                panels[p].setAttribute('hidden','');
-                            }
-                            var btn = ev.currentTarget;
-                            btn.classList.add('active');
-                            btn.setAttribute('aria-selected','true');
-                            var panelId = btn.getAttribute('aria-controls');
-                            var panel = tabRoot.querySelector('#'+panelId);
-                            if(panel){
-                                panel.classList.add('active');
-                                panel.removeAttribute('hidden');
-                            }
-                        });
-                    }
-                })(tabs[i]);
-            }
-        })();
-    </script>
 {{ end }}

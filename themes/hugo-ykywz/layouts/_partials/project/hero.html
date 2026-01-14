@@ -1,86 +1,96 @@
-<div class="project-hero">
-    <div class="project-hero-content">
-        <div class="project-meta">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-20 bg-gray-50 dark:bg-gray-800/50 rounded-3xl p-8 border border-gray-200 dark:border-gray-700" x-data>
+    <div class="space-y-6">
+        <div class="flex flex-wrap gap-3">
 
             {{ if .Params.category }}
-                <span class="project-category">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300">
                     {{ partial "project/category.html" . }}
                 </span>
             {{ end }}
 
 
             {{ if .Params.date }}
-                <span class="project-duration">
-                    <i class="ri-calendar-2-line"></i>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300">
+                    {{ partial "icons/calendar.html" (dict "class" "w-4 h-4") }}
                     {{ .Date | time.Format "Jan 2006" }}
                 </span>
             {{ end }}
 
 
             {{ if .Params.status }}
-                <span class="project-status">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300">
                     {{ partial "project/status.html" . }}
                 </span>
             {{ end }}
 
         </div>
-        <h1 class="project-title">{{ .Title }}</h1>
-        <p class="project-subtitle">{{ .Description }}</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight">{{ .Title }}</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">{{ .Description }}</p>
 
-        <div class="project-actions">
+        <div class="flex flex-wrap gap-3 pt-2">
             {{ if .Params.demo }}
-            <a target="_blank" href='{{ .Params.demo }}' class="btn btn-outline">
-                <i class="ri-external-link-line"></i>
+            <a target="_blank" href='{{ .Params.demo }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium shadow-sm">
+                {{ partial "icons/arrow-top-right-on-square.html" (dict "class" "w-5 h-5") }}
                 Demo
             </a>
             {{ end }}
 
             {{ if .Params.github }}
-            <a target="_blank" href=' {{ .Params.github }}' class="btn btn-outline">
-                <i class="ri-github-fill"></i>
+            <a target="_blank" href=' {{ .Params.github }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium shadow-sm">
+                {{ partial "icons/github.html" (dict "class" "w-5 h-5") }}
                 Kode
             </a>
             {{ end }}
 
              {{ if .Params.doc }}
-            <a href='{{ .Params.doc }}' class="btn btn-outline">
-                <i class="ri-file-text-line"></i>
+            <a href='{{ .Params.doc }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium shadow-sm">
+                {{ partial "icons/document-text.html" (dict "class" "w-5 h-5") }}
                 Panduan
             </a>
             {{ end }}
 
 
             {{ if .Params.buy }}
-            <a target="_blank" href=' {{ .Params.buy }}' class="btn btn-primary">
-                <i class="ri-shopping-cart-line"></i>
+            <a target="_blank" href=' {{ .Params.buy }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm">
+                {{ partial "icons/shopping-cart.html" (dict "class" "w-5 h-5") }}
                 Beli
             </a>
             {{ end }}
 
             {{ if .Params.download }}
-            <a target="_blank" href=' {{ .Params.download }}' class="btn btn-primary">
-                <i class="ri-file-download-line"></i>
+            <a target="_blank" href=' {{ .Params.download }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm">
+                {{ partial "icons/arrow-down-tray.html" (dict "class" "w-5 h-5") }}
                 Unduh
             </a>
             {{ end }}            
         </div>
     </div>
 
-    <div class="project-hero-image">
+    <div class="relative h-full flex justify-center max-h-[300px] p-4 rounded-xl bg-gray-100 dark:bg-gray-700/50">
         {{ if hasPrefix .Params.image "http" }}
-            <img class="glightbox" data-src="{{ .Params.image }}" src='{{ .Params.image }}' alt='{{ .Title }}' data-description="{{ .Description }}" data-gallery="hero" />
+            <img 
+                @click="$store.lightbox.open('{{ .Params.image }}', '{{ .Title }}', '{{ .Description }}')"
+                class="w-full h-full object-contain cursor-pointer" 
+                src='{{ .Params.image }}' 
+                alt='{{ .Title }}' 
+            />
         {{ else }}
-            <img class="glightbox" data-src="{{ .RelPermalink }}{{ .Params.image }}" src='{{ .RelPermalink }}{{ .Params.image }}' alt='{{ .Title }}' data-description="{{ .Description }}" data-gallery="hero" />
+            <img 
+                @click="$store.lightbox.open('{{ .RelPermalink }}{{ .Params.image }}', '{{ .Title }}', '{{ .Description }}')"
+                class="w-full h-full object-contain cursor-pointer" 
+                src='{{ .RelPermalink }}{{ .Params.image }}' 
+                alt='{{ .Title }}' 
+            />
         {{ end }}  
     </div>
 
-    <div class="project-hero-footer">
-        <a href="javascript:;" id="share-offcanvas-trigger">
-            <i class="ri-share-line"></i>
+    <div class="col-span-1 lg:col-span-2 flex justify-between items-center pt-8 border-t border-gray-200 dark:border-gray-700 flex-wrap gap-4">
+        <a href="javascript:;" @click="$store.share.toggle()" class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+            {{ partial "icons/share.html" (dict "class" "w-5 h-5") }}
             Bagikan
         </a>
-        <span>
-            <i class="ri-fire-line"></i>
+        <span class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 font-medium">
+            {{ partial "icons/fire.html" (dict "class" "w-5 h-5 text-orange-500") }}
             {{ partial "view-count.html" . }}
         </span>
     </div>

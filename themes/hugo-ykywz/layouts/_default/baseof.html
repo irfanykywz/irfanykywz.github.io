@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body class="bg-white dark:bg-gray-900">
 
     {{ $hideHeader := .Scratch.Get "hideHeader" }}
     {{ if not $hideHeader }}
@@ -27,6 +27,9 @@
     {{ if not $hideFooter }}
         {{ partial "baseof/footer.html" . }}
     {{ end }}
+    
+    <!-- Lightbox Component -->
+    {{ partial "baseof/lightbox.html" . }}
 
     {{ partial "baseof/js-bottom.html" . }}
 

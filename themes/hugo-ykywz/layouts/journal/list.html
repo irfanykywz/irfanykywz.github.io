@@ -1,59 +1,57 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/journal.css") }}
-    {{ partial "style.html" (dict "css" "css/pagination.css") }}
 {{ end }}
 
 {{ define "main" }}
 
-    <main class="main">
-        <section class="page-header">
-            <div class="container">
-                <h1 class="page-title">
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+        <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
                     📝
                     {{.Title}}
                 </h1>
-                <p class="page-description">{{ .Description }}</p>
+                <p class="text-xl text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto">{{ .Description }}</p>
             </div>
         </section>
 
-        <section class="journal-content">
-            <div class="container">
-                <div class="journal-entries">
+        <section class="py-16 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-4">
+                <div id="content-container" class="grid grid-cols-1 gap-8 mb-12 max-w-4xl mx-auto">
 
                     {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
                     {{ range $paginator.Pages }}
-                        <article class="journal-entry">
-                            <div class="journal-header">
-                                <div class="journal-date">
-                                    <div class="date-day">{{ .Date.Day }}</div>
-                                    <div class="date-month">{{ i18n .Date.Month }}</div>
-                                    <div class="date-year">{{ .Date.Year }}</div>
-                                </div>
-                                <div class="journal-meta">
-                                    <div class="journal-time">
-                                        <i class="ri-time-line"></i>
-                                        {{ .Date.Format "3:04 PM" }}
+                        <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-all duration-300">
+                            <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                                <div class="flex items-center gap-3">
+                                    
+                                    {{ partial "journal/datecard.html" . }}
+
+                                    <div class="text-gray-500 dark:text-gray-400 text-sm flex flex-wrap gap-2">
+                                        <span class="flex items-center gap-1 leading-relaxed">
+                                            {{ partial "icons/clock.html" (dict "class" "w-4 h-4") }}
+                                            {{ .Date.Format "3:04 PM" }}
+                                        </span>                     
+
+                                        {{ if .Params.weather }}
+                                            <span class="flex items-center gap-1 leading-relaxed">
+                                                {{ partial "journal/weather.html" . }}
+                                            </span>
+                                        {{ end }}
+
+                                        {{ if .Params.location }}
+                                            <span class="flex items-center gap-1 leading-relaxed">
+                                                {{ partial "icons/map-pin.html" (dict "class" "w-4 h-4") }}
+                                                <span>{{ .Params.location }}</span>
+                                            </span>
+                                        {{ end }}
                                     </div>
-
-                                    <div class="journal-time">
-                                        <i class="ri-eye-2-line"></i>
-                                        {{ partial "view-count.html" . }}
-                                    </div>                                    
-
-                                    {{ if .Params.weather }}
-                                        <div class="journal-weather">
-                                            {{ partial "journal/weather.html" . }}
-                                        </div>
-                                    {{ end }}
-
                                 </div>
                             </div>
-                            <div class="journal-content-body">
-                                <h2 class="journal-title">
-                                    <a href="{{ .RelPermalink }}">{{.Title}}{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}</a>
+                            <div class="p-6">
+                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+                                    <a href="{{ .RelPermalink }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{.Title}}{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}</a>
                                 </h2>
-                                <div class="journal-text">
-                                    <p>
+                                <p class="text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3">
                                         {{ if isset .Params "description" }}
                                             {{ .Description }}
                                         {{ else if gt (countrunes (.Content | plainify)) 120 }}
@@ -61,19 +59,17 @@
                                         {{ else }}
                                             {{ .Content | plainify | safeHTML }}
                                         {{ end }}
-                                    </p>
-                                </div>
+                                </p>
                                 {{ if gt .Params.tags 0 }}
-                                <div class="journal-tags">
+                                <div class="flex flex-wrap gap-2 mt-4">
                                     {{ range .Params.tags }}
-                                        <span class="tag">{{ . }}</span>
+                                        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-medium rounded">{{ . }}</span>
                                     {{ end }}
                                 </div>
                                 {{ end }}
                             </div>
-                            <div class="journal-footer">
-                                <a href="{{ .RelPermalink }}" class="read-more">
-                                    <i class="ri-book-open-line"></i>
+                            <div class="p-6 pt-4 flex justify-end">
+                                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium shadow-sm">
                                     Selengkapnya
                                 </a>
                             </div>
@@ -82,14 +78,10 @@
 
                 </div>
 
-                {{ template "_internal/pagination.html" . }}
+                {{ partial "components/pagination-loadmore.html" .Paginator }}
 
             </div>
         </section>
     </main>
 
-{{ end }}
-
-{{ define "footer" }}
-    {{ partial "view-count-js.html" . }}
 {{ end }}

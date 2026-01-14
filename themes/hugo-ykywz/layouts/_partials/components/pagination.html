@@ -1,0 +1,71 @@
+{{ $paginator := . }}
+{{ $scratch := newScratch }}
+{{ $adjacent_links := 2 }}
+{{ $max_links := (add (mul $adjacent_links 2) 1) }}
+{{ $lower_limit := (add $adjacent_links 1) }}
+{{ $upper_limit := (sub $paginator.TotalPages $adjacent_links) }}
+
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="flex justify-center items-center gap-2 mt-12">
+    
+    {{ if ne $paginator.PageNumber 1 }}
+        <a href="{{ $paginator.First.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="First page">
+            <i class="ri-arrow-left-double-line text-base"></i>
+        </a>
+    {{ end }}
+
+    {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="Previous">
+            {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
+        </a>
+    {{ end }}
+
+    <div class="hidden md:flex items-center gap-2">
+    {{ range $paginator.Pagers }}
+        {{ $scratch.Set "page_number_flag" false }}
+        {{ if gt $paginator.TotalPages $max_links }}
+            {{ if le $paginator.PageNumber $lower_limit }}
+                {{ if le .PageNumber $max_links }}
+                    {{ $scratch.Set "page_number_flag" true }}
+                {{ end }}
+            {{ else if ge $paginator.PageNumber $upper_limit }}
+                {{ if gt .PageNumber (sub $paginator.TotalPages $max_links) }}
+                    {{ $scratch.Set "page_number_flag" true }}
+                {{ end }}
+            {{ else }}
+                {{ if and (ge .PageNumber (sub $paginator.PageNumber $adjacent_links)) (le .PageNumber (add $paginator.PageNumber $adjacent_links)) }}
+                    {{ $scratch.Set "page_number_flag" true }}
+                {{ end }}
+            {{ end }}
+        {{ else }}
+            {{ $scratch.Set "page_number_flag" true }}
+        {{ end }}
+
+        {{ if eq ($scratch.Get "page_number_flag") true }}
+            <a href="{{ .URL }}" class="flex items-center justify-center w-10 h-10 rounded-lg transition-colors font-medium
+                {{ if eq . $paginator }} 
+                    bg-indigo-600 text-white border border-indigo-600 shadow-sm
+                {{ else }}
+                    bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700
+                {{ end }}">
+                {{ .PageNumber }}
+            </a>
+        {{ end }}
+    {{ end }}
+    </div>
+
+    <span class="md:hidden text-gray-500 dark:text-gray-400 font-mono">{{ .PageNumber }}/{{ .TotalPages }}</span>
+
+    {{ if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="Next">
+            {{ partial "icons/chevron-right.html" (dict "class" "w-5 h-5") }}
+        </a>
+    {{ end }}
+
+    {{ if ne $paginator.PageNumber $paginator.TotalPages }}
+        <a href="{{ $paginator.Last.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="Last page">
+            <i class="ri-arrow-right-double-line text-base"></i>
+        </a>
+    {{ end }}
+</nav>
+{{ end }}

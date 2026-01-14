@@ -1,22 +1,23 @@
-<section>
-    <div class="experience container">
-        <h2 class="section-title">
-            💼
+<section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-10 flex items-center gap-3">
+            <span>💼</span>
             {{ .Params.experiencetitle }}
         </h2>
-        <div class="grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {{- range $index, $element := .Params.experience -}}
-                <div class="card">
-                    <div class="card-head">
-                        <h3>{{ $element.title }}</h3>
-                        <p class="company-name">{{ $element.company }}</p>
-                        <p class="duration">{{ $element.time }}</p>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-300 flex flex-col h-full">
+                    <div class="mb-4 pb-4 border-b border-gray-100 dark:border-gray-700">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">{{ $element.title }}</h3>
+                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">{{ $element.company }}</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-mono bg-gray-100 dark:bg-gray-700/50 inline-block px-2 py-1 rounded">{{ $element.time }}</p>
                     </div>
-                    <div class="card-body">
-                        <ul>
+                    <div class="flex-grow">
+                        <ul class="space-y-2">
                             {{ range $element.jobs }}
-                                <li>
-                                    {{ . }}
+                                <li class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+                                    <span class="mt-1.5 w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0"></span>
+                                    <span class="leading-relaxed">{{ . }}</span>
                                 </li>
                             {{ end }}
                         </ul>

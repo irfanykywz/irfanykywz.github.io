@@ -1,41 +1,44 @@
-<section class="hero">
-    <div class="container">
-        <div class="profile-section">
-            <div class="profile-image">
-                <div class="open-to-work-wrapper">
-                    <div class="profile-image-border-wrapper"></div> <img 
-                        src="{{ .Site.Params.Avatar | safeURL }}" alt="{{ .Site.Title }}" 
-                        class="profile-image-badge"
-                    >                    
+<section class="py-20 bg-gray-50 dark:bg-gray-800/50">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center gap-10">
+            <div class="flex-shrink-0">
+                <div class="relative">
+                    <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden">
+                        <img 
+                            src="{{ .Site.Params.Avatar | safeURL }}" 
+                            alt="{{ .Site.Title }}" 
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
                 </div>
             </div>
-            <div class="profile-info">
-                <h1 class="profile-name">{{ .Title }}</h1>
-                <p class="profile-title">{{ .Description }}</p>
-                <div class="profile-actions">
-                    <a href="{{ .Params.Cv }}" target="_blank" class="btn btn-primary">
+            <div class="text-center md:text-left space-y-4">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">{{ .Title }}</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl">{{ .Description }}</p>
+                
+                <div class="flex flex-wrap justify-center md:justify-start gap-3 pt-2">
+                    <a href="{{ .Params.Cv }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
                         <i class="ri-file-list-line"></i>
-                        CV
+                        <span>CV</span>
                     </a>
-                    <a href="mailto:{{ .Params.Email }}" class="btn btn-secondary profile-button">
-                        <i class="ri-mail-line"></i>
+                    <a href="mailto:{{ .Params.Email }}" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" aria-label="Email">
+                        <i class="ri-mail-line text-xl"></i>
                     </a>
                     {{ if .Params.Linkedin }}
-                    <a href="{{ .Params.Linkedin }}" target="_blank" class="btn btn-secondary profile-button">
-                        <i class="ri-linkedin-fill"></i>
+                    <a href="{{ .Params.Linkedin }}" target="_blank" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-[#0077b5] border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" aria-label="LinkedIn">
+                        <i class="ri-linkedin-fill text-xl"></i>
                     </a>
                     {{ end }}
                     {{ if .Params.Github }}
-                    <a href="{{ .Params.Github }}" target="_blank" class="btn btn-secondary profile-button">
-                        <i class="ri-github-line"></i>
+                    <a href="{{ .Params.Github }}" target="_blank" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" aria-label="GitHub">
+                        <i class="ri-github-line text-xl"></i>
                     </a>
                     {{ end }}
-                    <a href="{{ "/profile-test/" | relURL }}" class="btn btn-indigo profile-button" title="Lihat Profil Tes">
-                        <i class="ri-user-search-line"></i>
+                    <a href="{{ "/profile-test/" | relURL }}" class="inline-flex items-center justify-center w-11 h-11 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-800 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors shadow-sm" title="Lihat Profil Tes">
+                        <i class="ri-user-search-line text-xl"></i>
                     </a>
                 </div>
             </div>
         </div>
-
     </div>
 </section>

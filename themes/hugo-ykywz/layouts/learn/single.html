@@ -1,5 +1,4 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/learn.css") }}
 {{ end }}
 
 {{ define "main" }}
@@ -35,46 +34,78 @@
     {{/* 6. Sort and display the pages */}}
     {{ $sortedPages := sort $specificPages "Weight" "asc" }}
 
-    <main class="main">        
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300" 
+          x-data="{ 
+              sidebarOpen: false,
+              activeSection: '',
+              init() {
+                  const observer = new IntersectionObserver((entries) => {
+                      entries.forEach(entry => {
+                          if (entry.isIntersecting) {
+                              this.activeSection = entry.target.id;
+                          }
+                      });
+                  }, { rootMargin: '-100px 0px -60% 0px' });
+                  
+                  document.querySelectorAll('.prose h2[id], .prose h3[id], .prose h4[id]').forEach(section => {
+                      observer.observe(section);
+                  });
 
-        <section class="detail-header">
-            <div class="container-full">
-                <nav class="breadcrumb">
+                  this.$watch('activeSection', (id) => {
+                      if(id) {
+                          // Scroll sidebar link into view
+                          const activeLink = document.querySelector(`aside a[href='#${id}']`);
+                          if(activeLink) {
+                              activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                          }
+                      }
+                  });
+              }
+          }">        
+
+        <section class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30">
+            <div class="container-fluid px-4 py-3">
+                <nav class="flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 overflow-hidden">
                     {{ if eq (len $dirParts) 5 }}
                         {{ with .Parent }}
                             {{ with .Parent }}
-                                <a href="{{ .RelPermalink }}">
-                                    💡
-                                    {{ .Title }}
+                                    <a href="{{ .RelPermalink }}" class="flex-shrink-0 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                        💡 {{ .Title }}
                                 </a>
                             {{ end }}
                         {{ end }}
                     {{ else }}
                         {{ with .Parent }}
-                            <a href="{{ .RelPermalink }}">
-                                💡
-                                {{ .Title }}
+                                <a href="{{ .RelPermalink }}" class="flex-shrink-0 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                    💡 {{ .Title }}
                             </a>
                         {{ end }}
                     {{ end }}
-                    <i class="ri-arrow-right-s-line"></i>
-                    <span class="u-grow">{{ .Title }}</span>
+                        <i class="ri-arrow-right-s-line flex-shrink-0"></i>
+                        <span class="font-medium text-gray-900 dark:text-white truncate">{{ .Title }}</span>
+                    </div>
                     
-                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                        Menu
+                    <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                        <i class="ri-menu-line"></i>
                     </button>
                 </nav>
             </div>
         </section>
 
         <!-- Main Container -->
-        <div class="main-container">
+        <div class="flex flex-col lg:flex-row min-h-[calc(100vh-7rem)]">
             <!-- Sidebar -->
-            <aside class="sidebar" id="sidebar">
-                <h2 class="sidebar-title">
+            <aside class="lg:w-72 flex-shrink-0 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 lg:block"
+                   :class="sidebarOpen ? 'fixed inset-y-0 left-0 z-100 w-72 shadow-2xl' : 'hidden'">
+                
+                <div class="h-full overflow-y-auto p-4">
+                    <div class="flex items-center justify-between lg:hidden mb-4">
+                        <h2 class="font-bold text-gray-900 dark:text-white">Menu</h2>
+                        <button @click="sidebarOpen = false" class="p-2 text-gray-500"><i class="ri-close-line"></i></button>
+                    </div>
+
+                    <h2 class="font-bold text-gray-900 dark:text-white mb-4 px-2">
                     {{ if eq (len $dirParts) 5 }}
                         {{ with .Parent }}
                             {{ with .Parent }}
@@ -87,7 +118,8 @@
                         {{ end }}
                     {{ end }}
                 </h2>
-                <ul class="lesson-list">
+
+                    <ul class="space-y-1">
 
                     {{ if eq (len $dirParts) 5 }}
                         {{ with .Parent }}
@@ -110,12 +142,9 @@
                         {{ $dirParts := split .File.Dir $split }}
 
                         {{ if and (eq (len $dirParts) 4) (.IsPage) }}
-                            <li class="lesson-item">
-                                <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                                    <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                    </svg>
-
+                                <li>
+                                    <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
+                                        <i class="ri-file-text-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                                     {{ if .Params.section }}
                                         {{ .Params.section }}
                                     {{ else }}
@@ -124,18 +153,15 @@
                                 </a>
                             </li>
                         {{ else if and (.IsSection) (eq (len $dirParts) 4) }}
-                            <li style="margin: 20px 0">
-                                <strong>{{ .Title }}</strong>
+                                <li class="mt-4 mb-2 px-2">
+                                    <strong class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ .Title }}</strong>
+                                </li>
                                 {{ $sortedPosts := sort .Data.Pages "Weight" }}
-                                {{ $first := first 1 $sortedPosts}}
-                                <ul class="lesson-list">
+                                <ul class="space-y-1 border-l border-gray-100 dark:border-gray-800 ml-2 pl-2">
                                     {{ range $sortedPosts }}
-                                        <li class="lesson-item">
-                                            <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                                                <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                                </svg>
-
+                                        <li>
+                                            <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
+                                                <i class="ri-file-text-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                                                 {{ if .Params.section }}
                                                     {{ .Params.section }}
                                                 {{ else }}
@@ -152,19 +178,23 @@
                     {{ end }}
 
                 </ul>
+                </div>
             </aside>
+            
+            <!-- Backdrop -->
+            <div x-show="sidebarOpen" x-transition.opacity class="fixed inset-0 bg-black/50 z-90 lg:hidden" @click="sidebarOpen = false" style="display: none;"></div>
 
             <!-- Content Wrapper -->
-            <div class="content-wrapper">
+            <div class="flex-grow min-w-0 flex flex-col lg:flex-row">
                 <!-- Main Content -->
-                <main class="main-content">
-                    <div class="content-header">
-                        <h1 class="content-title">
+                <main class="flex-grow p-6 lg:p-10 min-w-0">
+                    <div class="mb-8 border-b border-gray-200 dark:border-gray-700 pb-6">
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
                             {{ .Title }}
                         </h1>
                     </div>
 
-                    <div class="content-text">
+                    <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
                         {{ with .Content }}
                             {{ . | safeHTML }}
                         {{ end }}
@@ -174,19 +204,18 @@
                     {{ partial "learn/single-next-prev.html" . }}
 
                 </main>
+                
+                <!-- TOC (Right Sidebar) -->
+                <aside class="hidden xl:block w-64 flex-shrink-0 p-6 border-l border-gray-200 dark:border-gray-700">
+                    <div class="sticky top-32">
+                        {{ partial "learn/toc.html" . }}
+                    </div>
+                </aside>
             </div>
-
-            {{ partial "learn/toc.html" . }}
         </div>
-
-        <!-- Overlay -->
-        <div class="overlay" id="overlay"></div>
-
-
     </main>
 
 {{ end }}
 
 {{ define "footer" }}
-    {{ partial "script.html" (dict "js" "js/learn.js") }}
 {{ end }}

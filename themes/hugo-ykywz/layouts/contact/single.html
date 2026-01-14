@@ -1,94 +1,88 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/contact.css") }}
 {{ end }}
 
 {{ define "main" }}
-    <main class="main">
-        <section class="page-header">
-            <div class="container">
-                <h1 class="page-title">
-                    <i class="ri-mail-line"></i>
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+        <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+                    {{ partial "icons/mail.html" (dict "class" "w-10 h-10 text-indigo-600 dark:text-indigo-400") }}
                     {{ .Title }}
                 </h1>
-                <p class="page-description">{{ .Description }}</p>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl">{{ .Description }}</p>
             </div>
         </section>
 
-        <section class="contact-content">
-            <div class="container">
-                <div class="contact-grid">
+        <section class="py-16 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
-                    <div class="contact-container">
-                        <form id="form" class="contact-form">
+                    <div class="lg:col-span-2">
+                        <form id="form" class="space-y-6">
                             <input type="hidden" name="access_key" value="feedd383-8f73-47a0-8f20-f20696999a1a">
                             <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-                            <div class="form-group">
-                                <label for="name">Nama Lengkap</label>
-                                <input type="text" id="name" name="name" required placeholder="Masukkan nama">
+                            <div class="space-y-2">
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Lengkap</label>
+                                <input type="text" id="name" name="name" required placeholder="Masukkan nama" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all">
                             </div>
 
-                            <div class="form-group">
-                                <label for="email">Alamat Email</label>
-                                <input type="email" id="email" name="email" required placeholder="jack@gmail.com">
+                            <div class="space-y-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Alamat Email</label>
+                                <input type="email" id="email" name="email" required placeholder="jack@gmail.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all">
                             </div>
 
-                            <!-- <div class="form-group">
-                                <label for="subject">Subjek</label>
-                                <input type="text" id="subject" name="subject" required placeholder="Subjek pesan Anda">
-                            </div> -->
-
-                            <div class="form-group">
-                                <label for="message">Pesan</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="Tulis pesan di sini..."></textarea>
+                            <div class="space-y-2">
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pesan</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Tulis pesan di sini..." class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"></textarea>
                             </div>
                             
-                            <button type="submit" class="submit-button">
-                                Kirim Pesan <i class="ri-send-plane-line"></i>
+                            <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors shadow-sm cursor-pointer">
+                                Kirim Pesan {{ partial "icons/paper-airplane.html" (dict "class" "w-5 h-5") }}
                             </button>
                             
-                            <p id="result" class="form-result" style="display: none;"></p>
+                            <p id="result" class="mt-4 p-4 rounded-lg text-sm" style="display: none;"></p>
 
                         </form>
                     </div>
 
-                    <div class="contact-info">
-                        <div class="contact-card">
-                            <h3>
+                    <div class="lg:col-span-1">
+                        <div class="bg-gray-50 dark:bg-gray-800/50 p-8 rounded-2xl border border-gray-100 dark:border-gray-700 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">
                                 Kontak
                             </h3>
                             
-                            <div class="contact-methods">
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="ri-mail-send-line"></i>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-indigo-600 dark:text-indigo-400 shadow-sm">
+                                        {{ partial "icons/mail.html" (dict "class" "w-5 h-5") }}
                                     </div>
-                                    <div class="contact-details">
-                                        <h4>Email</h4>
-                                        <a target="_blank" href="mailto:{{ .Params.Email }}">{{ .Params.Email }}</a>
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Email</h4>
+                                        <a target="_blank" href="mailto:{{ .Params.Email }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors break-all">{{ .Params.Email }}</a>
                                     </div>
                                 </div>
 
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="ri-whatsapp-line"></i>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-green-600 dark:text-green-400 shadow-sm">
+                                        {{ partial "icons/whatsapp.html" (dict "class" "w-5 h-5") }}
                                     </div>
-                                    <div class="contact-details">
-                                        <h4>WhatsApp</h4>
-                                        <a target="_blank" href="{{ .Params.Whatsapp }}">
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">WhatsApp</h4>
+                                        <a target="_blank" href="{{ .Params.Whatsapp }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                                             {{ .Params.Phone }}
                                         </a>
                                     </div>
                                 </div>
 
                                 {{ if .Params.Telegram }}
-                                    <div class="contact-method">
-                                        <div class="contact-icon">
-                                            <i class="ri-telegram-line"></i>
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-blue-500 dark:text-blue-400 shadow-sm">
+                                            {{ partial "icons/telegram.html" (dict "class" "w-5 h-5") }}
                                         </div>
-                                        <div class="contact-details">
-                                            <h4>Telegram</h4>
-                                            <a target="_blank" href="{{ .Params.Telegram }}">
+                                        <div class="flex-grow">
+                                            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Telegram</h4>
+                                            <a target="_blank" href="{{ .Params.Telegram }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                                                 {{ .Params.Telegram }}
                                             </a>
                                         </div>
@@ -96,25 +90,25 @@
                                 {{ end }}
                                     
                                 {{ if .Params.Facebook }}
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="ri-facebook-line"></i>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-blue-600 dark:text-blue-500 shadow-sm">
+                                        {{ partial "icons/facebook.html" (dict "class" "w-5 h-5") }}
                                     </div>
-                                    <div class="contact-details">
-                                        <h4>Facebook</h4>
-                                        <a target="_blank" href="{{ .Params.Facebook }}">{{ .Params.Facebook }}</a>
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Facebook</h4>
+                                        <a target="_blank" href="{{ .Params.Facebook }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{ .Params.Facebook }}</a>
                                     </div>
                                 </div>
                                 {{ end }}
 
                                 {{ if .Params.Youtube }}
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="ri-youtube-line"></i>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-red-600 dark:text-red-500 shadow-sm">
+                                        {{ partial "icons/youtube.html" (dict "class" "w-5 h-5") }}
                                     </div>
-                                    <div class="contact-details">
-                                        <h4>Youtube</h4>
-                                        <a target="_blank" href="{{ .Params.Youtube }}">
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Youtube</h4>
+                                        <a target="_blank" href="{{ .Params.Youtube }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                                             {{ .Params.Youtube }}
                                         </a>
                                     </div>
@@ -122,13 +116,13 @@
                                 {{ end }}
                                 
                                 {{ if .Params.Discord }}
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="ri-discord-line"></i>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-indigo-500 dark:text-indigo-400 shadow-sm">
+                                        {{ partial "icons/discord.html" (dict "class" "w-5 h-5") }}
                                     </div>
-                                    <div class="contact-details">
-                                        <h4>Discord</h4>
-                                        <a target="_blank" href="{{ .Params.Discord }}">
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Discord</h4>
+                                        <a target="_blank" href="{{ .Params.Discord }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                                             {{ .Params.discordusername }}
                                         </a>
                                     </div>
@@ -136,13 +130,13 @@
                                 {{ end }}
 
                                 {{ if .Params.Linkedin }}
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="ri-linkedin-line"></i>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-blue-700 dark:text-blue-600 shadow-sm">
+                                        {{ partial "icons/linkedin.html" (dict "class" "w-5 h-5") }}
                                     </div>
-                                    <div class="contact-details">
-                                        <h4>Linkedin</h4>
-                                        <a target="_blank" href="{{ .Params.Linkedin }}">
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Linkedin</h4>
+                                        <a target="_blank" href="{{ .Params.Linkedin }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                                             {{ .Params.Linkedin }}
                                         </a>
                                     </div>
@@ -150,13 +144,13 @@
                                 {{ end }}
                                 
                                 {{ if .Params.Github }}
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="ri-github-line"></i>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-gray-900 dark:text-white shadow-sm">
+                                        {{ partial "icons/github.html" (dict "class" "w-5 h-5") }}
                                     </div>
-                                    <div class="contact-details">
-                                        <h4>Github</h4>
-                                        <a target="_blank" href="{{ .Params.Github }}">
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Github</h4>
+                                        <a target="_blank" href="{{ .Params.Github }}" class="text-gray-900 dark:text-white font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                                             {{ .Params.Github }}
                                         </a>
                                     </div>
@@ -166,9 +160,9 @@
 
                             </div>
 
-                            <div class="availability-status">
-                                <div class="status-indicator available"></div>
-                                <span>{{ .Params.Status }}</span>
+                            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                                <span class="text-sm text-gray-600 dark:text-gray-300">{{ .Params.Status }}</span>
                             </div>
                         </div>
                     </div>
@@ -200,7 +194,7 @@
             
             // 2. Tampilkan pesan tunggu
             result.innerHTML = "Mohon tunggu sebentar...";
-            result.className = "form-result form-result-loading"; // Terapkan styling loading
+            result.className = "mt-4 p-4 rounded-lg text-sm bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"; // Terapkan styling loading
 
             // 3. Kirim data menggunakan Fetch API
             fetch('https://api.web3forms.com/submit', {
@@ -217,19 +211,19 @@
                 if (response.status === 200) {
                     // Sukses
                     result.innerHTML = "Pesan berhasil terkirim! Terima kasih.";
-                    result.className = "form-result form-result-success"; 
+                    result.className = "mt-4 p-4 rounded-lg text-sm bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"; 
                 } else {
                     // Error dari Web3Forms (misalnya key salah)
                     console.error("Web3Forms Error:", resJson);
                     result.innerHTML = resJson.message || "Terjadi kesalahan saat mengirim pesan.";
-                    result.className = "form-result form-result-error";
+                    result.className = "mt-4 p-4 rounded-lg text-sm bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400";
                 }
             })
             .catch(error => {
                 // Error koneksi/jaringan
                 console.error("Fetch Error:", error);
                 result.innerHTML = "Terjadi kesalahan jaringan! Coba lagi.";
-                result.className = "form-result form-result-error";
+                result.className = "mt-4 p-4 rounded-lg text-sm bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400";
             })
             .finally(function() {
                 // Dijalankan setelah sukses atau error
@@ -238,7 +232,7 @@
                 setTimeout(() => {
                     // Mengganti display dengan innerHTML kosong lebih baik
                     result.innerHTML = ""; 
-                    result.className = "form-result"; // Reset class
+                    result.className = "mt-4 p-4 rounded-lg text-sm"; // Reset class
                 }, 5000); 
             });
         });

@@ -1,8 +1,8 @@
 {{ if eq .Params.category "Desktop" }}
-	<i class="ri-computer-line"></i>
+	{{ partial "icons/computer-desktop.html" (dict "class" "w-3 h-3") }}
 {{ else if eq .Params.category "Seluler" }}
-	<i class="ri-smartphone-line"></i>
+	{{ partial "icons/device-phone-mobile.html" (dict "class" "w-3 h-3") }}
 {{ else if eq .Params.category "Website" }}
-	<i class="ri-earth-line"></i>
+	{{ partial "icons/globe-alt.html" (dict "class" "w-3 h-3") }}
 {{ end }}
 {{ .Params.category }}

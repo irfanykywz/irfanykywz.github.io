@@ -1,40 +1,43 @@
-<main class="main">
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">
-                🧪
-                {{.Title}}
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section class="py-16 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                🧪 {{.Title}}
             </h1>
-            <p class="page-description">{{ .Description }}</p>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{{ .Description }}</p>
         </div>
     </section>
 
-    <section class="research-content">
-        <div class="container">
-            <div class="research-table-wrapper">
-                <table class="research-table">
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+                <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>Title</th>
-                            <th width="20%">Last Update</th>
+                        <tr class="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
+                            <th class="p-4 font-bold"></th>
+                            <th class="p-4 font-bold">Title</th>
+                            <th class="p-4 font-bold w-1/5">Last Update</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                         {{ $sort_pages := sort .Pages.ByDate.Reverse }}
                         {{ range $sort_pages }}
-                            <tr>
-                                <td class="w-30">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                                <td class="p-4 w-24 md:w-32">
+                                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden text-2xl">
                                     {{ if isset .Params "image" }}
-                                    <img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" class="w-40 h-40 obj-cover rounded-md bg-dark">
+                                        <img src="{{ .RelPermalink }}{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover">
                                     {{ else }}
-                                    🧪
+                                        🧪
                                     {{ end }}
+                                    </div>
                                 </td>
-                                <td>
-                                    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                                    {{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}
-                                    <div class="research-description-table">
+                                <td class="p-4">
+                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                                        <a href="{{ .Permalink }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{ .Title }}</a>
+                                        {{ if .Draft }}<sup class="ml-2 px-2 py-0.5 bg-yellow-100 text-yellow-800 text-xs rounded-full font-bold">DRAFT</sup>{{ end }}
+                                    </h3>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                                         {{ if isset .Params "description" }}
                                         {{ .Description }}
                                         {{ else if gt (countrunes (.Content | plainify)) 120 }}
@@ -44,7 +47,7 @@
                                         {{ end }}
                                     </div>
                                 </td>
-                                <td>
+                                <td class="p-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                     {{ $sorted := sort .Pages "Date" }}
                                     {{ $lastUpdate := index $sorted (sub (len $sorted) 1) }}
                                     {{ $lastUpdate.Date | time.Format "2 January 2006" }}

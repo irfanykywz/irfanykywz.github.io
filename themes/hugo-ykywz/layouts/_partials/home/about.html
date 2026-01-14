@@ -1,15 +1,15 @@
-<section>
-<div class="about-section container">
-    <h2 class="section-title">
-        ✨
-        {{ .Params.abouttitle }}
-    </h2>
-    <div class="about-content">
-        {{ range .Params.about }}
-            <p>
-                {{ . }}
-            </p>
-        {{ end }}
+<section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+            <span>✨</span>
+            {{ .Params.abouttitle }}
+        </h2>
+        <div class="prose prose-lg dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 space-y-4">
+            {{ range .Params.about }}
+                <p class="leading-relaxed">
+                    {{ . }}
+                </p>
+            {{ end }}
+        </div>
     </div>
-</div>
 </section>

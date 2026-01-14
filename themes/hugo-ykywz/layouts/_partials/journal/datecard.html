@@ -1,0 +1,9 @@
+<div class="flex flex-col items-center justify-center bg-white dark:bg-indigo-600 text-gray-700 dark:text-white px-5 py-4 rounded-lg min-w-[60px] text-center flex-shrink-0 border border-gray-200">
+    <div class="text-2xl font-bold leading-none">{{ .Date.Day }}</div>
+    <div class="text-xs my-1 font-semibold uppercase tracking-wide">
+        {{ $month := i18n .Date.Month }}
+        {{ $prefix := lower (slicestr $month 0 3) }}
+        {{ $prefix }}                                                
+    </div>
+    <div class="text-xs opacity-80">{{ .Date.Year }}</div>
+</div>

@@ -1,366 +1,161 @@
-<section class="research-table">
+<section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
+    x-data="{
+        search: '',
+        filterChar: '',
+        sortCol: '',
+        sortAsc: true,
+        items: {{ .Params.data | jsonify }},
+        
+        get filteredItems() {
+            let result = this.items;
+            
+            // Filter by Search
+            if (this.search) {
+                const s = this.search.toLowerCase();
+                result = result.filter(item => {
+                    return Object.values(item).some(val => 
+                        String(val).toLowerCase().includes(s)
+                    );
+                });
+            }
+            
+            // Filter by Alphabet (assuming first column is the name/title)
+            if (this.filterChar) {
+                const keys = Object.keys(this.items[0] || {});
+                if (keys.length > 0) {
+                    const firstKey = keys[0];
+                    result = result.filter(item => {
+                        const val = String(item[firstKey]).trim();
+                        return val.toUpperCase().startsWith(this.filterChar);
+                    });
+                }
+            }
+            
+            // Sort
+            if (this.sortCol) {
+                result = result.sort((a, b) => {
+                    let valA = String(a[this.sortCol] || '').toLowerCase();
+                    let valB = String(b[this.sortCol] || '').toLowerCase();
+                    
+                    if (valA < valB) return this.sortAsc ? -1 : 1;
+                    if (valA > valB) return this.sortAsc ? 1 : -1;
+                    return 0;
+                });
+            }
+            
+            return result;
+        },
+        
+        sortBy(col) {
+            if (this.sortCol === col) {
+                this.sortAsc = !this.sortAsc;
+            } else {
+                this.sortCol = col;
+                this.sortAsc = true;
+            }
+        },
+        
+        clearFilters() {
+            this.search = '';
+            this.filterChar = '';
+            this.sortCol = '';
+            this.sortAsc = true;
+        }
+    }">
+    
     {{ if .Params.data }}
-    <!-- Search and Filter Controls -->
-    <div class="table-controls">
-        <!-- Search Input -->
-        <div class="search-section">
-            <div class="search-container">
-                <i class="ri-search-line"></i>
-                <input type="text" id="researchTableSearch" class="search-input" placeholder="Search table data..." />
-                <button type="button" id="clearSearch" class="clear-search" title="Clear search">
-                    <i class="ri-close-line"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Alphabet Filter -->
-        <div class="filter-section">
-            <div class="filter-controls">
-                <!-- <label for="alphabetFilter" class="filter-label">Filter by:</label> -->
-                <select id="alphabetFilter" class="filter-select">
-                    <option value="">All</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="I">I</option>
-                    <option value="J">J</option>
-                    <option value="K">K</option>
-                    <option value="L">L</option>
-                    <option value="M">M</option>
-                    <option value="N">N</option>
-                    <option value="O">O</option>
-                    <option value="P">P</option>
-                    <option value="Q">Q</option>
-                    <option value="R">R</option>
-                    <option value="S">S</option>
-                    <option value="T">T</option>
-                    <option value="U">U</option>
-                    <option value="V">V</option>
-                    <option value="W">W</option>
-                    <option value="X">X</option>
-                    <option value="Y">Y</option>
-                    <option value="Z">Z</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Sort Controls -->
-        <div class="sort-section">
-            <div class="sort-controls">
-                <!-- <label for="sortColumn" class="sort-label">Sort by:</label> -->
-                <select id="sortColumn" class="sort-select">
-                    <option value="">No sorting</option>
-                </select>
-                <button type="button" id="sortDirection" class="sort-direction" title="Sort direction">
-                    <i class="ri-sort-asc"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="search-info">
-        <span id="searchResults">Showing all results</span>
-    </div>
-
-    {{ $firstItem := index .Params.data 0 }}
-    {{ $columnOrder := slice }}
-    {{ range $key, $value := $firstItem }}
-    {{ $columnOrder = $columnOrder | append $key }}
-    {{ end }}
-
-    <div class="table-header">
-        <div class="table-row header-row">
-            {{ range $columnOrder }}
-            <div class="table-cell header-cell">{{ . | title }}</div>
-            {{ end }}
-        </div>
-    </div>
-    <div class="table-body" id="researchTableBody">
-        {{ range $index, $item := .Params.data }}
-        <div class="table-row data-row" data-searchable="true">
-            {{ range $columnOrder }}
-            {{ $key := . }}
-            {{ $value := index $item $key }}
-            <div class="table-cell {{ $key }}-cell">
-                {{ if eq $key "field" }}
-                <span class="field-label">
-                    <i class="ri-information-line"></i>
-                    {{ $value | default "Field" }}
-                </span>
-                {{ else if eq $key "value" }}
-                {{ if (index $item "url") }}
-                <a href="{{ index $item "url" }}" target="_blank" rel="noopener" class="value-link">
-                    {{ $value | default "Value" }}
-                    <i class="ri-external-link-line"></i>
-                </a>
-                {{ else }}
-                <span class="value-text">{{ $value | default "Value" }}</span>
-                {{ end }}
-                {{ else if eq $key "description" }}
-                <span class="description-text">{{ $value | default "-" }}</span>
-                {{ else if ne $key "url" }}
-                <span class="value-text">{{ $value | default "-" }}</span>
-                {{ end }}
-            </div>
-            {{ end }}
-        </div>
-        {{ end }}
-    </div>
-
-    <!-- No Results Placeholder -->
-    <div id="noResultsPlaceholder" class="no-results-placeholder hidden">
-        <div class="no-results-content">
-            <i class="ri-search-line"></i>
-            <h3>No results found</h3>
-            <p>Try adjusting your search terms or filters to find what you're looking for.</p>
-            <button type="button" class="clear-all-filters" onclick="clearAllFilters()">
+    <!-- Controls -->
+    <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700 flex flex-col md:flex-row gap-4">
+        <!-- Search -->
+        <div class="relative flex-grow">
+            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input type="text" x-model="search" placeholder="Search data..." 
+                class="w-full pl-10 pr-10 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
+            <button x-show="search" @click="search = ''" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
                 <i class="ri-close-line"></i>
-                Clear all filters
             </button>
         </div>
+
+        <!-- Filter Alphabet -->
+        <select x-model="filterChar" class="px-4 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer">
+            <option value="">All A-Z</option>
+            {{ range $char := split "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "" }}
+            <option value="{{ $char }}">{{ $char }}</option>
+            {{ end }}
+        </select>
+    </div>
+
+    <!-- Info Bar -->
+    <div class="px-6 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-xs text-indigo-600 dark:text-indigo-400 font-medium border-b border-indigo-100 dark:border-indigo-900/30 flex justify-between items-center">
+        <span x-text="`Showing ${filteredItems.length} of ${items.length} results`"></span>
+        <button x-show="search || filterChar || sortCol" @click="clearFilters()" class="hover:underline">Clear Filters</button>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            {{ $firstItem := index .Params.data 0 }}
+            {{ $columnOrder := slice }}
+            {{ range $key, $value := $firstItem }}
+                {{ $columnOrder = $columnOrder | append $key }}
+            {{ end }}
+            
+            <thead>
+                <tr class="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+            {{ range $columnOrder }}
+                    <th @click="sortBy('{{ . }}')" class="p-4 font-bold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors select-none whitespace-nowrap group">
+                        <div class="flex items-center gap-2">
+                            {{ . | title }}
+                            <span class="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300">
+                                <i class="ri-arrow-up-s-fill" :class="sortCol === '{{ . }}' && sortAsc ? 'text-indigo-600 dark:text-indigo-400' : 'opacity-30'"></i>
+                                <i class="ri-arrow-down-s-fill -ml-2" :class="sortCol === '{{ . }}' && !sortAsc ? 'text-indigo-600 dark:text-indigo-400' : 'opacity-30'"></i>
+                            </span>
+                        </div>
+                    </th>
+            {{ end }}
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                <template x-for="(item, index) in filteredItems" :key="index">
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                        {{ range $columnOrder }}
+                            <td class="p-4 text-sm text-gray-600 dark:text-gray-300">
+                                {{ if eq . "field" }}
+                                    <span class="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                                        <i class="ri-information-line text-indigo-500"></i>
+                                        <span x-text="item.field || 'Field'"></span>
+                                    </span>
+                                {{ else if eq . "value" }}
+                                    <div x-data>
+                                        <a x-show="item.url" :href="item.url" target="_blank" rel="noopener" class="text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1 font-medium">
+                                            <span x-text="item.value"></span>
+                                            <i class="ri-external-link-line"></i>
+                                        </a>
+                                        <span x-show="!item.url" x-text="item.value"></span>
+                                    </div>
+                                {{ else if eq . "url" }}
+                                     <a :href="item.url" target="_blank" class="text-indigo-600 hover:underline truncate block max-w-xs" x-text="item.url"></a>
+                                {{ else }}
+                                    <span x-text="item['{{ . }}'] || '-'"></span>
+                                {{ end }}
+                            </td>
+                        {{ end }}
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- No Results -->
+    <div x-show="filteredItems.length === 0" class="p-12 text-center" style="display: none;">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+            <i class="ri-search-2-line text-2xl text-gray-400"></i>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-1">No results found</h3>
+        <p class="text-gray-500 dark:text-gray-400 mb-4">Try adjusting your search terms or filters.</p>
+        <button @click="clearFilters()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+            Clear all filters
+        </button>
     </div>
     {{ end }}
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('researchTableSearch');
-        const clearButton = document.getElementById('clearSearch');
-        const tableBody = document.getElementById('researchTableBody');
-        const searchResults = document.getElementById('searchResults');
-        const alphabetFilter = document.getElementById('alphabetFilter');
-        const sortColumn = document.getElementById('sortColumn');
-        const sortDirection = document.getElementById('sortDirection');
-        const noResultsPlaceholder = document.getElementById('noResultsPlaceholder');
-
-        if (!searchInput || !tableBody) return;
-
-        let totalRows = 0;
-        let visibleRows = 0;
-        let currentSortColumn = '';
-        let currentSortDirection = 'asc';
-        let originalRowOrder = [];
-
-        // Initialize row count and setup
-        function initializeTable() {
-            const rows = tableBody.querySelectorAll('.table-row[data-searchable="true"]');
-            totalRows = rows.length;
-            visibleRows = totalRows;
-
-            // Store original order
-            originalRowOrder = Array.from(rows);
-
-            // Setup sort column options
-            setupSortColumns();
-
-            updateSearchInfo();
-        }
-
-        // Setup sort column options based on first row
-        function setupSortColumns() {
-            const firstRow = tableBody.querySelector('.table-row[data-searchable="true"]');
-            if (!firstRow) return;
-
-            const cells = firstRow.querySelectorAll('.table-cell');
-            const headerRow = document.querySelector('.header-row');
-            const headerCells = headerRow.querySelectorAll('.header-cell');
-
-            sortColumn.innerHTML = '<option value="">No sorting</option>';
-
-            headerCells.forEach((headerCell, index) => {
-                const columnName = headerCell.textContent.trim();
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = columnName;
-                sortColumn.appendChild(option);
-            });
-        }
-
-        // Update search results info
-        function updateSearchInfo() {
-            if (visibleRows === totalRows) {
-                searchResults.textContent = `Showing all ${totalRows} results`;
-            } else {
-                searchResults.textContent = `Showing ${visibleRows} of ${totalRows} results`;
-            }
-
-            // Show/hide no results placeholder
-            if (visibleRows === 0 && totalRows > 0) {
-                noResultsPlaceholder.style.display = 'flex';
-                tableBody.style.display = 'none';
-            } else {
-                noResultsPlaceholder.style.display = 'none';
-                tableBody.style.display = '';
-            }
-        }
-
-        // Get row text for filtering
-        function getRowText(row) {
-            const cells = row.querySelectorAll('.table-cell');
-            let rowText = '';
-            cells.forEach(cell => {
-                rowText += cell.textContent.toLowerCase() + ' ';
-            });
-            return rowText;
-        }
-
-        // Get cell text for sorting
-        function getCellText(row, columnIndex) {
-            const cells = row.querySelectorAll('.table-cell');
-            if (cells[columnIndex]) {
-                return cells[columnIndex].textContent.trim().toLowerCase();
-            }
-            return '';
-        }
-
-        // Check if row starts with letter
-        function rowStartsWithLetter(row, letter) {
-            if (!letter) return true;
-            const cells = row.querySelectorAll('.table-cell');
-            for (let cell of cells) {
-                const text = cell.textContent.trim();
-                if (text && text.toUpperCase().startsWith(letter)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        // Apply all filters
-        function applyFilters() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            const alphabetLetter = alphabetFilter.value;
-            const rows = tableBody.querySelectorAll('.table-row[data-searchable="true"]');
-
-            visibleRows = 0;
-
-            rows.forEach(row => {
-                const rowText = getRowText(row);
-                const matchesSearch = searchTerm === '' || rowText.includes(searchTerm);
-                const matchesAlphabet = rowStartsWithLetter(row, alphabetLetter);
-
-                if (matchesSearch && matchesAlphabet) {
-                    row.style.display = '';
-                    visibleRows++;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            updateSearchInfo();
-
-            // Show/hide clear button
-            if (searchTerm !== '') {
-                clearButton.style.display = 'flex';
-            } else {
-                clearButton.style.display = 'none';
-            }
-        }
-
-        // Sort table
-        function sortTable() {
-            const columnIndex = parseInt(sortColumn.value);
-            if (isNaN(columnIndex)) {
-                // Reset to original order
-                resetToOriginalOrder();
-                return;
-            }
-
-            const rows = Array.from(tableBody.querySelectorAll('.table-row[data-searchable="true"]'));
-
-            rows.sort((a, b) => {
-                const aText = getCellText(a, columnIndex);
-                const bText = getCellText(b, columnIndex);
-
-                let comparison = 0;
-                if (aText < bText) comparison = -1;
-                if (aText > bText) comparison = 1;
-
-                return currentSortDirection === 'asc' ? comparison : -comparison;
-            });
-
-            // Reorder rows in DOM
-            rows.forEach(row => {
-                tableBody.appendChild(row);
-            });
-
-            updateSortDirectionIcon();
-        }
-
-        // Reset to original order
-        function resetToOriginalOrder() {
-            originalRowOrder.forEach(row => {
-                tableBody.appendChild(row);
-            });
-            updateSortDirectionIcon();
-        }
-
-        // Update sort direction icon
-        function updateSortDirectionIcon() {
-            const icon = sortDirection.querySelector('i');
-            if (currentSortColumn === '') {
-                icon.className = 'ri-sort-asc';
-            } else if (currentSortDirection === 'asc') {
-                icon.className = 'ri-sort-asc';
-            } else {
-                icon.className = 'ri-sort-desc';
-            }
-        }
-
-        // Clear search
-        function clearSearch() {
-            searchInput.value = '';
-            applyFilters();
-            searchInput.focus();
-        }
-
-        // Clear all filters
-        function clearAllFilters() {
-            searchInput.value = '';
-            alphabetFilter.value = '';
-            sortColumn.value = '';
-            currentSortColumn = '';
-            currentSortDirection = 'asc';
-            applyFilters();
-            resetToOriginalOrder();
-        }
-
-        // Make clearAllFilters globally accessible
-        window.clearAllFilters = clearAllFilters;
-
-        // Event listeners
-        searchInput.addEventListener('input', applyFilters);
-        clearButton.addEventListener('click', clearSearch);
-        alphabetFilter.addEventListener('change', applyFilters);
-        sortColumn.addEventListener('change', function() {
-            currentSortColumn = this.value;
-            if (this.value === '') {
-                resetToOriginalOrder();
-            } else {
-                sortTable();
-            }
-        });
-
-        sortDirection.addEventListener('click', function() {
-            if (currentSortColumn !== '') {
-                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-                sortTable();
-            }
-        });
-
-        // Keyboard shortcuts
-        searchInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                clearAllFilters();
-            }
-        });
-
-        // Initialize
-        initializeTable();
-    });
-</script>

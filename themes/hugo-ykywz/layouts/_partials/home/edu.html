@@ -1,102 +1,135 @@
-<section>
-    <div class="pn-section pn-education container">
-        <div class="pn-head">
-            <h3 class="mono">{{ .Params.educationtitle}}</h3>
+<section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+    <div class="container mx-auto px-4" x-data="{ activeTab: '{{ if .Params.educationtab }}{{ (index .Params.educationtab 0).id }}{{ end }}' }">
+        <div class="mb-10">
+            <h3 class="text-3xl font-bold text-gray-900 dark:text-white font-mono">{{ .Params.educationtitle}}</h3>
         </div>
 
-        <div class="pn-tabs" data-tabs>
-            <div class="pn-tablist" role="tablist" aria-label="education Tabs">
+        <div class="w-full">
+            <!-- Tab List -->
+            <div class="flex flex-wrap gap-2 border-b border-gray-200 dark:border-gray-700 mb-8" role="tablist" aria-label="Education Tabs">
                 {{- range $index, $element := .Params.educationtab -}}
-                    <button class="pn-tab{{ if eq $index 0 }} active{{ end }}" role="tab" aria-selected="true" aria-controls="{{ $element.class }}" id="tabbtn-{{ $element.class }}">{{ $element.name }}</button>
+                    <button 
+                        @click="activeTab = '{{ $element.id }}'"
+                        :class="activeTab === '{{ $element.id }}' 
+                            ? 'border-indigo-500 text-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 dark:text-indigo-400' 
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-800'"
+                        class="px-4 py-2 border-b-2 font-medium text-sm rounded-t-lg transition-all duration-200 focus:outline-none"
+                        role="tab" 
+                        aria-selected="false"
+                        :aria-selected="activeTab === '{{ $element.id }}'"
+                        aria-controls="{{ $element.class }}" 
+                        id="tabbtn-{{ $element.class }}">
+                        {{ $element.name }}
+                    </button>
                 {{- end -}}
             </div>
 
-            <div class="pn-tabpanels">
+            <!-- Tab Panels -->
+            <div class="relative min-h-[300px]">
                 {{- range $index, $element := .Params.educationtab -}}
-                    <div id="{{ $element.class }}" class="pn-tabpanel {{ if eq $index 0 }} active{{ end }}" role="tabpanel" aria-labelledby="tabbtn-{{ $element.class }}" {{ if ne $index 0 }} hidden{{ end }}>
+                    <div 
+                        x-show="activeTab === '{{ $element.id }}'"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        id="{{ $element.class }}" 
+                        class="w-full"
+                        role="tabpanel" 
+                        aria-labelledby="tabbtn-{{ $element.class }}" 
+                        {{ if ne $index 0 }} style="display: none;" {{ end }}>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {{- range index $.Params.education $element.id -}}
                             {{ if ne $element.id "certification" }}
-                                <ul class="pn-cards pn-cards-edu">
-                                    <li class="pn-card edu-card">
-                                        <div class="edu-head">
-                                            <div class="campus">
-                                                {{ with .logo }}
-                                                    <img class="campus-logo" src="{{ . }}" alt="{{ $.Title }} campus" loading="lazy">
-                                                {{ else }}
-                                                    {{ with .initial }}
-                                                        <div class="campus-initials" aria-hidden="true">
-                                                            {{ . }}
-                                                        </div>
-                                                    {{ end }}
-                                                {{ end }}
-                                                <div class="campus-meta">
-                                                    <div class="degree">{{ .degree }}</div>
-                                                    {{ with .field }}<div class="field">{{ . }}</div>{{ end }}
-                                                    <div class="school">{{ .school }}</div>
-                                                </div>
-                                            </div>
-                                            <div class="edu-actions">
-                                                {{ with .link }}<a class="btn btn-outline btn-small" href="{{ . }}" target="_blank" rel="noopener">Lihat Transkrip</a>{{ end }}
-                                            </div>
-                                        </div>
-                                        <div class="edu-meta">
-                                            
-                                            {{ with .period }}
-                                                <span class="badge mono">
-                                                    {{ . }}
-                                                </span>
+                                <!-- Formal/Non-Formal Card -->
+                                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-300">
+                                    <div class="flex items-start gap-4 mb-4">
+                                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden text-lg font-bold text-gray-500 dark:text-gray-300">
+                                            {{ with .logo }}
+                                                <img class="w-full h-full object-cover" src="{{ . }}" alt="{{ $.Title }} campus" loading="lazy">
+                                            {{ else }}
+                                                {{ with .initial }}{{ . }}{{ end }}
                                             {{ end }}
-
-                                            {{ with .location }}
-                                                <span class="badge mono">
-                                                    <i class="ri-map-pin-line"></i> {{ . }}
-                                                </span>
-                                            {{ end }}
-
-                                            {{ with .gpa }}<span class="badge mono success">IPK {{ . }}</span>{{ end }}
-                                            {{ with .honors }}<span class="badge mono warn">{{ . }}</span>{{ end }}
-                                            {{ if .certificate }}<span class="badge mono success">Bersertifikat</span>{{ end }}
                                         </div>
-                                        {{ with .activities }}
-                                        <ul class="bullets">
-                                            {{ range . }}<li>{{ . }}</li>{{ end }}
-                                        </ul>
+                                        <div class="flex-grow">
+                                            <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">{{ .degree }}</h4>
+                                            {{ with .field }}<div class="text-indigo-600 dark:text-indigo-400 text-sm font-medium">{{ . }}</div>{{ end }}
+                                            <div class="text-gray-600 dark:text-gray-400 text-sm">{{ .school }}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        {{ with .period }}
+                                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-mono rounded">
+                                                {{ . }}
+                                            </span>
                                         {{ end }}
-                                    </li>
-                                </ul>   
+                                        {{ with .location }}
+                                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-mono rounded flex items-center gap-1">
+                                                <i class="ri-map-pin-line"></i> {{ . }}
+                                            </span>
+                                        {{ end }}
+                                        {{ with .gpa }}<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-mono rounded">IPK {{ . }}</span>{{ end }}
+                                        {{ with .honors }}<span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-mono rounded">{{ . }}</span>{{ end }}
+                                        {{ if .certificate }}<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-mono rounded">Bersertifikat</span>{{ end }}
+                                    </div>
+
+                                    {{ with .activities }}
+                                    <ul class="space-y-1 mb-4">
+                                        {{ range . }}
+                                            <li class="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
+                                                <span class="mt-1.5 w-1 h-1 bg-gray-400 rounded-full flex-shrink-0"></span>
+                                                {{ . }}
+                                            </li>
+                                        {{ end }}
+                                    </ul>
+                                    {{ end }}
+
+                                    {{ with .link }}
+                                    <div class="mt-auto pt-2">
+                                        <a class="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors" href="{{ . }}" target="_blank" rel="noopener">
+                                            Lihat Transkrip {{ partial "icons/arrow-right.html" (dict "class" "w-4 h-4") }}
+                                        </a>
+                                    </div>
+                                    {{ end }}
+                                </div>
                             {{ else }}
-                                
-                                <ul class="pn-cards pn-cards-cert">
-                                    <li class="pn-card cert-card">
-                                        <div class="cert-head">
-                                            <div class="issuer">
-                                                {{ with .logo }}
-                                                    <img class="issuer-logo" src="{{ . }}" alt="{{ $.Title }} issuer" loading="lazy">
-                                                {{ else }}
-                                                    <div class="issuer-initials" aria-hidden="true">{{ .initial }}</div>
-                                                {{ end }}
-                                                <div class="issuer-meta">
-                                                    <div class="title">{{ or .name .title }}</div>
-                                                    <div class="org">{{ .org }}</div>
-                                                </div>
-                                            </div>
-                                            {{ if or .link .credential_id }}
-                                                <div class="cert-actions">
-                                                    {{ with .link }}<a class="btn btn-primary btn-small" href="{{ . }}" target="_blank" rel="noopener">Lihat Kredensial</a>{{ end }}
-                                                </div>
+                                <!-- Certification Card -->
+                                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-300">
+                                    <div class="flex items-start gap-4 mb-4">
+                                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden text-lg font-bold text-gray-500 dark:text-gray-300">
+                                            {{ with .logo }}
+                                                <img class="w-full h-full object-cover" src="{{ . }}" alt="{{ $.Title }} issuer" loading="lazy">
+                                            {{ else }}
+                                                {{ .initial }}
                                             {{ end }}
                                         </div>
-                                        <div class="cert-meta">
-                                            {{ with .issued }}<span class="badge mono">Diterbitkan: {{ . }}</span>{{ end }}
-                                            {{ with .expires }}<span class="badge mono warn">Kedaluwarsa: {{ . }}</span>{{ end }}
-                                            {{ with .year }}<span class="badge mono">Tahun: {{ . }}</span>{{ end }}
-                                            {{ with .credential_id }}<span class="badge mono mute">ID: {{ . }}</span>{{ end }}
+                                        <div class="flex-grow">
+                                            <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">{{ or .name .title }}</h4>
+                                            <div class="text-gray-600 dark:text-gray-400 text-sm">{{ .org }}</div>
                                         </div>
-                                    </li>
-                                </ul>
+                                    </div>
 
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        {{ with .issued }}<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-mono rounded">Diterbitkan: {{ . }}</span>{{ end }}
+                                        {{ with .expires }}<span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-mono rounded">Kedaluwarsa: {{ . }}</span>{{ end }}
+                                        {{ with .year }}<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-mono rounded">Tahun: {{ . }}</span>{{ end }}
+                                        {{ with .credential_id }}<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs font-mono rounded">ID: {{ . }}</span>{{ end }}
+                                    </div>
+
+                                    {{ if or .link .credential_id }}
+                                        <div class="mt-auto pt-2">
+                                            {{ with .link }}
+                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors w-full" href="{{ . }}" target="_blank" rel="noopener">
+                                                    Lihat Kredensial
+                                                </a>
+                                            {{ end }}
+                                        </div>
+                                    {{ end }}
+                                </div>
                             {{ end }}             
                         {{- end -}}
+                        </div>
                     </div>                    
                 {{- end -}}
             </div>

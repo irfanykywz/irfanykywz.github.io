@@ -1,0 +1,62 @@
+{{ with . }}
+    {{ if .HasNext }}
+    <div id="load-more-container" class="text-center mt-12">
+        <a href="{{ .Next.URL }}" id="load-more-btn" class="inline-flex items-center gap-3 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm">
+            <span id="load-more-text">Muat Lebih Banyak</span>
+            <div id="load-more-spinner" class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" style="display: none;"></div>
+        </a>
+    </div>
+    {{ end }}
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        if (!loadMoreBtn) return;
+
+        // ID ini harus ada pada elemen yang membungkus daftar konten Anda
+        const container = document.getElementById('content-container'); 
+        if (!container) return;
+
+        const spinner = document.getElementById('load-more-spinner');
+        const btnText = document.getElementById('load-more-text');
+
+        loadMoreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            let nextPageUrl = this.getAttribute('href');
+            if (!nextPageUrl) return;
+
+            spinner.style.display = 'block';
+            btnText.style.display = 'none';
+            loadMoreBtn.classList.add('pointer-events-none', 'opacity-75');
+
+            fetch(nextPageUrl)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    const newContent = doc.querySelectorAll('#content-container > *');
+                    newContent.forEach(item => {
+                        container.appendChild(item);
+                    });
+
+                    const newLoadMoreBtn = doc.getElementById('load-more-btn');
+                    if (newLoadMoreBtn) {
+                        loadMoreBtn.setAttribute('href', newLoadMoreBtn.getAttribute('href'));
+                    } else {
+                        document.getElementById('load-more-container').style.display = 'none';
+                    }
+
+                    // Update URL history
+                    history.pushState(null, '', nextPageUrl);
+                })
+                .catch(error => console.error('Error loading more content:', error))
+                .finally(() => {
+                    spinner.style.display = 'none';
+                    btnText.style.display = 'block';
+                    loadMoreBtn.classList.remove('pointer-events-none', 'opacity-75');
+                });
+        });
+    });
+    </script>
+{{ end }}

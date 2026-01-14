@@ -1,50 +1,80 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/movie-watches.css") }}
 {{ end }}
 
 {{ define "main" }}
-<div class="movie-detail-page">
-    <nav class="breadcrumb">
-        <a href="{{ .CurrentSection.RelPermalink }}">
-            {{ with .Parent }}
-                {{ .Title }}
-            {{ end }}
-        </a>
-        <span>/</span>
-        <span>{{ .Title }}</span>
-    </nav>
-
-    <div class="movie-detail-container">
-        <div class="movie-detail-layout">
-            <div class="movie-detail-poster">
-                <img src="{{ .Params.poster }}" alt="Poster Film {{ .Title }}">
-            </div>
-            <div class="movie-detail-content">
-                <h1 class="movie-detail-title">{{ .Title }}</h1>
-                <div class="movie-detail-meta">
-                    <span class="meta-item">{{ .Params.year }}</span>
-                    <span class="meta-item">{{ delimit .Params.genres ", " }}</span>
-                    {{ with .Params.watched_on }}
-                        <span class="meta-item">Ditonton pada {{ (time.AsTime .).Format "2 Jan 2006" }}</span>
-                    {{ end }}
-                    <span class="watched-badge" data-status="{{ .Params.status | lower }}">{{ .Params.status }}</span>
-                </div>
-                <div class="movie-detail-rating">
-                    <span class="rating-star">⭐</span>
-                    <span class="rating-text">{{ .Params.rating }}/10</span>
-                </div>
-                <p class="movie-detail-synopsis">{{ .Params.synopsis }}</p>
-                {{ if .Content }}
-                <div class="movie-detail-review post-content-full">
-                    {{ .Content }}
-                </div>
-                {{ end }}
-            </div>
+<div class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                <a href="{{ .CurrentSection.RelPermalink }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                    {{ with .Parent }}{{ .Title }}{{ end }}
+                </a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-gray-900 dark:text-white font-medium truncate">{{ .Title }}</span>
+            </nav>
         </div>
     </div>
 
-    <div class="movie-detail-footer">
-        <a href="{{ .CurrentSection.RelPermalink }}" class="back-button">&larr; Kembali ke Daftar Film</a>
+    <div class="container mx-auto px-4 py-12">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-0">
+                
+                <!-- Poster -->
+                <div class="relative bg-gray-100 dark:bg-gray-700 h-[450px] md:h-full">
+                    <img src="{{ .Params.poster }}" alt="Poster Film {{ .Title }}" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+
+                <!-- Content -->
+                <div class="p-8 md:p-10 flex flex-col">
+                    <div class="mb-6">
+                        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">{{ .Title }}</h1>
+                        
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-600 dark:text-gray-300 mb-6">
+                            <span class="font-medium">{{ .Params.year }}</span>
+                            <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+                            <span>{{ delimit .Params.genres ", " }}</span>
+                            {{ with .Params.watched_on }}
+                                <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+                                <span>Ditonton pada {{ (time.AsTime .).Format "2 Jan 2006" }}</span>
+                            {{ end }}
+                        </div>
+
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="flex items-center gap-2 px-3 py-1.5 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-100 dark:border-yellow-900/30 rounded-lg">
+                                <i class="ri-star-fill text-yellow-400"></i>
+                                <span class="font-bold text-gray-900 dark:text-white">{{ .Params.rating }}/10</span>
+                            </div>
+                            
+                            <span class="px-3 py-1.5 rounded-lg text-sm font-semibold capitalize
+                                {{ if eq (lower .Params.status) "setengah menonton" }} bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300
+                                {{ else if eq (lower .Params.status) "belum ditonton" }} bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300
+                                {{ else }} bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 {{ end }}">
+                                {{ .Params.status }}
+                            </span>
+                        </div>
+
+                        <div class="prose prose-lg dark:prose-invert max-w-none">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Sinopsis</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">{{ .Params.synopsis }}</p>
+                            
+                            {{ if .Content }}
+                            <div class="pt-8 border-t border-gray-100 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Review</h3>
+                                {{ .Content }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <div class="mt-auto pt-8">
+                        <a href="{{ .CurrentSection.RelPermalink }}" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors">
+                            <i class="ri-arrow-left-line"></i>
+                            Kembali ke Daftar Film
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {{ end }}

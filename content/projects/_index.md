@@ -1,6 +1,6 @@
 ---
 title: Proyek
-description: Kumpulan proyek yang pernah dibuat sebagai bahan referensi
+description: proyek yang pernah dikerjakan sebelumnya
 filtertab:
     - name: "Semua"
       icon: "ri-apps-2-line"

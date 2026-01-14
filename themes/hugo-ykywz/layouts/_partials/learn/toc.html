@@ -2,44 +2,28 @@
 {{ if .Page.Params.toc | default true }}
     {{ $headers := findRE "<h[2-6].*?>(.|\n])+?</h[2-6]>" .Content }}
     {{ if ge (len $headers) 1 }}
-        <aside class="toc-sidebar">
-            <h3 class="toc-title">Daftar Isi</h3>
-            <ul class="toc-list">
-                {{ range $i, $header := $headers }}
-                    {{ $headerLevel := index (findRE "[2-6]" $header 1) 0 }}
-                    {{ $headerLevel := int $headerLevel }}
-                    {{ $headerID := $header | replaceRE ".* id=\"([^\"]+)\".*" "$1" }}
-                    {{ if not $headerID }}
-                        {{ $headerID = $header | plainify | anchorize }}
-                    {{ end }}
-                    {{ $headerText := $header | plainify | htmlUnescape }}
-
-                    {{ if eq $i 0 }}
-
-                        <li class="toc-item">
-                            <a href="#{{ $headerID }}" class="toc-link toc-level-{{ $headerLevel }}">{{ $headerText }}</a>
-                        </li>
-
-                    {{ else }}
-
-                        {{ $prevHeaderLevel := index (findRE "[2-6]" (index $headers (sub $i 1)) 1) 0 }}
-                        {{ $prevHeaderLevel := int $prevHeaderLevel }}
-
-                        {{ if gt $headerLevel $prevHeaderLevel }}
-                            <ul class="toc-list-sub">
-                        {{ else if lt $headerLevel $prevHeaderLevel }}
-                            {{ range seq (sub $prevHeaderLevel $headerLevel) }}
-                                </ul>
-                            {{ end }}
-                        {{ end }}
-
-                        <ul class="toc-list">
-                            <li class="toc-item"><a href="#{{ $headerID }}" class="toc-link toc-level-{{ $headerLevel }}">{{ $headerText }}</a></li>
-                        </ul>
-                    {{ end }}
-
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Daftar Isi</h3>
+        <ul class="space-y-2 text-sm">
+            {{ range $i, $header := $headers }}
+                {{ $headerLevel := index (findRE "[2-6]" $header 1) 0 }}
+                {{ $headerLevel := int $headerLevel }}
+                {{ $headerID := $header | replaceRE ".* id=\"([^\"]+)\".*" "$1" }}
+                {{ if not $headerID }}
+                    {{ $headerID = $header | plainify | anchorize }}
                 {{ end }}
-            </ul>
-        </aside>
+                {{ $headerText := $header | plainify | htmlUnescape }}
+                
+                {{ $padding := mul (sub $headerLevel 2) 12 }}
+
+                <li>
+                    <a href="#{{ $headerID }}" 
+                       @click="activeSection = '{{ $headerID }}'; sidebarOpen = false"
+                       :class="activeSection === '{{ $headerID }}' ? 'text-indigo-600 dark:text-indigo-400 font-medium' : 'text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400'"
+                       class="block transition-colors" style="padding-left: {{ $padding }}px">
+                        {{ $headerText }}
+                    </a>
+                </li>
+            {{ end }}
+        </ul>
     {{ end }}
 {{ end }}

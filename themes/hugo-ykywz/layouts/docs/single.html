@@ -1,65 +1,113 @@
 {{ define "head" }}
-    {{/* Memuat CSS khusus untuk halaman dokumentasi */}}
-    {{ $css := resources.Get "css/docs.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $css.Permalink }}">
 {{ end }}
 
 {{ define "main" }}
-<main class="main">
-    <section class="detail-header">
-        <div class="container">
-            <nav class="breadcrumb">
-                <!-- use project_url if exist -->
-                                 
-                <a href="{{ .CurrentSection.RelPermalink }}">
-                    <i class="ri-file-text-line"></i>
-                    {{ with .Parent }}
-                        {{ .Title }}
-                    {{ end }}
-                </a>
-                <i class="ri-arrow-right-s-line"></i>
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300" 
+      x-data="{ 
+          tocOpen: false,
+          activeSection: '',
+          init() {
+              const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                      if (entry.isIntersecting) {
+                          this.activeSection = entry.target.id;
+                      }
+                  });
+              }, { rootMargin: '-100px 0px -60% 0px' });
+              
+              document.querySelectorAll('.prose h2[id], .prose h3[id], .prose h4[id]').forEach(section => {
+                  observer.observe(section);
+              });
 
-                {{ if .Params.project_url }}
-                    <a href="{{ $.Site.BaseURL }}{{ .Params.project_url }}">                       
-                        Proyek
+              this.$watch('activeSection', (id) => {
+                  if(id) {
+                      // Scroll sidebar link into view
+                      const activeLink = document.querySelector(`aside a[href='#${id}']`);
+                      if(activeLink) {
+                          activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                      }
+                  }
+              });
+          }
+      }">
+    <section class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 overflow-hidden">
+                    <a href="{{ .CurrentSection.RelPermalink }}" class="flex-shrink-0 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                        <i class="ri-file-text-line"></i>
+                        {{ with .Parent }}{{ .Title }}{{ end }}
                     </a>
-                    <i class="ri-arrow-right-s-line"></i>
-                {{ else }}
-                {{ end }}                 
+                    <i class="ri-arrow-right-s-line flex-shrink-0"></i>
 
-                <span class="grow">{{ .Title }}</span>
-                <button class="docs-menu-toggle" id="docsMenuToggle" aria-label="Toggle Table of Contents">
+                    {{ if .Params.project_url }}
+                        <a href="{{ $.Site.BaseURL }}{{ .Params.project_url }}" class="flex-shrink-0 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">                       
+                            Proyek
+                        </a>
+                        <i class="ri-arrow-right-s-line flex-shrink-0"></i>
+                    {{ end }}                 
+
+                    <span class="font-medium text-gray-900 dark:text-white truncate">{{ .Title }}</span>
+                </div>
+                
+                <button @click="tocOpen = !tocOpen" class="lg:hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
                     <i class="ri-menu-line"></i>
                 </button>
             </nav>
         </div>
     </section>
 
-    <div class="container-full">
-        <div class="docs-layout">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8 relative">
             {{/* Sidebar untuk Daftar Isi */}}
-            <aside class="docs-sidebar">
-                <h4>Daftar Isi</h4>
-                {{ .TableOfContents }}
+            <aside class="lg:w-64 flex-shrink-0">
+                <div class="sticky top-32 max-h-[calc(100vh-8rem)] overflow-y-auto hidden lg:block">
+                    {{ partial "docs/toc.html" . }}
+                </div>
+                
+                <!-- Mobile TOC Offcanvas -->
+                <div x-show="tocOpen" 
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="translate-x-full"
+                     x-transition:enter-end="translate-x-0"
+                     x-transition:leave="transition ease-in duration-300"
+                     x-transition:leave-start="translate-x-0"
+                     x-transition:leave-end="translate-x-full"
+                     class="fixed inset-y-0 right-0 w-80 bg-white dark:bg-gray-900 shadow-2xl z-100 p-6 overflow-y-auto lg:hidden"
+                     @click.outside="tocOpen = false"
+                     style="display: none;">
+                    <div class="flex items-center justify-between mb-6">
+                        <h4 class="text-lg font-bold text-gray-900 dark:text-white">Daftar Isi</h4>
+                        <button @click="tocOpen = false" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="ri-close-line text-xl"></i>
+                        </button>
+                    </div>
+                    {{ partial "docs/toc.html" . }}
+                </div>
+                
+                <!-- Backdrop -->
+                <div x-show="tocOpen" x-transition.opacity class="fixed inset-0 bg-black/50 z-90 lg:hidden" @click="tocOpen = false" style="display: none;"></div>
             </aside>
     
             {{/* Konten Utama Dokumentasi */}}
-            <article class="docs-content">
-                <!-- tambahkan app_icon jika ada -->
-                <div class="docs-content-header">
-                    {{ if .Params.app_icon }}
-                    <div class="docs-app-icon">
-                        <img src="{{ .Params.app_icon }}" alt="{{ .Title }} icon">
+            <article class="flex-grow min-w-0">
+                <div class="mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center gap-4 mb-4">
+                        {{ if .Params.app_icon }}
+                        <div class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl p-2 flex-shrink-0">
+                            <img src="{{ .Params.app_icon }}" alt="{{ .Title }} icon" class="w-full h-full object-contain">
+                        </div>
+                        {{ end }}
+                        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{{ .Title }}</h1>
                     </div>
+                    {{ if .Description }}
+                        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">{{ .Description }}</p>
                     {{ end }}
-
-                    <h1>{{ .Title }}</h1>
                 </div>
-                {{ if .Description }}
-                    <p class="lead">{{ .Description }}</p>
-                {{ end }}
                 
-                {{ .Content }}
+                <div class="prose prose-lg dark:prose-invert max-w-none">
+                    {{ .Content }}
+                </div>
             </article>
         </div>
     </div>
@@ -67,10 +115,4 @@
 {{ end }}
 
 {{ define "footer" }}
-    {{/* Overlay untuk sidebar offcanvas di mobile */}}
-    <div class="docs-overlay" id="docsOverlay"></div>
-
-    {{/* Memuat skrip khusus untuk halaman dokumentasi */}}
-    {{ $js := resources.Get "js/docs.js" | resources.Minify | resources.Fingerprint }}
-    <script src="{{ $js.Permalink }}" defer></script>
 {{ end }}

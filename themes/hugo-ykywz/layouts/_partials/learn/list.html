@@ -1,83 +1,61 @@
-<main class="main">
-    <section class="page-header">
-        <div class="container-full">
-            <h1 class="page-title">    
-                💡             
-                {{ .Title }}
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section class="py-16 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">    
+                💡 {{ .Title }}
             </h1>
-            <p class="page-description">{{ .Description }}</p>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{{ .Description }}</p>
         </div>
     </section>
 
-    <section class="learn-content">
-        <div class="container-full">
-            <div class="courses-container">
-                <div class="courses-list">
-                    {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
-                    {{ range $paginator.Pages }}
-                        <div class="course-card-tutorial">
-                            <div class="course-icon">
-                                {{ if isset .Params "image" }}
-                                    <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}'>
-                                {{ end }}
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col gap-6 max-w-4xl mx-auto">
+                {{ $paginator := .Paginate (where .Data.Pages "Params.hidden" "ne" true) }}
+                {{ range $paginator.Pages }}
+                    <a href="{{ .RelPermalink }}" class="group block bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col md:flex-row h-full">
+                            <div class="md:w-64 h-48 md:h-auto bg-gray-100 dark:bg-gray-700 flex-shrink-0 flex items-center justify-center p-6">
+                            {{ if isset .Params "image" }}
+                                <img src="{{ .RelPermalink }}{{ .Params.image }}" alt='{{.Title}}' class="max-h-full max-w-full object-contain shadow-sm rounded">
+                            {{ else }}
+                                <i class="ri-book-open-line text-6xl text-gray-300 dark:text-gray-600"></i>
+                            {{ end }}
                             </div>
-                            <div class="course-info">
-                                <h3 class="course-title">
-                                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                            <div class="p-6 flex flex-col flex-grow justify-center">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                    {{ .Title }}
                                 </h3>
-                                <p class="course-description">
+                                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                                     {{ .Description }}
                                 </p>
-                            </div>
-                            <div class="course-meta">
-                                <div class="meta-item">
-                                    <i class="ri-file-text-line"></i>
-                                    <span>{{ (len .Pages) }} Konten</span>
-                                </div>
-                                <div class="meta-item">
-                                    <i class="ri-time-line"></i>
-                                    {{ $totalReadingTime := 0 }}
-                                    {{ range .Pages }}
-                                        {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
-                                        {{ if .IsSection }}
-                                            {{ range .Pages }}
-                                                {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
-                                            {{ end }}        
+                                
+                                <div class="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400">
+                                    <div class="flex items-center gap-1">
+                                        <i class="ri-file-text-line"></i>
+                                        <span>{{ (len .Pages) }} Konten</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <i class="ri-time-line"></i>
+                                        {{ $totalReadingTime := 0 }}
+                                        {{ range .Pages }}
+                                            {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
+                                            {{ if .IsSection }}
+                                                {{ range .Pages }}
+                                                    {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
+                                                {{ end }}        
+                                            {{ end }}
                                         {{ end }}
-                                    {{ end }}
-                                    <span>{{ printf "%d min waktu baca" $totalReadingTime }}</span>
-                                </div>
-                                <div class="meta-item">
-                                    <a href="{{ .RelPermalink }}" class="read-more">
-                                        <i class="ri-book-open-line"></i>
-                                        Mulai Belajar
-                                    </a>
+                                        <span>{{ printf "%d min" $totalReadingTime }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    {{ end }}
-
-                </div>
-
-                {{ with $paginator }}
-                <div class="pagination">
-                    {{ with .Prev }}
-                    <a href="{{ .URL }}" class="pagination-link" aria-label="Previous">
-                        <i class="ri-arrow-left-s-line"></i>
-                        <span aria-hidden="true">Sebelumnya</span>
                     </a>
-                    {{ end }}
-                    <span class="pagination-info">{{ .PageNumber }}/{{ .TotalPages }}</span>
-                    {{ with .Next }}
-                    <a href="{{ .URL }}" class="pagination-link" aria-label="Next">
-                        <span aria-hidden="true">Selanjutnya</span>
-                        <i class="ri-arrow-right-s-line"></i>
-                    </a>
-                    {{ end }}
-                </div>
                 {{ end }}
-
             </div>
+
+            {{ partial "components/pagination.html" $paginator }}
         </div>
     </section>
 </main>

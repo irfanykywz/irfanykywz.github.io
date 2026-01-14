@@ -1,6 +1,6 @@
 ---
 title: Kontak
-description: hubungi saya kapan saja, berikut kontaknya
+description: terhubung dengan saya kapan saja
 email: irfanyouth@gmail.com
 phone: +6281389215100
 whatsapp: https://api.whatsapp.com/send?phone=6281389215100&text=Halo, Saya dapat kontak dari website.

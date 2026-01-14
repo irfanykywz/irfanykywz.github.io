@@ -17,19 +17,3 @@
 {{ end }}
 
 {{ partial "google_analytics.html" . }}
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.1/js/glightbox.min.js" integrity="sha512-XL54SjceXZFzblziNnaFFaXggzqCuZrFS4loWPpvPJ6Kg0kc2HyL89+cPeH0GMq0sKL2SegzUmA8Lx9a0st2ow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        // Initialize GLightbox, targeting the elements with the 'glightbox' class
-        const lightbox = GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true,
-            skin: 'clean', 
-            closeOnOutsideClick: true, 
-            // Add other options as needed
-        });
-    });
-</script>

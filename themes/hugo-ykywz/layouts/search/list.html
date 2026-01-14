@@ -1,54 +1,50 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/search.css") }}
 {{ end }}
 
 {{ define "main" }}
-    <div class="search-page">
-        <div class="search-page-container">
+    <div class="min-h-[calc(100vh-200px)] py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto px-4 max-w-4xl">
             <!-- Search Header -->
-            <div class="search-header">
-                <h1 class="search-title">
-                    <i class="ri-search-line"></i>   
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                    {{ partial "icons/search.html" (dict "class" "w-10 h-10 text-indigo-600 dark:text-indigo-400") }}
                     {{ .Title }}
                 </h1>
-                <p class="search-description">{{ .Description }}</p>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{{ .Description }}</p>
             </div>
 
             <!-- Search Input -->
-            <div class="search-input-container">
-                <div class="search-input-wrapper">
+            <div class="mb-8">
+                <div class="relative max-w-2xl mx-auto">
                     <input 
                         type="search" 
                         id="searchInput" 
-                        class="search-page-input" 
+                        class="w-full px-6 py-4 text-lg border-2 border-gray-200 dark:border-gray-700 rounded-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all" 
                         placeholder="Masukan kata yang ingin dicari"
                         autocomplete="off"
                     >
-                    <button id="searchIcon" class="search-button" aria-label="Search">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="search-page-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                    <button id="searchIcon" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Search">
+                        {{ partial "icons/search.html" (dict "class" "w-6 h-6") }}
                     </button>
                 </div>
             </div>
 
             <!-- Search Stats -->
-            <div class="search-stats">
-                <span id="resultCount" class="result-count">0 hasil</span>
-                <span id="searchTime" class="search-time"></span>
+            <div class="flex justify-between items-center mb-8 px-4 text-sm text-gray-500 dark:text-gray-400">
+                <span id="resultCount">0 hasil</span>
+                <span id="searchTime"></span>
             </div>
 
             <!-- Search Results -->
-            <div id="searchResults" class="search-results hidden">
-                <div class="search-table-container">
-                    <table class="search-table">
+            <div id="searchResults" class="hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <table class="w-full text-left">
                         <thead>
                             <tr>
-                                <th class="table-header">Judul</th>
-                                <th class="table-header">Tanggal</th>
-                                <!-- <th class="table-header">Tags</th> -->
-                                <th class="table-header">Pratinjau</th>
-                                <th class="table-header">Aksi</th>
+                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Judul</th>
+                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Tanggal</th>
+                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Pratinjau</th>
+                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="searchTableBody">
@@ -59,28 +55,24 @@
             </div>
 
             <!-- No Results -->
-            <div id="noResults" class="no-results hidden">
-                <div class="no-results-content">
-                    <div class="no-results-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
-                        </svg>
+            <div id="noResults" class="hidden text-center py-20">
+                <div class="max-w-md mx-auto">
+                    <div class="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600">
+                        {{ partial "icons/search.html" (dict "class" "w-full h-full") }}
                     </div>
-                    <h3 class="no-results-title">Hasil tidak ditemukan</h3>
-                    <p class="no-results-text">Coba sesuaikan kata kunci pencarian Anda atau telusuri kategori kami</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Hasil tidak ditemukan</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Coba sesuaikan kata kunci pencarian Anda atau telusuri kategori kami</p>
                 </div>
             </div>
 
             <!-- Initial State -->
-            <div id="initialState" class="initial-state">
-                <div class="initial-state-content">
-                    <div class="initial-state-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+            <div id="initialState" class="text-center py-20">
+                <div class="max-w-md mx-auto">
+                    <div class="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600">
+                        {{ partial "icons/search.html" (dict "class" "w-full h-full") }}
                     </div>
-                    <h3 class="initial-state-title">Mulai Pencarian</h3>
-                    <p class="initial-state-text">Masukkan kata kunci untuk menemukan konten yang relevan</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Mulai Pencarian</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Masukkan kata kunci untuk menemukan konten yang relevan</p>
                 </div>
             </div>
         </div>
@@ -179,22 +171,22 @@
                     
                     resultsHTML += `
                         <tr>
-                            <td class="search-table-cell">
-                                <div class="table-title">${titleHighlighted}</div>
+                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
+                                <div class="font-bold text-gray-900 dark:text-white text-lg">${titleHighlighted}</div>
                             </td>
-                            <td class="search-table-cell">
-                                <div class="table-date">${formatDate(item.date)}</div>
+                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
+                                <div class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">${formatDate(item.date)}</div>
                             </td>
                             <!-- 
-                                <td class="search-table-cell">
+                                <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
                                     <div class="table-tags">${tagsHTML}</div>
                                 </td>
                             -->
-                            <td class="search-table-cell">
-                                <div class="table-preview">${contentPreview}...</div>
+                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
+                                <div class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">${contentPreview}...</div>
                             </td>
-                            <td class="search-table-cell table-action">
-                                <a href="${item.permalink}" class="table-link">
+                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0 text-center">
+                                <a href="${item.permalink}" class="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
                                     Lihat
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -215,7 +207,7 @@
                 if (!query) return text;
                 
                 const regex = new RegExp(query, 'gi');
-                return text.replace(regex, match => `<span class="search-highlight">${match}</span>`);
+                return text.replace(regex, match => `<span class="bg-yellow-200 dark:bg-yellow-900/50 text-gray-900 dark:text-white px-0.5 rounded">${match}</span>`);
             }
             
             // Format date

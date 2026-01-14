@@ -8,7 +8,7 @@ category: Desktop
 status: Product
 demo: https://youtu.be/Q5MAXYU0iRg
 # download: https://lynk.id/irfanykywz/r46n7r43okn6
-buy: /buy-license/?product=audio-extract-tool
+buy: /shop/?product=audio-extract-tool
 # github: https://github.com/ykywz-python/
 doc: /docs/audio-extract-tool
 date: 2025-11-05T05:00:35+07:00

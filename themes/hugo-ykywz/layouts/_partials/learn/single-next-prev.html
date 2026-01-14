@@ -55,50 +55,55 @@
     {{ $nextPage = index $collectedAllPage (add $currentIndex 1) }}
 {{ end }}
 
-<div class="module-navigation">
+<div class="flex flex-col sm:flex-row justify-between gap-4 mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
     {{/* --- PREVIOUS BUTTON --- */}}
-    <div class="nav-prev">
+    <div class="w-full sm:w-1/2">
         {{ with $prevPage }}
-            <a href="{{ .RelPermalink }}" class="nav-button prev-button">
-                <i class="ri-arrow-left-line"></i>
+            <a href="{{ .RelPermalink }}" class="flex flex-col p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group h-full">
+                <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                    <i class="ri-arrow-left-line"></i> Sebelumnya
+                </span>
                 <!-- Prev: -->
-                {{ if .Params.section }}
-                    {{ .Params.section }}
-                {{ else }}
-                    {{ .LinkTitle }}
-                {{ end }}
+                <span class="font-medium text-gray-900 dark:text-white">
+                    {{ if .Params.section }}{{ .Params.section }}{{ else }}{{ .LinkTitle }}{{ end }}
+                </span>
             </a>
         {{ else }}
             {{ with .Parent }}
-                <a href="{{ .RelPermalink }}" class="nav-button">
-                    <i class="ri-arrow-left-s-line"></i>
-                    {{ if .Params.section }}
-                        {{ .Params.section }}
-                    {{ else }}
-                        {{ .Title }}
-                    {{ end }}
+                <a href="{{ .RelPermalink }}" class="flex flex-col p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group h-full">
+                    <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                        <i class="ri-arrow-left-line"></i> Kembali ke Modul
+                    </span>
+                    <span class="font-medium text-gray-900 dark:text-white">
+                        {{ if .Params.section }}{{ .Params.section }}{{ else }}{{ .Title }}{{ end }}
+                    </span>
                 </a>
             {{ end }}
         {{ end }}
     </div>
 
     {{/* --- NEXT BUTTON --- */}}
-    <div class="nav-next">
+    <div class="w-full sm:w-1/2">
         {{ with $nextPage }}
-            <a href="{{ .RelPermalink }}" class="nav-button next-button">
+            <a href="{{ .RelPermalink }}" class="flex flex-col items-end text-right p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group h-full">
+                <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                    Selanjutnya <i class="ri-arrow-right-line"></i>
+                </span>
                 <!-- Next: -->
-                {{ if .Params.section }}
-                    {{ .Params.section }}
-                {{ else }}
-                    {{ .LinkTitle }}
-                {{ end }}
-                <i class="ri-arrow-right-line"></i>
+                <span class="font-medium text-gray-900 dark:text-white">
+                    {{ if .Params.section }}{{ .Params.section }}{{ else }}{{ .LinkTitle }}{{ end }}
+                </span>
             </a>
         {{ else }}
-            <span class="nav-button disabled">
+             <div class="flex flex-col items-end text-right p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 opacity-50 h-full cursor-not-allowed">
+                <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1">
+                    Selesai <i class="ri-check-line"></i>
+                </span>
                 <!-- Next: End of Module -->
-                <i class="ri-arrow-right-s-line"></i>
-            </span>
+                <span class="font-medium text-gray-900 dark:text-white">
+                    Akhir Modul
+                </span>
+            </div>
         {{ end }}
     </div>
 </div>

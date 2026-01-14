@@ -1,25 +1,25 @@
 {{ if .Params.review }}
-<div class="project-testimonial">
-    <h2 class="section-title">
-        <i class="ri-feedback-line"></i>
+<div class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+        {{ partial "icons/chat-bubble-left-right.html" (dict "class" "w-8 h-8 text-indigo-600 dark:text-indigo-400") }}
         Testimoni Klien
     </h2>
 
     {{ range $index, $element := .Params.review }}
-        <div class="testimonial-card">
-            <div class="testimonial-content">
-                <p>
+        <div class="bg-gray-50 dark:bg-gray-800/50 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 mb-4 last:mb-0">
+            <div class="mb-6">
+                <p class="text-xl text-gray-600 dark:text-gray-300 italic leading-relaxed">
                     "{{ $element.content }}"
                 </p>
             </div>
-            <div class="testimonial-author">
-                <div class="author-info">
-                    <h4>{{ $element.author }}</h4>
-                    <p>{{ $element.from }}</p>
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">{{ $element.author }}</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">{{ $element.from }}</p>
                 </div>
-                <div class="testimonial-rating">
+                <div class="flex gap-1 text-yellow-400">
                     {{ range (seq $element.rating )}}
-                        <i class="ri-star-fill"></i>
+                        {{ partial "icons/star.html" (dict "class" "w-5 h-5") }}
                     {{ end }}
                 </div>
             </div>

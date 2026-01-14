@@ -1,4 +1,4 @@
 ---
 title: Jurnal Harian
-description: Sebuah tulisan berisi pemikiran pribadi, refleksi, dan pengalaman hidup.
+description: Tulisan berisi kegiatan harian, refleksi, dan pengalaman hidup.
 ---

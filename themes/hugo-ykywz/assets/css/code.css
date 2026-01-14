@@ -1,0 +1,34 @@
+/* Base code block styling */
+.chroma .lnt{color:#7d7d7d;user-select:none}
+.chroma .ln{color:#abb2bf}
+.chroma .lntd:nth-child(1) { /* code cell */
+    border-right: 1px solid var(--color-gray-600);
+    padding: 0;
+}
+.chroma .lntd:nth-child(1) .hl .lnt { /* code cell */
+    color: #f59e0b; 
+}
+.chroma .lntd:nth-child(2) pre { /* code cell */
+    padding-left: 0;
+}
+.chroma .lntd:nth-child(2) .hl { /* code cell */
+  background: rgba(245, 158, 11, 0.15); 
+}
+.chroma .k{color:#c678dd}
+.chroma .n{color:#e06c75}
+.chroma .o{color:#56b6c2}
+.chroma .p{color:#abb2bf}
+.chroma .s{color:#98c379}
+.chroma .c{color:#5c6370;font-style:italic}
+.chroma .l{color:#d19a66}
+.chroma .m{color:#d19a66}
+.chroma .f{color:#61afef}
+.chroma .g{color:#abb2bf}
+.chroma .x{color:#abb2bf}
+.code-copy-btn{position:absolute;right:8px;top:8px;background:rgba(255,255,255,0.1);border:none;border-radius:4px;color:#abb2bf;cursor:pointer;padding:4px 8px;font-size:0.8em;transition:all 0.2s}
+.code-copy-btn:hover{background:rgba(255,255,255,0.2);color:white}
+.highlight pre{padding:0px 0px 0px 10px;margin-bottom:0;margin-top:0;background-color:transparent!important;overflow:auto;font-family:'Courier New',Courier,monospace;white-space:pre;line-height:1.5;}
+.highlight > pre{padding: 20px;white-space: break-spaces;}
+.highlight{background-color:var(--color-gray-700);border-radius:8px;margin:1.5em 0;overflow:auto;font-family:'Fira Code','Consolas','Monaco',monospace;line-height:1.5;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+.dark .highlight{background-color: var(--color-gray-800);}
+.highlight table{width: 100%}

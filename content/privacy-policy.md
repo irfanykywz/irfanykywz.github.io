@@ -3,8 +3,8 @@ title: "Kebijakan Privasi"
 date: 2025-10-09T00:00:00+08:00 # Tanggal pembuatan halaman ini
 ---
 
-<div class="policy-intro">
-    <p style="margin: var(--space-2) 0 0 0;">Di <span style="color: var(--accent-primary); font-weight: bold;">irfanykywz</span>, kami menghargai privasi Anda, terutama karena kami menggunakan <strong>Google AdSense</strong> untuk menampilkan iklan. Kebijakan ini menjelaskan bagaimana data Anda dikumpulkan, digunakan, dan dibagikan, termasuk kaitannya dengan iklan.</p>
+<div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl border-l-4 border-blue-500 mb-8">
+    <p class="m-0">Di <span class="font-bold text-blue-600 dark:text-blue-400">irfanykywz</span>, kami menghargai privasi Anda, terutama karena kami menggunakan <strong>Google AdSense</strong> untuk menampilkan iklan. Kebijakan ini menjelaskan bagaimana data Anda dikumpulkan, digunakan, dan dibagikan, termasuk kaitannya dengan iklan.</p>
 </div>
 
 <h3>1. Informasi yang Kami Kumpulkan</h3>
@@ -30,11 +30,11 @@ date: 2025-10-09T00:00:00+08:00 # Tanggal pembuatan halaman ini
 
 <h3>5. Kontak Kami</h3>
 <p>
-	Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silahkan hubungi melalui <a href="/contact/" style="color: var(--accent-secondary);">halaman kontak</a>
+	Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silahkan hubungi melalui <a href="/contact/" class="text-indigo-600 dark:text-indigo-400 hover:underline">halaman kontak</a>
 </p>
 
-<hr style="border-color: var(--border-color); margin-top: var(--space-10); margin-bottom: var(--space-10);">
+<hr class="my-10 border-gray-200 dark:border-gray-700">
 
-<div class="disclaimer">
-<p style="margin: 0;"><strong>Diperbarui pada:</strong> 09 Oktober 2025</p>
+<div class="mt-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl text-center text-sm text-gray-500 dark:text-gray-400">
+<p class="m-0"><strong>Diperbarui pada:</strong> 09 Oktober 2025</p>
 </div>

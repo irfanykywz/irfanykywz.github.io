@@ -1,91 +1,18 @@
-<style>
-/* Gaya untuk komponen reaksi
-Menggunakan font Inter dan warna dari variabel Anda.
-*/
-.reaction-component {
-  display: inline-flex;
-  gap: var(--space-4); /* Jarak antar item reaksi */
-  padding: var(--space-2);
-  background-color: var(--bg-secondary); /* Latar belakang kotak reaksi */
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  font-family: var(--font-family);
-  border: 1px solid var(--border-color); /* Tambahkan border tipis agar lebih menonjol */
-}
-
-.reaction-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--space-2);
-  cursor: pointer;
-  border-radius: var(--radius-lg);
-  transition: background-color var(--transition-fast);
-}
-
-.reaction-item:hover {
-  background-color: var(--hover-bg);
-}
-
-.emoji {
-  font-size: 2rem; /* Ukuran emoji agar terlihat besar seperti gambar */
-  line-height: 1;
-  margin-bottom: var(--space-2); /* Jarak antara emoji dan angka */
-}
-
-.count {
-  font-size: 0.875rem; /* Ukuran font lebih kecil untuk hitungan */
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-/* Gaya untuk item reaksi yang "aktif" atau telah dipilih */
-.reaction-item.is-active {
-  /* Misalnya, beri highlight tipis atau gaya lain jika diperlukan */
-  /* background-color: var(--hover-bg); */ 
-}
-
-/* Gaya untuk mereplikasi visual cursor dari gambar (opsional)
-Ini hanyalah indikasi visual, bukan kursor asli
-*/
-.cursor-pointer {
-  position: absolute;
-  top: 50%;
-  left: -20px; /* Sesuaikan posisi agar tampak seperti menunjuk */
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 15px solid var(--text-primary); /* Bentuk segitiga menunjuk */
-  opacity: 0; /* Sembunyikan secara default */
-}
-
-/* Menampilkan cursor pointer di item aktif */
-.reaction-item.is-active .cursor-pointer {
-  opacity: 0.7; /* Tampilkan dan sedikit transparan */
-  z-index: 10;
-  /* Karena cursor di gambar menunjuk ke item pertama, saya tempatkan secara manual di sana */
-  /* Namun, dalam implementasi nyata, ini akan dihapus. */
-}
-</style>
-
 <div class="post-reactions" data-id='{{ .RelPermalink }}'>
-    <div class="reaction-component">
-        <div class="reaction-item" data-type="clap">
-            <span class="emoji" role="img" aria-label="Clapping Hands">👏</span>
-            <span class="count reaction-loading">0</span> 
+    <div class="inline-flex gap-4 p-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div class="reaction-item relative flex flex-col items-center p-2 cursor-pointer rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-gray-700" data-type="clap">
+            <span class="text-3xl mb-1 leading-none" role="img" aria-label="Clapping Hands">👏</span>
+            <span class="count reaction-loading text-sm font-semibold text-gray-900 dark:text-white">0</span> 
         </div>
 
-        <div class="reaction-item" data-type="wow">
-            <span class="emoji" role="img" aria-label="Surprised Face">😮</span>
-            <span class="count reaction-loading">0</span>
+        <div class="reaction-item relative flex flex-col items-center p-2 cursor-pointer rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-gray-700" data-type="wow">
+            <span class="text-3xl mb-1 leading-none" role="img" aria-label="Surprised Face">😮</span>
+            <span class="count reaction-loading text-sm font-semibold text-gray-900 dark:text-white">0</span>
         </div>
 
-        <div class="reaction-item" data-type="hmm">
-            <span class="emoji" role="img" aria-label="Face with Monocle">🧐</span>
-            <span class="count reaction-loading">0</span>
+        <div class="reaction-item relative flex flex-col items-center p-2 cursor-pointer rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-gray-700" data-type="hmm">
+            <span class="text-3xl mb-1 leading-none" role="img" aria-label="Face with Monocle">🧐</span>
+            <span class="count reaction-loading text-sm font-semibold text-gray-900 dark:text-white">0</span>
         </div>
     </div>
 </div>

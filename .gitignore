@@ -5,3 +5,6 @@ public
 
 *.mp4
 .video
+
+node_modules
+plan

@@ -3,16 +3,12 @@
 {{ $destination := .Destination | safeURL }}
 {{ $altText := .PlainText }}
 {{ $title := .Title }}
-
-<a href="{{ $destination }}"
-   class="glightbox"
-   data-title="{{ with $title }}{{ . }}{{ end }}"
-   data-description="{{ with $altText }}{{ . }}{{ end }}">
     
-    <img src="{{ $destination }}" 
-         alt="{{ $altText }}" 
-         {{ with $title }}title="{{ . }}"{{ end }}
-         loading="lazy" />
-</a>
+<img src="{{ $destination }}" class="cursor-pointer"
+   x-data 
+   @click="$store.lightbox.open('{{ $destination }}', '{{ $title }}', '{{ $altText }}')"
+   alt="{{ $altText }}" 
+   {{ with $title }}title="{{ . }}"{{ end }}
+   loading="lazy" />
 
 {{- /* Pastikan tidak ada newline berlebih */ -}}

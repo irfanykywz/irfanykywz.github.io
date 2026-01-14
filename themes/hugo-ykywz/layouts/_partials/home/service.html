@@ -1,24 +1,25 @@
-<section>
-    <div class="services container">
-        <h2 class="section-title">
-            🪓
+<section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-10 flex items-center gap-3">
             {{ .Params.servicetitle }}
         </h2>
-        <div class="services-grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {{- range $index, $element := .Params.service -}}
-                <div class="services-card">
-                    <div class="icon">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
+                    <div class="text-4xl mb-4">
                         {{ $element.icon }}
                     </div>
-                    <div class="info">
-                        <h3>
+                    <div class="space-y-3">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
                             {{ $element.title }}
                         </h3>
-                        {{ range $element.jobs }}
-                            <p>
-                                {{ . }}
-                            </p>
-                        {{ end }}
+                        <div class="space-y-2">
+                            {{ range $element.jobs }}
+                                <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">
+                                    {{ . }}
+                                </p>
+                            {{ end }}
+                        </div>
                     </div>
                 </div>
              {{ end }}

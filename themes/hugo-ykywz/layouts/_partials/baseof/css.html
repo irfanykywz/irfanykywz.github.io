@@ -1,10 +1,4 @@
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.1/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnlgEXFQqwcTC9AdkFIxhBlmoaFqYaIjq2ShhNwNao9AKaLUPMfwiBPL0ScxAtc+UYbHAgvd+sjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-{{- with resources.Get "css/main.css" }}
+{{- with resources.Get "css/output.css" }}
 	{{- if hugo.IsDevelopment }}
 		<link rel="stylesheet" href="{{ .RelPermalink }}">
 	{{- else }}	
@@ -13,3 +7,16 @@
 		{{- end }}
 	{{- end }}
 {{- end }}
+
+{{- with resources.Get "css/code.css" }}
+	{{- if hugo.IsDevelopment }}
+		<link rel="stylesheet" href="{{ .RelPermalink }}">
+	{{- else }}	
+		{{- with . | minify | fingerprint }}
+			<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+		{{- end }}
+	{{- end }}
+{{- end }}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />

@@ -9,7 +9,7 @@ project_url: projects/audio-extract-tool/
 
 ## Pembelian
 
-Anda dapat membeli lisensi Audio Extract Tool melalui [halaman pembelian](https://irfanykywz.web.id/buy-license/?product=audio-extract-tool). Setelah pembelian, Anda harus melakukan konfirmasi lewat whatsapp atau telegram untuk menerima tautan unduhan.
+Anda dapat membeli lisensi Audio Extract Tool melalui [halaman pembelian](/shop/?product=audio-extract-tool). Setelah pembelian, Anda harus melakukan konfirmasi lewat whatsapp atau telegram untuk menerima tautan unduhan.
 
 ## Persyaratan Sistem
 

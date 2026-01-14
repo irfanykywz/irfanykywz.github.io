@@ -1,73 +1,66 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/terms.css") }}
 {{ end }}
 
-
 {{ define "main" }}
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section class="py-16 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                🏷️ {{ .Title }}
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 mb-8">
+                Menampilkan {{ len .Pages }} konten dengan tag ini.
+            </p>
+            <a href="{{ $.Site.BaseURL }}tags/" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                <i class="ri-arrow-left-line"></i>
+                Kembali ke Daftar Tag
+            </a>
+        </div>
+    </section>
 
-    <main class="main">
-
-        <section class="tags-content">
-            <div class="container">
-
-
-                <div class="tag-content" id="tagContent">
-                    <div class="tag-header">
-                        <h2 id="tagTitle">Konten dengan Tag: <span id="currentTag">{{ .Title }}</span></h2>
-                        <a href="{{ $.Site.BaseURL }}tags/" class="close-tag-view" id="closeTagView">
-                            <i class="ri-arrow-left-line"></i>
-                            Kembali
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                {{ range .Pages }}
+                <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-300 flex flex-col h-full group">
+                    <div class="mb-4">
+                        <div class="flex flex-wrap gap-4 mb-3 text-sm text-gray-500 dark:text-gray-400">
+                            {{ $urls := urls.Parse .Path }}
+                            {{ $subs := index (split $urls "/") 1 | humanize }}
+                            <span class="flex items-center gap-1 capitalize">
+                                <i class="ri-article-line"></i>
+                                {{ $subs }}
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="ri-calendar-2-line"></i>
+                                {{ .Date | time.Format "2 Jan 2006" }}
+                            </span>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white leading-tight mb-2">
+                            <a href="{{ .RelPermalink }}" class="group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                {{ .LinkTitle }}
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 mb-6 flex-grow line-clamp-3 text-sm">
+                        {{ if isset .Params "description" }}
+                            {{ .Description }}
+                        {{ else if gt (countrunes (.Content | plainify)) 120 }}
+                            {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
+                        {{ else }}
+                            {{ .Content | plainify | safeHTML }}
+                        {{ end }}
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-end">
+                        <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
+                            Selengkapnya
+                            <i class="ri-arrow-right-line"></i>
                         </a>
                     </div>
-
-                    <div class="tag-results">
-
-                        <div class="results-content">
-                            <div class="tab-content active" id="allContent">
-                                <div class="content-grid" id="allResults">
-
-                                    {{ range .Pages }}
-                                    <div class="content-item">
-                                        <div class="content-meta">
-                                            {{ $urls := urls.Parse .Path }}
-                                            {{ $subs := index (split $urls "/") 1 | humanize }}
-                                            <span>
-                                                <i class="ri-article-line"></i>
-                                                {{ $subs }}
-                                            </span>
-                                            <span><i class="ri-calendar-2-line"></i> {{ .Date | time.Format ":date_medium" }} </span>
-                                            <span><i class="ri-time-line"></i> {{ printf "%d min read" .ReadingTime }}</span>
-                                        </div>
-                                        <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
-                                        <p>
-                                            {{ if isset .Params "description" }}
-                                                {{ .Description }}
-                                            {{ else if gt (countrunes (.Content | plainify)) 120 }}
-                                                {{ slicestr (.Content | plainify) 0 120 | safeHTML }}...
-                                            {{ else }}
-                                                {{ .Content | plainify | safeHTML }}
-                                            {{ end }}
-                                        </p>
-                                        <a href="{{ .RelPermalink }}" class="read-more">
-                                            <i class="ri-arrow-right-line"></i>
-                                            Selengkapnya
-                                        </a>
-                                    </div>
-                                    {{ end }}
-
-
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-
+                </article>
+                {{ end }}
             </div>
-        </section>
-
-    </main>
-
+        </div>
+    </section>
+</main>
 {{ end }}

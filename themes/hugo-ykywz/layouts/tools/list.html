@@ -1,91 +1,81 @@
 {{ define "head" }}
-  {{ partial "style.html" (dict "css" "css/tools.css") }}
 {{ end }}
 
 {{ define "main" }}
-    <main class="main">
-        <section class="tools-header">
-            <div class="container">
-                <h1 class="page-title">
-                    🔨
-                    {{.Title}}
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300"
+        x-data="{
+            search: '',
+            items: [
+                {{ range .Pages }}
+                {
+                    title: {{ .Title | lower | jsonify }},
+                    description: {{ .Params.description | default .Summary | lower | jsonify }},
+                    permalink: {{ .RelPermalink | jsonify }},
+                    displayTitle: {{ .Title | jsonify }},
+                    displayDesc: {{ .Params.description | default .Summary | jsonify }},
+                    icon: {{ or .Params.icon "ri-wrench-line" | jsonify }},
+                    date: {{ .Date | time.Format "2 January 2006" | jsonify }}
+                },
+                {{ end }}
+            ],
+            get hasResults() {
+                const s = this.search.toLowerCase();
+                return this.items.some(i => i.title.includes(s) || i.description.includes(s));
+            }
+        }">
+        
+        <section class="py-16 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                    🔨 {{.Title}}
                 </h1>
-                <p class="page-description">{{ .Description }}</p>
-                <div class="tools-search" role="search">
-                    <input id="toolsSearch" type="search" placeholder="Cari alat berdasarkan nama atau deskripsi..." aria-label="Cari alat">                    
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{{ .Description }}</p>
+                
+                <div class="max-w-2xl mx-auto mt-8 relative">
+                    <i class="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="search" x-model="search" placeholder="Cari alat..." 
+                        class="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all shadow-sm">
                 </div>
             </div>
         </section>
 
-		<section class="tools-section">
-            <div class="container">
-                <ul class="tools-list">
-                    {{ range .Pages }}
-                        <li class="tools-list-item">
-                            <a class="tool-card" href="{{ .RelPermalink }}">
-                                <div class="card-head">
-                                    <span class="card-icon">
-                                        {{ $icon := or .Params.icon "ri-wrench-line" }}
-                                        <i class="{{ $icon }}" aria-hidden="true"></i>
-                                    </span>
-                                    <div>
-                                        <div class="card-title">
-                                            <h2>
-                                                {{ .Title }}
-                                            </h2>
-                                        </div>
-                                        {{ with .Params.description }}
-                                            <div class="card-desc">{{ . }}</div>
-                                        {{ end }}
-                                    </div>
+		<section class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <template x-for="item in items">
+                        <a :href="item.permalink" 
+                           x-show="search === '' || item.title.includes(search.toLowerCase()) || item.description.includes(search.toLowerCase())"
+                           class="group block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                            
+                            <div class="flex items-start gap-4 mb-4">
+                                <div class="w-16 h-16 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-indigo-100 dark:border-indigo-900/50">
+                                    <i :class="item.icon" class="text-3xl"></i>
                                 </div>
-                                <div class="card-meta">
-                                    <span>
-                                        <i class="ri-calendar-2-line"></i>
-                                        {{ .Date | time.Format "2 January 2006" }}
-                                    </span>
-                                    <span>Buka →</span>
+                                <div>
+                                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" x-text="item.displayTitle"></h2>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400" x-text="item.date"></p>
                                 </div>
-                            </a>
-                        </li>
-                    {{ end }}
-                </ul>
-                <div id="noResults" class="no-results" hidden>Tidak ada alat yang cocok dengan pencarian.</div>
+                            </div>
+                            
+                            <p class="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4" x-text="item.displayDesc"></p>
+                            
+                            <div class="pt-4 border-t border-gray-100 dark:border-gray-700 flex items-center justify-end text-sm font-medium text-indigo-600 dark:text-indigo-400">
+                                <span class="flex items-center gap-1">Buka <i class="ri-arrow-right-line transition-transform group-hover:translate-x-1"></i></span>
+                            </div>
+                        </a>
+                    </template>
+                </div>
+                
+                <div x-show="!hasResults" x-transition class="text-center py-16" style="display: none;">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+                        <i class="ri-search-2-line text-2xl text-gray-400"></i>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-lg">Alat tidak ditemukan.</p>
+                </div>
             </div>
 		</section>
-
-
 	</main>
 {{ end }}
 
 {{ define "footer" }}
-
-    <script>
-        (function(){
-            const input = document.getElementById('toolsSearch');
-            const items = Array.from(document.querySelectorAll('.tools-list-item'));
-            const noResults = document.getElementById('noResults');
-
-            function normalize(s){ return (s||'').toLowerCase(); }
-
-            function filter(){
-                const q = normalize(input.value.trim());
-                let shown = 0;
-                items.forEach(li => {
-                    const title = normalize(li.querySelector('.card-title')?.innerText);
-                    const desc = normalize(li.querySelector('.card-desc')?.innerText);
-                    if(!q || title.includes(q) || desc.includes(q)){
-                        li.style.display = '';
-                        shown++;
-                    } else {
-                        li.style.display = 'none';
-                    }
-                });
-                noResults.hidden = shown > 0;
-            }
-
-            input.addEventListener('input', filter);
-        })();
-    </script>
-
 {{ end }}

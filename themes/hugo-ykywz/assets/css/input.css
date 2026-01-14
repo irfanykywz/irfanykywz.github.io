@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* baris ini untuk mengaktifkan dark mode via class .dark */
+@variant dark (&:where(.dark, .dark *));
+
+/* Konfigurasi Source: Deteksi file Hugo relatif dari file ini */
+@source "../../../../content";
+@source "../../../../layouts";
+@source "../../layouts";
+
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+/* Konfigurasi Tema */
+@theme {
+  --font-sans: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: 'JetBrains Mono','Fira Code',Consolas,monospace;
+  --color-primary: #3b82f6;
+  --color-chocolate: #D2691E;
+  --color-chocolate-dark: #8B4513;  
+}
+
+html {
+  font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}

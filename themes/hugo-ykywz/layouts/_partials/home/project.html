@@ -1,14 +1,16 @@
-<section>
-    <div class="project-section container">
-        <div class="section-title">        
-            <h2>        
+<section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-end mb-10">        
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3">                        
                 {{ .Params.projecttitle }}
             </h2>
 
-            <a href="{{ $.Site.BaseURL }}projects/">Selengkapnya</a>
+            <a href="{{ "projects/" | relURL }}" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium text-sm flex items-center gap-1 transition-colors">
+                Selengkapnya {{ partial "icons/arrow-right.html" (dict "class" "w-4 h-4") }}
+            </a>
         </div>
 
-        <div class="projects-grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {{ $pages := where site.RegularPages "Section" "eq" "projects" -}}
             {{ range first .Params.projectcount $pages }}
                 {{ partial "project/list-card.html" . }}

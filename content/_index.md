@@ -21,7 +21,7 @@ service:
         - "Membantu merawat dan memastikan perangkat keras (hardware) serta sistem operasi dan aplikasi (software) komputer berfungsi dengan optimal dan bebas masalah."
         - "Mendiagnosis dan memperbaiki berbagai masalah teknis pada jaringan, koneksi internet, perangkat lunak, dan keamanan dasar."
     - title: "Pengembangan Perangkat Lunak"
-      icon: "🧑‍💻"
+      icon: "🖥️"
       jobs: 
         - "Mengembangkan aplikasi desktop dan situs web, dengan teknologi terkini"
         - "Membuat skrip otomatisasi tugas-tugas berulang guna meningkatkan efisiensi kerja."        
@@ -94,7 +94,7 @@ education:
           # credential_id: "ABC-123"
           link: "https://www.google.com"
 # =====================================
-skill: true
+skill: false
 skilltitle: "☑️ Ruang Lingkup Kemampuan"
 skilltab:
     - name: "Non-Teknis"

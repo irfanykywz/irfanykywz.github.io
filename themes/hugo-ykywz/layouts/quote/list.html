@@ -1,20 +1,56 @@
 {{ define "head" }}
-  {{ partial "style.html" (dict "css" "css/quote.css") }}
+<style>
+    .quote-content p {
+        margin-bottom: 1rem;
+    }
+</style>
 {{ end }}
 
 {{ define "main" }}
-<main class="main">
-    <div class="quote-list-page">
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300"
+    x-data="{ 
+        activeFilter: new URLSearchParams(window.location.search).get('filter') || 'all',
+        updateFilter(filter) {
+            this.activeFilter = filter;
+            const url = new URL(window.location);
+            if (filter === 'all') {
+                url.searchParams.delete('filter');
+            } else {
+                url.searchParams.set('filter', filter);
+            }
+            window.history.pushState({}, '', url);
+        },
+        copyToClipboard(text, $el) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalIcon = $el.innerHTML;
+                $el.innerHTML = '<i class=\'ri-check-line text-green-500\'></i>';
+                setTimeout(() => {
+                    $el.innerHTML = originalIcon;
+                }, 2000);
+            });
+        }
+    }"
+    @popstate.window="activeFilter = new URLSearchParams(window.location.search).get('filter') || 'all'">
 
-        <header class="quote-list-header">
-            <h1>🌟 {{ .Title }}</h1>
-            <p>
+    <div class="max-w-5xl mx-auto px-4 py-16">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                🌟 {{ .Title }}
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 {{ .Description }}
             </p>
         </header>
 
-        <div class="quote-filters" aria-label="Filter kutipan">
-            <button class="filter-btn active" data-filter="all">Semua</button>
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
+            <button 
+                @click="updateFilter('all')"
+                :class="activeFilter === 'all' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
+                Semua
+            </button>
+            
             {{ $allCategories := slice }}
             {{ range .Pages }}
                 {{ with .Params.categories }}
@@ -24,30 +60,44 @@
             
             {{ $uniqueCategories := uniq (sort $allCategories) }}
             {{ range $uniqueCategories }}
-                <button class="filter-btn" data-filter="{{ . }}">{{ . }}</button>
+                <button 
+                    @click="updateFilter('{{ . }}')"
+                    :class="activeFilter === '{{ . }}' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                    class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
+                    {{ . }}
+                </button>
             {{ end }}
         </div>
 
-        <div class="quotes-grid">
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
             {{ range .Pages }}
-            <article class="quote-card" data-cats="{{ delimit .Params.categories "|" }}">
-                <div class="quote-content">{{ .Content | safeHTML }}</div>
-                <div class="quote-meta">
-                    <div class="quote-attribution">
-                        <div class="quote-author">
+            <article 
+                x-show="activeFilter === 'all' || '{{ delimit .Params.categories "|" }}'.split('|').includes(activeFilter)"
+                x-transition.opacity.duration.300ms
+                class="break-inside-avoid bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300">
+                
+                <div class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 quote-content text-lg font-sans">
+                    {{ .Content | safeHTML }}
+                </div>
+                
+                <div class="flex items-end justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
+                    <div>
+                        <div class="font-bold text-gray-900 dark:text-white">
                         {{ with .Params.author }}
-                            - {{ . }}
+                            {{ . }}
                         {{ else }}
-                            — Anonymous
+                            Anonymous
                         {{ end }}
                         </div>
-                        <div class="quote-date">{{ .Date | time.Format "2 January 2006" }}</div>
+                        <div class="text-xs text-gray-400 mt-1">{{ .Date | time.Format "2 January 2006" }}</div>
                     </div>
-                    <button class="quote-copy" title="Salin kutipan" data-target="quote-{{ .File.UniqueID }}">
-                        <i class="ri-file-copy-line"></i>
+                    <button 
+                        @click='copyToClipboard({{ .Plain | jsonify }}, $el)'
+                        class="p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700" 
+                        title="Salin kutipan">
+                        <i class="ri-file-copy-line text-xl"></i>
                     </button>
                 </div>
-                <textarea id="quote-{{ .File.UniqueID }}" class="quote-hidden">{{ .Plain }}</textarea>
             </article>
             {{ end }}
         </div>
@@ -56,88 +106,4 @@
 {{ end }}
 
 {{ define "footer" }}
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function(){
-        const cards = Array.from(document.querySelectorAll('.quote-card'));
-        const filtersContainer = document.querySelector('.quote-filters');
-
-        function applyFilter(filter) {
-            // Set active class on the correct button
-            filtersContainer.querySelectorAll('.filter-btn').forEach(function(b) {
-                b.classList.remove('active');
-            });
-            const activeBtn = filtersContainer.querySelector(`.filter-btn[data-filter="${filter}"]`);
-            if (activeBtn) {
-                activeBtn.classList.add('active');
-            }
-
-            // Show or hide cards based on the filter
-            cards.forEach(function(c) {
-                const cats = c.getAttribute('data-cats') || '';
-                const shouldShow = (filter === 'all') || cats.split('|').includes(filter);
-                c.style.display = shouldShow ? '' : 'none';
-            });
-        }
-
-        // Filter logic
-        filtersContainer.addEventListener('click', function(e){
-            if(!e.target || !e.target.classList.contains('filter-btn')) return;
-            
-            const filter = e.target.getAttribute('data-filter');
-            applyFilter(filter);
-
-            // Update URL without reloading the page
-            const url = new URL(window.location);
-            if (filter === 'all') {
-                url.searchParams.delete('filter');
-            } else {
-                url.searchParams.set('filter', filter);
-            }
-            window.history.pushState({}, '', url);
-        });
-
-        // Copy logic (delegated)
-        document.addEventListener('click', function(e){
-        var copyButton = e.target.closest('.quote-copy');
-        if(copyButton){
-            var id = copyButton.getAttribute('data-target');
-            var ta = document.getElementById(id);
-            if(!ta) return;
-
-            var originalContent = copyButton.innerHTML;
-            var successContent = '<i class="ri-check-line"></i>';
-
-            function showSuccess(button) {
-                button.innerHTML = successContent;
-                setTimeout(function() {
-                    button.innerHTML = originalContent;
-                }, 1200);
-            }
-
-            var text = ta.value || ta.innerText || ta.textContent;
-            if(navigator.clipboard){ 
-                navigator.clipboard.writeText(text).then(function() { showSuccess(copyButton); }); 
-            }
-            else {
-                ta.select(); 
-                try { 
-                    document.execCommand('copy'); 
-                    showSuccess(copyButton);
-                } catch(err) {
-                    console.warn(err)
-                }
-            }
-        }
-        });
-
-        // On page load, check for a filter in the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const filterFromUrl = urlParams.get('filter');
-        if (filterFromUrl) {
-            applyFilter(filterFromUrl);
-        }
-    });
-    </script>
-
 {{ end }}

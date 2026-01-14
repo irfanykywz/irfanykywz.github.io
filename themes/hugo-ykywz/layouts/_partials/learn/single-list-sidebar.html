@@ -1,66 +1,52 @@
-<aside class="sidebar" id="sidebar">
-    <h2 class="sidebar-title">
-        {{ .Title }}
-    </h2>
-    <ul class="lesson-list">
+<h2 class="font-bold text-gray-900 dark:text-white mb-4 px-2">
+    {{ .Title }}
+</h2>
+<ul class="space-y-1">
 
-        <li class="lesson-item">
-            <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                </svg>
-
+    <li>
+        <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
+            <i class="ri-home-4-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                 {{ if .Params.section }}
                     {{ .Params.section }}
                 {{ else }}
                     {{ .Title }}
                 {{ end }}
             </a>
-        </li>
+    </li>
 
-        {{ $sortedPosts := sort .Data.Pages "Weight" }}
-        {{ $first := first 1 $sortedPosts}}
-        {{ range $sortedPosts }}
-            {{ if not .IsSection }}
-                <li class="lesson-item">
-                        <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                            <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-
+    {{ $sortedPosts := sort .Data.Pages "Weight" }}
+    {{ range $sortedPosts }}
+        {{ if not .IsSection }}
+            <li>
+                <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
+                    <i class="ri-file-text-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                             {{ if .Params.section }}
                                 {{ .Params.section }}
                             {{ else }}
                                 {{ .Title }}
                             {{ end }}
                         </a>
-                </li>
-            {{ else }}
-                <li style="margin: 20px 0">
-                    <strong>{{ .Title }}</strong>
-                    {{ $sortedPosts := sort .Data.Pages "Weight" }}
-                    {{ $first := first 1 $sortedPosts}}
-                    <ul class="lesson-list">
-                        {{ range $sortedPosts }}
-                            <li class="lesson-item">
-                                <a href="{{ .RelPermalink }}" class="lesson-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                                    <svg class="lesson-icon {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                    </svg>
-
+            </li>
+        {{ else }}
+            <li class="mt-4 mb-2 px-2">
+                <strong class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ .Title }}</strong>
+            </li>
+            {{ $sortedPosts := sort .Data.Pages "Weight" }}
+            <ul class="space-y-1 border-l border-gray-100 dark:border-gray-800 ml-2 pl-2">
+                {{ range $sortedPosts }}
+                    <li>
+                        <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
+                            <i class="ri-file-text-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                                     {{ if .Params.section }}
                                         {{ .Params.section }}
                                     {{ else }}
                                         {{ .Title }}
                                     {{ end }}
                                 </a>
-                            </li>
-                        {{ end }}
-                    </ul>
-                </li>
-
-            {{ end }}
+                    </li>
+                {{ end }}
+            </ul>
         {{ end }}
+    {{ end }}
 
-    </ul>
-</aside>
+</ul>

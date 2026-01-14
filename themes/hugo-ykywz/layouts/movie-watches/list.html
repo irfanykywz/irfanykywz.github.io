@@ -1,27 +1,68 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/movie-watches.css") }}
 {{ end }}
 
 {{ define "main" }}
-    <main class="main">
-        <section class="page-header">
-            <div class="container">
-                <h1 class="page-title">
-                    <i class="ri-movie-line"></i>
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300"
+        x-data="{
+            search: new URLSearchParams(window.location.search).get('search') || '',
+            genre: new URLSearchParams(window.location.search).get('genre') || 'all',
+            
+            updateUrl() {
+                const url = new URL(window.location);
+                if (this.search) url.searchParams.set('search', this.search);
+                else url.searchParams.delete('search');
+                
+                if (this.genre !== 'all') url.searchParams.set('genre', this.genre);
+                else url.searchParams.delete('genre');
+                
+                window.history.pushState({}, '', url);
+            },
+
+            items: [
+                {{ range .Pages }}
+                {
+                    title: {{ .Title | lower | jsonify }},
+                    genres: {{ .Params.genres | default (slice) | jsonify }}
+                },
+                {{ end }}
+            ],
+
+            get hasResults() {
+                const s = this.search.toLowerCase();
+                return this.items.some(i => {
+                    return (this.genre === 'all' || i.genres.map(g => g.toLowerCase()).includes(this.genre)) &&
+                           (this.search === '' || i.title.includes(s));
+                });
+            }
+        }"
+        @popstate.window="
+            search = new URLSearchParams(window.location.search).get('search') || '';
+            genre = new URLSearchParams(window.location.search).get('genre') || 'all';
+        ">
+        <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                    <i class="ri-movie-line text-indigo-600 dark:text-indigo-400"></i>
                     {{.Title}}
                 </h1>
-                <p class="page-description">{{ .Description }}</p>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{{ .Description }}</p>
             </div>
         </section>
 
-        <section class="movie-watches">
-
-            <div class="container">
-                <div class="controls">
-                    <input type="search" id="search-input" class="search-input" placeholder="Cari Judul Film...">
+        <section class="py-16">
+            <div class="container mx-auto px-4">
+                
+                <!-- Controls -->
+                <div class="flex flex-col md:flex-row gap-4 mb-12 max-w-4xl mx-auto">
+                    <div class="relative flex-grow">
+                        <i class="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="search" x-model="search" @input.debounce.300ms="updateUrl()" placeholder="Cari Judul Film..." 
+                            class="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all shadow-sm">
+                    </div>
                     
-                    <div class="filter-group">
-                        <select id="genre-filter" class="filter-select">
+                    <div class="relative min-w-[200px]">
+                        <i class="ri-filter-3-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <select x-model="genre" @change="updateUrl()" class="w-full pl-11 pr-10 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none appearance-none cursor-pointer shadow-sm">
                             <option value="all">Semua Genre</option>                            
                             {{ $allGenres := slice }}
                             {{ range .Pages }}
@@ -34,86 +75,59 @@
                                 <option value="{{ . | lower }}">{{ . | humanize | title }}</option>
                             {{ end }}
                         </select>
-
+                        <i class="ri-arrow-down-s-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
                     </div>
-                    
                 </div>
 
-                <div class="movie-list" id="movie-list">
+                <!-- Movie Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                     {{ range .Pages }}
-                    <a href="{{ .RelPermalink }}" class="movie-card-link">
-                        <div class="movie-card" data-title="{{ .Title }}" data-genre="{{ delimit .Params.genres " " }}" data-rating="{{ .Params.rating }}">
-                            <img src="{{ .Params.poster }}" alt="Poster Film {{ .Title }}" class="movie-poster">
-                            <div class="movie-content">
-                                <div class="watched-badge" data-status="{{ .Params.status | lower }}">{{ .Params.status }}</div>
-                                <h2 class="movie-title">{{ .Title }}</h2>
-                                <p class="movie-year">Tahun Rilis: {{ .Params.year }}</p>
-                                <p class="movie-genre">Genre: {{ delimit .Params.genres ", " }}</p>
-                                <div class="movie-rating">
-                                    <span class="rating-star">⭐</span>
-                                    <span class="rating-text">{{ .Params.rating }}/10</span>
-                                </div>
+                    <a href="{{ .RelPermalink }}" 
+                       x-show='(genre === "all" || {{ .Params.genres | default (slice) | jsonify }}.map(g => g.toLowerCase()).includes(genre)) && (search === "" || {{ .Title | lower | jsonify }}.includes(search.toLowerCase()))'
+                       class="group block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        
+                        <div class="relative aspect-[2/3] overflow-hidden bg-gray-100 dark:bg-gray-700">
+                            <img src="{{ .Params.poster }}" alt="Poster Film {{ .Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            
+                            <div class="absolute top-2 right-2">
+                                <span class="px-2 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-bold rounded-md flex items-center gap-1">
+                                    <i class="ri-star-fill text-yellow-400"></i> {{ .Params.rating }}
+                                </span>
+                            </div>
+
+                            {{ if eq (lower .Params.status) "setengah menonton" }}
+                            <div class="absolute bottom-0 left-0 right-0 bg-indigo-600/90 text-white text-xs font-bold py-1 text-center backdrop-blur-sm">
+                                Setengah Menonton
+                            </div>
+                            {{ else if eq (lower .Params.status) "belum ditonton" }}
+                            <div class="absolute bottom-0 left-0 right-0 bg-gray-800/90 text-white text-xs font-bold py-1 text-center backdrop-blur-sm">
+                                Belum Ditonton
+                            </div>
+                            {{ end }}
+                        </div>
+
+                        <div class="p-4">
+                            <h2 class="text-base font-bold text-gray-900 dark:text-white leading-tight mb-1 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{{ .Title }}</h2>
+                            <div class="text-xs text-gray-500 dark:text-gray-400 flex flex-wrap gap-x-2 gap-y-1">
+                                <span>{{ .Params.year }}</span>
+                                <span>•</span>
+                                <span class="truncate">{{ index .Params.genres 0 | humanize | title }}</span>
                             </div>
                         </div>
                     </a>
                     {{ end }}
-                </div>
-                <div class="not-found" id="not-found" style="display: none;">
-                    <p>Film yang Anda cari tidak ditemukan.</p>
+                    <div x-show="!hasResults" x-transition class="col-span-full text-center py-16" style="display: none;">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+                            <i class="ri-film-line text-2xl text-gray-400"></i>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-lg">Film tidak ditemukan.</p>
+                    </div>
                 </div>
 
             </div>
         </section>
-
-
     </main>
-
 {{ end }}
 
 {{ define "footer" }}
-
-    <script>
-    function filterMovies() {
-        const searchString = document.getElementById('search-input').value.toLowerCase();
-        const genreFilter = document.getElementById('genre-filter').value.toLowerCase();
-        const cardLinks = document.querySelectorAll('.movie-card-link');
-        const notFoundMessage = document.getElementById('not-found');
-        
-        let visibleMovies = 0;
-
-        cardLinks.forEach(link => {
-            const card = link.querySelector('.movie-card');
-            const title = card.getAttribute('data-title').toLowerCase();
-            const genres = card.getAttribute('data-genre').toLowerCase();
-            
-            let matchesSearch = title.includes(searchString);
-            let matchesGenre = (genreFilter === 'all') || genres.includes(genreFilter);
-
-            if (matchesSearch && matchesGenre) {
-                link.classList.remove('hidden');
-                visibleMovies++;
-            } else {
-                link.classList.add('hidden');
-            }
-        });
-
-        if (visibleMovies === 0) {
-            notFoundMessage.style.display = 'block';
-        } else {
-            notFoundMessage.style.display = 'none';
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('search-input');
-        const genreFilter = document.getElementById('genre-filter');
-
-        searchInput.addEventListener('input', filterMovies);
-        genreFilter.addEventListener('change', filterMovies);
-
-        // Initial filter on page load
-        filterMovies();
-    });
-    </script>
-
 {{ end }}

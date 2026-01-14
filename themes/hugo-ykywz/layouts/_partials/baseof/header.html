@@ -1,46 +1,65 @@
-<header class="header">
-    <div class="nav">
-        <button class="offcanvas-button mobile-nav-toggle toggleOffcanvasBtn" aria-label="Toggle Menu">
-            <i class="ri-apps-2-line"></i>
+<header 
+    x-data="{ 
+        visible: true, 
+        lastScrollTop: 0,
+        scroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > this.lastScrollTop && scrollTop > 50) {
+                this.visible = false;
+            } else {
+                this.visible = true;
+            }
+            this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+    }"
+    @scroll.window="scroll()"
+    :class="visible ? 'translate-y-0' : '-translate-y-full'"
+    class="sticky top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300">
+    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+        <!-- Mobile Menu Button -->
+        <button @click="$store.nav.toggle()" type="button" class="p-2 text-2xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors me-1" aria-label="Toggle Menu">
+            <i class="ri-menu-4-line"></i>
         </button>
 
-        <div class="brand">
-            <a href="{{ .Site.BaseURL }}">
+        <!-- Brand -->
+        <div class="flex-shrink-0">
+            <a href="{{ .Site.BaseURL }}" class="block">
                 {{/* natal  */}}
                 {{ if eq (now.Format "01") "12" }}
-                    <img src='{{ "logo-natal.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="brand-logo">                
+                    <img src='{{ "logo-natal.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="h-8 w-auto">                
                 {{/* ramadhan */}}
                 {{ else if eq (now.Format "01") "02" }}
-                    <img src='{{ "logo-ramadhan.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="brand-logo">
+                    <img src='{{ "logo-ramadhan.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="h-8 w-auto">
                 {{ else }}
-                    <img src='{{ "logo.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="brand-logo">
+                    <img src='{{ "logo.avif" | relURL }}' alt="{{ .Site.Title }} logo" class="h-8 w-auto">
                 {{ end }}
             </a>
         </div>
 
-        <nav class="nav-links desktop-nav">
-            
-            {{ range .Site.Menus.main }}
-            
-                {{ $menu_item_url := .URL | relLangURL }}
-                {{/* {{ $menu_item_url }} */}}
+        <div class="flex-grow hidden md:flex"></div>
 
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-8">
+            {{ range .Site.Menus.main }}
+                {{ $menu_item_url := .URL | relLangURL }}
                 {{ $page_url := $.Page.RelPermalink | relLangURL }}
                 {{ $page_split := index (split $page_url "/") 1 }}
-                {{/* {{ $page_split }} */}}
-
                 {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
                 
-                <a href="{{ .URL | relLangURL }}" class='nav-link {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}active{{ end }}'>
+                <a href="{{ .URL | relLangURL }}" class='flex items-center gap-2 text-sm font-medium transition-colors {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400{{ end }}'>
                     <i class="{{ .Pre }}"></i>
                     <span>{{ .Name }}</span>
                 </a>
             {{ end}}
-
         </nav>
+
+        <div class="flex-grow hidden md:flex"></div>
         
-        <div class="search">
-            <a href="/search" class='search-button {{ if eq .Page.RelPermalink "/search/" }}active{{ end }}' aria-label="Search"><i class="ri-search-line"></i></a>
-        </button>
+        <!-- Search -->
+        <div class="flex items-center">
+            <a href="/search" class='p-2 text-xl transition-colors {{ if eq .Page.RelPermalink "/search/" }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400{{ end }}' aria-label="Search">
+                <i class="ri-search-line"></i>
+            </a>
+        </div>
     </div>
 </header>

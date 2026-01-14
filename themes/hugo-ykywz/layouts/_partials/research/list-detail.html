@@ -1,31 +1,30 @@
-<main class="main">
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
 
-    <section class="detail-header">
-        <div class="container">
-            <nav class="breadcrumb">
-                <a href="{{ $.Site.BaseURL }}research/">
-                    🧪
-                    Research
+    <section class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                <a href="{{ $.Site.BaseURL }}research/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1">
+                    🧪 Research
                 </a>
                 <i class="ri-arrow-right-s-line"></i>
-                <span>{{ .Title }}</span>
+                <span class="text-gray-900 dark:text-white font-medium truncate">{{ .Title }}</span>
             </nav>
         </div>
     </section>
 
-    <article class="detail-content">
-        <div class="container">
-            <div class="research-detail">
+    <article class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
                 <!-- Research Hero Section -->
-                <header class="research-hero">
-                    <div class="research-hero-content">
-                        <h1 class="research-title">{{ .Title }}</h1>
-                        <p class="research-subtitle">{{ .Description }}</p>
+                <header class="mb-12 text-center">
+                    <div class="p-8 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700">
+                        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ .Title }}</h1>
+                        <p class="text-xl text-gray-600 dark:text-gray-300">{{ .Description }}</p>
                     </div>
                 </header>
 
                 <!-- Research Content -->
-                <div class="research-body">
+                <div class="space-y-8">
                     {{ range .Pages }}
                         {{ if .Params.type }}
 
@@ -46,9 +45,9 @@
                 </div>
 
                 <!-- Research Footer -->
-                <footer class="research-footer">
-                    <div class="research-navigation">
-                        <a href="javascript:window.history.go(-1);" class="nav-button">
+                <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex justify-start">
+                        <a href="javascript:window.history.go(-1);" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
                             <i class="ri-arrow-left-line"></i>
                             Kembali
                         </a>

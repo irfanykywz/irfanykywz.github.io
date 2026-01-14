@@ -3,8 +3,7 @@ title: Gagal Build Pyinstaller karena subfolder memiliki karakter []
 slug: gagal-build-pyinstaller
 date: 2025-06-30T15:59:43+07:00
 draft: false
-categories: Troubleshooting
-tags: ['Python']
+tags: ['python', 'fix error']
 ---
 
 

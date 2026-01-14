@@ -9,7 +9,7 @@ project_url: projects/promise-ety/
 
 ## Pembelian
 
-Anda dapat membeli lisensi Promise ETY melalui [halaman pembelian](https://irfanykywz.web.id/buy-license/?product=promise-ety). Setelah pembelian, Anda harus melakukan konfirmasi lewat whatsapp atau telegram untuk menerima tautan unduhan.
+Anda dapat membeli lisensi Promise ETY melalui [halaman pembelian](/shop/?product=promise-ety). Setelah pembelian, Anda harus melakukan konfirmasi lewat whatsapp atau telegram untuk menerima tautan unduhan.
 
 ## Persyaratan Sistem
 

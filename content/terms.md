@@ -3,8 +3,8 @@ title: "Syarat & Ketentuan"
 date: 2025-10-09T00:00:00+08:00 
 ---
 
-<div class="terms-intro">
-    <p style="margin: var(--space-2) 0 0 0;">Ketentuan ini mengatur penggunaan Layanan di <span style="color: var(--accent-primary); font-weight: bold;">irfanykywz</span>. Dengan mengakses atau menggunakan Layanan, Anda setuju untuk terikat oleh Ketentuan ini.</p>
+<div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-xl border-l-4 border-green-500 mb-8">
+    <p class="m-0">Ketentuan ini mengatur penggunaan Layanan di <span class="font-bold text-indigo-600 dark:text-indigo-400">irfanykywz</span>. Dengan mengakses atau menggunakan Layanan, Anda setuju untuk terikat oleh Ketentuan ini.</p>
 </div>
 
 <h3>1. Penerimaan Ketentuan</h3>
@@ -40,6 +40,6 @@ date: 2025-10-09T00:00:00+08:00
 <h3>7. Perubahan Ketentuan</h3>
 <p>Kami berhak memodifikasi Ketentuan ini kapan saja. Perubahan akan berlaku segera setelah dipublikasikan di halaman ini. Dengan terus menggunakan Layanan setelah perubahan, Anda menyetujui Ketentuan yang direvisi.</p>
 
-<div class="disclaimer">
-<p style="margin: 0;"><strong>Diperbarui pada:</strong> 05 November 2025</p>
+<div class="mt-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl text-center text-sm text-gray-500 dark:text-gray-400">
+<p class="m-0"><strong>Diperbarui pada:</strong> 05 November 2025</p>
 </div>

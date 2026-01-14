@@ -1,23 +1,17 @@
 {{ define "head" }}
-    {{ partial "style.html" (dict "css" "css/pages.css") }}
 {{ end }}
 
 {{ define "main" }}
-
-<main class="main">
-
-<section class="detail-content">
-
-
-    <div class="container">
-
-        <h1>🔒 {{ .Title }}</h1>
-
-        {{ .Content }}
-
-    </div>
-
-</section>    
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                <span>🔒</span> {{ .Title }}
+            </h1>
+            <div class="prose prose-lg dark:prose-invert max-w-none">
+                {{ .Content }}
+            </div>
+        </div>
+    </section>    
 </main>
-
 {{ end }}
