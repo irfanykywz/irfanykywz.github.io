@@ -4,29 +4,30 @@
 {{ define "main" }}
 <div class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
     <div class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-        <div class="container mx-auto px-4 py-4">
+        <div class="container max-w-6xl mx-auto px-4 py-4">
             <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                <a href="{{ .CurrentSection.RelPermalink }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <a href="{{ .CurrentSection.RelPermalink }}" class="flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                    <i class="icon-[ri--movie-line] text-indigo-600 dark:text-indigo-400"></i>
                     {{ with .Parent }}{{ .Title }}{{ end }}
                 </a>
-                <i class="ri-arrow-right-s-line"></i>
+                <i class="icon-[ri--arrow-right-s-line]"></i>
                 <span class="text-gray-900 dark:text-white font-medium truncate">{{ .Title }}</span>
             </nav>
         </div>
     </div>
 
-    <div class="container mx-auto px-4 py-12">
+    <div class="container max-w-6xl mx-auto px-4 py-12">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-            <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-0">
+            <div class="grid grid-cols-1 md:grid-cols-[400px_1fr] md:h-[600px] gap-0">
                 
                 <!-- Poster -->
-                <div class="relative bg-gray-100 dark:bg-gray-700 h-[450px] md:h-full">
+                <div class="relative bg-gray-100 dark:bg-gray-900 h-[500px] md:h-full">
                     <img src="{{ .Params.poster }}" alt="Poster Film {{ .Title }}" class="absolute inset-0 w-full h-full object-cover">
                 </div>
 
                 <!-- Content -->
-                <div class="p-8 md:p-10 flex flex-col">
-                    <div class="mb-6">
+                <div class="p-8 md:p-10 flex flex-col h-full overflow-hidden">
+                    <div class="flex-grow overflow-y-auto pr-4">
                         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">{{ .Title }}</h1>
                         
                         <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-600 dark:text-gray-300 mb-6">
@@ -41,7 +42,7 @@
 
                         <div class="flex items-center gap-4 mb-8">
                             <div class="flex items-center gap-2 px-3 py-1.5 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-100 dark:border-yellow-900/30 rounded-lg">
-                                <i class="ri-star-fill text-yellow-400"></i>
+                                <i class="icon-[ri--star-fill] text-yellow-400"></i>
                                 <span class="font-bold text-gray-900 dark:text-white">{{ .Params.rating }}/10</span>
                             </div>
                             
@@ -66,9 +67,9 @@
                         </div>
                     </div>
 
-                    <div class="mt-auto pt-8">
+                    <div class="mt-auto pt-8 border-t border-gray-100 dark:border-gray-700 flex-shrink-0">
                         <a href="{{ .CurrentSection.RelPermalink }}" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors">
-                            <i class="ri-arrow-left-line"></i>
+                            <i class="icon-[ri--arrow-left-line]"></i>
                             Kembali ke Daftar Film
                         </a>
                     </div>

@@ -1,6 +1,6 @@
 ---
 title: Kontak
-description: terhubung dengan saya kapan saja
+description: Mari berdiskusi tentang peluang kerja, kolaborasi teknis, atau solusi IT
 email: irfanyouth@gmail.com
 phone: +6281389215100
 whatsapp: https://api.whatsapp.com/send?phone=6281389215100&text=Halo, Saya dapat kontak dari website.

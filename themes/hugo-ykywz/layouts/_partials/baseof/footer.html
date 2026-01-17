@@ -1,5 +1,5 @@
-<footer x-data class="py-12 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-auto">
-    <div class="container mx-auto px-4">
+<footer class="py-12 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-auto">
+    <div class="container max-w-6xl mx-auto px-4">
         <div class="flex flex-col items-center text-center gap-6">            
             <div class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed space-y-2">
                 <p>
@@ -12,8 +12,8 @@
                 <p class="flex items-center justify-center gap-2">
                     <span>Menggunakan</span>
                     <a target="_blank" rel="nofollow" href="https://gohugo.io" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"> Hugo {{ hugo.Version }}</a>
-                    <a target="_blank" href="{{ "index.xml" | relURL }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="RSS Feed">
-                        {{ partial "icons/rss.html" (dict "class" "w-4 h-4") }}
+                    <a target="_blank" href="{{ "index.xml" | relURL }}" class="inline-flex hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="RSS Feed">
+                        <span class="icon-[ri--rss-line] w-4 h-4 text-orange-600"></span>
                     </a>
                 </p>
                 <p>
@@ -27,99 +27,6 @@
                 </p>
             </div>
 
-            <!-- Fixed Theme Toggle -->
-            <div class="fixed bottom-24 right-4 z-40 md:bottom-8 md:right-8">
-                <button @click="$store.theme.toggle()" class="w-12 h-12 bg-white dark:bg-gray-800 text-gray-800 dark:text-yellow-300 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 focus:outline-none" aria-label="Toggle theme">
-                    <span x-show="!$store.theme.isDark">
-                        {{ partial "icons/moon.html" (dict "class" "w-6 h-6 text-gray-600") }}
-                    </span>
-                    <span x-show="$store.theme.isDark" style="display: none;">
-                        {{ partial "icons/sun.html" (dict "class" "w-6 h-6 text-yellow-400") }}
-                    </span>
-                </button>
-            </div>
-
         </div>
     </div>
 </footer>
-
-<!-- Offcanvas Backdrop -->
-<div 
-    x-data
-    x-show="$store.nav.isOpen" 
-    x-transition.opacity 
-    @click="$store.nav.close()" 
-    class="fixed inset-0 bg-black/50 z-[60]" 
-    style="display: none;">
-</div>
-
-<!-- Offcanvas Menu -->
-<div 
-    x-data
-    x-show="$store.nav.isOpen"
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="-translate-x-full"
-    x-transition:enter-end="translate-x-0"
-    x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="translate-x-0"
-    x-transition:leave-end="-translate-x-full"
-    class="fixed top-0 bottom-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-gray-900 z-[70] shadow-2xl h-full flex flex-col" 
-    role="dialog" aria-modal="true" aria-labelledby="offcanvasTitle"
-    style="display: none;">
-    <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800 flex-shrink-0">
-        <h5 class="text-lg font-bold text-gray-900 dark:text-white" id="offcanvasTitle">Menu Lainnya</h5>
-        <button @click="$store.nav.close()" type="button" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors" aria-label="Tutup Navigasi">
-            {{ partial "icons/close.html" (dict "class" "w-6 h-6") }}
-        </button>
-    </div>
-    <div class="p-4 overflow-y-auto">
-        <nav class="space-y-1">
-            {{ range .Site.Menus.footer }}
-                {{ $menu_item_url := .URL | relLangURL }}
-                {{ $page_url := $.Page.RelPermalink | relLangURL }}
-                {{ $page_split := index (split $page_url "/") 1 }}
-                {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
-
-                <a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}" href="{{ .URL | relLangURL }}">
-                    {{ .Name | safeHTML  }}
-                </a>
-            {{ end}}
-        </nav>
-    </div>
-</div>
-
-<!-- Bottom Nav (Mobile) -->
-<nav 
-    x-data="{ 
-        visible: true, 
-        lastScrollTop: 0,
-        scroll() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > this.lastScrollTop && scrollTop > 100) {
-                this.visible = false;
-            } else {
-                this.visible = true;
-            }
-            this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }
-    }"
-    @scroll.window="scroll()"
-    :class="visible ? 'translate-y-0' : 'translate-y-full'"
-    class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-around items-center h-16 z-50 md:hidden pb-[env(safe-area-inset-bottom)] transition-transform duration-300">
-    {{ range .Site.Menus.bottom }}
-        {{ $menu_item_url := .URL | relLangURL }}
-        {{ $page_url := $.Page.RelPermalink | relLangURL }}
-        {{ $page_split := index (split $page_url "/") 1 }}
-        {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
-        
-        <a href="{{ .URL | relLangURL }}" class='flex flex-col items-center justify-center w-full h-full gap-1 text-[10px] font-medium transition-colors {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400{{ end }}'>
-            <i class="{{ .Pre }} text-xl mb-0.5"></i>
-            <span>{{ .Name }}</span>
-        </a>
-    {{ end}}
-
-     <a href="javascript:;" @click="$store.nav.toggle()" class="flex flex-col items-center justify-center w-full h-full gap-1 text-[10px] font-medium text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-        {{ partial "icons/more.html" (dict "class" "w-6 h-6 mb-0.5") }}
-        <span>Lainnya</span>
-    </a>
-</nav>

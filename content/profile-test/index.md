@@ -4,7 +4,7 @@ description: "Ini adalah ringkasan hasil dari berbagai tes profil yang telah say
 layout: "profile-test"
 profile_data:
   - title: "Kepribadian MBTI"
-    icon: "ri-user-search-line"
+    icon: "icon-[ri--user-search-line]"
     test_date: "2025-10-10"
     source_url: "/journal/2025/oktober/tes-mbti-lagi-diwebsite-laduni/"
     items:
@@ -19,7 +19,7 @@ profile_data:
         description: "Digerakkan oleh Logika Internal (Ti) dan fokus pada pengalaman dunia nyata saat ini (Se), yang menghasilkan kemampuan pemecahan masalah yang sangat efektif dan langsung."
 
   - title: "Kecerdasan Majemuk"
-    icon: "ri-brain-line"
+    icon: "icon-[ri--brain-line]"
     test_date: "2017-01-10"
     source_url: ""
     items:
@@ -57,7 +57,7 @@ profile_data:
         description: "Kemampuan untuk mengenali, mengklasifikasikan, dan memahami lingkungan alam."
 
   - title: "Gaya Belajar"
-    icon: "ri-lightbulb-flash-line"
+    icon: "icon-[ri--lightbulb-flash-line]"
     test_date: "2017-01-10"
     source_url: ""    
     items:
@@ -72,7 +72,7 @@ profile_data:
         percentage: 21
 
   - title: "Motivasi Belajar"
-    icon: "ri-fire-line"
+    icon: "icon-[ri--fire-line]"
     test_date: "2017-01-10"
     source_url: ""        
     items:

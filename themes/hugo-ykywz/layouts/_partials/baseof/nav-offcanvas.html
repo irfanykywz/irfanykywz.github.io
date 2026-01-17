@@ -1,0 +1,79 @@
+<!-- Offcanvas Backdrop -->
+<div 
+    x-data
+    x-show="$store.nav.isOpen" 
+    x-transition.opacity 
+    @click="$store.nav.close()" 
+    class="fixed inset-0 bg-black/50 z-[60]" 
+    style="display: none;">
+</div>
+
+<div 
+    x-data
+    x-show="$store.nav.isOpen"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="-translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="-translate-x-full"
+    class="fixed top-0 bottom-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-gray-900 z-[70] shadow-2xl h-full flex flex-col" 
+    role="dialog" aria-modal="true" aria-labelledby="offcanvasTitle"
+    style="display: none;">
+    
+    <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800 flex-shrink-0">
+        <h5 class="text-lg font-bold text-gray-900 dark:text-white" id="offcanvasTitle">Menu Lainnya</h5>
+        <button @click="$store.nav.close()" type="button" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors" aria-label="Tutup Navigasi">
+            <span class="icon-[ri--close-line] w-6 h-6"></span>
+        </button>
+    </div>
+
+    <div class="p-4 overflow-y-auto flex-grow">
+        <nav class="space-y-1">
+            {{ range .Site.Menus.footer }}
+                {{ $menu_item_url := .URL | relLangURL }}
+                {{ $page_url := $.Page.RelPermalink | relLangURL }}
+                {{ $page_split := index (split $page_url "/") 1 }}
+                {{ $active := and (strings.Contains $menu_item_url $page_split) (not $.IsHome) }}
+
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors {{ if or ($active) (and ($.IsHome) (eq .URL "/")) }}bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}" href="{{ .URL | relLangURL }}">
+                    {{ .Name | safeHTML  }}
+                </a>
+            {{ end}}
+        </nav>
+    </div>
+
+    <div class="mt-auto p-6 border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
+        <div class="flex items-center gap-4">
+            
+            <div class="flex flex-col w-full">
+                <div class="flex items-baseline justify-between">
+                    
+                    <div class="flex flex-col">
+                        <div class="flex items-start gap-2">
+                            <div class="flex items-center gap-1">
+                                <!-- clock icon -->                                
+                                <span class="icon-[ri--time-line] text-indigo-500 text-xl"></span>                                
+                                <span id="nav-time" class="text-xl font-bold text-gray-900 dark:text-white tabular-nums tracking-tight">
+                                    00:00
+                                </span>
+                            </div>
+                            <span id="nav-greeting" class="text-[10px] font-bold uppercase tracking-widest text-indigo-500">PAGI</span>
+                        </div>
+                        <span id="nav-date" class="text-xs text-gray-500 dark:text-gray-400">Memuat tanggal...</span>
+                    </div>
+                    
+                    <div id="nav-weather" class="flex flex-col items-end hidden">
+                        <div class="flex items-center gap-1 text-gray-900 dark:text-white">
+                            <span id="weather-icon" class="text-lg"></span>
+                            <span id="weather-temp" class="text-sm font-bold tabular-nums">--°C</span>
+                        </div>
+                        <span class="text-[9px] uppercase tracking-tighter text-gray-400 dark:text-gray-500 font-medium">Cibinong, Bogor</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

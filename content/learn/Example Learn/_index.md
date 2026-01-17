@@ -3,7 +3,7 @@ title: Example Learn
 slug: example-learn
 description: Lorem ipsum dolor sit amet, consectetur adipisicing elit
 section: Index
-image: image.avif
+image: cover.avif
 date: 2025-10-09T16:00:35+07:00
 draft: false
 ---

@@ -1,3 +1,37 @@
+{{- with resources.Get "js/weather-time.js" }}
+    {{- $opts := dict
+        "minify" (not hugo.IsDevelopment)
+        "sourceMap" (cond hugo.IsDevelopment "external" "")
+        "targetPath" "js/weather-time.js"
+      }}
+    {{- with . | js.Build $opts }}
+        {{- if hugo.IsDevelopment }}
+            <script src="{{ .RelPermalink }}"></script>
+        {{- else }}
+            {{- with . | fingerprint }}
+                <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+            {{- end }}
+        {{- end }}
+    {{- end }}
+{{- end }}
+
+{{- with resources.Get "js/ga-lazyload.js" }}
+    {{- $opts := dict
+        "minify" (not hugo.IsDevelopment)
+        "sourceMap" (cond hugo.IsDevelopment "external" "")
+        "targetPath" "js/ga-lazyload.js"
+      }}
+    {{- with . | js.Build $opts }}
+        {{- if hugo.IsDevelopment }}
+            <script src="{{ .RelPermalink }}"></script>
+        {{- else }}
+            {{- with . | fingerprint }}
+                <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+            {{- end }}
+        {{- end }}
+    {{- end }}
+{{- end }}
+
 <!-- <script src="{{ $.Site.BaseURL }}js/mouse.js"></script> -->
 <script src="{{ $.Site.BaseURL }}js/cursor.js"></script>
 
@@ -16,4 +50,4 @@
 	<script src="{{ $.Site.BaseURL }}js/snow.js"></script>
 {{ end }}
 
-{{ partial "google_analytics.html" . }}
+<!-- {{ partial "google_analytics.html" . }} -->

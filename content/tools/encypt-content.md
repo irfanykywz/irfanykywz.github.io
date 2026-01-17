@@ -2,14 +2,29 @@
 title: "Enkripsi Konten"
 date: 2025-10-07T00:00:00+07:00
 description: "Alat sederhana untuk mengenkripsi konten dan hanya bisa dilihat dengan kunci yang benar"
-icon: "ri-key-fill"
+icon: "icon-[ri--key-fill]"
 ---
+
+<!-- Marked.js for Markdown conversion -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <form id="form_hash" class="max-w-3xl mx-auto flex flex-col gap-6 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm my-8">
 
 <div class="flex flex-col gap-2">
         <label for="secret key" class="block font-semibold text-gray-600 dark:text-gray-400">Kunci Rahasia</label>
         <input type="text" id="key" placeholder="Masukkan kunci rahasia" class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-colors">
+</div>
+
+<div class="flex items-center gap-4">
+    <span class="font-semibold text-gray-600 dark:text-gray-400">Mode Input:</span>
+    <div class="flex items-center gap-2">
+        <input type="radio" id="modeHtml" name="inputMode" value="html" checked class="text-indigo-600 focus:ring-indigo-500">
+        <label for="modeHtml" class="text-gray-700 dark:text-gray-300 cursor-pointer">HTML</label>
+    </div>
+    <div class="flex items-center gap-2">
+        <input type="radio" id="modeMarkdown" name="inputMode" value="markdown" class="text-indigo-600 focus:ring-indigo-500">
+        <label for="modeMarkdown" class="text-gray-700 dark:text-gray-300 cursor-pointer">Markdown</label>
+    </div>
 </div>
 
 <div class="flex flex-col gap-2">
@@ -65,8 +80,14 @@ icon: "ri-key-fill"
 
         e.preventDefault();
 
-        let content = document.getElementById('content').value,
-        key = document.getElementById('key').value;
+        let content = document.getElementById('content').value;
+        const key = document.getElementById('key').value;
+
+        // Check for Markdown mode
+        const mode = document.querySelector('input[name="inputMode"]:checked').value;
+        if (mode === 'markdown' && typeof marked !== 'undefined') {
+            content = marked.parse(content);
+        }
 
         var goHash = hashFormatEncrypt(key),
         hashKey = goHash.hashKey,

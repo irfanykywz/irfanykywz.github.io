@@ -15,10 +15,10 @@
     @scroll.window="scroll()"
     :class="visible ? 'translate-y-0' : '-translate-y-full'"
     class="sticky top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300">
-    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+    <div class="container max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <!-- Mobile Menu Button -->
-        <button @click="$store.nav.toggle()" type="button" class="p-2 text-2xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors me-1" aria-label="Toggle Menu">
-            <i class="ri-menu-4-line"></i>
+        <button @click="$store.nav.toggle()" type="button" class="flex p-2 text-2xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors me-1" aria-label="Toggle Menu">
+            <i class="icon-[ri--menu-4-line]"></i>
         </button>
 
         <!-- Brand -->
@@ -53,12 +53,12 @@
             {{ end}}
         </nav>
 
-        <div class="flex-grow hidden md:flex"></div>
+        <div class="flex-grow hidden md:flex md:mr-10"></div>
         
         <!-- Search -->
         <div class="flex items-center">
             <a href="/search" class='p-2 text-xl transition-colors {{ if eq .Page.RelPermalink "/search/" }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400{{ end }}' aria-label="Search">
-                <i class="ri-search-line"></i>
+                <i class="icon-[ri--search-line]"></i>
             </a>
         </div>
     </div>

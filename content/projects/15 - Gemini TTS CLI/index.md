@@ -18,13 +18,13 @@ overview:
 # =============================
 # feature:
 #     - name: "Ekstrak Audio"
-#       icon: 'ri-file-text-line'
+#       icon: 'icon-[ri--file-text-line]'
 #       description: "memisahkan vokal dan instrumen"
 #     - name: "Berbasis CLI"
-#       icon: 'ri-file-text-line'
+#       icon: 'icon-[ri--file-text-line]'
 #       description: "memudahkan penggunaan tanpa harus install apapun"
 #     - name: "Output bisa JSON"
-#       icon: 'ri-file-text-line'
+#       icon: 'icon-[ri--file-text-line]'
 #       description: "bisa dikembangkan lagi menjadi GUI"
 galery:
     - name: "Tampilan utama"

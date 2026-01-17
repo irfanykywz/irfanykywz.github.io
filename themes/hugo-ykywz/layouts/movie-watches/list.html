@@ -40,9 +40,9 @@
             genre = new URLSearchParams(window.location.search).get('genre') || 'all';
         ">
         <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-            <div class="container mx-auto px-4 text-center">
+            <div class="container max-w-6xl mx-auto px-4 text-center">
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
-                    <i class="ri-movie-line text-indigo-600 dark:text-indigo-400"></i>
+                    <i class="icon-[ri--movie-line] text-indigo-600 dark:text-indigo-400"></i>
                     {{.Title}}
                 </h1>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{{ .Description }}</p>
@@ -50,18 +50,18 @@
         </section>
 
         <section class="py-16">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 
                 <!-- Controls -->
                 <div class="flex flex-col md:flex-row gap-4 mb-12 max-w-4xl mx-auto">
                     <div class="relative flex-grow">
-                        <i class="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <i class="icon-[ri--search-line] absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                         <input type="search" x-model="search" @input.debounce.300ms="updateUrl()" placeholder="Cari Judul Film..." 
                             class="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all shadow-sm">
                     </div>
                     
                     <div class="relative min-w-[200px]">
-                        <i class="ri-filter-3-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <i class="icon-[ri--filter-3-line] absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                         <select x-model="genre" @change="updateUrl()" class="w-full pl-11 pr-10 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none appearance-none cursor-pointer shadow-sm">
                             <option value="all">Semua Genre</option>                            
                             {{ $allGenres := slice }}
@@ -75,7 +75,7 @@
                                 <option value="{{ . | lower }}">{{ . | humanize | title }}</option>
                             {{ end }}
                         </select>
-                        <i class="ri-arrow-down-s-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                        <i class="icon-[ri--arrow-down-s-line] absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
                             
                             <div class="absolute top-2 right-2">
                                 <span class="px-2 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-bold rounded-md flex items-center gap-1">
-                                    <i class="ri-star-fill text-yellow-400"></i> {{ .Params.rating }}
+                                    <i class="icon-[ri--star-fill] text-yellow-400"></i> {{ .Params.rating }}
                                 </span>
                             </div>
 
@@ -118,7 +118,7 @@
                     {{ end }}
                     <div x-show="!hasResults" x-transition class="col-span-full text-center py-16" style="display: none;">
                         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-                            <i class="ri-film-line text-2xl text-gray-400"></i>
+                            <i class="icon-[ri--film-line] text-2xl text-gray-400"></i>
                         </div>
                         <p class="text-gray-500 dark:text-gray-400 text-lg">Film tidak ditemukan.</p>
                     </div>

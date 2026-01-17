@@ -5,7 +5,7 @@
 
     <li>
         <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
-            <i class="ri-home-4-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
+            <i class="icon-[ri--home-4-line] {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                 {{ if .Params.section }}
                     {{ .Params.section }}
                 {{ else }}
@@ -19,7 +19,7 @@
         {{ if not .IsSection }}
             <li>
                 <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
-                    <i class="ri-file-text-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
+                    <i class="icon-[ri--file-text-line] {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                             {{ if .Params.section }}
                                 {{ .Params.section }}
                             {{ else }}
@@ -36,7 +36,7 @@
                 {{ range $sortedPosts }}
                     <li>
                         <a href="{{ .RelPermalink }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors {{ if eq .RelPermalink $.RelPermalink }}bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-medium{{ else }}text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800{{ end }}">
-                            <i class="ri-file-text-line {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
+                            <i class="icon-[ri--file-text-line] {{ if eq .RelPermalink $.RelPermalink }}text-indigo-600 dark:text-indigo-400{{ else }}text-gray-400{{ end }}"></i>
                                     {{ if .Params.section }}
                                         {{ .Params.section }}
                                     {{ else }}

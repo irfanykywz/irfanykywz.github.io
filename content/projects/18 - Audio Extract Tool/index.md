@@ -22,48 +22,48 @@ spec:
   - title: "Minimum"
     requirements:
       - name: "OS"
-        icon: "ri-window-line"
+        icon: "icon-[ri--window-line]"
         value: "Windows 10 (64-bit)"
       - name: "Prosesor"
-        icon: "ri-cpu-line"
+        icon: "icon-[ri--cpu-line]"
         value: "2.4 Ghz"
       - name: "Memori"
-        icon: "ri-ram-2-line"
+        icon: "icon-[ri--ram-2-line]"
         value: "8 GB RAM"      
       - name: "Grafis"
-        icon: "ri-macbook-line"
+        icon: "icon-[ri--macbook-line]"
         value: "-"        
       - name: "Penyimpanan"
-        icon: "ri-hard-drive-2-line"
+        icon: "icon-[ri--hard-drive-2-line]"
         value: "2 GB ruang tersedia"
   - title: "Rekomendasi"
     requirements:
       - name: "OS"
-        icon: "ri-window-line"
+        icon: "icon-[ri--window-line]"
         value: "Windows 11"
       - name: "Prosesor"
-        icon: "ri-cpu-line"
+        icon: "icon-[ri--cpu-line]"
         value: "3.5 Ghz"
       - name: "Memori"
-        icon: "ri-ram-2-line"
+        icon: "icon-[ri--ram-2-line]"
         value: "32 GB RAM"      
       - name: "Grafis"
-        icon: "ri-macbook-line"
+        icon: "icon-[ri--macbook-line]"
         value: "(GTX 10xx, RTX 20xx,30xx) Series"          
       - name: "Penyimpanan"
-        icon: "ri-hard-drive-2-line"
+        icon: "icon-[ri--hard-drive-2-line]"
         value: "2 GB ruang tersedia"        
     
 # =============================
 feature:
     - name: "Extractor"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "Pisah Vokal dan Instrumental"
     - name: "Multi File"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "Memproses banyak file secara bergantian"      
     - name: "Offline"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "Tidak membutuhkan internet"            
 
 # =============================

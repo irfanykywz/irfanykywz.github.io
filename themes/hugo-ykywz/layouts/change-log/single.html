@@ -6,7 +6,7 @@
     <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
 
         <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ .Title }}</h1>
                     <p class="text-xl text-gray-600 dark:text-gray-300">{{ .Description }}</p> 
@@ -22,7 +22,7 @@
                     <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-gray-50/50 dark:bg-gray-800/50">
                         <span class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Versi {{ $version }}</span>
                         <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
-                            {{ partial "icons/calendar.html" (dict "class" "w-4 h-4") }}
+                            <span class="icon-[ri--calendar-line] w-4 h-4"></span>
                             {{ $date }}
                         </span>
                     </div>

@@ -4,9 +4,9 @@
 {{ define "main" }}
 <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
     <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container max-w-6xl mx-auto px-4 text-center">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
-                <i class="ri-user-search-line text-indigo-600 dark:text-indigo-400"></i>
+                <i class="icon-[ri--user-search-line] text-indigo-600 dark:text-indigo-400"></i>
                 {{ .Title }}
             </h1>
             {{ with .Params.description }}
@@ -16,7 +16,7 @@
     </section>
 
     <section class="py-16">
-        <div class="container mx-auto px-4">
+        <div class="container max-w-6xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 {{ range .Params.profile_data }}
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300">
@@ -62,7 +62,7 @@
                         {{ end }}
                         {{ with .source_url }}
                         <a href="{{ . | relURL }}" class="flex items-center gap-1 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors" title="Lihat Bukti Tes">
-                            Lihat <i class="ri-arrow-right-up-line"></i>
+                            Lihat <i class="icon-[ri--arrow-right-up-line]"></i>
                         </a>
                         {{ end }}
                     </div>

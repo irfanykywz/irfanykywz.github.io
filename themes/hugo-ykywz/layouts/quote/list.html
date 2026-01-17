@@ -23,7 +23,7 @@
         copyToClipboard(text, $el) {
             navigator.clipboard.writeText(text).then(() => {
                 const originalIcon = $el.innerHTML;
-                $el.innerHTML = '<i class=\'ri-check-line text-green-500\'></i>';
+                $el.innerHTML = '<i class=\'icon-[ri--check-line] text-green-500\'></i>';
                 setTimeout(() => {
                     $el.innerHTML = originalIcon;
                 }, 2000);
@@ -95,7 +95,7 @@
                         @click='copyToClipboard({{ .Plain | jsonify }}, $el)'
                         class="p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700" 
                         title="Salin kutipan">
-                        <i class="ri-file-copy-line text-xl"></i>
+                        <i class="icon-[ri--file-copy-line] text-xl"></i>
                     </button>
                 </div>
             </article>

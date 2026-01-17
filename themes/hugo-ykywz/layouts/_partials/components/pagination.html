@@ -10,13 +10,13 @@
     
     {{ if ne $paginator.PageNumber 1 }}
         <a href="{{ $paginator.First.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="First page">
-            <i class="ri-arrow-left-double-line text-base"></i>
+            <span class="icon-[ri--arrow-left-double-line] text-base"></span>
         </a>
     {{ end }}
 
     {{ if $paginator.HasPrev }}
         <a href="{{ $paginator.Prev.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="Previous">
-            {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
+            <span class="icon-[ri--arrow-left-s-line] w-5 h-5"></span>
         </a>
     {{ end }}
 
@@ -58,13 +58,13 @@
 
     {{ if $paginator.HasNext }}
         <a href="{{ $paginator.Next.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="Next">
-            {{ partial "icons/chevron-right.html" (dict "class" "w-5 h-5") }}
+            <span class="icon-[ri--arrow-right-s-line] w-5 h-5"></span>
         </a>
     {{ end }}
 
     {{ if ne $paginator.PageNumber $paginator.TotalPages }}
         <a href="{{ $paginator.Last.URL }}" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" aria-label="Last page">
-            <i class="ri-arrow-right-double-line text-base"></i>
+            <span class="icon-[ri--arrow-right-double-line] text-base"></span>
         </a>
     {{ end }}
 </nav>

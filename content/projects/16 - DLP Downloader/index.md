@@ -18,13 +18,13 @@ overview:
 # =============================
 feature:
     - name: "Pengunduhan Fleksibel"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "bisa download satuan atau sekaligus"
     - name: "Pengaturan yang fleksibel"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "kustomisasi pengaturan yang ada dengan mudah"
     - name: "Auto Update"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "bila sewaktu waktu aplikasi membutuhkan update"
 galery:
     - name: "Tampilan Halaman Single"

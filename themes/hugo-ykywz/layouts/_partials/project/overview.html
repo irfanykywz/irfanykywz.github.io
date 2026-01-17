@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 gap-8">
         <div class="bg-gray-50 dark:bg-gray-800/50 p-8 rounded-2xl border border-gray-200 dark:border-gray-700">
             <h3 class="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white mb-4">
-                {{ partial "icons/squares-2x2.html" (dict "class" "w-6 h-6 text-indigo-600 dark:text-indigo-400") }}
+                <span class="icon-[heroicons--squares-2x2] w-6 h-6 text-indigo-600 dark:text-indigo-400"></span>
                 Deskripsi
             </h3>
             {{ range $index, $element := .Params.overview }}

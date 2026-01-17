@@ -1,416 +1,165 @@
-{{ define "config" }}
-    {{ .Scratch.Set "hideHeader" true }} 
-    {{ .Scratch.Set "hideFooter" true }} 
-{{ end }}
-
 {{ define "main" }}
-<main class="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 py-8 sm:py-12 px-4 font-sans"
-      x-data="shopHandler()" x-init="init()">
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <a href="{{ .Site.BaseURL }}" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors text-sm mb-4 inline-block"><i class="ri-arrow-left-line"></i> Kembali ke Beranda</a>
-            <h1 class="text-3xl md:text-4xl font-bold mb-2 tracking-tight">{{ .Title }}</h1>
-            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-2xl mx-auto">{{ .Description }}</p>
-        </div>
-
-        <!-- Stepper -->
-        <div class="w-full max-w-2xl mx-auto mb-10 p-4">
-            <div class="flex items-center">
-                <div class="flex items-center text-blue-600 dark:text-blue-500 relative cursor-pointer" @click="goToStep(1)">
-                    <div class="rounded-full transition duration-500 ease-in-out h-10 w-10 border-2 border-blue-600 dark:border-blue-500 flex items-center justify-center bg-blue-600 dark:bg-blue-500 text-white font-bold">1</div>
-                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-blue-600 dark:text-blue-500">Pilih Item</div>
-                </div>
-                <div class="flex-auto border-t-2 transition duration-500 ease-in-out" :class="step > 1 ? 'border-blue-600 dark:border-blue-500' : 'border-gray-200 dark:border-gray-800'"></div>
-                <div class="flex items-center text-gray-400 dark:text-gray-600 relative cursor-pointer" @click="goToStep(2)">
-                    <div class="rounded-full transition duration-500 ease-in-out h-10 w-10 border-2 flex items-center justify-center" :class="step >= 2 ? 'border-blue-600 dark:border-blue-500 bg-blue-600 dark:bg-blue-500 text-white' : 'border-gray-200 dark:border-gray-800'">2</div>
-                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase" :class="step >= 2 ? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 dark:text-gray-600'">Pembayaran</div>
-                </div>
-                <div class="flex-auto border-t-2 transition duration-500 ease-in-out" :class="step > 2 ? 'border-blue-600 dark:border-blue-500' : 'border-gray-200 dark:border-gray-800'"></div>
-                <div class="flex items-center text-gray-400 dark:text-gray-600 relative cursor-pointer" @click="goToStep(3)">
-                    <div class="rounded-full transition duration-500 ease-in-out h-10 w-10 border-2 flex items-center justify-center" :class="step >= 3 ? 'border-blue-600 dark:border-blue-500 bg-blue-600 dark:bg-blue-500 text-white' : 'border-gray-200 dark:border-gray-800'">3</div>
-                    <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase" :class="step >= 3 ? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 dark:text-gray-600'">Konfirmasi</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step 1: Select Item -->
-        <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
-            <div class="space-y-10">
-                 {{ $products := where .Pages "Params.type" "product" }}
-                 {{ if $products }}
-                 <section>
-                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3 pb-2 border-b border-gray-200 dark:border-gray-800">
-                         <i class="ri-box-3-line text-blue-600 dark:text-blue-500"></i> Produk Digital
-                     </h2>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                         {{ range $products }}
-                         <div {{ if .Params.available }} @click="selectItem({name: '{{ .Title }}', slug: '{{ .File.BaseFileName }}', price: {{ .Params.price }}, displayPrice: '{{ .Params.display_price }}', type: 'Produk'})" {{ end }}
-                              class="group relative border-2 bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 transition-all duration-300 {{ if .Params.available }}cursor-pointer hover:border-blue-600 dark:hover:border-blue-500 hover:shadow-lg hover:-translate-y-1{{ else }}cursor-not-allowed{{ end }}"
-                              :class="selectedItem.name === '{{ .Title }}' ? 'border-blue-600 dark:border-blue-500 ring-2 ring-blue-600/50 dark:ring-blue-500/50' : 'border-gray-200 dark:border-gray-800'">
-                             {{ if not .Params.available }}<div class="absolute inset-0 bg-white/80 dark:bg-gray-950/80 z-10 flex items-center justify-center backdrop-blur-[2px] rounded-2xl"><span class="bg-red-500/90 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">Tidak Tersedia</span></div>{{ end }}
-                             <div class="flex justify-between items-start mb-3"><div class="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center text-2xl text-blue-600 dark:text-blue-500 shadow-inner"><i class="ri-shopping-bag-3-fill"></i></div><span class="font-mono font-bold text-blue-600 dark:text-blue-500 bg-blue-600/10 dark:bg-blue-500/10 px-3 py-1 rounded-lg text-sm">{{ .Params.display_price }}</span></div>
-                             <h3 class="font-bold text-lg mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors">{{ .Title }}</h3><p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ .Description }}</p>
-                         </div>
-                         {{ end }}
-                     </div>
-                 </section>
-                 {{ end }}
- 
-                 {{ $services := where .Pages "Params.type" "service" }}
-                 {{ if $services }}
-                 <section>
-                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3 pb-2 border-b border-gray-200 dark:border-gray-800">
-                         <i class="ri-service-line text-emerald-600 dark:text-emerald-500"></i> Jasa & Layanan
-                     </h2>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                         {{ range $services }}
-                         <div {{ if .Params.available }} @click="selectItem({name: '{{ .Title }}', slug: '{{ .File.BaseFileName }}', price: {{ .Params.price }}, displayPrice: '{{ .Params.display_price }}', type: 'Jasa'})" {{ end }}
-                              class="group relative border-2 bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 transition-all duration-300 {{ if .Params.available }}cursor-pointer hover:border-emerald-600 dark:hover:border-emerald-500 hover:shadow-lg hover:-translate-y-1{{ else }}cursor-not-allowed{{ end }}"
-                              :class="selectedItem.name === '{{ .Title }}' ? 'border-emerald-600 dark:border-emerald-500 ring-2 ring-emerald-600/50 dark:ring-emerald-500/50' : 'border-gray-200 dark:border-gray-800'">
-                             {{ if not .Params.available }}<div class="absolute inset-0 bg-white/80 dark:bg-gray-950/80 z-10 flex items-center justify-center backdrop-blur-[2px] rounded-2xl"><span class="bg-red-500/90 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">Tidak Tersedia</span></div>{{ end }}
-                             <div class="flex justify-between items-start mb-3"><div class="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center text-2xl text-emerald-600 dark:text-emerald-500 shadow-inner"><i class="ri-tools-fill"></i></div><span class="font-mono font-bold text-emerald-600 dark:text-emerald-500 bg-emerald-600/10 dark:bg-emerald-500/10 px-3 py-1 rounded-lg text-sm">{{ .Params.display_price }}</span></div>
-                             <h3 class="font-bold text-lg mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors">{{ .Title }}</h3><p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ .Description }}</p>
-                         </div>
-                         {{ end }}
-                     </div>
-                 </section>
-                 {{ end }}
-            </div>
-            <div class="mt-10 text-center">
-                <button @click="goToStep(2)" :disabled="!selectedItem.name" class="bg-blue-600 dark:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20 dark:shadow-blue-500/20">
-                    Lanjut ke Pembayaran <i class="ri-arrow-right-line"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Step 2: Select Payment -->
-        <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" class="max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold mb-2 text-center">Pilih Metode Pembayaran</h2>
-            <p class="text-center text-gray-600 dark:text-gray-400 mb-8">Anda memesan: <strong class="text-gray-900 dark:text-white" x-text="selectedItem.name"></strong></p>
-
-            <div class="space-y-4">
-                {{ range .Params.payments }}
-                <div @click="selectPayment({ name: '{{ .name }}', accountNumber: '{{ .account_number }}', type: '{{ .type }}' })"
-                     class="border-2 rounded-xl p-4 flex items-center justify-between cursor-pointer transition-all duration-300"
-                     :class="selectedPayment.name === '{{ .name }}' ? 'border-blue-600 dark:border-blue-500 ring-2 ring-blue-600/50 dark:ring-blue-500/50 bg-gray-50 dark:bg-gray-900' : 'border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800 hover:border-blue-600/50 dark:hover:border-blue-500/50'">
-                    <div class="flex items-center gap-4">
-                        {{ if .image }}
-                        <img src="{{ .image }}" class="w-10 h-10 object-contain bg-white rounded-md p-1">
-                        {{ else }}
-                        <div class="w-10 h-10 rounded-md bg-white dark:bg-gray-700 flex items-center justify-center text-sm font-bold text-gray-500 dark:text-gray-400 shrink-0">{{ substr .name 0 3 }}</div>
-                        {{ end }}
-                        <div>
-                            <p class="font-bold">{{ .name }}</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 font-mono">{{ .account_number }}</p>
-                        </div>
-                    </div>
-                    <div x-show="selectedPayment.name === '{{ .name }}'" class="w-6 h-6 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center text-white">
-                        <i class="ri-check-line"></i>
-                    </div>
-                </div>
-                {{ end }}
-            </div>
-
-            <!-- Coupon Section -->
-            <div class="mt-8 border-t border-gray-200 dark:border-gray-800 pt-6">
-                <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Punya Kode Kupon?</label>
-                <div class="flex gap-2">
-                    <input type="text" x-model="couponCode" @input="couponMessage = ''" @keydown.enter.prevent="applyCoupon" placeholder="Masukkan kode kupon" class="flex-1 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition-colors">
-                    <button @click="applyCoupon" class="bg-gray-800 dark:bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors">Terapkan</button>
-                </div>
-                <p x-show="couponMessage" :class="couponApplied ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'" class="text-sm mt-2 font-medium" x-text="couponMessage"></p>
-            </div>
-
-            <div class="mt-10 flex justify-between items-center">
-                <button @click="goToStep(1)" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white font-bold py-3 px-6 rounded-lg transition-all">
-                    <i class="ri-arrow-left-line"></i> Kembali
-                </button>
-                <button @click="goToStep(3)" :disabled="!selectedPayment.name" class="bg-blue-600 dark:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20 dark:shadow-blue-500/20">
-                    Lanjut ke Konfirmasi <i class="ri-arrow-right-line"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Step 3: Confirmation -->
-        <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" class="max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold mb-6 text-center">Konfirmasi Pesanan Anda</h2>
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300"
+    x-data="{
+        modalOpen: false,
+        isLoading: false,
+        activeItem: null,
+        activeCategory: 'all',
+        
+        async openProduct(url, title) {
+            this.isLoading = true;
+            this.modalOpen = true;
+            document.body.style.overflow = 'hidden';
             
-            <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 space-y-6">
-                <!-- Ringkasan -->
-                <div>
-                    <h4 class="font-bold text-sm text-gray-600 dark:text-gray-400 mb-2">Ringkasan Pesanan:</h4>
-                    <div class="bg-white dark:bg-gray-950 p-4 rounded-xl border border-gray-200 dark:border-gray-800 space-y-2">
-                        <div class="flex justify-between items-center"><span class="text-gray-500 dark:text-gray-400">Item:</span> <strong x-text="selectedItem.name"></strong></div>
-                        <div class="flex justify-between items-center"><span class="text-gray-500 dark:text-gray-400">Harga Asli:</span> <strong x-text="selectedItem.displayPrice"></strong></div>
-                        <div x-show="discountAmount > 0" class="flex justify-between items-center text-green-600 dark:text-green-400" x-transition>
-                            <span>Diskon:</span> <span>- <span x-text="formatPrice(discountAmount)"></span></span>
-                        </div>
-                        <div class="flex justify-between items-center pt-2 border-t border-gray-200 dark:border-gray-700"><span class="font-bold">Total Bayar:</span> <strong class="text-blue-600 dark:text-blue-500 text-xl" x-text="formatPrice(finalPrice)"></strong></div>
-                        <div class="flex justify-between items-center"><span class="text-gray-500 dark:text-gray-400">Pembayaran:</span> <strong x-text="selectedPayment.name"></strong></div>
-                    </div>
-                </div>
+            // Push state
+            window.history.pushState({ modal: true }, '', url);
+            document.title = title;
 
-                <!-- Info Transfer -->
-                <div x-show="selectedPayment.type !== 'qris'">
-                    <h4 class="font-bold text-sm text-gray-600 dark:text-gray-400 mb-2">Silakan transfer ke:</h4>
-                    <div class="flex items-center justify-between p-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-800">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-sm" x-text="selectedPayment.name"></span>
-                            <span class="text-xs text-gray-500 dark:text-gray-400 font-mono" x-text="selectedPayment.accountNumber"></span>
-                        </div>
-                        <button @click="copyToClipboard(selectedPayment.accountNumber.replace(/[^0-9]/g, ''), $el)" class="text-xs bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 px-2.5 py-1.5 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors shrink-0">Salin</button>
-                    </div>
-                </div>
-                {{ $qris := index (where .Params.payments "type" "qris") 0 }}
-                 <div x-show="selectedPayment.type === 'qris'">
-                    <h4 class="font-bold text-sm text-gray-600 dark:text-gray-400 mb-2">Scan QRIS untuk membayar:</h4>
-                    <div class="flex items-center justify-center p-4 rounded-lg bg-white border border-gray-200 dark:border-gray-800">
-                        <img src="{{ $qris.image }}" alt="QRIS" class="w-48 h-48 object-contain cursor-pointer"
-                             @click="$store.lightbox.open('{{ $qris.image | absURL }}', 'QRIS Scan', 'Scan untuk membayar')">
-                    </div>
-                </div>
-
-                <!-- Pesan Konfirmasi -->
-                <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
-                    <label class="block text-sm font-bold mb-2 text-gray-600 dark:text-gray-400">Setelah transfer, kirim pesan konfirmasi ini:</label>
-                    <textarea x-model="confirmationMessage" readonly class="w-full h-32 bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl p-3 text-xs font-mono resize-none focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition-colors text-gray-600 dark:text-gray-300"></textarea>
-                </div>
-
-                <!-- Tombol Kirim -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                    <button @click="sendConfirmation('whatsapp')" class="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white py-3 rounded-xl font-bold transition-all shadow-lg shadow-green-500/20">
-                        <i class="ri-whatsapp-fill text-xl"></i> Kirim ke WhatsApp
-                    </button>
-                    <button @click="sendConfirmation('telegram')" class="flex items-center justify-center gap-2 bg-[#0088cc] hover:bg-[#0077b5] text-white py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/20">
-                        <i class="ri-telegram-fill text-xl"></i> Kirim ke Telegram
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-8 text-center">
-                <button @click="goToStep(2)" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white font-bold py-3 px-6 rounded-lg transition-all">
-                    <i class="ri-arrow-left-line"></i> Kembali ke Pembayaran
-                </button>
-            </div>
-        </div>
-
-        <p class="text-center text-xs text-gray-500 dark:text-gray-400 mt-12">
-            Dengan membeli, Anda menyetujui <a href="{{ .Site.BaseURL }}terms/" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">Syarat & Ketentuan</a>.
-        </p>
-
-    </div>
-</main>
-
-<script>
-    const CONTACT_WA = '{{ .Params.contact_wa }}';
-    const CONTACT_TELEGRAM = '{{ .Params.contact_telegram }}';
- 
-    function shopHandler() {
-        return {
-            step: 1,
-            selectedItem: { name: '', slug: '', price: 0, displayPrice: '', type: '' },
-            selectedPayment: { name: '', accountNumber: '', type: '' },
-            couponCode: '',
-            discountAmount: 0,
-            couponApplied: false,
-            couponMessage: '',
-
-            // Data from Hugo
-            allProducts: [ {{ range .Pages }} { name: '{{ .Title }}', slug: '{{ .File.BaseFileName }}', price: {{ .Params.price }}, displayPrice: '{{ .Params.display_price }}', type: '{{ if eq .Params.type "product" }}Produk{{ else }}Jasa{{ end }}', available: {{ .Params.available }} }, {{ end }} ],
-            payments: [
-                {{ range .Params.payments }}
-                { name: '{{ .name }}', accountNumber: '{{ .account_number }}', type: '{{ .type }}' },
-                {{ end }}
-            ],
-
-            coupons: {{ .Params.coupons | jsonify }},
-
-            get finalPrice() {
-                return Math.max(0, this.selectedItem.price - this.discountAmount);
-            },
-
-            get confirmationMessage() {
-                if (!this.selectedItem.name || !this.selectedPayment.name) { return "Lengkapi pilihan Anda..."; }
-                let paymentDetails = this.selectedPayment.type === 'qris'
-                    ? `Metode: ${this.selectedPayment.name}`
-                    : `Metode: ${this.selectedPayment.name} (${this.selectedPayment.accountNumber})`;
-                let priceText = this.couponApplied ? `${this.formatPrice(this.finalPrice)} (setelah diskon)` : this.selectedItem.displayPrice;
-
-                return `Halo, saya ingin konfirmasi pesanan:\n\n- Item: ${this.selectedItem.name} (${this.selectedItem.type})\n- Harga: ${priceText}\n- Pembayaran: ${paymentDetails}\n\nSaya sudah transfer. Mohon segera diproses. Terima kasih.`;
-            },
-
-            selectItem(item) {
-                if (this.selectedItem.slug === item.slug) { // Deselect
-                    this.selectedItem = { name: '', slug: '', price: 0, displayPrice: '', type: '' };
-                    this.selectedPayment = { name: '', accountNumber: '', type: '' };
-                    this.resetCoupon();
-                    this.goToStep(1);
-                } else {
-                    this.selectedItem = item;
-                    this.resetCoupon();
-                    this.goToStep(2);
-                }
-            },
-            
-            selectPayment(payment) {
-                if (this.selectedPayment.name === payment.name) {
-                    this.selectedPayment = { name: '', accountNumber: '', type: '' };
-                } else {
-                    this.selectedPayment = payment;
-                    this.updateUrl();
-                }
-            },
-
-            applyCoupon() {
-                this.resetCoupon();
-                if (!this.couponCode) return;
-
-                const code = this.couponCode.toUpperCase();
-                const coupon = this.coupons.find(c => c.code.toUpperCase() === code);
-
-                if (coupon) {
-                    // Validasi tanggal kadaluarsa
-                    if (coupon.expires) {
-                        const today = new Date();
-                        const expiryDate = new Date(coupon.expires);
-                        today.setHours(0, 0, 0, 0);
-                        if (today > expiryDate) {
-                            this.couponMessage = 'Kupon ini sudah kadaluarsa.';
-                            return;
-                        }
-                    }
-
-                    // Validasi produk spesifik
-                    if (coupon.products && coupon.products.length > 0 && !coupon.products.includes(this.selectedItem.slug)) {
-                        this.couponMessage = 'Kupon tidak berlaku untuk produk ini.';
-                        return;
-                    }
-
-                    if (coupon.type === 'percentage') {
-                        this.discountAmount = this.selectedItem.price * (parseFloat(coupon.value) / 100);
-                    } else if (coupon.type === 'fixed') {
-                        this.discountAmount = parseFloat(coupon.value);
-                    }
-
-                    this.couponApplied = true;
-                    this.couponMessage = 'Kupon berhasil diterapkan!';
-                    this.updateUrl();
-                } else {
-                    this.couponMessage = 'Kode kupon tidak valid.';
-                }
-            },
-
-            resetCoupon() {
-                this.couponApplied = false;
-                this.couponMessage = '';
-                this.discountAmount = 0;
-            },
-
-            goToStep(s, fromStepper = false) {
-                if (fromStepper && s > this.step && s === 2 && !this.selectedItem.slug) {
-                    return;
-                }
-                if (fromStepper && s > this.step && s === 3 && !this.selectedPayment.name) {
-                    return;
-                }
+            try {
+                const res = await fetch(url);
+                const html = await res.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const content = doc.getElementById('ajax-content');
                 
-                if (s === 2 && !this.selectedPayment.name && this.payments.length > 0) {
-                    this.selectedPayment = this.payments[0];
+                if (content) {
+                    this.$refs.modalContent.innerHTML = content.innerHTML;
+                    // Re-init Alpine
+                    this.$nextTick(() => {
+                        Alpine.initTree(this.$refs.modalContent);
+                    });
+                } else {
+                    this.$refs.modalContent.innerHTML = '<div class=\'p-10 text-center\'>Gagal memuat konten.</div>';
                 }
+            } catch (e) {
+                this.$refs.modalContent.innerHTML = '<div class=\'p-10 text-center text-red-500\'>Terjadi kesalahan jaringan.</div>';
+            } finally {
+                this.isLoading = false;
+            }
+        },
 
-                this.step = s;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                this.updateUrl();
-            },
-
-            updateUrl() {
-                const params = new URLSearchParams();
-                if (this.selectedItem.slug) {
-                    params.set('product', this.selectedItem.slug);
-                    if (this.step > 1) {
-                        params.set('step', this.step);
-                    }
-                    if (this.couponApplied && this.couponCode) {
-                        params.set('coupon', this.couponCode);
-                    }
-                    if (this.selectedPayment.name) {
-                        params.set('payment', this.selectedPayment.name);
-                    }
-                }
-                const newUrl = `${window.location.pathname}?${params.toString()}`;
-                history.pushState({step: this.step}, '', newUrl);
-            },
-
-            init() {
-                // Perbaiki error 'find is not a function' dengan parsing JSON dari Hugo
-                if (typeof this.coupons === 'string') {
-                    this.coupons = JSON.parse(this.coupons);
-                }
-                this.parseUrlAndSetState();
-                window.onpopstate = () => {
-                    this.parseUrlAndSetState();
-                };
-            },
-
-            parseUrlAndSetState() {
-                const params = new URLSearchParams(window.location.search);
-                const productSlug = params.get('product');
-                const stepParam = parseInt(params.get('step'));
-                const paymentParam = params.get('payment');
-                const couponParam = params.get('coupon');
-
-                if (productSlug) {
-                    const product = this.allProducts.find(p => p.slug === productSlug);
-                    // Hanya proses jika produk ditemukan DAN tersedia
-                    if (product && product.available) {
-                        this.selectedItem = product;
-                        
-                        // Pulihkan state pembayaran dari URL
-                        if (paymentParam) {
-                            const payment = this.payments.find(p => p.name === paymentParam);
-                            if (payment) this.selectedPayment = payment;
-                        }
-
-                        // Pulihkan state kupon dari URL
-                        if (couponParam) {
-                            this.couponCode = couponParam;
-                            this.applyCoupon();
-                        }
-                        // Atur step, default ke 2 jika ada produk
-                        this.step = (stepParam && stepParam > 1) ? stepParam : 2; 
-                    } else {
-                        // Jika produk tidak ada atau tidak tersedia, bersihkan URL
-                        history.replaceState({}, '', window.location.pathname);
-                    }
-                }
-            },
-
-            copyToClipboard(text, el) {
-                navigator.clipboard.writeText(text).then(() => {
-                    let originalText = el.innerText;
-                    el.innerText = 'Tersalin!';
-                    el.classList.add('!bg-green-500', '!text-white', '!border-green-500');
-                    setTimeout(() => {
-                        el.innerText = originalText;
-                        el.classList.remove('!bg-green-500', '!text-white', '!border-green-500');
-                    }, 2000);
-                });
-            },
+        closeModal() {
+            this.modalOpen = false;
+            document.body.style.overflow = '';
+            this.$refs.modalContent.innerHTML = '';
             
-            formatPrice(price) {
-                return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(price);
-            },
+            window.history.pushState({}, '', '{{ .RelPermalink }}');
+            document.title = '{{ .Title }}';
+        },
 
-            sendConfirmation(platform) {
-                if (!this.selectedItem.name || !this.selectedPayment.name) return;
-                let message = encodeURIComponent(this.confirmationMessage);
-                let url = platform === 'whatsapp' 
-                    ? `https://wa.me/${CONTACT_WA}?text=${message}` 
-                    : `https://t.me/${CONTACT_TELEGRAM}?text=${message}`;
-                window.open(url, '_blank');
+        handlePopstate(e) {
+            if (this.modalOpen) {
+                this.modalOpen = false;
+                document.body.style.overflow = '';
+                this.$refs.modalContent.innerHTML = '';
+                document.title = '{{ .Title }}';
             }
         }
-    }
-</script>
+    }"
+    @popstate.window="handlePopstate($event)"
+    @keydown.escape.window="if(modalOpen) closeModal()">
+
+    <div class="max-w-6xl mx-auto px-6 py-16">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                <i class="{{ .Params.icon }} text-indigo-600 dark:text-indigo-400"></i>
+                {{ .Title }}
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                {{ .Description }}
+            </p>
+        </header>
+
+        <!-- Category Filter -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <button @click="activeCategory = 'all'" 
+                    :class="activeCategory === 'all' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                    class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
+                Semua
+            </button>
+            <button @click="activeCategory = 'product'" 
+                    :class="activeCategory === 'product' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                    class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
+                Produk
+            </button>
+            <button @click="activeCategory = 'service'" 
+                    :class="activeCategory === 'service' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
+                    class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
+                Jasa
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {{ range .Pages }}
+            {{ $type := .Params.shop_type }}
+            <div @click="openProduct('{{ .RelPermalink }}', '{{ .Title }}')"
+                 x-show="activeCategory === 'all' || activeCategory === '{{ $type }}'"
+                 x-transition.opacity.duration.300ms
+                 class="group cursor-pointer bg-white dark:bg-gray-800 rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 flex flex-col h-full">
+                
+                <div class="p-8 flex-grow">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm
+                            {{ if eq $type "product" }} bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400
+                            {{ else }} bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400 {{ end }}">
+                            <i class="{{ if eq $type "product" }}icon-[ri--box-3-line]{{ else }}icon-[ri--service-line]{{ end }}"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider
+                            {{ if .Params.available }} bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300
+                            {{ else }} bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300 {{ end }}">
+                            {{ if .Params.available }}Tersedia{{ else }}Habis{{ end }}
+                        </span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        {{ .Title }}
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 line-clamp-3">
+                        {{ .Description }}
+                    </p>
+                </div>
+
+                <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between">
+                    <span class="text-lg font-bold text-gray-900 dark:text-white">{{ .Params.display_price }}</span>
+                    <span class="flex items-center gap-1 text-sm font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
+                        {{ if eq $type "product" }}Beli Sekarang{{ else }}Pesan Sekarang{{ end }}
+                        <i class="icon-[ri--arrow-right-line]"></i>
+                    </span>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div x-show="modalOpen" 
+         style="display: none;"
+         @click="closeModal()"
+         class="fixed inset-0 z-50 overflow-y-auto bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0">
+        
+        <!-- Close Button -->
+        <button @click="closeModal()" class="flex fixed top-6 right-6 z-[60] p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:text-red-500 transition-colors">
+            <span class="icon-[ri--close-line] w-6 h-6"></span>
+        </button>
+
+        <!-- Loading -->
+        <div x-show="isLoading" class="absolute inset-0 flex items-center justify-center z-40">
+            <div class="animate-spin rounded-full h-16 w-16 border-4 border-indigo-600 border-t-transparent"></div>
+        </div>
+
+        <!-- Content -->
+        <div x-ref="modalContent" class="min-h-screen flex items-center justify-center p-4 md:p-8">
+            <!-- Injected Content -->
+        </div>
+    </div>
+
+</main>
+
+{{ partial "shop/script.html" . }}
 {{ end }}

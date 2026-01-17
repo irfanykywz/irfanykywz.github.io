@@ -1,10 +1,10 @@
 {{ if eq .Params.status "Produk"}}
-{{ partial "icons/shopping-bag.html" (dict "class" "w-4 h-4") }}
+<span class="icon-[ri--shopping-bag-line] w-4 h-4"></span>
 {{ else if eq .Params.status "Freelance" }}
-{{ partial "icons/newspaper.html" (dict "class" "w-4 h-4") }}
+<span class="icon-[ri--newspaper-line] w-4 h-4"></span>
 {{ else if eq .Params.status "Proyek" }}
-{{ partial "icons/briefcase.html" (dict "class" "w-4 h-4") }}
+<span class="icon-[ri--briefcase-line] w-4 h-4"></span>
 {{ else }}
-{{ partial "icons/document.html" (dict "class" "w-4 h-4") }}
+<span class="icon-[ri--file-line] w-4 h-4"></span>
 {{ end }}
 {{ .Params.status }}

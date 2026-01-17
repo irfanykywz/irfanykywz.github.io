@@ -1,7 +1,7 @@
 {{ if .Params.review }}
 <div class="mb-16">
     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
-        {{ partial "icons/chat-bubble-left-right.html" (dict "class" "w-8 h-8 text-indigo-600 dark:text-indigo-400") }}
+        <span class="icon-[heroicons--chat-bubble-left-right] w-8 h-8 text-indigo-600 dark:text-indigo-400"></span>
         Testimoni Klien
     </h2>
 
@@ -19,7 +19,7 @@
                 </div>
                 <div class="flex gap-1 text-yellow-400">
                     {{ range (seq $element.rating )}}
-                        {{ partial "icons/star.html" (dict "class" "w-5 h-5") }}
+                        <span class="icon-[ri--star-fill] w-5 h-5"></span>
                     {{ end }}
                 </div>
             </div>

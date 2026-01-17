@@ -1,5 +1,5 @@
 <section class="py-20 bg-gray-50 dark:bg-gray-800/50">
-    <div class="container mx-auto px-4">
+    <div class="container max-w-6xl mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center gap-10">
             <div class="flex-shrink-0">
                 <div class="relative">
@@ -17,25 +17,44 @@
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl">{{ .Description }}</p>
                 
                 <div class="flex flex-wrap justify-center md:justify-start gap-3 pt-2">
-                    <a href="{{ .Params.Cv }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
-                        <i class="ri-file-list-line"></i>
+
+                    {{ if .Params.Whatsapp }}
+                    <a href="{{ .Params.Whatsapp }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors shadow-sm" title="Whatsapp">
+                        <span class="icon-[ri--whatsapp-line] w-5 h-5"></span>
+                    </a>
+                    {{ end }}
+                    
+                    {{ if .Params.Cv }}
+                    <a href="{{ .Params.Cv }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm" title="Download CV">
+                        <span class="icon-[ri--attachment-line] w-5 h-5"></span>
                         <span>CV</span>
                     </a>
-                    <a href="mailto:{{ .Params.Email }}" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" aria-label="Email">
-                        <i class="ri-mail-line text-xl"></i>
+                    {{ end }}
+
+                    {{ if .Params.Email }}
+                    <a href="mailto:{{ .Params.Email }}" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" title="Email">
+                        <span class="icon-[ri--mail-line] w-5 h-5"></span>
                     </a>
+                    {{ end }}
+
                     {{ if .Params.Linkedin }}
-                    <a href="{{ .Params.Linkedin }}" target="_blank" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-[#0077b5] border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" aria-label="LinkedIn">
-                        <i class="ri-linkedin-fill text-xl"></i>
+                    <a href="{{ .Params.Linkedin }}" target="_blank" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-[#0077b5] border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" title="LinkedIn">
+                        <span class="icon-[ri--linkedin-fill] w-5 h-5"></span>
                     </a>
                     {{ end }}
+
                     {{ if .Params.Github }}
-                    <a href="{{ .Params.Github }}" target="_blank" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" aria-label="GitHub">
-                        <i class="ri-github-line text-xl"></i>
+                    <a href="{{ .Params.Github }}" target="_blank" class="inline-flex items-center justify-center w-11 h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm" title="GitHub">
+                        <span class="icon-[ri--github-fill] w-5 h-5"></span>
                     </a>
                     {{ end }}
+             
+                    <a href="{{ "/donate/" | relURL }}" class="inline-flex items-center justify-center w-11 h-11 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-800 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors shadow-sm" title="Beri dukungan">                    
+                        <span class="icon-[ri--heart-3-fill] text-red-500 w-5 h-5 animate-pulse"></span>
+                    </a>                    
+
                     <a href="{{ "/profile-test/" | relURL }}" class="inline-flex items-center justify-center w-11 h-11 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-800 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors shadow-sm" title="Lihat Profil Tes">
-                        <i class="ri-user-search-line text-xl"></i>
+                        <span class="icon-[ri--file-text-line] w-5 h-5"></span>
                     </a>
                 </div>
             </div>

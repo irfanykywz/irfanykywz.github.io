@@ -17,7 +17,7 @@
 {{ $collectedAllPage := slice }}
 
 {{/* Loop through immediate children of $rootSection */}}
-{{ range $rootSection.Pages }}
+{{ range $rootSection.Pages.ByWeight }}
     {{/* If the page is a regular page (like 01, 02), append it. */}}
     {{ if not .IsSection }}
         {{ $collectedAllPage = $collectedAllPage | append . }}
@@ -61,7 +61,7 @@
         {{ with $prevPage }}
             <a href="{{ .RelPermalink }}" class="flex flex-col p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group h-full">
                 <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                    <i class="ri-arrow-left-line"></i> Sebelumnya
+                    <i class="icon-[ri--arrow-left-line]"></i> Sebelumnya
                 </span>
                 <!-- Prev: -->
                 <span class="font-medium text-gray-900 dark:text-white">
@@ -69,10 +69,10 @@
                 </span>
             </a>
         {{ else }}
-            {{ with .Parent }}
+            {{ with $rootSection }}
                 <a href="{{ .RelPermalink }}" class="flex flex-col p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group h-full">
                     <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                        <i class="ri-arrow-left-line"></i> Kembali ke Modul
+                        <i class="icon-[ri--arrow-left-line]"></i> Kembali ke Modul
                     </span>
                     <span class="font-medium text-gray-900 dark:text-white">
                         {{ if .Params.section }}{{ .Params.section }}{{ else }}{{ .Title }}{{ end }}
@@ -87,7 +87,7 @@
         {{ with $nextPage }}
             <a href="{{ .RelPermalink }}" class="flex flex-col items-end text-right p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all group h-full">
                 <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                    Selanjutnya <i class="ri-arrow-right-line"></i>
+                    Selanjutnya <i class="icon-[ri--arrow-right-line]"></i>
                 </span>
                 <!-- Next: -->
                 <span class="font-medium text-gray-900 dark:text-white">
@@ -97,7 +97,7 @@
         {{ else }}
              <div class="flex flex-col items-end text-right p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 opacity-50 h-full cursor-not-allowed">
                 <span class="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1">
-                    Selesai <i class="ri-check-line"></i>
+                    Selesai <i class="icon-[ri--check-line]"></i>
                 </span>
                 <!-- Next: End of Module -->
                 <span class="font-medium text-gray-900 dark:text-white">

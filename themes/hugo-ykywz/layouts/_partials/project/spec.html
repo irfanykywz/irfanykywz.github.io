@@ -1,7 +1,7 @@
 {{ if .Params.spec }}
 <div class="mb-16">
     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
-        {{ partial "icons/cpu-chip.html" (dict "class" "w-8 h-8 text-indigo-600 dark:text-indigo-400") }}
+        <span class="icon-[heroicons--cpu-chip] w-8 h-8 text-indigo-600 dark:text-indigo-400"></span>
         Persyaratan Sistem
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -11,7 +11,7 @@
             <div class="space-y-3">
                 {{ range .requirements }}
                 <div class="flex items-start gap-3">
-                    {{ partial "icons/chevron-right.html" (dict "class" "w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0") }}
+                    <span class="icon-[ri--arrow-right-s-line] w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0"></span>
                     <div class="text-gray-600 dark:text-gray-300 leading-relaxed">
                         <span class="font-semibold text-gray-900 dark:text-white">{{ .name }}:</span> {{ .value }}
                     </div>

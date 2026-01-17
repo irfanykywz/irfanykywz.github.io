@@ -15,54 +15,55 @@ date: 2025-12-13T05:00:35+07:00
 draft: false
 # =============================
 overview:
-    - mengelola banyak channel youtube dengan mudah
+  - Promise ETY adalah aplikasi desktop berbasis Python (PySide6) yang dirancang khusus untuk membantu konten kreator mengelola ekosistem YouTube dalam skala besar secara otomatis. Aplikasi ini lahir dari kebutuhan pribadi saya untuk mengelola banyak channel tanpa harus kehilangan banyak waktu dalam proses repetitif.
+  - Dengan Promise ETY, pengguna dapat melakukan manajemen profil akun, pemantauan performa, hingga otomatisasi alur kerja pembuatan konten dalam satu dasbor yang terintegrasi. Proyek ini merupakan manifestasi dari janji produktivitas saya di akhir tahun 2025 untuk menjembatani antara kemampuan teknis pemrograman dengan dunia konten kreator.
 
 spec:
   - title: "Minimum"
     requirements:
       - name: "OS"
-        icon: "ri-window-line"
+        icon: "icon-[ri--window-line]"
         value: "Windows 10 (64-bit)"
       - name: "Prosesor"
-        icon: "ri-cpu-line"
+        icon: "icon-[ri--cpu-line]"
         value: "2.4 Ghz"
       - name: "Memori"
-        icon: "ri-ram-2-line"
+        icon: "icon-[ri--ram-2-line]"
         value: "8 GB RAM"      
       - name: "Grafis"
-        icon: "ri-macbook-line"
+        icon: "icon-[ri--macbook-line]"
         value: "-"        
       - name: "Penyimpanan"
-        icon: "ri-hard-drive-2-line"
+        icon: "icon-[ri--hard-drive-2-line]"
         value: "2 GB ruang tersedia"
   - title: "Rekomendasi"
     requirements:
       - name: "OS"
-        icon: "ri-window-line"
+        icon: "icon-[ri--window-line]"
         value: "Windows 11"
       - name: "Prosesor"
-        icon: "ri-cpu-line"
+        icon: "icon-[ri--cpu-line]"
         value: "3.5 Ghz"
       - name: "Memori"
-        icon: "ri-ram-2-line"
+        icon: "icon-[ri--ram-2-line]"
         value: "32 GB RAM"      
       - name: "Grafis"
-        icon: "ri-macbook-line"
+        icon: "icon-[ri--macbook-line]"
         value: "(GTX 10xx, RTX 20xx,30xx) Series"          
       - name: "Penyimpanan"
-        icon: "ri-hard-drive-2-line"
+        icon: "icon-[ri--hard-drive-2-line]"
         value: "2 GB ruang tersedia"        
     
 # =============================
 feature:
     - name: "Tools All in One"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "tersedia banyak tools untuk mempermudah pembuatan konten"
-    - name: "Manajemen Channel"
-      icon: 'ri-file-text-line'
+    - name: "Manajemen Multi Channel"
+      icon: 'icon-[ri--file-text-line]'
       description: "memudahkan jika ingin garap banyak channel"
     - name: "Aplikasi Hybrid"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "Beberapa tool bisa berjalan offline dan sisanya online"
 
 # =============================

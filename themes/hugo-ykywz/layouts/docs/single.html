@@ -31,33 +31,33 @@
           }
       }">
     <section class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30">
-        <div class="container mx-auto px-4 py-3">
+        <div class="container max-w-6xl mx-auto px-4 py-3">
             <nav class="flex items-center justify-between gap-4">
                 <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 overflow-hidden">
                     <a href="{{ .CurrentSection.RelPermalink }}" class="flex-shrink-0 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                        <i class="ri-file-text-line"></i>
+                        <i class="icon-[ri--file-text-line]"></i>
                         {{ with .Parent }}{{ .Title }}{{ end }}
                     </a>
-                    <i class="ri-arrow-right-s-line flex-shrink-0"></i>
+                    <i class="icon-[ri--arrow-right-s-line] flex-shrink-0"></i>
 
                     {{ if .Params.project_url }}
                         <a href="{{ $.Site.BaseURL }}{{ .Params.project_url }}" class="flex-shrink-0 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">                       
                             Proyek
                         </a>
-                        <i class="ri-arrow-right-s-line flex-shrink-0"></i>
+                        <i class="icon-[ri--arrow-right-s-line] flex-shrink-0"></i>
                     {{ end }}                 
 
                     <span class="font-medium text-gray-900 dark:text-white truncate">{{ .Title }}</span>
                 </div>
                 
                 <button @click="tocOpen = !tocOpen" class="lg:hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                    <i class="ri-menu-line"></i>
+                    <i class="icon-[ri--menu-line]"></i>
                 </button>
             </nav>
         </div>
     </section>
 
-    <div class="container mx-auto px-4 py-8">
+    <div class="container max-w-6xl mx-auto px-4 py-8">
         <div class="flex flex-col lg:flex-row gap-8 relative">
             {{/* Sidebar untuk Daftar Isi */}}
             <aside class="lg:w-64 flex-shrink-0">
@@ -79,7 +79,7 @@
                     <div class="flex items-center justify-between mb-6">
                         <h4 class="text-lg font-bold text-gray-900 dark:text-white">Daftar Isi</h4>
                         <button @click="tocOpen = false" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                            <i class="ri-close-line text-xl"></i>
+                            <i class="icon-[ri--close-line] text-xl"></i>
                         </button>
                     </div>
                     {{ partial "docs/toc.html" . }}

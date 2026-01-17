@@ -1,7 +1,7 @@
 ---
 title: "Produk dan Layanan"
-description: "Temukan produk digital berkualitas dan jasa profesional untuk kebutuhan Anda."
-icon: "ri-store-2-line"
+description: "Temukan produk digital dan jasa profesional untuk kebutuhan Anda."
+icon: "icon-[ri--store-2-line]"
 layout: "shop"
 contact_wa: "6281389215100"
 contact_telegram: "irfanykywz"
@@ -22,16 +22,16 @@ payments:
     type: "ewallet"
 
 coupons:
-  - code: "DISKON10"
-    type: "percentage" # Tipe diskon: 'percentage' atau 'fixed'
-    value: 10 # Nilai: 10 untuk 10%
-  - code: "BOT30"
+  # - code: "DISKON10"
+  #   type: "percentage" # Tipe diskon: 'percentage' atau 'fixed'
+  #   value: 10 # Nilai: 10 untuk 10%
+  - code: "YT26"
     type: "percentage"
-    value: 30
+    value: 26
     products: # Kupon ini hanya berlaku untuk produk dengan slug berikut
-      - produk-1
-    expires: "2026-01-15" # Format YYYY-MM-DD
-  - code: "HEMAT50"
-    type: "fixed"
-    value: 50000 # Nilai: 50000 untuk potongan Rp 50.000
+      - promise-ety
+    expires: "2026-01-16" # Format YYYY-MM-DD
+  # - code: "HEMAT50"
+  #   type: "fixed"
+  #   value: 50000 # Nilai: 50000 untuk potongan Rp 50.000
 ---

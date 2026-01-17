@@ -5,6 +5,51 @@ description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan pe
 date: 2025-10-09T00:00:00+08:00
 
 changelog:
+  - version: "2.0.5"
+    date: "18 Januari 2026"
+    changes: 
+      - tag: "Pembaruan"
+        description: "perubahan total alur halaman toko, sekarang pakai list dan single, dipisah begini biar produk dan jasa bisa lebih terlihat, dan untuk single juga bisa diload langsung dihalaman list jadi bisa lebih cepat" 
+  - version: "2.0.4"
+    date: "17 Januari 2026"
+    changes:
+      - tag: "Perbaikan"
+        description: "perbaikan halaman evaluasi, sekarang pakai ajax untuk meload konten agar tidak numpuk disatu halaman semua kontennya"  
+      - tag: "Perbaikan"
+        description: "perbaikan js google analysis, sekarang pakai script manual biar bisa dilazyload"
+      - tag: "Perbaikan"
+        description: "perbaikan js weather time sekarang pakai cache agar tidak hit endpoint terus, perbaikan juga untuk tampilannya sekarang munculin hari singkat + pindah icon timenya agar presisi"
+      - tag: "Perbaikan"
+        description: "perbiakan ukuran halaman sekarang pakai max-w-xxx biar containernya ada batas limit widthnya, tujaunnya agar konten berada ditengah dan gak terlalu lebar "     
+      - tag: "Pembaruan"
+        description: "perubahan tampilan list journal dan artikel, perubahan tampilan single film. jadi lebi clean"                                
+  - version: "2.0.3"
+    date: "16 Januari 2026"
+    changes:
+      - tag: "Fitur Baru"
+        description: "membuat halaman target tahunan"        
+      - tag: "Fitur Baru"
+        description: "migrasi icon svg, icon remix cdn sekarang terpusat pakai iconify lewat tailwindcss4. memungkinkan menggunakan set icon yang berbeda dengan mudah" 
+      - tag: "Perbaikan"
+        description: "perbaikan halaman belajar, menu module sekarang bisa fokus, perbaikan juga next prev saat sub module adalah konten pertama"         
+  - version: "2.0.2"
+    date: "15 Januari 2026"
+    changes:
+      - tag: "Fitur Baru"
+        description: "membuat halaman evaluasi tahunan"    
+      - tag: "Perbaikan"
+        description: "memperbaiki tombol dihalaman home, tombol cv dan email dihilangkan ganti jadi tombol wa. menambakan tombol donasi"  
+      - tag: "Perbaikan"
+        description: "memperbaiki ukuran lebar tulisan pada layar yang terlalu panjang, sekarang pakai width max-w-3xl"          
+      - tag: "Pembaruan"
+        description: "mengubah tampilan halaman donasi menjadi lebih bagus"
+  - version: "2.0.1"
+    date: "14 Januari 2026"
+    changes:
+      - tag: "Perbaikan"
+        description: "tampilan halaman search input ada tombol clear, hasil pencarian tidak pakai table lagi"  
+      - tag: "Fitur Baru"
+        description: "membuat halaman shop, pengganti halaman buy-license yang dihapus"        
   - version: "2.0.0"
     date: "13 Januari 2026"
     changes:

@@ -22,6 +22,13 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/typography": "^0.5.16",
+    "alpinejs": "^3.15.4",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@iconify-json/heroicons": "^1.2.3",
+    "@iconify-json/lucide": "^1.2.85",
+    "@iconify-json/ri": "^1.2.7",
+    "@iconify/tailwind4": "^1.2.1"
   }
 }

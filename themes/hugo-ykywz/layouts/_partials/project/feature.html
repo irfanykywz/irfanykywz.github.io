@@ -1,7 +1,7 @@
 {{ if .Params.feature }}
     <div class="mb-16">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
-            {{ partial "icons/puzzle-piece.html" (dict "class" "w-8 h-8 text-indigo-600 dark:text-indigo-400") }}
+            <span class="icon-[heroicons--puzzle-piece] w-8 h-8 text-indigo-600 dark:text-indigo-400"></span>
             Fitur Utama
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -12,7 +12,7 @@
                         {{ with $element.icon }}
                             <i class="{{ . }}"></i>
                         {{ else }}
-                            {{ partial "icons/document-text.html" (dict "class" "w-10 h-10") }}
+                            <span class="icon-[heroicons--document-text] w-10 h-10"></span>
                         {{ end }}
                     </div>
                     <div class="text-lg font-bold text-gray-900 dark:text-white mb-3">{{ $element.name }}</div>

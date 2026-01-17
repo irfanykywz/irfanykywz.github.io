@@ -2,7 +2,7 @@
 title: License Generator
 date: 2025-10-27T20:00:00+07:00
 description: Alat Generate Lisensi
-icon: "ri-key-fill"
+icon: "icon-[ri--key-fill]"
 ---
 <!-- Using a CDN for the UUID library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>

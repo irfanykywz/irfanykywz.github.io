@@ -1,3 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Muhamad Irfan\'s web initialized successfully!');
-});
+import Alpine from 'alpinejs'
+
+window.Alpine = Alpine
+
+Alpine.start()

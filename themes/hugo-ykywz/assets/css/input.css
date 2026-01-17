@@ -1,5 +1,10 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@plugin "@iconify/tailwind4";
 
 /* baris ini untuk mengaktifkan dark mode via class .dark */
 @variant dark (&:where(.dark, .dark *));
@@ -9,9 +14,6 @@
 @source "../../../../layouts";
 @source "../../layouts";
 
-/* Import Font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 /* Konfigurasi Tema */
 @theme {

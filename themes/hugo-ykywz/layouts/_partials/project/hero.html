@@ -11,7 +11,7 @@
 
             {{ if .Params.date }}
                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300">
-                    {{ partial "icons/calendar.html" (dict "class" "w-4 h-4") }}
+                    <span class="icon-[ri--calendar-line] w-4 h-4"></span>
                     {{ .Date | time.Format "Jan 2006" }}
                 </span>
             {{ end }}
@@ -30,21 +30,21 @@
         <div class="flex flex-wrap gap-3 pt-2">
             {{ if .Params.demo }}
             <a target="_blank" href='{{ .Params.demo }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium shadow-sm">
-                {{ partial "icons/arrow-top-right-on-square.html" (dict "class" "w-5 h-5") }}
+                <span class="icon-[heroicons--arrow-top-right-on-square] w-5 h-5"></span>
                 Demo
             </a>
             {{ end }}
 
             {{ if .Params.github }}
             <a target="_blank" href=' {{ .Params.github }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium shadow-sm">
-                {{ partial "icons/github.html" (dict "class" "w-5 h-5") }}
+                <span class="icon-[ri--github-fill] w-5 h-5"></span>
                 Kode
             </a>
             {{ end }}
 
              {{ if .Params.doc }}
             <a href='{{ .Params.doc }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium shadow-sm">
-                {{ partial "icons/document-text.html" (dict "class" "w-5 h-5") }}
+                <span class="icon-[heroicons--document-text] w-5 h-5"></span>
                 Panduan
             </a>
             {{ end }}
@@ -52,14 +52,14 @@
 
             {{ if .Params.buy }}
             <a target="_blank" href=' {{ .Params.buy }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm">
-                {{ partial "icons/shopping-cart.html" (dict "class" "w-5 h-5") }}
+                <span class="icon-[ri--shopping-cart-line] w-5 h-5"></span>
                 Beli
             </a>
             {{ end }}
 
             {{ if .Params.download }}
             <a target="_blank" href=' {{ .Params.download }}' class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm">
-                {{ partial "icons/arrow-down-tray.html" (dict "class" "w-5 h-5") }}
+                <span class="icon-[heroicons--arrow-down-tray] w-5 h-5"></span>
                 Unduh
             </a>
             {{ end }}            
@@ -86,11 +86,11 @@
 
     <div class="col-span-1 lg:col-span-2 flex justify-between items-center pt-8 border-t border-gray-200 dark:border-gray-700 flex-wrap gap-4">
         <a href="javascript:;" @click="$store.share.toggle()" class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
-            {{ partial "icons/share.html" (dict "class" "w-5 h-5") }}
+            <span class="icon-[ri--share-line] w-5 h-5"></span>
             Bagikan
         </a>
         <span class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 font-medium">
-            {{ partial "icons/fire.html" (dict "class" "w-5 h-5 text-orange-500") }}
+            <span class="icon-[ri--fire-line] w-5 h-5 text-orange-500"></span>
             {{ partial "view-count.html" . }}
         </span>
     </div>

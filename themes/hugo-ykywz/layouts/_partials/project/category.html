@@ -1,8 +1,8 @@
 {{ if eq .Params.category "Desktop" }}
-	{{ partial "icons/computer-desktop.html" (dict "class" "w-3 h-3") }}
+	<span class="icon-[heroicons--computer-desktop] w-3 h-3"></span>
 {{ else if eq .Params.category "Seluler" }}
-	{{ partial "icons/device-phone-mobile.html" (dict "class" "w-3 h-3") }}
+	<span class="icon-[heroicons--device-phone-mobile] w-3 h-3"></span>
 {{ else if eq .Params.category "Website" }}
-	{{ partial "icons/globe-alt.html" (dict "class" "w-3 h-3") }}
+	<span class="icon-[heroicons--globe-alt] w-3 h-3"></span>
 {{ end }}
 {{ .Params.category }}

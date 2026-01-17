@@ -18,13 +18,13 @@ overview:
 # =============================
 feature:
     - name: "Live Data"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "Melihat data live terbaru"
     - name: "Affiliate Product"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "*** generate csv"
     - name: "*** Affiliate"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "***"   
 # =============================     
 review:

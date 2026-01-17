@@ -18,13 +18,13 @@ overview:
 # =============================
 feature:
     - name: "Mass Editing"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "editing sekaligus dengan berbagai efek yang ada"
     - name: "Organize Video"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "terdapat fitur ai untuk generate title, deskripsi dan mengorganisirnya"
     - name: "Multi Threading"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "edit video secara masal dengan proses berbarengan dengan threading"   
 # ============================= 
 galery:

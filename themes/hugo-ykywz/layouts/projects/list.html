@@ -24,9 +24,9 @@
         }"
         @popstate.window="activeFilter = new URLSearchParams(window.location.search).get('filter') || 'all'">
         <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
-                    {{ partial "icons/briefcase.html" (dict "class" "w-10 h-10 text-indigo-600 dark:text-indigo-400") }}
+                    <span class="icon-[ri--briefcase-line] w-10 h-10 text-indigo-600 dark:text-indigo-400"></span>
                     {{ .Title }}
                 </h1>
                 <p class="text-xl text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto">{{ len .Data.Pages }} {{ .Description }}</p>
@@ -34,7 +34,7 @@
         </section>
 
         <section class="py-8 border-b border-gray-200 dark:border-gray-700">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <div class="flex flex-wrap justify-center gap-4">
                     {{ $filters := .Params.filtertab }}
                     {{ $visibleFiltersCount := 5 }}
@@ -45,9 +45,9 @@
                             @click="updateFilter('{{ $element.filter }}')"
                             :class="activeFilter === '{{ $element.filter }}' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
                             class="flex items-center gap-2 px-6 py-2.5 rounded-full border font-medium transition-all duration-200 shadow-sm">
-                            <!-- Icon logic needs to be handled if icons are classes or partials. Assuming classes for now based on config, but ideally partials. -->
-                            <!-- If $element.icon is a class like 'ri-home-line', we might need a map or just use it if we still had font icons. Since we are moving to SVG, we might need to map these in config or hardcode here if limited. -->
-                            <!-- For now, assuming we might not have dynamic SVG mapping easily without changing config structure. I will omit icon or use a generic one if not mapped. -->
+                            {{ if $element.icon }}
+                                <span class="{{ $element.icon }} w-5 h-5"></span>
+                            {{ end }}
                             {{ $element.name }}
                         </button>
                     {{- end -}}
@@ -56,16 +56,21 @@
                     {{ if gt (len $filters) $visibleFiltersCount }}
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" @click.outside="open = false" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
-                                {{ partial "icons/more.html" (dict "class" "w-6 h-6") }}
+                                <span class="icon-[ri--more-fill] w-6 h-6"></span>
                             </button>
                             <div x-show="open" x-transition class="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 z-10 overflow-hidden" style="display: none;">
                                 {{ range after $visibleFiltersCount $filters }}
-                                    <a href="javascript:;" @click="updateFilter('{{ .filter }}'); open = false" class="block px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    <a href="javascript:;" @click="updateFilter('{{ .filter }}'); open = false" class="block px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2">
+
+                                        {{ if .icon }}
+                                            <span class="{{ .icon }} w-4 h-4"></span>
+                                        {{ end }}                                        
+
                                         {{ .name }}
                                     </a>
                                 {{ end }}
                                 <a href="{{ "projects/archives/" | relURL }}" class="block px-4 py-3 text-sm text-indigo-600 dark:text-indigo-400 font-medium hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors border-t border-gray-100 dark:border-gray-700 flex items-center gap-2">
-                                    {{ partial "icons/archive.html" (dict "class" "w-4 h-4") }}
+                                    <span class="icon-[ri--archive-line] w-4 h-4"></span>
                                     Diarsipkan
                                 </a>
                             </div>
@@ -76,7 +81,7 @@
         </section>
 
         <section class="py-16 bg-white dark:bg-gray-900">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- filter only show type index not _index -->
                     {{ $filteredPages := .RegularPages }}                    

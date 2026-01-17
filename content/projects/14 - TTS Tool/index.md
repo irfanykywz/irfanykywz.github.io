@@ -19,22 +19,22 @@ overview:
 # =============================
 feature:
     - name: "Text to Speech"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "ubah text menjadi suara"
     - name: "Terdapat 3 Layanan"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "layanan edge-tts tiktok-tts, gemini-tts, terdapat lebih banyak pilihan suara"
     - name: "Satuan atau Barengan"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "bisa generate secara satuan maupun barengan sekaligus"
     - name: "Cek Preview"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "cek hasil suara yang dihasilkan sebelum digunakan"
     - name: "Logging"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "bisa melihat proses yang sedang berjalan"
     - name: "Updater"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "tersedia fitur updater jika sewaktu-waktu dibutuhkan"
 galery:
     - name: "tts-tool-2"

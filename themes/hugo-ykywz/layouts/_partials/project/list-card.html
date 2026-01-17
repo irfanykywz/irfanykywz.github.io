@@ -20,7 +20,7 @@
             {{ end }}
             {{ if isset .Params "date" }}
                 <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-md">
-                    {{ partial "icons/calendar.html" (dict "class" "w-3 h-3") }}
+                    <span class="icon-[ri--calendar-line] w-3 h-3"></span>
                     {{ .Date | time.Format "January 2006" }}
                 </span>
             {{ end }}

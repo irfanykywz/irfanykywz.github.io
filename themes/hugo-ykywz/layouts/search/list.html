@@ -3,11 +3,11 @@
 
 {{ define "main" }}
     <div class="min-h-[calc(100vh-200px)] py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
-        <div class="container mx-auto px-4 max-w-4xl">
+        <div class="container max-w-6xl mx-auto px-4 max-w-4xl">
             <!-- Search Header -->
             <div class="text-center mb-12">
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
-                    {{ partial "icons/search.html" (dict "class" "w-10 h-10 text-indigo-600 dark:text-indigo-400") }}
+                    <span class="icon-[ri--search-line] w-10 h-10 text-indigo-600 dark:text-indigo-400"></span>
                     {{ .Title }}
                 </h1>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{{ .Description }}</p>
@@ -15,16 +15,21 @@
 
             <!-- Search Input -->
             <div class="mb-8">
-                <div class="relative max-w-2xl mx-auto">
+                <div class="relative max-w-2xl mx-auto group">
+                    <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-600 dark:group-focus-within:text-indigo-400 transition-colors pointer-events-none">
+                        <span class="icon-[ri--search-line] w-6 h-6"></span>
+                    </div>
                     <input 
-                        type="search" 
+                        type="text" 
                         id="searchInput" 
-                        class="w-full px-6 py-4 text-lg border-2 border-gray-200 dark:border-gray-700 rounded-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all" 
-                        placeholder="Masukan kata yang ingin dicari"
+                        class="w-full pl-14 pr-12 py-4 text-lg border-2 border-gray-200 dark:border-gray-700 rounded-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder-gray-400 dark:placeholder-gray-500" 
+                        placeholder="Masukan kata yang ingin dicari..."
                         autocomplete="off"
                     >
-                    <button id="searchIcon" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Search">
-                        {{ partial "icons/search.html" (dict "class" "w-6 h-6") }}
+                    <button id="clearSearch" class="hidden absolute right-4 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="Hapus pencarian">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -37,20 +42,8 @@
 
             <!-- Search Results -->
             <div id="searchResults" class="hidden">
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr>
-                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Judul</th>
-                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Tanggal</th>
-                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Pratinjau</th>
-                                <th class="bg-gray-50 dark:bg-gray-700/50 px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="searchTableBody">
-                            <!-- Results will be populated by JavaScript -->
-                        </tbody>
-                    </table>
+                <div id="searchResultsContainer" class="space-y-4">
+                    <!-- Results will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -58,7 +51,7 @@
             <div id="noResults" class="hidden text-center py-20">
                 <div class="max-w-md mx-auto">
                     <div class="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600">
-                        {{ partial "icons/search.html" (dict "class" "w-full h-full") }}
+                        <span class="icon-[ri--search-line] w-full h-full"></span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Hasil tidak ditemukan</h3>
                     <p class="text-gray-500 dark:text-gray-400">Coba sesuaikan kata kunci pencarian Anda atau telusuri kategori kami</p>
@@ -69,7 +62,7 @@
             <div id="initialState" class="text-center py-20">
                 <div class="max-w-md mx-auto">
                     <div class="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600">
-                        {{ partial "icons/search.html" (dict "class" "w-full h-full") }}
+                        <span class="icon-[ri--search-line] w-full h-full"></span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Mulai Pencarian</h3>
                     <p class="text-gray-500 dark:text-gray-400">Masukkan kata kunci untuk menemukan konten yang relevan</p>
@@ -84,7 +77,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
-            const searchIcon = document.getElementById('searchIcon');
+            const clearSearch = document.getElementById('clearSearch');
             const searchResults = document.getElementById('searchResults');
             const noResults = document.getElementById('noResults');
             const initialState = document.getElementById('initialState');
@@ -105,6 +98,7 @@
                     
                     if (queryFromUrl) {
                         searchInput.value = queryFromUrl;
+                        toggleClearButton(queryFromUrl);
                         performSearch(queryFromUrl);
                     }
                 })
@@ -165,41 +159,54 @@
                     if (item.tags) {
                         const tags = item.tags.split(',').map(tag => tag.trim());
                         tagsHTML = tags.map(tag => 
-                            `<span class="table-tag">${highlightText(tag, query)}</span>`
+                            `<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 border border-indigo-200 dark:border-indigo-800">${highlightText(tag, query)}</span>`
                         ).join('');
                     }
                     
                     resultsHTML += `
-                        <tr>
-                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
-                                <div class="font-bold text-gray-900 dark:text-white text-lg">${titleHighlighted}</div>
-                            </td>
-                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
-                                <div class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">${formatDate(item.date)}</div>
-                            </td>
-                            <!-- 
-                                <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
-                                    <div class="table-tags">${tagsHTML}</div>
-                                </td>
-                            -->
-                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
-                                <div class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">${contentPreview}...</div>
-                            </td>
-                            <td class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0 text-center">
-                                <a href="${item.permalink}" class="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
-                                    Lihat
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300 group relative">
+                            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                    <a href="${item.permalink}" class="focus:outline-none">
+                                        <span class="absolute inset-0" aria-hidden="true"></span>
+                                        ${titleHighlighted}
+                                    </a>
+                                </h3>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap flex-shrink-0 flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    ${formatDate(item.date)}
+                                </span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4 leading-relaxed">${contentPreview}...</p>
+                            <div class="flex items-center justify-between mt-auto">
+                                <div class="flex flex-wrap gap-2 relative z-10">
+                                    ${tagsHTML}
+                                </div>
+                                <span class="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform pointer-events-none">
+                                    Baca Selengkapnya
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                     </svg>
-                                </a>
-                            </td>
-                        </tr>
+                                </span>
+                            </div>
+                        </div>
                     `;
                 });
                 
-                document.getElementById('searchTableBody').innerHTML = resultsHTML;
+                document.getElementById('searchResultsContainer').innerHTML = resultsHTML;
                 resultCount.textContent = `${results.length} ${results.length === 1 ? 'result' : 'results'}`;
                 searchTime.textContent = `${duration}ms`;
+            }
+
+            // Toggle clear button
+            function toggleClearButton(query) {
+                if (query && query.length > 0) {
+                    clearSearch.classList.remove('hidden');
+                } else {
+                    clearSearch.classList.add('hidden');
+                }
             }
             
             // Highlight matching text
@@ -247,13 +254,17 @@
                 }
             });
             
-            searchIcon.addEventListener('click', function() {
-                performSearch(searchInput.value);
+            clearSearch.addEventListener('click', function() {
+                searchInput.value = '';
+                toggleClearButton('');
+                searchInput.focus();
+                performSearch('');
             });
             
             // Debounce search for better performance
             let debounceTimer;
             searchInput.addEventListener('input', function() {
+                toggleClearButton(this.value);
                 clearTimeout(debounceTimer);
                 debounceTimer = setTimeout(() => {
                     performSearch(this.value);

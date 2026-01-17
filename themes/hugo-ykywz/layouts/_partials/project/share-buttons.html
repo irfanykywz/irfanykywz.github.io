@@ -2,22 +2,22 @@
     <span class="share-label">Bagikan:</span>
     <div class="share-buttons">
         <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Bagikan di Twitter">
-            <i class="ri-twitter-fill"></i>
+            <i class="icon-[ri--twitter-fill]"></i>
         </a>
         <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="share-btn facebook" title="Bagikan di Facebook">
-            <i class="ri-facebook-fill"></i>
+            <i class="icon-[ri--facebook-fill]"></i>
         </a>
         <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" title="Bagikan di LinkedIn">
-            <i class="ri-linkedin-fill"></i>
+            <i class="icon-[ri--linkedin-fill]"></i>
         </a>
         <a href="https://api.whatsapp.com/send?text={{ .Title | urlize }}%20{{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="share-btn whatsapp" title="Bagikan di WhatsApp">
-            <i class="ri-whatsapp-fill"></i>
+            <i class="icon-[ri--whatsapp-fill]"></i>
         </a>
         <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="share-btn telegram" title="Bagikan di Telegram">
-            <i class="ri-telegram-fill"></i>
+            <i class="icon-[ri--telegram-fill]"></i>
         </a>
         <button class="share-btn copy-link" title="Salin Tautan">
-            <i class="ri-link"></i>
+            <i class="icon-[ri--link]"></i>
         </button>
 
     </div>
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         copyButton.addEventListener('click', function() {
             navigator.clipboard.writeText('{{ .Permalink }}').then(() => {
                 const originalIcon = this.innerHTML;
-                this.innerHTML = '<i class="ri-check-line"></i>';
+                this.innerHTML = '<i class="icon-[ri--check-line]"></i>';
                 this.title = 'Tautan disalin!';
                 setTimeout(() => {
                     this.innerHTML = originalIcon;

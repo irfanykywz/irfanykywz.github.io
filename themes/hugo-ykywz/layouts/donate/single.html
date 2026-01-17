@@ -7,107 +7,112 @@
 {{ end }}
 
 {{ define "main" }}
-<main class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12 px-4" x-data="{
-    copyToClipboard(text, $el) {
+<main class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" 
+    x-data="{
+        copyToClipboard(text, el) {
         navigator.clipboard.writeText(text).then(() => {
-            const originalText = $el.innerText;
-            $el.innerText = 'Tersalin!';
-            setTimeout(() => {
-                $el.innerText = originalText;
-            }, 1500);
+                const originalIcon = el.innerHTML;
+                const originalText = el.querySelector('span').innerText;
+                el.querySelector('i').className = 'icon-[ri--check-line] text-green-500';
+                el.querySelector('span').innerText = 'Tersalin';
+                el.disabled = true;
+                setTimeout(() => {
+                    el.innerHTML = originalIcon;
+                    el.querySelector('span').innerText = originalText;
+                    el.disabled = false;
+                }, 2000);
         });
     }
 }">
-    <div class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden relative">
-        
-        {{ with .Params.image }}
-            <div class="absolute top-4 right-4 w-24 opacity-20 pointer-events-none">
-                <img src="{{ . }}" alt="ilustrasi donasi" class="w-full h-auto">
-            </div>
-        {{ end }}
-
-        <div class="p-8 md:p-12">
-            <section class="text-center mb-10">
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">{{ .Title }}</h1>
-                {{ with .Params.description }}
-                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ . }}</p>
+    <div class="w-full max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            
+            <!-- Left Column: Information -->
+            <div class="lg:sticky lg:top-12">
+                {{ with .Params.image }}
+                <img src="{{ . }}" alt="Ilustrasi Donasi" class="w-48 h-auto mx-auto mb-8 opacity-80 animate-pulse">
                 {{ end }}
-            </section>
-
-            {{ with .Params.qr }}
-            <section class="text-center mb-10">
-                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Scan QR</h2>
-                <div class="inline-block p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
-                    <img src="{{ . }}" alt="QR Code" class="w-48 h-48 object-cover cursor-pointer" 
-                    @click="$store.lightbox.open('{{ . }}', '', '')"
-                    />
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-center lg:text-left mb-6">{{ .Title }}</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed text-center lg:text-left mb-8">{{ .Description }}</p>
+                <div class="prose prose-lg dark:prose-invert max-w-none text-center lg:text-left">
+                    {{ .Content }}
                 </div>
-            </section>
-            {{ end }}
-
-            {{ with .Params.funding }}
-            <section class="mb-10">
-                <h2 class="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-4">{{ $.Params.funding_title }}</h2>
-                <div class="space-y-4">
-                {{ range $i, $f := . }}
-                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-600">
-                        <div class="overflow-hidden">
-                            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $f.type }}</div>
-                            <div class="font-mono text-gray-900 dark:text-white truncate my-1 select-all">{{ $f.value }}</div>
-                            <div class="text-xs text-gray-500 dark:text-gray-400">{{ $f.owner }}</div>
-                        </div>
-                        <button @click="copyToClipboard('{{ $f.value }}', $el)" class="flex-shrink-0 ml-4 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm">
-                            Copy
-                        </button>
-                    </div>
-                {{ end }}
+                <div class="mt-12 text-center lg:text-left">
+                    <a href="/" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold transition-colors">
+                        <i class="icon-[ri--arrow-left-line]"></i>
+                        <span>Kembali ke Halaman Utama</span>
+                    </a>
                 </div>
-            </section>
-            {{ end }}
-
-            {{ if or .Params.paypal_email .Params.paypal_me }}
-            <section class="mb-10">
-                <h2 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-4">PayPal</h2>
-                <div class="space-y-4">
-                    {{ with .Params.paypal_email }}
-                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-600">
-                        <div class="overflow-hidden">
-                            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Email PayPal</div>
-                            <div class="font-mono text-gray-900 dark:text-white truncate my-1 select-all">{{ . }}</div>
-                        </div>
-                        <button @click="copyToClipboard('{{ . }}', $el)" class="flex-shrink-0 ml-4 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm">
-                            Copy
-                        </button>
-                    </div>
-                    {{ end }}
-                    
-                    {{ with .Params.paypal_me }}
-                    <div class="text-center pt-2">
-                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-[#ffc439] text-[#003087] rounded-full font-bold hover:bg-[#f2b930] transition-colors shadow-sm">
-                            <i class="ri-paypal-fill text-xl"></i>
-                            <span>PayPal.Me</span>
-                        </a>
-                    </div>
-                    {{ end }}
-                </div>
-            </section>
-            {{ end }}
-
-            <section class="text-center text-gray-500 dark:text-gray-400 mb-8">
-                <p>{{ with .Params.thanks }}{{ . }}{{ else }}Thank you for your support!{{ end }}</p>
-            </section>
-
-            <div class="prose prose-sm dark:prose-invert max-w-none mb-8 text-center">
-                {{ .Content }}            
             </div>
 
-            <div class="text-center">
-                <a href="/" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors">
-                    <i class="ri-arrow-left-line"></i>
-                    Kembali ke Halaman Utama
-                </a>
+            <!-- Right Column: Donation Methods -->
+            <div class="space-y-8">
+                {{ with .Params.qr }}
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3"><i class="icon-[ri--qr-code-line] text-indigo-500"></i><span>Scan QRIS</span></h2>
+                    <div class="flex flex-col sm:flex-row items-center gap-6">
+                        <div class="p-3 bg-white rounded-lg border border-gray-200 shadow-sm inline-block">
+                            <img src="{{ . }}" alt="QR Code" class="w-100 object-contain cursor-pointer" 
+                                 @click="$store.lightbox.open('{{ . }}', 'QRIS', '')"/>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm sm:text-base text-center sm:text-left">
+                            Gunakan aplikasi perbankan atau e-wallet Anda untuk memindai kode QR ini. Mendukung semua pembayaran (GoPay, OVO, DANA, ShopeePay, Mobile Banking, dll).
+                        </p>
+                    </div>
+                </div>
+                {{ end }}
+
+                {{ with .Params.funding }}
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3"><i class="icon-[ri--bank-line] text-indigo-500"></i><span>{{ $.Params.funding_title | default "Transfer Bank & E-Wallet" }}</span></h2>
+                    <div class="space-y-4">
+                        {{ range . }}
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-700">
+                            <div class="overflow-hidden">
+                                <div class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ .type }}</div>
+                                <div class="font-mono text-gray-900 dark:text-white truncate my-1 select-all">{{ .value }}</div>
+                                <div class="text-xs text-gray-500 dark:text-gray-400">a/n {{ .owner }}</div>
+                            </div>
+                            <button @click="copyToClipboard('{{ .value }}', $el)" class="flex-shrink-0 ml-4 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all shadow-sm flex items-center gap-2 disabled:opacity-50">
+                                <i class="icon-[ri--file-copy-line]"></i>
+                                <span>Salin</span>
+                            </button>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+                
+                {{ if or .Params.paypal_email .Params.paypal_me }}
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3"><i class="icon-[ri--paypal-line] text-indigo-500"></i><span>PayPal</span></h2>
+                    <div class="space-y-4">
+                        {{ with .Params.paypal_email }}
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-600">
+                            <div class="overflow-hidden">
+                                <div class="text-sm font-semibold text-gray-800 dark:text-gray-200">Email PayPal</div>
+                                <div class="font-mono text-gray-900 dark:text-white truncate my-1 select-all">{{ . }}</div>
+                            </div>
+                            <button @click="copyToClipboard('{{ . }}', $el)" class="flex-shrink-0 ml-4 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all shadow-sm flex items-center gap-2 disabled:opacity-50">
+                                <i class="icon-[ri--file-copy-line]"></i>
+                                <span>Salin</span>
+                            </button>
+                        </div>
+                        {{ end }}
+                        
+                        {{ with .Params.paypal_me }}
+                        <div class="pt-2">
+                            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#0070ba] text-white rounded-lg font-bold hover:bg-[#005ea6] transition-colors shadow-sm">
+                                <i class="icon-[ri--paypal-fill] text-xl"></i>
+                                <span>Donasi dengan PayPal.Me</span>
+                            </a>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
             </div>
         </div>
     </div>
 </main>
- {{ end }}
+{{ end }}

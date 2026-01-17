@@ -20,13 +20,13 @@ overview:
 # =============================
 feature:
     - name: "Multi Profil"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "buat profil chrome tanpa batas"
     - name: "Custom Extension"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "tambahkan extension yang ingin digunakan"
     - name: "Proxy"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "gunakan proxy bila dibutuhkan"
 galery:
     - name: "Gambar 1"

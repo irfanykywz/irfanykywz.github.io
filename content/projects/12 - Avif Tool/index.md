@@ -19,19 +19,19 @@ overview:
 # =============================
 feature:
     - name: "Convert .Avif"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "mengubah ke format .avif"
     - name: "Proses Sekaligus"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "bisa memproses banyak gambar secara bergantian"
     - name: "Updater"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "tersedia fitur updater jika sewaktu-waktu dibutuhkan"
     - name: "History"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "terdapat halaman history untuk melihat gambar yang telah diproses" 
     - name: "Log"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "tersedia fitur logging / catatan, untuk melihat proses secara langsung"           
 
 galery:

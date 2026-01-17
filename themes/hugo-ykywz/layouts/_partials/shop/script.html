@@ -1,0 +1,108 @@
+<script>
+    function productPurchase(data) {
+        return {
+            ...data,
+            selectedPayment: data.payments.length > 0 ? data.payments[0] : null,
+            couponCode: '',
+            discount: 0,
+            couponMessage: '',
+            isCouponValid: false,
+
+            get finalPrice() {
+                return Math.max(0, this.product.price - this.discount);
+            },
+
+            formatRupiah(number) {
+                return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+            },
+
+            checkCoupon() {
+                this.discount = 0;
+                this.couponMessage = '';
+                this.isCouponValid = false;
+                
+                if (!this.couponCode) return;
+
+                const code = this.couponCode.toUpperCase();
+                const coupon = this.coupons.find(c => c.code.toUpperCase() === code);
+
+                if (!coupon) {
+                    this.couponMessage = 'Kode kupon tidak valid';
+                    return;
+                }
+
+                // Check expiry
+                if (coupon.expires) {
+                    const today = new Date();
+                    const expiry = new Date(coupon.expires);
+                    if (today > expiry) {
+                        this.couponMessage = 'Kupon sudah kadaluarsa';
+                        return;
+                    }
+                }
+
+                // Check product specific
+                if (coupon.products && !coupon.products.includes(this.product.slug)) {
+                    this.couponMessage = 'Kupon tidak berlaku untuk produk ini';
+                    return;
+                }
+
+                if (coupon.type === 'percentage') {
+                    this.discount = this.product.price * (coupon.value / 100);
+                } else {
+                    this.discount = coupon.value;
+                }
+
+                this.isCouponValid = true;
+                this.couponMessage = 'Kupon berhasil diterapkan!';
+            },
+            
+            copyToClipboard(text, el) {
+                if (!text) return;
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalContent = el.innerHTML;
+                    el.innerHTML = '<i class="icon-[ri--check-line] text-lg"></i>';
+                    setTimeout(() => {
+                        el.innerHTML = originalContent;
+                    }, 2000);
+                });
+            },
+
+            sendTo(platform) {
+                if (this.product.type === 'service') {
+                    const message = `Halo, saya tertarik dengan jasa *${this.product.name}*\n\n` +
+                                  `Mohon informasi lebih lanjut. Terima kasih.`;
+                    
+                    const encodedMsg = encodeURIComponent(message);
+                    const number = platform === 'whatsapp' ? this.contact.wa : this.contact.telegram;
+                    const url = platform === 'whatsapp' 
+                        ? `https://wa.me/${number}?text=${encodedMsg}`
+                        : `https://t.me/${number}?text=${encodedMsg}`;
+                    
+                    window.open(url, '_blank');
+                    return;
+                }
+
+                if (!this.selectedPayment) return;
+
+                const paymentInfo = this.selectedPayment.type === 'qris' 
+                    ? `QRIS (${this.selectedPayment.name})` 
+                    : `${this.selectedPayment.name} (${this.selectedPayment.account_number})`;
+
+                const message = `Halo, saya ingin membeli *${this.product.name}*\n\n` +
+                              `Harga: ${this.formatRupiah(this.finalPrice)}\n` +
+                              `Pembayaran: ${paymentInfo}\n` +
+                              `${this.isCouponValid ? '(Menggunakan Kupon: ' + this.couponCode + ')\n' : ''}\n` +
+                              `Mohon diproses. Terima kasih.`;
+
+                const encodedMsg = encodeURIComponent(message);
+                const number = platform === 'whatsapp' ? this.contact.wa : this.contact.telegram;
+                const url = platform === 'whatsapp' 
+                    ? `https://wa.me/${number}?text=${encodedMsg}`
+                    : `https://t.me/${number}?text=${encodedMsg}`;
+                
+                window.open(url, '_blank');
+            }
+        }
+    }
+</script>

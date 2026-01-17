@@ -4,7 +4,7 @@
 {{ define "main" }}
 <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
     <section class="py-16 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container max-w-6xl mx-auto px-4 text-center">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
                 🏷️ {{ .Name | humanize }}
             </h1>
@@ -12,13 +12,13 @@
     </section>
 
     <section class="py-16">
-        <div class="container mx-auto px-4">
+        <div class="container max-w-6xl mx-auto px-4">
             <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
                 {{ $data := .Data }}
                 {{ range $key, $value := .Data.Terms.ByCount }}
                 <a href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/{{ $value.Name | urlize }}/" 
                    class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-200 dark:hover:border-indigo-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shadow-sm group">
-                    <i class="ri-hashtag text-gray-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400"></i>
+                    <i class="icon-[ri--hashtag] text-gray-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400"></i>
                     <span class="font-medium">{{ $value.Name }}</span>
                     <span class="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs py-0.5 px-2 rounded-full group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">{{ $value.Count }}</span>
                 </a>

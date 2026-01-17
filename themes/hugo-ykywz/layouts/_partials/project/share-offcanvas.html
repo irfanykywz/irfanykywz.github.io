@@ -23,29 +23,29 @@
     <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800 flex-shrink-0">
         <h5 class="text-lg font-bold text-gray-900 dark:text-white" id="share-offcanvas-title">Bagikan Proyek Ini</h5>
         <button @click="$store.share.close()" type="button" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors" aria-label="Tutup">
-            {{ partial "icons/close.html" (dict "class" "w-6 h-6") }}
+            <span class="icon-[ri--close-line] w-6 h-6"></span>
         </button>
     </div>
     <div class="p-6 overflow-y-auto">
         <div class="grid grid-cols-3 gap-4">
             <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-1 transition-all text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
-                {{ partial "icons/twitter.html" (dict "class" "w-6 h-6") }}
+                <span class="icon-[ri--twitter-x-line] w-6 h-6"></span>
                 <span>Twitter</span>
             </a>
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-1 transition-all text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500">
-                {{ partial "icons/facebook.html" (dict "class" "w-6 h-6") }}
+                <span class="icon-[ri--facebook-fill] w-6 h-6"></span>
                 <span>Facebook</span>
             </a>
             <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-1 transition-all text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-600">
-                {{ partial "icons/linkedin.html" (dict "class" "w-6 h-6") }}
+                <span class="icon-[ri--linkedin-fill] w-6 h-6"></span>
                 <span>LinkedIn</span>
             </a>
             <a href="https://api.whatsapp.com/send?text={{ .Title | urlize }}%20{{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-1 transition-all text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500">
-                {{ partial "icons/whatsapp.html" (dict "class" "w-6 h-6") }}
+                <span class="icon-[ri--whatsapp-line] w-6 h-6"></span>
                 <span>WhatsApp</span>
             </a>
             <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title | urlize }}" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-1 transition-all text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
-                {{ partial "icons/telegram.html" (dict "class" "w-6 h-6") }}
+                <span class="icon-[ri--telegram-fill] w-6 h-6"></span>
                 <span>Telegram</span>
             </a>
             <button 
@@ -53,10 +53,10 @@
                 @click="navigator.clipboard.writeText('{{ .Permalink }}').then(() => { copied = true; setTimeout(() => copied = false, 1500) })"
                 class="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-1 transition-all text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
                 <div x-show="!copied">
-                    {{ partial "icons/link.html" (dict "class" "w-6 h-6") }}
+                    <span class="icon-[ri--link] w-6 h-6"></span>
                 </div>
                 <div x-show="copied" style="display: none;">
-                    {{ partial "icons/check.html" (dict "class" "w-6 h-6 text-green-500") }}
+                    <span class="icon-[ri--check-line] w-6 h-6 text-green-500"></span>
                 </div>
                 <span x-text="copied ? 'Tersalin!' : 'Salin'">Salin</span>
             </button>

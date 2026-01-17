@@ -18,13 +18,13 @@ overview:
 # =============================
 feature:
     - name: "Upscale 2x"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "memperbesar gambar 2x"
     - name: "Proses Sekaligus"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "bisa memproses banyak gambar secara bergantian"
     - name: "Updater"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "tersedia fitur updater jika sewaktu-waktu dibutuhkan"
 
 changelog:

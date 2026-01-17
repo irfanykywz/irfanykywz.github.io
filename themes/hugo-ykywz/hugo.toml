@@ -37,25 +37,25 @@ pygmentscodefencesguesssyntax = true
 [[menu.main]]
 name = "Beranda"
 url = "/"
-pre = "ri-home-line"
+pre = "icon-[ri--home-line]"
 weight = 10
 
 [[menu.main]]
 name = "Proyek"
 url = "/projects/"
-pre = "ri-briefcase-2-line"
+pre = "icon-[ri--briefcase-2-line]"
 weight = 20
 
 [[menu.main]]
 name = "Artikel"
 url = "/posts/"
-pre = "ri-article-line"
+pre = "icon-[ri--article-line]"
 weight = 30
 
 [[menu.main]]
 name = "Kontak"
 url = "/contact/"
-pre = "ri-mail-line"
+pre = "icon-[ri--mail-line]"
 weight = 40
 
 # Menu Footer
@@ -122,19 +122,19 @@ weight = 100
 [[menu.bottom]]
 name = "Beranda"
 url = "/"
-pre = "ri-home-line"
+pre = "icon-[ri--home-line]"
 weight = 10
 
 [[menu.bottom]]
 name = "Proyek"
 url = "/projects/"
-pre = "ri-briefcase-2-line"
+pre = "icon-[ri--briefcase-2-line]"
 weight = 20
 
 [[menu.bottom]]
 name = "Pencarian"
 url = "/search"
-pre = "ri-search-line"
+pre = "icon-[ri--search-line]"
 weight = 100
 
 [markup]

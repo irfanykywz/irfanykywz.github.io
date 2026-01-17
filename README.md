@@ -11,4 +11,3 @@ Situs personal yang dibuat menggunakan hugo
 **Halaman yang pakai logika harcode buat nampilinnya**
 - learn/
 - research/
-- game-journey/

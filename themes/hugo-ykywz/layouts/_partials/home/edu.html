@@ -1,5 +1,5 @@
 <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-    <div class="container mx-auto px-4" x-data="{ activeTab: '{{ if .Params.educationtab }}{{ (index .Params.educationtab 0).id }}{{ end }}' }">
+    <div class="container max-w-6xl mx-auto px-4" x-data="{ activeTab: '{{ if .Params.educationtab }}{{ (index .Params.educationtab 0).id }}{{ end }}' }">
         <div class="mb-10">
             <h3 class="text-3xl font-bold text-gray-900 dark:text-white font-mono">{{ .Params.educationtitle}}</h3>
         </div>
@@ -66,7 +66,7 @@
                                         {{ end }}
                                         {{ with .location }}
                                             <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-mono rounded flex items-center gap-1">
-                                                <i class="ri-map-pin-line"></i> {{ . }}
+                                                <i class="icon-[ri--map-pin-line]"></i> {{ . }}
                                             </span>
                                         {{ end }}
                                         {{ with .gpa }}<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-mono rounded">IPK {{ . }}</span>{{ end }}
@@ -88,7 +88,7 @@
                                     {{ with .link }}
                                     <div class="mt-auto pt-2">
                                         <a class="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors" href="{{ . }}" target="_blank" rel="noopener">
-                                            Lihat Transkrip {{ partial "icons/arrow-right.html" (dict "class" "w-4 h-4") }}
+                                            Lihat Transkrip <span class="icon-[ri--arrow-right-line] w-4 h-4"></span>
                                         </a>
                                     </div>
                                     {{ end }}

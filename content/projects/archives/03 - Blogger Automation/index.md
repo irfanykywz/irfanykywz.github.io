@@ -17,13 +17,13 @@ overview:
 # =============================
 feature:
     - name: "Multi Akun"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "Mengotomatisasikan Bisa lebih dari 1 akun"
     - name: "Threading Limit"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "Menjalankan tugas secara bersamaan dan bisa dibatasi"
     - name: "Otomatisasi"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "terdapat fitur auto login, auto aktivitas, dll"
 # ============================= 
 ---

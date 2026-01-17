@@ -26,8 +26,12 @@
     {{ $hideFooter := .Scratch.Get "hideFooter" }}
     {{ if not $hideFooter }}
         {{ partial "baseof/footer.html" . }}
+        {{ partial "baseof/nav-bottom.html" . }}
+        {{ partial "baseof/nav-offcanvas.html" . }}
+        {{ partial "baseof/theme-switch.html" . }}
     {{ end }}
     
+
     <!-- Lightbox Component -->
     {{ partial "baseof/lightbox.html" . }}
 

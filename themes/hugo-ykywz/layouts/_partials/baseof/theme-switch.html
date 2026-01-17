@@ -1,0 +1,11 @@
+<!-- Fixed Theme Toggle -->
+<div x-data class="fixed bottom-24 right-4 z-40 md:bottom-8 md:right-8">
+    <button @click="$store.theme.toggle()" class="w-12 h-12 bg-white dark:bg-gray-800 text-gray-800 dark:text-yellow-300 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 focus:outline-none" aria-label="Toggle theme">
+        <span class="flex" x-show="!$store.theme.isDark">
+            <span class="icon-[lucide--moon] w-6 h-6 text-gray-600"></span>
+        </span>
+        <span class="flex" x-show="$store.theme.isDark" style="display: none;">
+            <span class="icon-[lucide--sun] w-6 h-6 text-yellow-400"></span>
+        </span>
+    </button>
+</div>

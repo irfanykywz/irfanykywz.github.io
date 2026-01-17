@@ -18,7 +18,7 @@ pygmentscodefencesguesssyntax = true
 
 
 [params]
-  version = "2.0.0"
+  version = "2.0.5"
 	# browser icon
 	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
   favicon = "favicon.ico"
@@ -35,25 +35,32 @@ pygmentscodefencesguesssyntax = true
 [[menu.main]]
 name = "Beranda"
 url = "/"
-pre = "ri-home-line"
+pre = "icon-[ri--home-line]"
 weight = 10
 
 [[menu.main]]
 name = "Proyek"
 url = "/projects/"
-pre = "ri-briefcase-2-line"
+pre = "icon-[ri--briefcase-2-line]"
 weight = 20
 
 [[menu.main]]
 name = "Artikel"
 url = "/posts/"
-pre = "ri-article-line"
+pre = "icon-[ri--article-line]"
 weight = 30
+
+
+[[menu.main]]
+name = "Toko"
+url = "/shop/"
+pre = "icon-[ri--shopping-bag-line]"
+weight = 35
 
 [[menu.main]]
 name = "Kontak"
 url = "/contact/"
-pre = "ri-mail-line"
+pre = "icon-[ri--mail-line]"
 weight = 40
 
 # Menu Footer
@@ -105,19 +112,26 @@ weight = 91
 [[menu.bottom]]
 name = "Artikel"
 url = "/posts/"
-pre = "ri-article-line"
+pre = "icon-[ri--article-line]"
 weight = 30
 
 [[menu.bottom]]
 name = "Proyek"
 url = "/projects/"
-pre = "ri-briefcase-2-line"
+pre = "icon-[ri--briefcase-2-line]"
 weight = 20
+
+# menu shop
+[[menu.bottom]]
+name = "Toko"
+url = "/shop/"
+pre = "icon-[ri--shopping-bag-line]"
+weight = 35
 
 [[menu.bottom]]
 name = "Kontak"
 url = "/contact/"
-pre = "ri-mail-line"
+pre = "icon-[ri--mail-line]"
 weight = 40
 
 [markup]

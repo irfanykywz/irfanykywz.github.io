@@ -5,16 +5,16 @@
 
     <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
         <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
-                    {{ partial "icons/archive.html" (dict "class" "w-10 h-10 text-indigo-600 dark:text-indigo-400") }}
+                    <span class="icon-[ri--archive-line] w-10 h-10 text-indigo-600 dark:text-indigo-400"></span>
                     {{ .Title }}
                 </h1>
                 <p class="text-xl text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto">{{ len .Data.Pages }} {{ .Description }}</p>
 
                 <div class="flex justify-center mt-8">
                 <a href="{{ "projects" | absURL }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
-                    {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
+                    <span class="icon-[ri--arrow-left-s-line] w-5 h-5"></span>
                     Kembali
                 </a>
                 </div>                
@@ -22,7 +22,7 @@
         </section>
 
         <section class="py-16 bg-white dark:bg-gray-900">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {{ range .Data.Pages }}
                         {{ partial "project/list-card.html" . }}

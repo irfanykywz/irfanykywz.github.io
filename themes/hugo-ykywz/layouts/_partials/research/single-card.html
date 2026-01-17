@@ -5,12 +5,12 @@
             {{ if .Params.icon }}
                 <i class="{{ .Params.icon }} text-indigo-600 dark:text-indigo-400"></i>
             {{ else }}
-                <i class="ri-file-text-line text-indigo-600 dark:text-indigo-400"></i>
+                <i class="icon-[ri--file-text-line] text-indigo-600 dark:text-indigo-400"></i>
             {{ end }}
             {{ .Title }}
         </h2>
         <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-            <i class="ri-calendar-2-line"></i>
+            <i class="icon-[ri--calendar-2-line]"></i>
             <span>{{ .Date.Format "2 January 2006" }}</span>
         </div>
     </div>

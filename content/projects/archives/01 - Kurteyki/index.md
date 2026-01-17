@@ -17,22 +17,22 @@ overview:
 # =============================
 feature:
     - name: "Topic"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "Menulis Konten Berdasarkan Topik"
     - name: "Pages"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "Tersedia Halaman untuk informasi web"
     - name: "Membership"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "ada fitur membership untuk menjual topik yang ditulis"
     - name: "Authenticantion"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "fitur pengguna harus masuk terlebih dahulu"
     - name: "SEO"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "website sudah dioptimasi technical SEO"
     - name: "Responsive"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "memiliki tampilan yang responsive diberbagai device"
 # ============================= 
 ---

@@ -18,7 +18,7 @@ tapi untuk kentang tidak normal. kentang ini sudah memiliki tunas, sebagian area
 
 kentang normal saya masak lebih dulu dan makan seperti biasa, nikmat sekali rasanya
 
-kentang tidka normal saya masukan kedalam kulkas dan didiamkan beberapa hari atau mungkin 1 minggu ?
+kentang tidak normal saya masukan kedalam kulkas dan didiamkan beberapa hari atau mungkin 1 minggu ?
 
 sampai saya lupa, masih ada kentang yang belum dimasak 
 
@@ -97,3 +97,4 @@ jangan malah penasaran dan mencobanya langsung
 
 bisa-bisa hidup jadi terlalu singkat nantinya...
 
+![kentang-beracun](kentang-beracun-4-januari-2026.avif)

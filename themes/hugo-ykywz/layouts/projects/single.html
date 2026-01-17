@@ -3,23 +3,23 @@
 
 {{ define "main" }}
     <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
-        <section class="py-8 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-            <div class="container mx-auto px-4">
+        <section class="py-6 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+            <div class="container max-w-6xl mx-auto px-4">
                 <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                     <a href="{{ .CurrentSection.RelPermalink }}" class="flex items-center gap-1 leading-relaxed hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                        {{ partial "icons/briefcase.html" (dict "class" "w-4 h-4") }}
+                        <span class="icon-[ri--briefcase-line] w-4 h-4"></span>
                         {{ with .Parent }}
                             {{ .Title }}
                         {{ end }}
                     </a>
-                    {{ partial "icons/chevron-right.html" (dict "class" "w-4 h-4 text-gray-400") }}
+                    <span class="icon-[ri--arrow-right-s-line] w-4 h-4 text-gray-400"></span>
                     <span class="leading-relaxed text-gray-900 dark:text-white font-medium truncate max-w-[200px] md:max-w-none">{{ .Title }}</span>
                 </nav>
             </div>
         </section>
 
         <article class="py-16 bg-white dark:bg-gray-900">
-            <div class="container mx-auto px-4 max-w-5xl">
+            <div class="container max-w-6xl mx-auto px-4 max-w-5xl">
 
                 {{ partial "project/hero.html" . }}
                 {{ partial "project/overview.html" . }}           
@@ -34,7 +34,7 @@
                 <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between gap-4">
                     <div class="flex-shrink-0">
                         <a href="{{ "projects/" | relURL }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
-                            {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
+                            <span class="icon-[ri--arrow-left-s-line] w-5 h-5"></span>
                             Kembali
                         </a>
                     </div>
@@ -43,7 +43,7 @@
 
                             {{ with $pages.Prev . }}
                                 <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
-                                    {{ partial "icons/chevron-left.html" (dict "class" "w-5 h-5") }}
+                                    <span class="icon-[ri--arrow-left-s-line] w-5 h-5"></span>
                                     Proyek Sebelumnya
                                 </a>
                             {{ end }}
@@ -51,7 +51,7 @@
                             {{ with $pages.Next . }}
                                 <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
                                     Proyek Selanjutnya
-                                    {{ partial "icons/chevron-right.html" (dict "class" "w-5 h-5") }}
+                                    <span class="icon-[ri--arrow-right-s-line] w-5 h-5"></span>
                                 </a>
                             {{ end }}
                     </div>

@@ -1,61 +1,65 @@
 ---
 title: Muhamad Irfan
-description: IT Support
-cv: https://drive.google.com/drive/folders/13YFtrbO0rbK28MTrAZk5f7Zx2z-0Z7IZ?usp=sharing
-email: irfanyouth@gmail.com
+description: IT Specialist
+# cv: https://drive.google.com/drive/folders/13YFtrbO0rbK28MTrAZk5f7Zx2z-0Z7IZ?usp=sharing
+# email: irfanyouth@gmail.com
+whatsapp: https://api.whatsapp.com/send?phone=6281389215100&text=Halo, Saya dapat kontak dari website.
 # linkedin: https://linkedin.com/in/irfanykywz
 # github: https://github.com/irfanykywz
 # =====================================
 abouttitle: "Profil Singkat"
 about:
-    - "Halo, nama saya Muhamad Irfan. Saya adalah teknisi IT pemula yang bersemangat mencari pengalaman kerja."
-    - "Saya memiliki pemahaman dasar yang kuat tentang sistem operasi, hardware, dan jaringan komputer. Meskipun belum banyak pengalaman formal, saya aktif belajar dan siap menerapkan keterampilan saya untuk membantu mengatasi masalah IT."
-    - "Saya sedang mencari posisi penuh waktu atau proyek lepas. Jika Anda membutuhkan teknisi yang berdedikasi dan siap belajar, saya siap untuk berkontribusi."
+  - Saya Muhamad Irfan, seorang teknisi IT yang memiliki pengalaman dalam menangani infrastruktur perangkat keras dan jaringan. Saya memiliki keunggulan dalam kemampuan pemrograman dasar yang sering saya gunakan untuk menciptakan solusi praktis guna mempermudah pekerjaan teknis harian. 
+  
+  - Jika Anda mencari staf IT yang handal, cekatan, dan solutif dalam menjaga operasional perusahaan tetap berjalan optimal, saya siap berkontribusi.
+  
 # =====================================
 servicestatus: true
-servicetitle: "Keahlian"
+servicetitle: "Layanan & Solusi"
 service:
-    - title: "Dukungan IT"
-      icon: "🖥️"
+    - title: "IT Support & Maintenance"
+      icon: "🛠️"
       jobs: 
-        - "Membantu merawat dan memastikan perangkat keras (hardware) serta sistem operasi dan aplikasi (software) komputer berfungsi dengan optimal dan bebas masalah."
-        - "Mendiagnosis dan memperbaiki berbagai masalah teknis pada jaringan, koneksi internet, perangkat lunak, dan keamanan dasar."
-    - title: "Pengembangan Perangkat Lunak"
-      icon: "🖥️"
+        - "Memastikan seluruh perangkat keras (hardware), sistem operasi, dan aplikasi perkantoran berjalan optimal serta bebas dari gangguan teknis."
+        - "Mendiagnosis serta menangani permasalahan pada jaringan internet, keamanan data dasar, dan integrasi perangkat lunak secara cepat dan akurat."
+    - title: "Solusi Efisiensi Kerja"
+      icon: "⚙️"
       jobs: 
-        - "Mengembangkan aplikasi desktop dan situs web, dengan teknologi terkini"
-        - "Membuat skrip otomatisasi tugas-tugas berulang guna meningkatkan efisiensi kerja."        
+        - "Mengembangkan aplikasi pembantu dan skrip otomatisasi untuk menyederhanakan tugas-tugas teknis yang repetitif guna meningkatkan produktivitas."
+        - "Membangun sistem pelaporan atau alat bantu digital kustom yang dirancang khusus untuk mempercepat alur kerja operasional perusahaan."
+        
+        
 # =====================================
 experiencestatus: false
 experiencetitle: "Pengalaman Kerja"
 experience:
-    - title: "Pekerja Lepas Pembuatan Aplikasi"
-      company: "Ykywz"
+    - title: "IT Solution & Development (Freelance)"
+      company: "Ykywz Project"
       time: "2023 - Sekarang"
       jobs: 
-        - "membuat aplikasi desktop"
-        - "membuat bot"
-        - "membuat website"
-        - "membuat alat scraping"
-    - title: "Teknisi Komputer"
+        - "Mengembangkan aplikasi desktop berbasis kustom untuk menyederhanakan alur kerja pengguna."
+        - "Membangun sistem otomatisasi (bot) untuk efisiensi pengolahan data repetitif."
+        - "Merancang dan memelihara website serta alat bantu pengumpulan data digital (scraping)."
+        - "Memberikan konsultasi teknis terkait optimalisasi penggunaan perangkat lunak."
+    - title: "Teknisi Komputer & Jaringan"
       company: "Nusa Komputer"
       time: "2022 - 2023"
       jobs: 
-        - "Perakitan Komputer"
-        - "Instalasi Sistem Operasi dan Aplikasi"
-        - "Instalasi dan Pemecah masalah Jaringan"
-        - "Penggantian Perangkat Komputer"
-        - "Pemecah masalah Printer & CCTV"
-        - "Layanan Pelanggan Panggilan"
-    - title: "Teknisi CCTV"
+        - "Melakukan instalasi, konfigurasi, dan perakitan perangkat keras komputer sesuai kebutuhan klien."
+        - "Menangani troubleshooting mendalam pada sistem operasi, perangkat lunak, dan konektivitas jaringan."
+        - "Melakukan pemeliharaan serta perbaikan printer, CCTV, dan penggantian komponen hardware."
+        - "Memberikan layanan teknis panggilan (on-site support) dengan fokus pada kepuasan pelanggan."
+        - "Memastikan seluruh infrastruktur IT klien berfungsi optimal tanpa gangguan."
+    - title: "Teknisi CCTV & Infrastruktur"
       company: "Network Global Solusindo"
       time: "2018 - 2019"
       jobs: 
-        - "Pemeliharaan CCTV"
-        - "Memastikan CCTV Tampil dilayar monitor"
-        - "Pengecekan Rekaman"
-        - "Laporan Hasil Pemeliharaan"
-        - "Pemecah masalah jaringan & Komputer"
+        - "Bertanggung jawab atas pemeliharaan rutin sistem keamanan CCTV skala besar."
+        - "Melakukan pemantauan sistem secara berkala untuk memastikan ketersediaan rekaman dan tampilan monitor."
+        - "Menganalisis dan memperbaiki gangguan pada jaringan transmisi data CCTV."
+        - "Menyusun laporan hasil pemeliharaan infrastruktur secara mendetail dan periodik."
+        - "Membantu penanganan masalah operasional pada komputer dan jaringan internal kantor."
+
 # =====================================
 educationstatus: false
 educationtitle: "🎓 Pendidikan"
@@ -93,125 +97,99 @@ education:
           expires: ""
           # credential_id: "ABC-123"
           link: "https://www.google.com"
+
 # =====================================
-skill: false
+skill: true
 skilltitle: "☑️ Ruang Lingkup Kemampuan"
 skilltab:
-    - name: "Non-Teknis"
-      id: "non_teknis"
-      class: "tab-0"
     - name: "IT Support"
       id: "it_support"
-      class: "tab-1"
-    - name: "Software Engineering"
+      class: "tab-0"
+    - name: "Pemrograman Praktis"
       id: "software_engineering"
+      class: "tab-1"
+    - name: "Non-Teknis"
+      id: "non_teknis"
       class: "tab-2"
     - name: "Bahasa"
       id: "bahasa"
       class: "tab-3"                        
 skills:
-    non_teknis:
-        scopes:
-          - title: "Kerja Sama Tim"
-            description: "kemampuan untuk bekerja bersama anggota tim dengan baik untuk mencapai tujuan bersama"
-          - title: "Pemecah Masalah"
-            description: "bisa mengidentifikasi adanya masalah dan mencari solusi efektif untuk penyelesaiannya" 
-          - title: "Mudah Beradaptasi"
-            description: "mudah menyesuaikan diri diberbagai kondisi dan lingkungan, cepat menyesuaikan perubahan"
-          - title: "Manajemen Waktu"
-            description: "dapat mengatur dan merencanakan waktu secara efisien untuk mencapai target deadline yang sudah ditentukan"  
-          - title: "Berpikir Kritis"
-            description: "Kemampuan untuk menganalisis fakta, data, dan informasi secara objektif dan logis"  
-          - title: "Etika dan Profesionalisme"
-            description: "memegang penuh tanggung jawab, integritas, ketekunan, dan dedikasi terhadap tugas yang diberikan"                                                 
     it_support:
         scopes:
           - title: "Sistem Operasi"
             items:
-              - Windows
-              - Linux
+              - Windows (Client & Server)
+              - Linux (Ubuntu/Debian)
           - title: "Perangkat Keras"
             items:
-              - "Merakit Komputer"
-              - "Pemecahan Masalah Komputer"
-          - title: "Perangkat Lunak"
-            items:
-              - "Office"
-              - "PDF"
-              - "Remote Desktop"
-              - "Browser"
-              - Outlook
-              - Mail
+              - "Merakit & Upgrade Komputer"
+              - "Troubleshooting Hardware"
+              - "Maintenance Printer & Periferal"
           - title: "Jaringan"
             items:
-              - "Instalasi Jaringan"
-              - "Konfigurasi VPN"
-              - "Konfigurasi Router"
-              - "Konfigurasi Wireless"
-          - title: "Pemeliharaan Perangkat"
-            items:
-              - "Pembersihan"
-              - "Pemeriksaan"
-              - "Pencadangan"
-              - "Pemulihan"
-              - "Laporan"
+              - "Instalasi Jaringan (Kabel & Wireless)"
+              - "Konfigurasi Mikrotik/Router"
+              - "Manajemen VPN & Firewall Dasar"
           - title: "Layanan Pelanggan"
             items:
-              - "Dukungan Teknis"
-              - "Pelatihan Pengguna"
-              - "Komunikasi"
-              - "Dokumentasi"
+              - "Dukungan Teknis (On-site & Remote)"
+              - "Edukasi Pengguna (User Training)"
+              - "Dokumentasi & Pelaporan Inventaris"
+          - title: "Administrasi Sistem"
+            items:
+              - "Manajemen Email (Outlook/GSuite)"
+              - "Backup & Recovery Data"
+              - "Keamanan Dasar & Update Patch"
     software_engineering:
         scopes:
-          - title: "Bahasa Pemrograman"
+          - title: "Bahasa Pemrograman (Alat Bantu)"
             items:
-              - Python
-              - Lua
-              - PHP
+              - Python (Otomasi Tugas)
+              - PHP (Web Internal)
               - Javascript
-              - SQL
-          - title: "Antarmuka (Frontend)"
+              - SQL (Manajemen Database)
+          - title: "Antarmuka & Tools"
             items:
-              - HTML
-              - CSS
-              - Javascript
-              - Bootstrap
+              - Pyside6 (Aplikasi Desktop)
+              - HTML & CSS (Web Dasar)
               - Tailwind CSS
-              - Pyside6
-          - title: "Sistem (Backend)"
+          - title: "Framework & Database"
             items:
-              - Codeigniter
-              - Laravel  
-              - Flask  
-          - title: "Basis Data"
-            items:
-              - JSON         
-              - MYSQL         
-              - SQLite
-          - title: "Alat Kolaborasi"
-            items:
-              - Notion
-              - Trello
-              - Slack
+              - Laravel / Codeigniter
+              - SQLite / MySQL / JSON
           - title: "Alat Kerja"
             items:
-              - Laragonzo
               - Cursor / VSCode
-              - Git
-              - Github
-              - Node.js
+              - Git & Github
+              - Remote Desktop Tools
+              - Laragon
+    non_teknis:
+        scopes:
+          - title: "Pemecah Masalah"
+            description: "Mampu mengidentifikasi akar masalah teknis dan memberikan solusi yang efektif." 
+          - title: "Etika & Profesionalisme"
+            description: "Memegang penuh tanggung jawab, integritas, dan dedikasi terhadap setiap tugas." 
+          - title: "Mudah Beradaptasi"
+            description: "Cepat menyesuaikan diri dengan lingkungan kerja dan perkembangan teknologi baru."
+          - title: "Manajemen Waktu"
+            description: "Mampu mengatur skala prioritas penanganan keluhan IT secara efisien."  
+          - title: "Kerja Sama Tim"
+            description: "Dapat berkolaborasi dengan baik antar departemen untuk mencapai tujuan bersama."
     bahasa:
         scopes:
           - title: "Indonesia"
-            description: "bisa dengan lancar berbicara, mendengar dan menulis menggunakan bahasa indonesia"
+            description: "Fasih dalam berkomunikasi lisan maupun tulisan."
           - title: "Inggris"
-            description: "bisa membaca bahasa inggris dengan baik, belum terbiasa menggunakannya untuk berbicara, menulis dan mendengar"   
+            description: "Kemampuan literasi teknis (membaca dokumentasi dan instruksi teknis) dengan baik."
 # =====================================
 project: true
 projecttitle: "🎲 Proyek terbaru"
 projectcount: 3
+
 # =====================================
 cta: true
+
 # =====================================
 ---
 

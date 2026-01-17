@@ -19,13 +19,13 @@ overview:
 # =============================
 feature:
     - name: "Simple Editing"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "melakukan edit video secara masal dengan efek khusus"
     - name: "Authentication"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "terdapat fitur authentication berdasarkan waktu"
     - name: "Logging"
-      icon: 'ri-file-text-line'
+      icon: 'icon-[ri--file-text-line]'
       description: "bisa melihat logging untuk melihat proses berjalan"
 # ============================= 
 review:

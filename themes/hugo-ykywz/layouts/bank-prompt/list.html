@@ -44,7 +44,7 @@
                 // Simple copy logic
                 navigator.clipboard.writeText(text).then(() => {
                     const originalHTML = $el.innerHTML;
-                    $el.innerHTML = '<i class=\'ri-check-line\'></i>';
+                    $el.innerHTML = '<i class=\'icon-[ri--check-line]\'></i>';
                     setTimeout(() => { $el.innerHTML = originalHTML; }, 1500);
                 });
             },
@@ -75,20 +75,20 @@
     >
 
         <div class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700 py-8">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{ .Title }}</h1>
                 <p class="text-gray-600 dark:text-gray-300">{{ .Description }}</p>
             </div>
         </div>
         
         {{ if .Pages }}
-        <div class="container mx-auto px-4 py-8">
+        <div class="container max-w-6xl mx-auto px-4 py-8">
             <div class="flex flex-col lg:flex-row gap-8">
                 
                 <!-- Mobile Sidebar Toggle -->
                 <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden w-full flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm text-gray-700 dark:text-gray-200 font-medium mb-4">
                     <span>Kategori</span>
-                    <i class="ri-arrow-down-s-line transition-transform duration-200" :class="sidebarOpen ? 'rotate-180' : ''"></i>
+                    <i class="icon-[ri--arrow-down-s-line] transition-transform duration-200" :class="sidebarOpen ? 'rotate-180' : ''"></i>
                 </button>
 
                 <!-- Sidebar -->
@@ -124,7 +124,7 @@
                                     <div class="pt-4" x-data="{ open: true }">
                                         <button @click="open = !open" class="w-full flex items-center justify-between px-2 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-gray-700 dark:hover:text-gray-200">
                                             <span>{{ $group }}</span>
-                                            <i class="ri-arrow-down-s-line transition-transform duration-200" :class="open ? '' : '-rotate-90'"></i>
+                                            <i class="icon-[ri--arrow-down-s-line] transition-transform duration-200" :class="open ? '' : '-rotate-90'"></i>
                                         </button>
                                         <div x-show="open" x-collapse class="mt-1 space-y-1">
                                             {{ range sort $categories }}
@@ -151,21 +151,21 @@
                     <!-- Toolbar -->
                     <div class="flex flex-col sm:flex-row gap-4 mb-6">
                         <div class="relative flex-grow">
-                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <i class="icon-[ri--search-line] absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                             <input type="search" x-model="search" @input.debounce.300ms="updateUrl()" placeholder="Cari prompt..." 
                                 class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all">
                         </div>
                         <div class="flex items-center gap-2 flex-shrink-0">
                             <div class="flex bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-1">
-                                <button @click="setView('list')" :class="view === 'list' ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'" class="p-2 rounded transition-colors" title="List View">
-                                    <i class="ri-list-check"></i>
+                                <button @click="setView('list')" :class="view === 'list' ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'" class="p-2 rounded transition-colors flex" title="List View">
+                                    <i class="icon-[ri--list-check]"></i>
                                 </button>
-                                <button @click="setView('grid')" :class="view === 'grid' ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'" class="p-2 rounded transition-colors" title="Grid View">
-                                    <i class="ri-layout-grid-line"></i>
+                                <button @click="setView('grid')" :class="view === 'grid' ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'" class="p-2 rounded transition-colors flex" title="Grid View">
+                                    <i class="icon-[ri--layout-grid-line]"></i>
                                 </button>
                             </div>
                             <button x-show="search !== '' || category !== 'all'" @click="clearFilters()" class="px-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm font-medium flex items-center gap-2">
-                                <i class="ri-close-line"></i> Hapus
+                                <i class="icon-[ri--close-line]"></i> Hapus
                             </button>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                                     <p class="text-xs text-gray-500 dark:text-gray-400">{{ .Date | time.Format "2 January 2006" }}</p>
                                 </div>
                                 <button @click="copyPrompt({{ .Plain | jsonify }}, $el)" class="p-2 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all" title="Salin Prompt">
-                                    <i class="ri-file-copy-line text-lg"></i>
+                                    <i class="icon-[ri--file-copy-line] text-lg"></i>
                                 </button>
                             </div>
                         </article>
@@ -205,7 +205,7 @@
                         
                         <div x-show="!hasResults" x-transition class="col-span-full text-center py-12" style="display: none;">
                             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-                                <i class="ri-search-2-line text-2xl text-gray-400"></i>
+                                <i class="icon-[ri--search-2-line] text-2xl text-gray-400"></i>
                             </div>
                             <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-1">Tidak ditemukan</h3>
                             <p class="text-gray-500 dark:text-gray-400">Coba kata kunci atau kategori lain.</p>
@@ -216,7 +216,7 @@
             </div>
         </div>
         {{ else }}
-        <div class="container mx-auto px-4 py-16 text-center">
+        <div class="container max-w-6xl mx-auto px-4 py-16 text-center">
             <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-indigo-50 dark:bg-indigo-900/30 mb-6">
                 <span class="text-4xl">💡</span>
             </div>

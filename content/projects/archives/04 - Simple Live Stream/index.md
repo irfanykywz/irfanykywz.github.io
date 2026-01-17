@@ -18,13 +18,13 @@ overview:
 # =============================
 feature:
     - name: "Download Live"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "Live menggunakan file maupun url dari website streaming lain"
     - name: "Authentication"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "Bisa mengatur jenis render, untuk pengaturan bitrate, dll"
     - name: "Logging"
-      icon: "ri-file-text-line"
+      icon: "icon-[ri--file-text-line]"
       description: "bisa melihat logging untuk melihat proses berjalan"
 # ============================= 
 review:

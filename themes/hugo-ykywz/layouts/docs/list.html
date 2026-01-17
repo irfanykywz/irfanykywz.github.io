@@ -23,7 +23,7 @@
     }">
     
     <section class="py-16 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container max-w-6xl mx-auto px-4 text-center">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
                 📄 {{ .Title }}
             </h1>
@@ -32,7 +32,7 @@
             {{ end }}
 
             <div class="max-w-2xl mx-auto mt-8 relative">
-                <i class="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <i class="icon-[ri--search-line] absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                 <input type="search" x-model="search" placeholder="Cari dokumentasi..." 
                     class="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all shadow-sm">
             </div>
@@ -40,20 +40,20 @@
     </section>
 
     <section class="py-16">
-        <div class="container mx-auto px-4">
+        <div class="container max-w-6xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <template x-for="item in items">
                     <a :href="item.permalink" 
                        x-show="search === '' || item.title.includes(search.toLowerCase()) || item.description.includes(search.toLowerCase())"
                        class="group block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
                         <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <i class="ri-file-text-line text-2xl"></i>
+                            <i class="icon-[ri--file-text-line] text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" x-text="item.displayTitle"></h3>
                         <p class="text-gray-600 dark:text-gray-300 text-sm line-clamp-3" x-text="item.displayDesc"></p>
                         <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400">
                             <span>Baca Selengkapnya</span>
-                            <i class="ri-arrow-right-line ml-1 transition-transform group-hover:translate-x-1"></i>
+                            <i class="icon-[ri--arrow-right-line] ml-1 transition-transform group-hover:translate-x-1"></i>
                         </div>
                     </a>
                 </template>
@@ -61,7 +61,7 @@
             
             <div x-show="!hasResults" x-transition class="text-center py-16" style="display: none;">
                 <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-                    <i class="ri-search-2-line text-2xl text-gray-400"></i>
+                    <i class="icon-[ri--search-2-line] text-2xl text-gray-400"></i>
                 </div>
                 <p class="text-gray-500 dark:text-gray-400 text-lg">Dokumentasi tidak ditemukan.</p>
             </div>

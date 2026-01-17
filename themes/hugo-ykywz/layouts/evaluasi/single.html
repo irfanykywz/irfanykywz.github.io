@@ -1,0 +1,28 @@
+{{ define "head" }}
+{{ end }}
+
+{{ define "main" }}
+<main class="flex-grow bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <article id="ajax-content" class="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-200 dark:border-gray-700">
+            <header class="mb-8 border-b border-gray-100 dark:border-gray-700 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{{ .Title }}</h1>
+                <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                        <i class="icon-[ri--calendar-line]"></i>
+                        {{ .Date | time.Format "2 January 2006" }}
+                    </span>
+                    <span class="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                        <i class="icon-[ri--time-line]"></i>
+                        {{ .ReadingTime }} min read
+                    </span>
+                </div>
+            </header>
+
+            <div class="prose prose-lg dark:prose-invert max-w-none prose-indigo prose-headings:font-bold prose-a:text-indigo-600 dark:prose-a:text-indigo-400 hover:prose-a:text-indigo-500 prose-img:rounded-2xl">
+                {{ .Content }}
+            </div>
+        </article>
+    </div>
+</main>
+{{ end }}

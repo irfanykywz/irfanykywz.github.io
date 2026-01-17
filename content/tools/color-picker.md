@@ -2,7 +2,7 @@
 title: "Pemilih Warna"
 date: 2025-10-07T00:00:00+07:00
 description: "Alat kecil untuk memilih warna, melihat pratinjau, dan menyalin nilai hex. Menggunakan variabel CSS tema."
-icon: "ri-palette-line"
+icon: "icon-[ri--palette-line]"
 ---
 
 <div class="grid gap-6 mt-6 items-start">

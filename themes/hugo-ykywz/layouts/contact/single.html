@@ -4,9 +4,9 @@
 {{ define "main" }}
     <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300">
         <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
-                    {{ partial "icons/mail.html" (dict "class" "w-10 h-10 text-indigo-600 dark:text-indigo-400") }}
+                    <span class="icon-[ri--mail-line] w-10 h-10 text-indigo-600 dark:text-indigo-400"></span>
                     {{ .Title }}
                 </h1>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl">{{ .Description }}</p>
@@ -14,7 +14,7 @@
         </section>
 
         <section class="py-16 bg-white dark:bg-gray-900">
-            <div class="container mx-auto px-4">
+            <div class="container max-w-6xl mx-auto px-4">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
                     <div class="lg:col-span-2">
@@ -38,7 +38,7 @@
                             </div>
                             
                             <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors shadow-sm cursor-pointer">
-                                Kirim Pesan {{ partial "icons/paper-airplane.html" (dict "class" "w-5 h-5") }}
+                                Kirim Pesan <span class="icon-[heroicons--paper-airplane] w-5 h-5"></span>
                             </button>
                             
                             <p id="result" class="mt-4 p-4 rounded-lg text-sm" style="display: none;"></p>
@@ -55,7 +55,7 @@
                             <div class="space-y-6">
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-indigo-600 dark:text-indigo-400 shadow-sm">
-                                        {{ partial "icons/mail.html" (dict "class" "w-5 h-5") }}
+                                        <span class="icon-[ri--mail-line] w-5 h-5"></span>
                                     </div>
                                     <div class="flex-grow">
                                         <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Email</h4>
@@ -65,7 +65,7 @@
 
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-green-600 dark:text-green-400 shadow-sm">
-                                        {{ partial "icons/whatsapp.html" (dict "class" "w-5 h-5") }}
+                                        <span class="icon-[ri--whatsapp-line] w-5 h-5"></span>
                                     </div>
                                     <div class="flex-grow">
                                         <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">WhatsApp</h4>
@@ -78,7 +78,7 @@
                                 {{ if .Params.Telegram }}
                                     <div class="flex items-start gap-4">
                                         <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-blue-500 dark:text-blue-400 shadow-sm">
-                                            {{ partial "icons/telegram.html" (dict "class" "w-5 h-5") }}
+                                            <span class="icon-[ri--telegram-line] w-5 h-5"></span>
                                         </div>
                                         <div class="flex-grow">
                                             <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Telegram</h4>
@@ -92,7 +92,7 @@
                                 {{ if .Params.Facebook }}
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-blue-600 dark:text-blue-500 shadow-sm">
-                                        {{ partial "icons/facebook.html" (dict "class" "w-5 h-5") }}
+                                        <span class="icon-[ri--facebook-fill] w-5 h-5"></span>
                                     </div>
                                     <div class="flex-grow">
                                         <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Facebook</h4>
@@ -104,7 +104,7 @@
                                 {{ if .Params.Youtube }}
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-red-600 dark:text-red-500 shadow-sm">
-                                        {{ partial "icons/youtube.html" (dict "class" "w-5 h-5") }}
+                                        <span class="icon-[ri--youtube-fill] w-5 h-5"></span>
                                     </div>
                                     <div class="flex-grow">
                                         <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Youtube</h4>
@@ -118,7 +118,7 @@
                                 {{ if .Params.Discord }}
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-indigo-500 dark:text-indigo-400 shadow-sm">
-                                        {{ partial "icons/discord.html" (dict "class" "w-5 h-5") }}
+                                        <span class="icon-[ri--discord-fill] w-5 h-5"></span>
                                     </div>
                                     <div class="flex-grow">
                                         <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Discord</h4>
@@ -132,7 +132,7 @@
                                 {{ if .Params.Linkedin }}
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-blue-700 dark:text-blue-600 shadow-sm">
-                                        {{ partial "icons/linkedin.html" (dict "class" "w-5 h-5") }}
+                                        <span class="icon-[ri--linkedin-fill] w-5 h-5"></span>
                                     </div>
                                     <div class="flex-grow">
                                         <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Linkedin</h4>
@@ -146,7 +146,7 @@
                                 {{ if .Params.Github }}
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg text-gray-900 dark:text-white shadow-sm">
-                                        {{ partial "icons/github.html" (dict "class" "w-5 h-5") }}
+                                        <span class="icon-[ri--github-fill] w-5 h-5"></span>
                                     </div>
                                     <div class="flex-grow">
                                         <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Github</h4>
