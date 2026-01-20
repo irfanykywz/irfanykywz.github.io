@@ -76,9 +76,9 @@ sayapun meminum air kelapa walau bukan kelapa hijau tapi rasanya seperti ada sed
 
 tubuh saya terasa ringan dan kepala masih sedikit pusing
 
-dihari selanjutnya saya tidak lagi saya mencoba untuk meminum air susu merk bear brand
+dihari selanjutnya saya tidak lagi meminum air kelapa, tapi saya mencoba untuk meminum air susu merk bear brand
 
-awal meminum kepala saya pusing sangat hebat dan rasa mual yang muncul padahal baru meminum susunya sedikit
+awal meminum kepala saya pusing sangat hebat dan rasa mual yang muncul padahal baru minumnya sedikit
 
 sayapun berhenti meminumnya dan lanjut tidur
 

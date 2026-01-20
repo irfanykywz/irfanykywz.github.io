@@ -8,7 +8,7 @@ category: Desktop
 status: Product
 # demo: https://youtu.be/Q5MAXYU0iRg
 # download: https://lynk.id/irfanykywz/r46n7r43okn6
-buy: /shop/?product=promise-ety&step=3&payment=QRIS
+buy: /shop/promise-ety/
 # github: https://github.com/ykywz-python/
 doc: /docs/promise-ety
 date: 2025-12-13T05:00:35+07:00

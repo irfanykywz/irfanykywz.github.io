@@ -5,6 +5,11 @@ description: Riwayat perubahan pada situs web. fitur baru, perbaikan bug, dan pe
 date: 2025-10-09T00:00:00+08:00
 
 changelog:
+  - version: "2.0.6"
+    date: "20 Januari 2026"
+    changes: 
+      - tag: "Fitur Baru"
+        description: "membuat halaman musik playlist"      
   - version: "2.0.5"
     date: "18 Januari 2026"
     changes: 

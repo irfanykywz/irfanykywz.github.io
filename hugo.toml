@@ -18,7 +18,7 @@ pygmentscodefencesguesssyntax = true
 
 
 [params]
-  version = "2.0.5"
+  version = "2.0.6"
 	# browser icon
 	# favicon = "https://avatars.githubusercontent.com/u/117440754?v=4"
   favicon = "favicon.ico"
@@ -63,7 +63,9 @@ url = "/contact/"
 pre = "icon-[ri--mail-line]"
 weight = 40
 
-# Menu Footer
+# menu offcanvas
+# ======================
+
 [[menu.footer]]
 name = "📝 Jurnal"
 url = "/journal/"
@@ -82,6 +84,11 @@ weight = 40
 [[menu.footer]]
 name = "🎞️ Film"
 url = "/movie-watches/"
+weight = 41
+
+[[menu.footer]]
+name = "🎶 Musik"
+url = "/music-playlist/"
 weight = 41
 
 [[menu.footer]]
@@ -108,6 +115,9 @@ weight = 80
 name = "📄 Dokumentasi"
 url = "/docs/"
 weight = 91
+
+# menu bottom mobile
+# ======================
 
 [[menu.bottom]]
 name = "Artikel"

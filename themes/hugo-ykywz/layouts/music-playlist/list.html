@@ -1,0 +1,46 @@
+{{ define "main" }}
+<div class="max-w-6xl mx-auto my-12 px-4">
+    <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">{{ .Title }}</h1>
+        <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg">{{ .Description }}</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {{ range .Pages }}
+        <a href="{{ .RelPermalink }}" class="group block">
+            <div class="relative aspect-square overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 mb-3 shadow-sm group-hover:shadow-md transition-all duration-300">
+                {{ $cover := printf "" }}
+                {{ if .Params.playlist }}
+                    {{ with (index .Params.playlist 0).youtubeId }}
+                        {{ $cover = printf "https://img.youtube.com/vi/%s/sddefault.jpg" . }}
+                    {{ end }}
+                {{ else }}
+                    {{ $keyword := .Title }}
+                    {{ $cover := printf "https://tse2.mm.bing.net/th?q=%s&w=300&h=300&c=7&rs=1&p=0" $keyword }}
+                {{ end }}
+                
+                <img src="{{ $cover }}" alt="{{ .Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                
+                <!-- Play Overlay -->
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+                        <i class="icon-[ri--play-fill] text-2xl ml-1"></i>
+                    </div>
+                </div>
+                
+                <!-- Track Count Badge -->
+                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-0.5 rounded-md flex items-center gap-1">
+                    <i class="icon-[ri--music-2-fill] text-[10px]"></i>
+                    <span>{{ len .Params.playlist }} Musik</span>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="text-base font-bold text-gray-900 dark:text-white mb-1 line-clamp-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{{ .Title }}</h2>
+                <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">{{ .Description }}</p>
+            </div>
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
