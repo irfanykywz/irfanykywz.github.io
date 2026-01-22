@@ -11,12 +11,14 @@
                     {{.Title}}
                 </h1>
                 <p class="text-xl text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto">{{ .Description }}</p>
-                <div class="flex flex-row-reverse items-end text-end absolute bottom-4 right-4">
-                    <a href="{{ "evaluasi" | relURL }}" class="inline-flex hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Evaluasi">
-                        <span class="icon-[lucide--file-chart-column] w-4 h-4 text-blue-600"></span>
+                <div class="flex flex-row-reverse items-end text-end absolute bottom-4 right-4 gap-2">
+                    <a href="{{ "journal/evaluasi" | relURL }}" class="inline-flex hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Evaluasi">
+                        <span class="icon-[lucide--waypoints] w-4 h-4 text-blue-600"></span>
                     </a>
-                    <a href="{{ "target" | relURL }}" class="inline-flex hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Evaluasi">
-                        <span class="icon-[ri--flag-line] w-4 h-4 text-blue-600"></span>
+                    <!-- create link to all page -->
+                    <a href="{{ "journal/all" | relURL }}" class="inline-flex hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Evaluasi">
+                        <span class="icon-[lucide--receipt-text] w-4 h-4 text-green-600"></span>
+                    </a>
                     </a>
                 </div>                
             </div>

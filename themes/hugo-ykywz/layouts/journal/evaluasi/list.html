@@ -1,0 +1,227 @@
+{{ define "head" }}
+{{ end }}
+
+{{ define "main" }}
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300 min-h-screen"
+    x-data="{
+        activeYear: '',
+        content: '',
+        isLoading: false,
+        showModal: false,
+        recentYears: [
+            {{- $pages := .Pages.ByDate.Reverse -}}
+            {{- $recent := first 6 $pages -}}
+            {{- range $index, $element := $recent -}}
+                '{{ $element.Title }}'{{ if ne (add $index 1) (len $recent) }},{{ end }}
+            {{- end -}}
+        ],
+        yearUrls: {
+            {{- range .Pages -}}
+                '{{ .Title }}': '{{ .RelPermalink }}',
+            {{- end -}}
+        },
+        async loadYear(year, url) {
+            if (this.activeYear === year && this.content !== '') return;
+            this.activeYear = year;
+            this.isLoading = true;
+            this.showModal = false;
+            
+            const urlObj = new URL(window.location);
+            urlObj.searchParams.set('year', year);
+            window.history.pushState({}, '', urlObj);
+
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newContent = doc.getElementById('ajax-content');
+                if (newContent) {
+                    this.content = newContent.outerHTML;
+                    this.$nextTick(async () => {
+                        const container = this.$refs.contentContainer;
+                        if (!container) return;
+                        const scripts = Array.from(container.querySelectorAll('script'));
+                        for (const script of scripts) {
+                            const newScript = document.createElement('script');
+                            Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                            newScript.textContent = script.textContent;
+                            if (script.src) {
+                                await new Promise(resolve => {
+                                    newScript.onload = resolve;
+                                    newScript.onerror = resolve;
+                                    script.parentNode.replaceChild(newScript, script);
+                                });
+                            } else {
+                                script.parentNode.replaceChild(newScript, script);
+                            }
+                        }
+                    });
+                } else {
+                    this.content = '<div class=\'p-8 text-center\'>Konten tidak ditemukan</div>';
+                }
+            } catch (e) {
+                this.content = '<div class=\'p-8 text-center text-red-500\'>Gagal memuat data</div>';
+            } finally {
+                this.isLoading = false;
+            }
+        },
+        init() {
+            const params = new URLSearchParams(window.location.search);
+            let year = params.get('year');
+            const defaultYear = '{{ if .Pages }}{{ (index (.Pages.ByDate.Reverse) 0).Title }}{{ end }}';
+            
+            if (!year || !this.yearUrls[year]) year = defaultYear;
+            
+            if (this.yearUrls[year]) this.loadYear(year, this.yearUrls[year]);
+        }
+
+    }"
+    @popstate.window="init()">
+
+    <section class="py-16 bg-gray-50 dark:bg-gray-800/50 relative border-b border-gray-200 dark:border-gray-700">
+        <div class="container max-w-4xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center justify-center md:justify-start gap-2">
+                        <!-- icon-[lucide--waypoints -->
+                         <span class="icon-[lucide--waypoints] text-blue-600"></span>
+                        {{.Title}}
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-400">{{ .Description }}</p>
+                </div>
+            </div>
+            
+            <div class="absolute top-4 right-4 md:top-auto md:bottom-4">
+                <a href="{{ "journal" | relURL }}" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                    <span class="icon-[ri--arrow-left-line] w-4 h-4"></span>
+                    <span class="hidden sm:inline">Kembali</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12">
+        <div class="container max-w-4xl mx-auto px-4">
+        {{ if .Pages }}
+            {{ $pages := .Pages.ByDate.Reverse }}
+            {{ $recent := first 5 $pages }}
+            {{ $older := after 5 $pages }}
+
+            <!-- Top Filter Navigation -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                {{ range $recent }}
+                <button 
+                    data-year="{{ .Title }}"
+                    @click="loadYear('{{ .Title }}', '{{ .RelPermalink }}');"
+                    :class="activeYear === '{{ .Title }}' 
+                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-600 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-900' 
+                        : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-gray-700'"
+                    class="year-btn px-6 py-2.5 rounded-full transition-all duration-200 font-semibold text-sm md:text-base">
+                    {{ .Title }}
+                </button>
+                {{ end }}
+
+                {{ if $older }}
+                <div class="relative">
+                    <button 
+                        @click="showModal = true"
+                        :class="!recentYears.includes(activeYear)
+                            ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-600 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-900' 
+                            : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-gray-700'"
+                        class="px-6 py-2.5 rounded-full transition-all duration-200 font-semibold text-sm md:text-base flex items-center gap-2">
+                        <span x-text="recentYears.includes(activeYear) ? 'Lainnya' : activeYear">Lainnya</span>
+                        <i class="icon-[ri--arrow-down-s-line]" :class="!recentYears.includes(activeYear) ? 'hidden' : ''"></i>
+                    </button>
+                </div>
+                {{ end }}
+            </div>
+
+            <!-- Content Area -->
+            <div class="relative min-h-[400px]" :class="isLoading ? 'opacity-50 pointer-events-none' : ''">
+                
+                <!-- Loading State -->
+                <div x-show="isLoading" class="absolute inset-0 flex items-start justify-center pt-20 z-10">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+                </div>
+
+                <!-- Content -->
+                <div x-html="content" 
+                     x-show="!isLoading"
+                     x-ref="contentContainer"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4"
+                     x-transition:enter-end="opacity-100 translate-y-0">
+                </div>
+
+            </div>
+
+            <!-- Modal Picker -->
+            {{ if $older }}
+            <div 
+                x-show="showModal" 
+                style="display: none;"
+                class="fixed inset-0 z-50 overflow-y-auto" 
+                aria-labelledby="modal-title" 
+                role="dialog" 
+                aria-modal="true">
+                
+                <!-- Backdrop -->
+                <div 
+                    x-show="showModal"
+                    x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="ease-in duration-200"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    class="fixed inset-0 bg-gray-500/75 dark:bg-gray-900/75 transition-opacity backdrop-blur-sm" 
+                    @click="showModal = false"></div>
+
+                <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                    <div 
+                        x-show="showModal"
+                        x-transition:enter="ease-out duration-300"
+                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                        x-transition:leave="ease-in duration-200"
+                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-gray-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-gray-200 dark:border-gray-700">
+                        
+                        <div class="bg-white dark:bg-gray-800 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
+                                    <h3 class="text-xl font-semibold leading-6 text-gray-900 dark:text-white mb-6" id="modal-title">Pilih Tahun Evaluasi</h3>
+                                    <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                                        {{ range $older }}
+                                        <button 
+                                            data-year="{{ .Title }}"
+                                            @click="loadYear('{{ .Title }}', '{{ .RelPermalink }}'); showModal = false"
+                                            class="px-4 py-3 rounded-xl text-sm font-semibold transition-colors duration-200 border border-gray-200 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-200 dark:hover:border-indigo-800 text-gray-700 dark:text-gray-300">
+                                            {{ .Title }}
+                                        </button>
+                                        {{ end }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                            <button 
+                                type="button" 
+                                class="mt-3 inline-flex w-full justify-center rounded-lg bg-white dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 sm:mt-0 sm:w-auto" 
+                                @click="showModal = false">
+                                Tutup
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+
+        {{ end }}
+
+        </div>
+    </section>
+</main>
+{{ end }}

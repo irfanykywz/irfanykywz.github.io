@@ -16,4 +16,4 @@ dengan tool ini kita bisa melihat statistik video seperti like, view, comment, t
 
 jadi kita bisa pelajari pola dari sebuah video yang ingin kita jadikan referensi pembuatan konten nantinya
 
-![tool-vide-analyzer](tool-vide-analyzer.avif)
+![tool-video-analyzer](tool-video-analyzer.avif)

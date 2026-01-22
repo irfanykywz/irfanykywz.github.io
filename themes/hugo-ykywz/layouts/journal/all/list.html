@@ -1,0 +1,96 @@
+{{ define "head" }}
+{{ end }}
+
+{{ define "main" }}
+
+    <main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300" x-data="{ search: '' }">
+        <section class="py-16 bg-gray-50 dark:bg-gray-800/50 relative border-b border-gray-200 dark:border-gray-700">
+            <div class="container max-w-4xl mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-center md:text-left">
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center justify-center md:justify-start gap-2">
+                            📚 {{.Title}}
+                        </h1>
+                        <p class="text-gray-600 dark:text-gray-400">{{ .Description }}</p>
+                    </div>
+                    
+                    <div class="w-full md:w-72 relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                            <span class="icon-[ri--search-line] w-4 h-4"></span>
+                        </span>
+                        <input 
+                            type="text" 
+                            x-model="search" 
+                            placeholder="Cari judul, tanggal, atau tag..." 
+                            class="w-full py-2.5 pl-10 pr-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all shadow-sm text-gray-900 dark:text-white placeholder-gray-400"
+                        >
+                        <button 
+                            x-show="search.length > 0" 
+                            @click="search = ''"
+                            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                            style="display: none;">
+                            <span class="icon-[ri--close-circle-fill] w-4 h-4"></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="absolute top-4 right-4 md:top-auto md:bottom-4">
+                    <a href="{{ "journal" | relURL }}" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                        <span class="icon-[ri--arrow-left-line] w-4 h-4"></span>
+                        <span class="hidden sm:inline">Kembali</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-white dark:bg-gray-900 min-h-[50vh]">
+            <div class="container max-w-4xl mx-auto px-4">
+                <div class="flex flex-col">
+                    {{ $journalSection := .Site.GetPage "section" "journal" }}
+                    {{ $pages := where $journalSection.RegularPages "Params.hidden" "ne" true }}
+                    
+                    {{ range $pages.GroupByDate "January 2006" }}
+                    <div class="mb-8" x-show="search === '' || $el.textContent.toLowerCase().includes(search.toLowerCase())">
+                        <h3 class="text-sm font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 sticky top-0 bg-white dark:bg-gray-900 py-2 z-10 border-b border-gray-100 dark:border-gray-800">
+                            {{ .Key }}
+                        </h3>
+                        <div class="flex flex-col">
+                        {{ range .Pages }}
+                        <a href="{{ .RelPermalink }}" 
+                           class="group flex items-center gap-4 py-2 px-3 -mx-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                           x-show="search === '' || $el.textContent.toLowerCase().includes(search.toLowerCase())"
+                           x-transition:enter="transition ease-out duration-300"
+                           x-transition:enter-start="opacity-0 transform scale-95"
+                           x-transition:enter-end="opacity-100 transform scale-100"
+                        >
+                            <span class="hidden">{{ .Date.Format "2006 January" }}</span>
+                            <div class="flex-shrink-0 text-gray-400 dark:text-gray-500 font-mono w-10 text-center">
+                                <span class="block text-xl font-bold text-gray-900 dark:text-white leading-none">{{ .Date.Format "02" }}</span>
+                                <span class="block text-[10px] uppercase mt-0.5">
+                                    <!-- use i18n -->                                     
+                                    {{ $day := i18n .Date.Weekday }}
+                                    {{ $prefix := lower (slicestr $day 0 3) }}
+                                    {{ $prefix }}                              
+                                </span>
+                            </div>
+
+                            <div class="flex-grow min-w-0">
+                                <h2 class="text-base text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 truncate">
+                                    {{ .Title }}
+                                </h2>
+                            </div>
+
+                            {{ if .Draft }}
+                                <span class="flex-shrink-0 px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800">DRAFT</span>
+                            {{ end }}
+                        </a>
+                        {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </section>
+    </main>
+
+{{ end }}
