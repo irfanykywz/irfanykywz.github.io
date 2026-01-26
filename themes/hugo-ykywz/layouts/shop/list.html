@@ -95,36 +95,33 @@
             <div @click="openProduct('{{ .RelPermalink }}', '{{ .Title }}')"
                  x-show="activeCategory === 'all' || activeCategory === '{{ $type }}'"
                  x-transition.opacity.duration.300ms
-                 class="group cursor-pointer bg-white dark:bg-gray-800 rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 flex flex-col h-full">
+                 class="group cursor-pointer bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 flex flex-col h-full">
                 
-                <div class="p-8 flex-grow">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm
-                            {{ if eq $type "product" }} bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400
-                            {{ else }} bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400 {{ end }}">
+                <!-- Image Area -->
+                <div class="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
+                    {{ if .Params.image }}
+                        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    {{ else }}
+                        <div class="w-full h-full flex items-center justify-center text-4xl text-gray-300 dark:text-gray-600">
                             <i class="{{ if eq $type "product" }}icon-[ri--box-3-line]{{ else }}icon-[ri--service-line]{{ end }}"></i>
                         </div>
-                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider
-                            {{ if .Params.available }} bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300
-                            {{ else }} bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300 {{ end }}">
-                            {{ if .Params.available }}Tersedia{{ else }}Habis{{ end }}
-                        </span>
+                    {{ end }}
+                    
+                    {{ if not .Params.available }}
+                    <div class="absolute inset-0 bg-white/60 dark:bg-black/60 flex items-center justify-center backdrop-blur-[2px]">
+                        <span class="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-sm">Habis</span>
                     </div>
-
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                        {{ .Title }}
-                    </h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 line-clamp-3">
-                        {{ .Description }}
-                    </p>
+                    {{ end }}
                 </div>
 
-                <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between">
-                    <span class="text-lg font-bold text-gray-900 dark:text-white">{{ .Params.display_price }}</span>
-                    <span class="flex items-center gap-1 text-sm font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
-                        {{ if eq $type "product" }}Beli Sekarang{{ else }}Pesan Sekarang{{ end }}
-                        <i class="icon-[ri--arrow-right-line]"></i>
-                    </span>
+                <!-- Content Area -->
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-base font-medium text-gray-900 dark:text-white mb-1 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        {{ .Title }}
+                    </h3>
+                    <div class="mt-auto pt-2">
+                        <span class="text-lg font-bold text-gray-900 dark:text-white">{{ .Params.display_price }}</span>
+                    </div>
                 </div>
             </div>
             {{ end }}
