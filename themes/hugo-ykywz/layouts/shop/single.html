@@ -1,196 +1,143 @@
 {{ define "main" }}
 <div id="ajax-content" class="w-full bg-transparent transition-colors duration-300">
-    <div class="bg-white dark:bg-gray-900 max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800 relative my-6"
+    <div class="max-w-6xl mx-auto px-4 py-8 md:py-12"
          @click.stop
          x-data="productPurchase({
             product: {
                 name: '{{ .Title }}',
-                price: {{ .Params.price }},
-                displayPrice: '{{ .Params.display_price }}',
                 type: '{{ .Params.shop_type }}',
-                slug: '{{ .File.BaseFileName }}'
+				slug: '{{ .File.BaseFileName }}',
+				variants: {{ .Params.variants | jsonify }}
+
             },
             payments: {{ .CurrentSection.Params.payments | jsonify }},
-            coupons: {{ .CurrentSection.Params.coupons | jsonify }},
             contact: {
                 wa: '{{ .CurrentSection.Params.contact_wa }}',
                 telegram: '{{ .CurrentSection.Params.contact_telegram }}'
             }
          })">
         
-        <!-- Header / Product Info -->
-        <div class="p-6 md:p-8 border-b border-gray-100 dark:border-gray-800">
-            <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-6">
-                <a href="{{ .CurrentSection.RelPermalink }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{ .CurrentSection.Title }}</a>
-                <span class="icon-[ri--arrow-right-s-line]"></span>
-                <span class="text-gray-900 dark:text-white font-medium truncate">{{ .Title }}</span>
-            </div>
-            <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider
-                            {{ if eq .Params.shop_type "product" }} bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300
-                            {{ else }} bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 {{ end }}">
-                            {{ .Params.shop_type }}
-                        </span>
-                        {{ if .Params.available }}
-                        <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300">
-                            Tersedia
-                        </span>
-                        {{ else }}
-                        <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">
-                            Tidak Tersedia
-                        </span>
-                        {{ end }}
-                    </div>
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">{{ .Title }}</h1>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">{{ .Description }}</p>
-                    {{ if .Params.link_project }}
-                    <div class="mt-4">
-                        <a href="{{ .Params.link_project | relURL }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium">
-                            <span class="icon-[ri--information-line]"></span>
-                            Lihat Detail Lengkap
-                        </a>
-                    </div>
-                    {{ end }}
-                </div>
-                <div class="text-right">
-                    <div class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">{{ .Params.display_price }}</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Payment Selection -->
-        <div class="p-6 md:p-8 bg-gray-50 dark:bg-gray-800/50">
-            {{ if eq .Params.shop_type "product" }}
-            <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-                Pilih Metode Pembayaran
-            </h3>
+        <div class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800 relative">
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                <template x-for="payment in payments" :key="payment.name">
-                    <div @click="selectedPayment = payment"
-                         class="cursor-pointer p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4"
-                         :class="selectedPayment && selectedPayment.name === payment.name 
-                            ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 dark:border-indigo-500' 
-                            : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-300 dark:hover:border-indigo-700'">
-                        
-                        <div class="w-10 h-10 rounded-lg bg-white dark:bg-gray-700 flex items-center justify-center p-1 shadow-sm shrink-0">
-                            <template x-if="payment.image">
-                                <img :src="payment.image" class="w-full h-full object-contain">
-                            </template>
-                            <template x-if="!payment.image">
-                                <span class="text-xs font-bold text-gray-500" x-text="payment.name.substring(0,3)"></span>
-                            </template>
-                        </div>
-                        
-                        <div class="flex-grow min-w-0">
-                            <div class="font-bold text-gray-900 dark:text-white text-sm truncate" x-text="payment.name"></div>
-                            <div class="text-xs text-gray-500 dark:text-gray-400 font-mono truncate" x-text="payment.account_number"></div>
-                        </div>
-
-                        <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
-                             :class="selectedPayment && selectedPayment.name === payment.name ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-gray-300 dark:border-gray-600'">
-                            <span x-show="selectedPayment && selectedPayment.name === payment.name" class="icon-[ri--check-line] w-3 h-3"></span>
-                        </div>
-                    </div>
-                </template>
-            </div>
-
-            <!-- QRIS Display -->
-            <template x-if="selectedPayment && selectedPayment.type === 'qris'">
-                <div class="mb-8 flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <span class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">Scan QRIS untuk Membayar</span>
-                    <img :src="selectedPayment.image" class="w-64 h-64 object-contain rounded-lg border border-gray-100 dark:border-gray-700 bg-white">
-                    <a :href="selectedPayment.image" download="QRIS.jpg" class="mt-4 flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors">
-                        <i class="icon-[ri--download-line]"></i>
-                        Download QRIS
-                    </a>
-                </div>
-            </template>
-
-            <!-- Coupon -->
-            <div class="mb-8">
-                <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 block">Kode Kupon (Opsional)</label>
-                <div class="flex gap-2">
-                    <input type="text" x-model="couponCode" @keydown.enter.prevent="checkCoupon" 
-                           class="flex-grow px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all uppercase"
-                           placeholder="Masukan kode...">
-                    <button @click="checkCoupon" 
-                            class="px-4 py-2.5 bg-gray-900 dark:bg-gray-700 text-white rounded-xl font-medium hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors">
-                        Gunakan
-                    </button>
-                </div>
-                <p x-show="couponMessage" class="text-xs mt-2 font-medium" 
-                   :class="isCouponValid ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'" 
-                   x-text="couponMessage"></p>
-            </div>
-
-            <!-- Summary & Action -->
-            <div class="bg-white dark:bg-gray-900 rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-sm">
-                <div class="flex justify-between items-center mb-2 text-sm">
-                    <span class="text-gray-500 dark:text-gray-400">Harga</span>
-                    <span class="font-medium text-gray-900 dark:text-white" x-text="product.displayPrice"></span>
-                </div>
-                
-                <!-- Copy Account Number -->
-                <template x-if="selectedPayment && selectedPayment.type !== 'qris'">
-                    <div class="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 flex items-center justify-between group">
-                        <div class="overflow-hidden">
-                            <div class="text-xs text-gray-500 dark:text-gray-400">Transfer ke <span x-text="selectedPayment.name"></span></div>
-                            <div class="font-mono font-bold text-gray-900 dark:text-white truncate" x-text="selectedPayment.account_number"></div>
-                            <div class="text-xs text-gray-400 truncate" x-text="selectedPayment.account_name"></div>
-                        </div>
-                        <button @click="copyToClipboard(selectedPayment.account_number, $el)" class="p-2 bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 text-gray-500 hover:text-indigo-600 transition-all" title="Salin Nomor Rekening"><i class="icon-[ri--file-copy-line]"></i></button>
-                    </div>
-                </template>
-
-                <div x-show="discount > 0" class="flex justify-between items-center mb-2 text-sm text-green-600 dark:text-green-400">
-                    <span>Diskon</span>
-                    <span>- <span x-text="formatRupiah(discount)"></span></span>
-                </div>
-                <div class="flex justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-800 mb-6">
-                    <span class="font-bold text-gray-900 dark:text-white">Total Bayar</span>
-                    <span class="text-xl font-black text-indigo-600 dark:text-indigo-400" x-text="formatRupiah(finalPrice)"></span>
-                </div>
-
-                <div class="space-y-3">
-                    <button @click="sendTo('whatsapp')" :disabled="!selectedPayment"
-                            class="w-full py-3.5 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all shadow-lg shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed bg-[#25D366] hover:bg-[#20bd5a]">
-                        <i class="icon-[ri--whatsapp-fill] text-xl"></i>
-                        Beli via WhatsApp
-                    </button>
-                    <button @click="sendTo('telegram')" :disabled="!selectedPayment"
-                            class="w-full py-3.5 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed bg-[#0088cc] hover:bg-[#0077b5]">
-                        <i class="icon-[ri--telegram-fill] text-xl"></i>
-                        Beli via Telegram
-                    </button>
-                </div>
-                <p x-show="!selectedPayment" class="text-center text-xs text-red-500 mt-3">Silakan pilih metode pembayaran terlebih dahulu</p>
-            </div>
-            {{ else }}
-            <!-- Service CTA Layout -->
-            <div class="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Tertarik dengan layanan ini?</h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-6">
-                    Silakan hubungi kami untuk konsultasi lebih lanjut atau melakukan pemesanan. Kami siap membantu kebutuhan Anda.
-                </p>
-                
-                <div class="space-y-3">
-                    <button @click="sendTo('whatsapp')"
-                            class="w-full py-3.5 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all shadow-lg shadow-green-500/20 bg-[#25D366] hover:bg-[#20bd5a]">
-                        <i class="icon-[ri--whatsapp-fill] text-xl"></i>
-                        Konsultasi via WhatsApp
-                    </button>
-                    <button @click="sendTo('telegram')"
-                            class="w-full py-3.5 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-500/20 bg-[#0088cc] hover:bg-[#0077b5]">
-                        <i class="icon-[ri--telegram-fill] text-xl"></i>
-                        Konsultasi via Telegram
-                    </button>
+            {{ if not .Params.available }}
+            <div class="absolute inset-0 z-50 bg-white/60 dark:bg-gray-900/60 backdrop-blur-[2px] flex items-center justify-center">
+                <div class="bg-red-600 text-white px-8 py-4 rounded-2xl font-black text-xl md:text-2xl shadow-2xl border-4 border-white dark:border-gray-800 transform -rotate-6 uppercase tracking-widest">
+                    Tidak Tersedia
                 </div>
             </div>
             {{ end }}
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-0">
+                
+                <!-- Image Section (Left) -->
+                <div class="md:col-span-5 bg-gray-100 dark:bg-gray-800 relative h-64 md:h-auto min-h-[300px] md:border-r border-gray-100 dark:border-gray-800">
+                    {{ if .Params.image }}
+                    <img src="../{{ .Params.image }}" alt="{{ .Title }}" class="absolute inset-0 w-full h-full object-contain">
+                    {{ else }}
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-300 dark:text-gray-600">
+                        <i class="{{ if eq .Params.shop_type "product" }}icon-[ri--box-3-line]{{ else }}icon-[ri--service-line]{{ end }} text-6xl"></i>
+                    </div>
+                    {{ end }}
+                    
+                    <!-- Back Button Overlay -->
+                    <a href="{{ .CurrentSection.RelPermalink }}" class="flex absolute top-4 left-4 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-md rounded-full text-gray-700 dark:text-white hover:bg-white dark:hover:bg-black transition-all shadow-sm z-10">
+                        <span class="icon-[ri--arrow-left-line] w-5 h-5"></span>
+                    </a>
+                </div>
+
+                <!-- Content Section (Right) -->
+                <div class="md:col-span-7 p-6 md:p-10 flex flex-col">
+                    
+                    <!-- Breadcrumbs & Type -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider
+                                {{ if eq .Params.shop_type "product" }} bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300
+                                {{ else }} bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 {{ end }}">
+                                {{ .Params.shop_type }}
+                            </span>
+                             {{ if .Params.available }}
+                            <span class="flex items-center gap-1 text-xs font-bold text-green-600 dark:text-green-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Tersedia
+                            </span>
+                            {{ else }}
+                            <span class="flex items-center gap-1 text-xs font-bold text-red-600 dark:text-red-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Tidak Tersedia
+                            </span>
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <h1 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4 leading-tight">{{ .Title }}</h1>
+                    
+                    <div class="prose dark:prose-invert text-gray-600 dark:text-gray-400 mb-8 max-w-none text-sm leading-relaxed">
+                        {{ .Description }}
+                    </div>
+
+                    {{ if .Params.link_project }}
+                    <div class="mb-8">
+                        <a href="{{ .Params.link_project | relURL }}" target="_blank" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline font-medium text-sm">
+                            <span class="icon-[ri--external-link-line]"></span>
+                            Lihat Demo / Detail Project
+                        </a>
+                    </div>
+                    {{ end }}
+
+                    <!-- Variants Selection -->
+                    {{ if .Params.variants }}
+                    <div class="mb-8">
+                        <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 block">Pilih Varian</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="variant in product.variants" :key="variant.name">
+                                <div @click="selectedVariant = variant"
+                                    class="cursor-pointer p-3 rounded-xl border-2 transition-all duration-200 flex items-center justify-between group"
+                                    :class="selectedVariant && selectedVariant.name === variant.name
+                                    ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 dark:border-indigo-500'
+                                    : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-300 dark:hover:border-indigo-700'">
+                                    
+                                    <div class="flex flex-col">
+                                        <span class="font-bold text-gray-900 dark:text-white text-sm" x-text="variant.name"></span>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400 font-mono" x-text="formatRupiah(variant.price)"></span>
+                                    </div>
+
+                                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors"
+                                        :class="selectedVariant && selectedVariant.name === variant.name ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-gray-300 dark:border-gray-600 group-hover:border-indigo-400'">
+                                        <span x-show="selectedVariant && selectedVariant.name === variant.name" class="icon-[ri--check-line] w-3 h-3"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    {{ end }}
+
+                    <!-- Price & CTA -->
+                    <div class="mt-auto pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <div class="flex items-end justify-between mb-6">
+                            <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">Total Harga</span>
+                            <span class="text-3xl font-black text-indigo-600 dark:text-indigo-400 tracking-tight" x-text="formatRupiah(finalPrice)"></span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <button @click="sendTo('whatsapp')" 
+                                    class="py-3.5 px-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all shadow-lg shadow-green-500/20 bg-[#25D366] hover:bg-[#20bd5a] hover:-translate-y-0.5 active:translate-y-0">
+                                <i class="icon-[ri--whatsapp-fill] text-xl"></i>
+                                <span class="hidden sm:inline">WhatsApp</span>
+                                <span class="sm:hidden">WA</span>
+                            </button>
+                            <button @click="sendTo('telegram')" 
+                                    class="py-3.5 px-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-500/20 bg-[#0088cc] hover:bg-[#0077b5] hover:-translate-y-0.5 active:translate-y-0">
+                                <i class="icon-[ri--telegram-fill] text-xl"></i>
+                                <span class="hidden sm:inline">Telegram</span>
+                                <span class="sm:hidden">TG</span>
+                            </button>
+                        </div>
+                        <p class="text-center text-[10px] text-gray-400 dark:text-gray-500 mt-4">
+                            Transaksi aman dan langsung terhubung ke admin.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

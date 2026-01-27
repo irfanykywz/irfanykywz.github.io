@@ -1,106 +1,63 @@
 {{ define "main" }}
-<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300"
-    x-data="{
-        modalOpen: false,
-        isLoading: false,
-        activeItem: null,
-        activeCategory: 'all',
-        
-        async openProduct(url, title) {
-            this.isLoading = true;
-            this.modalOpen = true;
-            document.body.style.overflow = 'hidden';
-            
-            // Push state
-            window.history.pushState({ modal: true }, '', url);
-            document.title = title;
-
-            try {
-                const res = await fetch(url);
-                const html = await res.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const content = doc.getElementById('ajax-content');
+{{ $productCount := len (where .Pages "Params.shop_type" "product") }}
+{{ $serviceCount := len (where .Pages "Params.shop_type" "service") }}
+<main class="flex-grow bg-white dark:bg-gray-900 transition-colors duration-300" 
+      x-data="{ 
+          activeCategory: 'all',
+          counts: {
+              all: {{ len .Pages }},
+              product: {{ $productCount }},
+              service: {{ $serviceCount }}
+          }
+      }">
+    
+    <!-- Header like Journal -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800/50 relative border-b border-gray-200 dark:border-gray-700">
+        <div class="container max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center justify-center md:justify-start gap-2">
+                        <i class="{{ .Params.icon }} text-indigo-600 dark:text-indigo-400"></i>
+                        {{ .Title }}
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-400">{{ .Description }}</p>
+                </div>
                 
-                if (content) {
-                    this.$refs.modalContent.innerHTML = content.innerHTML;
-                    // Re-init Alpine
-                    this.$nextTick(() => {
-                        Alpine.initTree(this.$refs.modalContent);
-                    });
-                } else {
-                    this.$refs.modalContent.innerHTML = '<div class=\'p-10 text-center\'>Gagal memuat konten.</div>';
-                }
-            } catch (e) {
-                this.$refs.modalContent.innerHTML = '<div class=\'p-10 text-center text-red-500\'>Terjadi kesalahan jaringan.</div>';
-            } finally {
-                this.isLoading = false;
-            }
-        },
-
-        closeModal() {
-            this.modalOpen = false;
-            document.body.style.overflow = '';
-            this.$refs.modalContent.innerHTML = '';
-            
-            window.history.pushState({}, '', '{{ .RelPermalink }}');
-            document.title = '{{ .Title }}';
-        },
-
-        handlePopstate(e) {
-            if (this.modalOpen) {
-                this.modalOpen = false;
-                document.body.style.overflow = '';
-                this.$refs.modalContent.innerHTML = '';
-                document.title = '{{ .Title }}';
-            }
-        }
-    }"
-    @popstate.window="handlePopstate($event)"
-    @keydown.escape.window="if(modalOpen) closeModal()">
-
-    <div class="max-w-6xl mx-auto px-6 py-16">
-        <header class="text-center mb-16">
-            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
-                <i class="{{ .Params.icon }} text-indigo-600 dark:text-indigo-400"></i>
-                {{ .Title }}
-            </h1>
-            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                {{ .Description }}
-            </p>
-        </header>
-
-        <!-- Category Filter -->
-        <div class="flex flex-wrap justify-center gap-3 mb-12">
-            <button @click="activeCategory = 'all'" 
-                    :class="activeCategory === 'all' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
-                    class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
-                Semua
-            </button>
-            <button @click="activeCategory = 'product'" 
-                    :class="activeCategory === 'product' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
-                    class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
-                Produk
-            </button>
-            <button @click="activeCategory = 'service'" 
-                    :class="activeCategory === 'service' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'"
-                    class="px-5 py-2 rounded-full border text-sm font-medium transition-all duration-200 shadow-sm">
-                Jasa
-            </button>
+                <!-- Filter -->
+                <div class="flex bg-white dark:bg-gray-900 p-1 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <button @click="activeCategory = 'all'" 
+                            :class="activeCategory === 'all' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400 font-bold shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'"
+                            class="px-4 py-1.5 rounded-lg text-sm transition-all">
+                        Semua
+                    </button>
+                    <button @click="activeCategory = 'product'" 
+                            :class="activeCategory === 'product' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400 font-bold shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'"
+                            class="px-4 py-1.5 rounded-lg text-sm transition-all">
+                        Produk
+                    </button>
+                    <button @click="activeCategory = 'service'" 
+                            :class="activeCategory === 'service' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400 font-bold shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'"
+                            class="px-4 py-1.5 rounded-lg text-sm transition-all">
+                        Jasa
+                    </button>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {{ range .Pages }}
             {{ $type := .Params.shop_type }}
-            <div @click="openProduct('{{ .RelPermalink }}', '{{ .Title }}')"
-                 x-show="activeCategory === 'all' || activeCategory === '{{ $type }}'"
+            <a href="{{ .RelPermalink }}"
+                 x-show="(activeCategory === 'all' || activeCategory === '{{ $type }}')"
                  x-transition.opacity.duration.300ms
-                 class="group cursor-pointer bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 flex flex-col h-full">
+                 class="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
                 
                 <!-- Image Area -->
-                <div class="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
+                <div class="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-800">
                     {{ if .Params.image }}
-                        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
                     {{ else }}
                         <div class="w-full h-full flex items-center justify-center text-4xl text-gray-300 dark:text-gray-600">
                             <i class="{{ if eq $type "product" }}icon-[ri--box-3-line]{{ else }}icon-[ri--service-line]{{ end }}"></i>
@@ -108,55 +65,67 @@
                     {{ end }}
                     
                     {{ if not .Params.available }}
-                    <div class="absolute inset-0 bg-white/60 dark:bg-black/60 flex items-center justify-center backdrop-blur-[2px]">
+                    <div class="absolute inset-0 bg-white/60 dark:bg-black/60 flex items-center justify-center backdrop-blur-[2px] z-10">
                         <span class="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-sm">Habis</span>
                     </div>
                     {{ end }}
+                    
+                    <!-- Type Badge -->
+                    <div class="absolute top-2 right-2 z-10">
+                        <span class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md shadow-sm backdrop-blur-md
+                            {{ if eq $type "product" }} bg-blue-500/80 text-white
+                            {{ else }} bg-emerald-500/80 text-white {{ end }}">
+                            {{ $type }}
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Content Area -->
                 <div class="p-4 flex flex-col flex-grow">
-                    <h3 class="text-base font-medium text-gray-900 dark:text-white mb-1 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    <h3 class="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-1 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                         {{ .Title }}
                     </h3>
-                    <div class="mt-auto pt-2">
-                        <span class="text-lg font-bold text-gray-900 dark:text-white">{{ .Params.display_price }}</span>
+                    
+                    <div class="mt-auto pt-3 flex items-end justify-between">
+                        <div class="flex flex-col">
+                            {{ if .Params.variants }}
+                                <span class="text-[10px] text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Mulai dari</span>
+                                <span class="text-sm md:text-lg font-black text-indigo-600 dark:text-indigo-400">
+                                    {{/* Find min price */}}
+                                    {{ $min := 999999999 }}
+                                    {{ range .Params.variants }}
+                                        {{ if lt .price $min }} {{ $min = .price }} {{ end }}
+                                    {{ end }}
+                                    {{/* Simple formatting since we don't have a formatter here easily accessible without partials */}}
+                                    {{ range .Params.variants }}
+                                        {{ if eq .price $min }} {{ .display_price }} {{ end }}
+                                    {{ end }}
+                                </span>
+                            {{ else }}
+                                <span class="text-[10px] text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Harga</span>
+                                <span class="text-sm md:text-lg font-black text-indigo-600 dark:text-indigo-400">{{ .Params.display_price }}</span>
+                            {{ end }}
+                        </div>
+                        
+                        {{ if .Params.variants }}
+                        <span class="text-[10px] px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-gray-500 dark:text-gray-400 font-medium">
+                            {{ len .Params.variants }} Varian
+                        </span>
+                        {{ end }}
                     </div>
                 </div>
-            </div>
+            </a>
             {{ end }}
+
+            <!-- Empty State -->
+            <div x-show="counts[activeCategory] === 0" class="col-span-full flex flex-col items-center justify-center py-20 text-center" style="display: none;">
+                <div class="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
+                    <i class="icon-[ri--inbox-line] text-4xl text-gray-400 dark:text-gray-500"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Tidak ada item ditemukan</h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Belum ada produk atau layanan untuk kategori ini.</p>
+            </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    <div x-show="modalOpen" 
-         style="display: none;"
-         @click="closeModal()"
-         class="fixed inset-0 z-50 overflow-y-auto bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
-        
-        <!-- Close Button -->
-        <button @click="closeModal()" class="flex fixed top-6 right-6 z-[60] p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:text-red-500 transition-colors">
-            <span class="icon-[ri--close-line] w-6 h-6"></span>
-        </button>
-
-        <!-- Loading -->
-        <div x-show="isLoading" class="absolute inset-0 flex items-center justify-center z-40">
-            <div class="animate-spin rounded-full h-16 w-16 border-4 border-indigo-600 border-t-transparent"></div>
-        </div>
-
-        <!-- Content -->
-        <div x-ref="modalContent" class="min-h-screen flex items-center justify-center p-4 md:p-8">
-            <!-- Injected Content -->
-        </div>
-    </div>
-
 </main>
-
-{{ partial "shop/script.html" . }}
 {{ end }}
