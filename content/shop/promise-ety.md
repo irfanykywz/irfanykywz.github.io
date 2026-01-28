@@ -1,23 +1,23 @@
 ---
 title: "Promise ETY"
 slug: promise-ety
-description: "manajemen channel dan konten youtube dengan mudah, disertai kumpulan tool yang mempermudah"
+description: "alat untuk manajemen channel youtube, disertai kumpulan tool yang siap mempermudahnya"
 # price: 250000
 # display_price: "Rp 250.000"
 variants:
-  - name: "Lifetime"
-    price: 250000
-    display_price: "Rp 250.000"
-  - name: "6 Bulan"
+  - name: "Cobain 1 Minggu"
+    price: 10000
+    display_price: "Rp 10.000"
+  - name: "1 Bulan"
+    price: 30000
+    display_price: "Rp 30.000"
+  - name: "1 Tahun"
     price: 150000
     display_price: "Rp 150.000"
-  - name: "3 Bulan"
-    price: 90000
-    display_price: "Rp 90.000"
-  - name: "1 Bulan"
-    price: 35000
-    display_price: "Rp 35.000"
-available: false
+  - name: "Selamanya"
+    price: 250000
+    display_price: "Rp 250.000"
+available: true
 shop_type: "product"
 link_project: "/projects/promise-ety/"
 image: "promise-ety.avif"

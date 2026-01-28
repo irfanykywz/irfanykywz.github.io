@@ -20,18 +20,4 @@ payments:
     account_number: "081389215100"
     account_name: "a.n. Muhamad Irfan"
     type: "ewallet"
-
-coupons:
-  # - code: "DISKON10"
-  #   type: "percentage" # Tipe diskon: 'percentage' atau 'fixed'
-  #   value: 10 # Nilai: 10 untuk 10%
-  - code: "YT26"
-    type: "percentage"
-    value: 26
-    products: # Kupon ini hanya berlaku untuk produk dengan slug berikut
-      - promise-ety
-    expires: "2026-01-16" # Format YYYY-MM-DD
-  # - code: "HEMAT50"
-  #   type: "fixed"
-  #   value: 50000 # Nilai: 50000 untuk potongan Rp 50.000
 ---

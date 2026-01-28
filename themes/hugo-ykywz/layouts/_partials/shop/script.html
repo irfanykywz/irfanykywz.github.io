@@ -45,7 +45,9 @@
                     ? `QRIS (${this.selectedPayment.name})` 
                     : `${this.selectedPayment.name} (${this.selectedPayment.account_number})`;
 
-                const message = `Halo, saya ingin membeli *${this.product.name}*\n\n` +
+                const productFormatter = platform === 'whatsapp' ? `*${this.product.name}*` : `**${this.product.name}**`
+
+                const message = `Halo, saya ingin membeli ${productFormatter}\n\n` +
                               `Harga: ${this.formatRupiah(this.finalPrice)}\n` +
                               `Pembayaran: ${paymentInfo}\n` +                              
                               `Mohon diproses. Terima kasih.`;
